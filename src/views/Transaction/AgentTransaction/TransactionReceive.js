@@ -1,20 +1,46 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
+import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 
-class Transaction extends Component {
+class TransactionReceive extends Component {
 
     state = {
+        id: '',
         transactions: []
     }
 
     componentDidMount() {
-        RadiusApi.get('/voucher-transactions/index.json')
+        const cookie = new Cookies();
+
+        RadiusApi.get('/dashboard/check_token.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
             .then(response => {
                 this.setState({
-                    transactions: response.data
+                    id: response.data.data.user.id
                 })
             })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.id !== this.state.id) {
+
+
+            RadiusApi.get('/voucher-transactions/index.json', {
+                params: {
+                    id: this.state.id
+                }
+            })
+                .then(response => {
+                    console.log(response)
+                    this.setState({
+                        transactions: response.data.received
+                    })
+                })
+        }
     }
 
     render() {
@@ -46,7 +72,7 @@ class Transaction extends Component {
                         this.state.transactions ? this.state.transactions.map((item) => {
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.transaction_id}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.partner_user_id}</td>
                                     <td>{item.profile_id}</td>
                                     <td>{item.credit}</td>
@@ -64,4 +90,4 @@ class Transaction extends Component {
     }
 }
 
-export default Transaction;
+export default TransactionReceive;

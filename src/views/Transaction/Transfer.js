@@ -9,16 +9,29 @@ import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 
 class Transfer extends Component {
     state = {
-        transaction_id: 11,
-        user_id: 33,
+        user_id: '',
         partner_user_id: '',
         realm_id: '',
         profile_id: '',
-        balance: ''
+        transfer_amount: '',
+    }
+
+    componentDidMount() {
+
+        const cookie = new Cookies();
+        RadiusApi.get('/dashboard/check_token.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    user_id: response.data.data.user.id
+                })
+            })
     }
 
     onTransactionComplete = () => {
-        console.log('onTransactionComplete')
         let data = this.state
         RadiusApi.post('/voucher-transactions/add.json', data)
             .then(response => {
@@ -57,14 +70,18 @@ class Transfer extends Component {
                     <AllUser onChange={this.onCreatePartner}/>
                     <VoucherGroup onChange={this.onCreateGroup}/>
                     <VoucherProfile onChange={this.onCreateProfile}/>
+
                     <Input type='number'
-                        value={this.state.balance}
+                           placeholder='The amount you want to transfer'
+                           value={this.state.transfer_amount}
                            onChange={event => {
                                this.setState({
-                                   balance: event.target.value
+                                   transfer_amount: event.target.value
                                })
                            }}
+                           required={true}
                     />
+
                     <button className='ui button primary' onClick={this.onTransactionComplete}>
                         Transfer
                     </button>

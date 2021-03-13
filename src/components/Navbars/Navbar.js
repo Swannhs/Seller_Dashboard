@@ -11,7 +11,8 @@ function Header() {
 
     const onLogout = () => {
         const cookie = new Cookies;
-        cookie.remove('Token', null);
+        console.log(cookie.remove('Token', null))
+
     }
 
 

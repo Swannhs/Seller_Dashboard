@@ -7,8 +7,8 @@ import EditUser from "./views/User/Action/Edit/EditUser";
 import VoucherList from "views/Voucher/VoucherList.js";
 import CreateVoucherApi from "./views/Voucher/CreateVoucher/CreateVoucherApi";
 
+import TransferLayout from "./views/Transaction/TransferLayout";
 import Transfer from "./views/Transaction/Transfer";
-import Transaction from "./views/Transaction/Transaction";
 
 
 
@@ -62,7 +62,7 @@ const dashboardRoutes = [
     {
         path: "/transaction",
         name: "Transaction",
-        component: Transaction,
+        component: TransferLayout,
         layout: '/admin'
     },
     {

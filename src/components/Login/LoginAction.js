@@ -12,10 +12,6 @@ class LoginAction extends Component {
                     this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
             )
         } else this.props.history.push('/login')
-
-
-        // this.props.history.push(window.location.pathname)
-        // : this.props.history.push('/login');
     }
 
     render() {
