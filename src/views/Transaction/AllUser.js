@@ -15,17 +15,21 @@ class AllUser extends Component {
     componentDidMount() {
         const cookie = new Cookies;
 
-        RadiusApi.get('/voucher-transactions/getUsers.json', {})
+        RadiusApi.get('/voucher-transactions/getUsers.json', {
+            params: {
+                'token': cookie.get('Token')
+            }
+        })
             .then(response => {
                 this.setState({
                     select: '',
-                    users: response.data
+                    users: response.data.user
                 })
             })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState !== this.state ? this.props.onChange(this.state.select): null
+        prevState !== this.state ? this.props.onChange(this.state.select) : null
     }
 
 

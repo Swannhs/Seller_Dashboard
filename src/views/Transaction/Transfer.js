@@ -9,31 +9,22 @@ import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 
 class Transfer extends Component {
     state = {
-        user_id: '',
         partner_user_id: '',
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
     }
 
-    componentDidMount() {
-
-        const cookie = new Cookies();
-        RadiusApi.get('/dashboard/check_token.json', {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    user_id: response.data.data.user.id
-                })
-            })
-    }
 
     onTransactionComplete = () => {
+        const cookie = new Cookies()
         let data = this.state
-        RadiusApi.post('/voucher-transactions/add.json', data)
+        console.log(data)
+        RadiusApi.post('/voucher-transactions/add.json', data, {
+            params: {
+                token : cookie.get('Token')
+            }
+        })
             .then(response => {
                 console.log(response)
             })

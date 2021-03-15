@@ -3,8 +3,7 @@ import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 
-class TransactionReceive extends Component {
-
+class TransactionTable extends Component {
     state = {
         id: '',
         transactions: []
@@ -12,35 +11,18 @@ class TransactionReceive extends Component {
 
     componentDidMount() {
         const cookie = new Cookies();
-
-        RadiusApi.get('/dashboard/check_token.json', {
+        RadiusApi.get('/voucher-transactions/index.json', {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    id: response.data.data.user.id
+                    transactions: response.data.transactions
                 })
             })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.id !== this.state.id) {
-
-
-            RadiusApi.get('/voucher-transactions/index.json', {
-                params: {
-                    id: this.state.id
-                }
-            })
-                .then(response => {
-                    this.setState({
-                        transactions: response.data.received
-                    })
-                })
-        }
-    }
 
     render() {
         return (
@@ -60,7 +42,9 @@ class TransactionReceive extends Component {
                     <tr>
                         <th scope="col">Trx ID</th>
                         <th scope="col">Partner</th>
-                        <th scope="col">Amount</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Credit</th>
+                        <th scope="col">Debit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,7 +54,9 @@ class TransactionReceive extends Component {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.partner_user_id}</td>
-                                    <td className='text-success'>{item.debit}</td>
+                                    <td>{item.balance}</td>
+                                    <td>{item.credit}</td>
+                                    <td>{item.debit}</td>
                                 </tr>
                             )
                         }) : null
@@ -83,4 +69,4 @@ class TransactionReceive extends Component {
     }
 }
 
-export default TransactionReceive;
+export default TransactionTable;

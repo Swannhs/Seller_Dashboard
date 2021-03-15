@@ -11,34 +11,18 @@ class TransactionSent extends Component {
 
     componentDidMount() {
         const cookie = new Cookies();
-        RadiusApi.get('/dashboard/check_token.json', {
+        RadiusApi.get('/voucher-transactions/index.json', {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    id: response.data.data.user.id
+                    transactions: response.data.transactions
                 })
             })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.id !== this.state.id) {
-
-
-            RadiusApi.get('/voucher-transactions/index.json', {
-                params: {
-                    id: this.state.id
-                }
-            })
-                .then(response => {
-                    this.setState({
-                        transactions: response.data.sent
-                    })
-                })
-        }
-    }
 
     render() {
         return (
@@ -58,10 +42,7 @@ class TransactionSent extends Component {
                     <tr>
                         <th scope="col">Trx ID</th>
                         <th scope="col">Partner</th>
-                        <th scope="col">Profile</th>
-                        <th scope="col">credit</th>
-                        <th scope="col">Debit</th>
-                        <th scope="col">Balance</th>
+                        <th scope="col">Amount</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -71,10 +52,7 @@ class TransactionSent extends Component {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.partner_user_id}</td>
-                                    <td>{item.profile_id}</td>
-                                    <td>{item.credit}</td>
-                                    <td>{item.debit}</td>
-                                    <td>{item.balance}</td>
+                                    <td> <span className='text-danger'>- </span>{item.debit}</td>
                                 </tr>
                             )
                         }) : null
