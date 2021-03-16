@@ -52,7 +52,7 @@ class Transfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    <Link to='/admin/transaction'>
+                    <Link to='/admin/cash'>
                         <button className='ui button'>Back</button>
                     </Link>
                 </div>

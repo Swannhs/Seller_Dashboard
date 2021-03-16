@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import {ProSidebar, Menu, MenuItem} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import {AiFillDashboard, AiOutlineUser, BsListNested, BiMoney} from "react-icons/all";
+import {AiFillDashboard, AiOutlineUser, BsListNested, BiMoney, MdAttachMoney} from "react-icons/all";
 import {Nav} from "react-bootstrap";
 
 
@@ -48,6 +48,11 @@ function Sidebar() {
                                 <MenuItem icon={<BiMoney/>}>
                                     <Link to='/admin/transaction'>
                                         Transaction
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem icon={<MdAttachMoney/>}>
+                                    <Link to='/admin/cash'>
+                                        Cash
                                     </Link>
                                 </MenuItem>
                             </Menu>
