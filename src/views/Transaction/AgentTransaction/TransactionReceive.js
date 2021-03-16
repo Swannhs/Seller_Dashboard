@@ -47,7 +47,7 @@ class TransactionReceive extends Component {
             <>
                 <div className="ui grid">
                     <div className="ui text-right floated column">
-                        <Link to='/admin/transfer'>
+                        <Link to='/admin/voucher/transfer'>
                             <button className='ui button primary'>
                                 Transfer
                             </button>

@@ -61,20 +61,20 @@ const dashboardRoutes = [
     },
 
     {
-        path: "/transaction",
+        path: "/voucher/transaction",
         name: "Transaction",
         component: TransactionTable,
         layout: '/admin'
     },
     {
-        path: "/transfer",
+        path: "/voucher/transfer",
         name: "Transfer",
         component: Transfer,
         layout: '/admin'
     },
 
     {
-        path: "/cash",
+        path: "/cash/transaction",
         name: "Cash",
         component: CashTable,
         layout: '/admin'

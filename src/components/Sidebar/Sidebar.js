@@ -46,12 +46,12 @@ function Sidebar() {
                                     </Link>
                                 </MenuItem>
                                 <MenuItem icon={<BiMoney/>}>
-                                    <Link to='/admin/transaction'>
+                                    <Link to='/admin/voucher/transaction'>
                                         Transaction
                                     </Link>
                                 </MenuItem>
                                 <MenuItem icon={<MdAttachMoney/>}>
-                                    <Link to='/admin/cash'>
+                                    <Link to='/admin/cash/transaction'>
                                         Cash
                                     </Link>
                                 </MenuItem>

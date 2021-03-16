@@ -11,7 +11,7 @@ class CashTransfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    <Link to='/admin/cash/transfer'>
+                    <Link to='/admin/cash/transaction'>
                         <button className='ui button'>Back</button>
                     </Link>
                 </div>
