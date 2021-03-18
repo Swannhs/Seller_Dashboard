@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form} from "react-bootstrap";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
 
 class AllUser extends Component {
     constructor(props) {
@@ -13,17 +13,16 @@ class AllUser extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies;
-
-        RadiusApi.get('/voucher-transactions/getUsers.json', {
+        const token = new Cookies;
+        RadiusApi.get('/voucher-transactions/getUsers.json',{
             params: {
-                'token': cookie.get('Token')
+                token: token.get('Token')
             }
         })
             .then(response => {
                 this.setState({
                     select: '',
-                    users: response.data.user
+                    users: response.data
                 })
             })
     }

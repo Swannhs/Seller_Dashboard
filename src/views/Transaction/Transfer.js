@@ -26,7 +26,8 @@ class Transfer extends Component {
             }
         })
             .then(response => {
-                console.log(response)
+                alert('Transfer amount successfully')
+                this.props.history.push('/admin/voucher/transaction')
             })
     }
 

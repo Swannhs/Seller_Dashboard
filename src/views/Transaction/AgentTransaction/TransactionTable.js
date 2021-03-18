@@ -53,7 +53,7 @@ class TransactionTable extends Component {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.partner_user_id}</td>
+                                    <td>{item.partner_username}</td>
                                     <td>{item.balance}</td>
                                     <td>{item.credit}</td>
                                     <td>{item.debit}</td>
