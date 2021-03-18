@@ -4,6 +4,8 @@ import {Navbar, Container, Nav, Dropdown, Button} from "react-bootstrap";
 
 import routes from "routes.js";
 import Cookies from "universal-cookie/lib";
+import {Input} from "reactstrap";
+import {BiSearch} from "react-icons/all";
 
 function Header() {
     const location = useLocation();
@@ -124,48 +126,24 @@ function Header() {
                                 href="#pablo"
                                 onClick={(e) => e.preventDefault()}
                             >
-                                <i className="nc-icon nc-zoom-split"/>
-                                <span className="d-lg-block"> Search</span>
+                                <i className='pr-2'><BiSearch/></i>
+                                <span className="d-lg-block">
+                                    <Input className='mt-1 pr-2' type='text' placeholder='search'/>
+                                </span>
+
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>
                     <Nav className="ml-auto" navbar>
-                        <Nav.Item>
-                            <Nav.Link
-                                className="m-0"
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                <span className="no-icon">Account</span>
-                            </Nav.Link>
-                        </Nav.Item>
-                        {/*<Dropdown as={Nav.Item}>*/}
-                        {/*  <Dropdown.Toggle*/}
-                        {/*    aria-expanded={false}*/}
-                        {/*    aria-haspopup={true}*/}
-                        {/*    as={Nav.Link}*/}
-                        {/*    data-toggle="dropdown"*/}
-                        {/*    id="navbarDropdownMenuLink"*/}
-                        {/*    variant="default"*/}
-                        {/*    className="m-0"*/}
-                        {/*  >*/}
-                        {/*    <span className="no-icon">CreateUser</span>*/}
-                        {/*  </Dropdown.Toggle>*/}
-                        {/*  <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink">*/}
-                        {/*    <Dropdown.Item*/}
-                        {/*      href="#pablo"*/}
-                        {/*      onClick={(e) => e.preventDefault()}*/}
+                        {/*<Nav.Item>*/}
+                        {/*    <Nav.Link*/}
+                        {/*        className="m-0"*/}
+                        {/*        href="#pablo"*/}
+                        {/*        onClick={(e) => e.preventDefault()}*/}
                         {/*    >*/}
-                        {/*      Reseller*/}
-                        {/*    </Dropdown.Item>*/}
-                        {/*    <Dropdown.Item*/}
-                        {/*      href="#pablo"*/}
-                        {/*      onClick={(e) => e.preventDefault()}*/}
-                        {/*    >*/}
-                        {/*      User*/}
-                        {/*    </Dropdown.Item>*/}
-                        {/*  </Dropdown.Menu>*/}
-                        {/*</Dropdown>*/}
+                        {/*        <span className="no-icon">Account</span>*/}
+                        {/*    </Nav.Link>*/}
+                        {/*</Nav.Item>*/}
                         <Nav.Item>
                             <Nav.Link
                                 className="m-0"
@@ -173,7 +151,7 @@ function Header() {
                                 onClick={(e) => e.preventDefault()}
                             >
                                 <Link to='/login'>
-                                    <span className="no-icon text-danger" onClick={onLogout}>Log out</span>
+                                    <button className="ui red button" onClick={onLogout}>Log out</button>
                                 </Link>
                             </Nav.Link>
                         </Nav.Item>
