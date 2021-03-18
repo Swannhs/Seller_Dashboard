@@ -19,7 +19,6 @@ class Transfer extends Component {
     onTransactionComplete = () => {
         const cookie = new Cookies()
         let data = this.state
-        console.log(data)
         RadiusApi.post('/voucher-transactions/add.json', data, {
             params: {
                 token : cookie.get('Token')
