@@ -15,12 +15,6 @@ class LoginUI extends Component {
     }
 
 
-    componentDidMount() {
-        const cookie = new Cookies();
-        cookie.get('Token') ? this.props.history.push('/admin/dashboard')
-            : this.props.history.push('/login');
-    }
-
 
     coChangeLoading = () => {
         this.setState({
@@ -66,7 +60,6 @@ class LoginUI extends Component {
                 <h1 className='heading-text'>Admin Dashboard</h1>
                 <div className="wrapper-login fadeInDown">
                     <div id="formContent">
-                        <form method="post" onSubmit={this.onLoginSubmit}>
                             {
                                 this.state.errors ? <div className="alert alert-danger">
                                     Invalid username or password
@@ -85,15 +78,14 @@ class LoginUI extends Component {
                                    placeholder="User Name" value={this.state.username}
                                    onChange={event => this.setState({username: event.target.value})}
                             />
-                            <input type="text" id="password" className="fadeIn third" name="password"
+                            <input type="password" id="password" className="fadeIn third" name="password"
                                    placeholder="Password" value={this.state.password}
                                    onChange={event => this.setState({password: event.target.value})}
                             />
                             <input type="submit" className="fadeIn fourth" defaultValue="Log In"
                                    value={this.state.click ? "Loading......"
-                                       : 'Login'} onClick={this.coChangeLoading}
+                                       : 'Login'} onClick={this.onLoginSubmit}
                             />
-                        </form>
                     </div>
                 </div>
             </div>
