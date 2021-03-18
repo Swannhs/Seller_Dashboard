@@ -11,20 +11,18 @@ class CashTransfer extends Component {
         receivable: ''
     }
 
-    onCashTransaction(){
+    onCashTransaction = () => {
         const cookie = new Cookies()
         let data = this.state
-        console.log(data)
-        // RadiusApi.post('/cash-transactions/add.json', data, {
-        //     params: {
-        //         token : cookie.get('Token')
-        //     }
-        // })
-        //     .then(response => {
-        //         console.log(response)
-        //         alert('Transfer cash successfully')
-        //         this.props.history.push('/admin/cash/transaction')
-        //     })
+        RadiusApi.post('/cash-transactions/add.json', data, {
+            params: {
+                token : cookie.get('Token')
+            }
+        })
+            .then(response => {
+                alert('Transfer cash successfully')
+                this.props.history.push('/admin/cash/transaction')
+            })
     }
 
     onCreatePartner = async data => {
@@ -55,6 +53,7 @@ class CashTransfer extends Component {
                            }}
                            required={true}
                     />
+
 
                     <button className='ui button primary'
                             onClick={this.onCashTransaction}
