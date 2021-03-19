@@ -39,7 +39,6 @@ class CreateUserUi extends Component {
 
                         <h2 className="card-title mt-3 text-center p-3">Create Account</h2>
 
-
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-user"/> </span>

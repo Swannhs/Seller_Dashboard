@@ -4,7 +4,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 import CreateUserUi from "./CreateUserUI";
 
-class CreateUser extends Component {
+class CreateUserAction extends Component {
 
     onCreateUser = async data => {
 
@@ -19,6 +19,7 @@ class CreateUser extends Component {
 
                 if (response.data.success) {
                     alert('User is created successfully')
+                    this.props.history.push('/admin/users/view')
                 } else
                     alert(response.data.errors.username)
             })
@@ -32,4 +33,4 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser;
+export default CreateUserAction;

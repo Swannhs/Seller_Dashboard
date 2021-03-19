@@ -50,12 +50,10 @@ class EditUi extends Component {
     render() {
         return (
             <>
-                <div className='col-1'>
-                    <button className='ui button align-left'>
-                        <Link to='/admin/users/view'>
-                            Back
-                        </Link>
-                    </button>
+                <div className='ml-3'>
+                    <Link to='/admin/users/view'>
+                        <button className='ui button'>Back</button>
+                    </Link>
                 </div>
 
 
@@ -83,7 +81,7 @@ class EditUi extends Component {
                         <div className="input-group-prepend">
                             <span className="input-group-text"> <i className="fa fa-user"/> </span>
                         </div>
-                        <input name className="form-control" placeholder='User Name' type="text"
+                        <input name className="form-control" placeholder='Name' type="text"
                                value={this.state.name}
                                onChange={event => {
                                    this.setState({

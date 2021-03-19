@@ -42,7 +42,6 @@ class VoucherApi extends Component {
     }
 
 
-
     componentDidMount() {
         this.onApiCall();
     }
@@ -55,7 +54,6 @@ class VoucherApi extends Component {
         let totalPage = this.state.total / this.state.limit
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
     }
-
 
 
     onHandleChange = event => {
@@ -153,7 +151,9 @@ class VoucherApi extends Component {
 
                                 <td data-label="Action">
                                     <BiReset/>
-                                    <AiOutlineEye/>
+                                    <Link to={'/admin/users/view/' + item.id}>
+                                        <AiOutlineEye/>
+                                    </Link>
                                     {/*<AiFillEdit onClick={this.onEditUser}/>*/}
                                     <Link to={'/admin/users/edit/' + item.id}>
                                         <AiFillEdit/>

@@ -1,8 +1,9 @@
 import Dashboard from "views/Dashboard.js";
 
 import UserList from "./views/User/UserList";
-import CreateUser from "views/User/CreateUser.js";
+import CreateUserAction from "views/User/CreateUserAction.js";
 import EditUser from "./views/User/Action/Edit/EditUser";
+import ViewUser from "./views/User/Action/ViewUser";
 
 import VoucherList from "views/Voucher/VoucherList.js";
 import CreateVoucherApi from "./views/Voucher/CreateVoucher/CreateVoucherApi";
@@ -27,15 +28,22 @@ const dashboardRoutes = [
 
 
     {
+        path: '/users/view/:id',
+        name: 'View',
+        component: ViewUser,
+        layout: '/admin'
+    },
+    {
         path: '/users/view',
         name: 'Users',
         component: UserList,
         layout: '/admin'
     },
+
     {
         path: '/users/create',
         name: 'Create User',
-        component: CreateUser,
+        component: CreateUserAction,
         layout: '/admin'
     },
     {
