@@ -7,13 +7,13 @@ class CreateUserUi extends Component {
         parent_id: '0',
         username: '',
         password: '',
+        active: '',
         name: '',
         surname: '',
         phone: '',
         email: '',
         address: '',
         language: "4_4",
-        active: 'active',
 
         errors: []
     }
@@ -61,7 +61,19 @@ class CreateUserUi extends Component {
                                    onChange={event => this.setState({password: event.target.value})}
                             />
                         </div>
-                        <div className="form-group input-group">
+
+                        <div className="ui checkbox">
+                            <input type="checkbox" name="example"
+                                   onChange={event => {
+                                       this.setState({
+                                           active: event.target.checked ? 'active' : ''
+                                       })
+                                   }}
+                            />
+                            <label>Active</label>
+                        </div>
+
+                        <div className="form-group input-group mt-2">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-building"/> </span>
                             </div>
@@ -93,12 +105,6 @@ class CreateUserUi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-phone"/> </span>
                             </div>
-                            {/*<select className="custom-select" style={{maxWidth: '120px'}}>*/}
-                            {/*    <option selected>+971</option>*/}
-                            {/*    <option value={1}>+972</option>*/}
-                            {/*    <option value={2}>+198</option>*/}
-                            {/*    <option value={3}>+701</option>*/}
-                            {/*</select>*/}
                             <input name className="form-control" placeholder="Phone number" type="number"
                                    value={this.state.phone}
                                    onChange={event => {
