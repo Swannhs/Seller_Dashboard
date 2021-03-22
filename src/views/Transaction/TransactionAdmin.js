@@ -46,7 +46,7 @@ class TransactionAdmin extends Component {
                             <div className='row'>
                                 <div className='col-1'>
                                     <div className="ui text-right floated column">
-                                        <Link to='/admin/generate'>
+                                        <Link to='/admin/voucher/generate'>
                                             <button className='ui button positive'>
                                                 Generate
                                             </button>
@@ -56,7 +56,7 @@ class TransactionAdmin extends Component {
 
                                 <div className='col'>
                                     <div className="ui text-right floated column">
-                                        <Link to='/admin/transfer'>
+                                        <Link to='/admin/voucher/transfer'>
                                             <button className='ui button primary'>
                                                 Transfer
                                             </button>
@@ -83,7 +83,7 @@ class TransactionAdmin extends Component {
                                     return (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
-                                            <td>{item.partner_user_id}</td>
+                                            <td>{item.partner_username}</td>
                                             <td>{item.profile_id}</td>
                                             <td>{item.credit}</td>
                                             <td>{item.debit}</td>

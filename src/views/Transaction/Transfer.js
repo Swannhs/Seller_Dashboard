@@ -13,6 +13,23 @@ class Transfer extends Component {
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
+        root: false
+
+    }
+
+
+    componentDidMount() {
+        const cookie = new Cookies
+        RadiusApi.get('/dashboard/checkToken/index.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    root: response.data.data.isRootUser
+                })
+            })
     }
 
 
@@ -25,8 +42,14 @@ class Transfer extends Component {
             }
         })
             .then(response => {
-                alert('Transfer amount successfully')
-                this.props.history.push('/admin/voucher/transaction')
+                if (this.state.root){
+                    alert('Transfer amount successfully')
+                    this.props.history.push('/admin/root/voucher/transaction')
+                }
+                else {
+                    alert('Transfer amount successfully')
+                    this.props.history.push('/admin/voucher/transaction')
+                }
             })
     }
 
