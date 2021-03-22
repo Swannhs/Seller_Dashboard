@@ -75,9 +75,14 @@ class Transfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    <Link to='/admin/voucher/transaction'>
-                        <button className='ui button'>Back</button>
-                    </Link>
+                    {this.state.root?
+                        <Link to='/admin/root/voucher/transaction'>
+                            <button className='ui button'>Back</button>
+                        </Link>:<Link to='/admin/voucher/transaction'>
+                            <button className='ui button'>Back</button>
+                        </Link>
+                    }
+
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
