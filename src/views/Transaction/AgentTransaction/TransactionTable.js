@@ -1,32 +1,37 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
+import TransactionSent from "./TransactionSent";
+import TransactionReceive from "./TransactionReceive";
 
 class TransactionTable extends Component {
     state = {
-        id: '',
-        transactions: []
+        sent: true
     }
-
-    componentDidMount() {
-        const cookie = new Cookies();
-        RadiusApi.get('/voucher-transactions/index.json', {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    transactions: response.data.transactions
-                })
-            })
-    }
-
 
     render() {
         return (
             <>
+                <div className='text-center'>
+                    <div className="ui buttons">
+                        <button className="ui button red"
+                                onClick={() => {
+                                    this.setState({
+                                        sent: true
+                                    })
+                                }}
+                        >Sent</button>
+                        <div className="or"/>
+                        <button className="ui button positive"
+                                onClick={() => {
+                                    this.setState({
+                                        sent: false
+                                    })
+                                }}
+                        >Received
+                        </button>
+                    </div>
+                </div>
+
                 <div className="ui grid">
                     <div className="ui text-right floated column">
                         <Link to='/admin/voucher/transfer'>
@@ -37,32 +42,7 @@ class TransactionTable extends Component {
                     </div>
                 </div>
 
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Trx ID</th>
-                        <th scope="col">Partner</th>
-                        <th scope="col">Balance</th>
-                        <th scope="col">Credit</th>
-                        <th scope="col">Debit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.transactions ? this.state.transactions.map((item) => {
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.partner_username}</td>
-                                    <td>{item.balance}</td>
-                                    <td>{item.credit}</td>
-                                    <td>{item.debit}</td>
-                                </tr>
-                            )
-                        }) : null
-                    }
-                    </tbody>
-                </table>
+                {this.state.sent ? <TransactionSent/> : <TransactionReceive/>}
             </>
 
         );

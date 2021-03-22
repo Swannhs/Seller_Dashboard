@@ -6,7 +6,7 @@ import Cookies from "universal-cookie/lib";
 class TransactionAdmin extends Component {
 
     state = {
-        id: '',
+        root: true,
         transactions: []
     }
 
@@ -20,70 +20,83 @@ class TransactionAdmin extends Component {
         })
             .then(response => {
                 this.setState({
-                    id: response.data.data.user.id
+                    root: response.data.data.isRootUser
+                })
+            })
+
+        RadiusApi.get('/voucher-transactions/index.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    transactions: response.data.transactions
                 })
             })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.id !== this.state.id) {
-
-
-            RadiusApi.get('/voucher-transactions/index.json', {
-                params: {
-                    id: this.state.id
-                }
-            })
-                .then(response => {
-                    console.log(response.data.voucherTransactions)
-                    this.setState({
-                        transactions: response.data.voucherTransactions
-                    })
-                })
-        }
-    }
 
     render() {
         return (
             <>
-                <div className="ui grid">
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/transfer'>
-                            <button className='ui button primary'>
-                                Transfer
-                            </button>
-                        </Link>
-                    </div>
-                </div>
+                {this.state.root ?
+                    <>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-1'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/generate'>
+                                            <button className='ui button positive'>
+                                                Generate
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
 
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Trx ID</th>
-                        <th scope="col">Partner</th>
-                        <th scope="col">Profile</th>
-                        <th scope="col">credit</th>
-                        <th scope="col">Debit</th>
-                        <th scope="col">Balance</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.transactions ? this.state.transactions.map((item) => {
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.partner_user_id}</td>
-                                    <td>{item.profile_id}</td>
-                                    <td>{item.credit}</td>
-                                    <td>{item.debit}</td>
-                                    <td>{item.balance}</td>
-                                </tr>
-                            )
-                        }) : null
-                    }
-                    </tbody>
-                </table>
+                                <div className='col'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/transfer'>
+                                            <button className='ui button primary'>
+                                                Transfer
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table className="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Trx ID</th>
+                                <th scope="col">Partner</th>
+                                <th scope="col">Profile</th>
+                                <th scope="col">credit</th>
+                                <th scope="col">Debit</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.transactions ? this.state.transactions.map((item) => {
+                                    return (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.partner_user_id}</td>
+                                            <td>{item.profile_id}</td>
+                                            <td>{item.credit}</td>
+                                            <td>{item.debit}</td>
+                                            <td>{item.balance}</td>
+                                        </tr>
+                                    )
+                                }) : null
+                            }
+                            </tbody>
+                        </table>
+                    </> : <h1 className='text-center text-danger'>You are not root user</h1>
+                }
+
             </>
 
         );

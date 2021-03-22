@@ -9,11 +9,11 @@ import VoucherList from "views/Voucher/VoucherList.js";
 import CreateVoucherApi from "./views/Voucher/CreateVoucher/CreateVoucherApi";
 
 import TransactionTable from "./views/Transaction/AgentTransaction/TransactionTable";
+import TransactionAdmin from "./views/Transaction/TransactionAdmin";
 import Transfer from "./views/Transaction/Transfer";
 
 import CashTable from "./views/Cash/CashTable";
 import CashTransfer from "./views/Cash/CashTransfer";
-
 
 
 
@@ -53,8 +53,6 @@ const dashboardRoutes = [
         layout: "/admin",
     },
 
-
-
     {
         path: '/voucher/create',
         name: "Reseller",
@@ -74,6 +72,14 @@ const dashboardRoutes = [
         component: TransactionTable,
         layout: '/admin'
     },
+
+    {
+        path: "/root/voucher/transaction/",
+        name: "Transaction",
+        component: TransactionAdmin,
+        layout: '/admin'
+    },
+
     {
         path: "/voucher/transfer",
         name: "Transfer",

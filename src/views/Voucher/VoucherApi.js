@@ -39,7 +39,6 @@ class VoucherApi extends Component {
 
 
     componentDidMount() {
-        console.log('componentDidMount')
         this.onApiCall()
     }
 
