@@ -14,15 +14,15 @@ class AllUser extends Component {
 
     componentDidMount() {
         const token = new Cookies;
-        RadiusApi.get('/voucher-transaction-details/getUsers.json',{
+        RadiusApi.get('/access-providers/index-tree-grid.json',{
             params: {
+                node: 0,
                 token: token.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    select: '',
-                    users: response.data
+                    users: response.data.items
                 })
             })
     }
@@ -49,7 +49,6 @@ class AllUser extends Component {
                         id="inlineFormCustomSelect"
                         custom
                         value={this.state.select}
-
                         onChange={event => {
                             this.setState({
                                 select: event.target.value

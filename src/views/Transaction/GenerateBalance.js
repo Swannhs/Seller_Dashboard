@@ -12,7 +12,7 @@ class GenerateBalance extends Component {
     onGenerate = () => {
         const cookie = new Cookies()
         let data = this.state
-        RadiusApi.post('//voucher-transaction-details/generate.json', data, {
+        RadiusApi.post('/voucher-transaction-details/generate.json', data, {
             params: {
                 token: cookie.get('Token')
             }

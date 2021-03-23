@@ -13,8 +13,11 @@ class Transfer extends Component {
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
-        root: false
-
+        root: false,
+        error: {
+            partner: '',
+            balance: ''
+        }
     }
 
 
@@ -38,19 +41,37 @@ class Transfer extends Component {
         let data = this.state
         RadiusApi.post('/voucher-transaction-details/add.json', data, {
             params: {
-                token : cookie.get('Token')
+                token: cookie.get('Token')
             }
         })
             .then(response => {
-                console.log(response)
-                // if (this.state.root){
-                //     alert('Transfer amount successfully')
-                //     this.props.history.push('/admin/root/voucher/transaction')
-                // }
-                // else {
-                //     alert('Transfer amount successfully')
-                //     this.props.history.push('/admin/voucher/transaction')
-                // }
+                console.log(response.data)
+                if (this.state.root) {
+                    if (response.data.success) {
+                        alert('Transfer amount successfully')
+                        this.props.history.push('/admin/root/voucher/transaction')
+                    } else {
+                        alert(response.data.message)
+                        this.setState({
+                            error: {
+                                partner: response.data.partner ? response.data.partner : null,
+                                balance: response.data.message ? response.data.message : null
+                            }
+                        })
+                    }
+                } else {
+                    if (response.data.success) {
+                        alert('Transfer amount successfully')
+                        this.props.history.push('/admin/voucher/transaction')
+                    } else {
+                        alert(response.data.message)
+                        this.setState({
+                            error: {
+                                balance: response.data.message
+                            }
+                        })
+                    }
+                }
             })
     }
 
@@ -76,10 +97,10 @@ class Transfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    {this.state.root?
+                    {this.state.root ?
                         <Link to='/admin/root/voucher/transaction'>
                             <button className='ui button'>Back</button>
-                        </Link>:<Link to='/admin/voucher/transaction'>
+                        </Link> : <Link to='/admin/voucher/transaction'>
                             <button className='ui button'>Back</button>
                         </Link>
                     }
@@ -88,23 +109,29 @@ class Transfer extends Component {
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
                     <AllUser onChange={this.onCreatePartner}/>
+                    <p className='text-danger'>{this.state.error.partner}</p>
                     <VoucherGroup onChange={this.onCreateGroup}/>
                     <VoucherProfile onChange={this.onCreateProfile}/>
 
-                    <Input type='number'
-                           placeholder='The amount you want to transfer'
-                           value={this.state.transfer_amount}
-                           onChange={event => {
-                               this.setState({
-                                   transfer_amount: event.target.value
-                               })
-                           }}
-                           required={true}
-                    />
+                    <div className='pl-3'>
+                        <h3 className='text-black-50'>Amount</h3>
+                        <Input type='number'
+                               placeholder='The amount you want to transfer'
+                               value={this.state.transfer_amount}
+                               onChange={event => {
+                                   this.setState({
+                                       transfer_amount: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+                        <p className='text-danger'>{this.state.error.balance}</p>
 
-                    <button className='ui button primary' onClick={this.onTransactionComplete}>
-                        Transfer
-                    </button>
+                        <button className='ui button primary' onClick={this.onTransactionComplete}>
+                            Transfer
+                        </button>
+                    </div>
+
                 </article>
 
             </div>
