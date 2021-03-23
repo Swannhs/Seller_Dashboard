@@ -36,20 +36,21 @@ class Transfer extends Component {
     onTransactionComplete = () => {
         const cookie = new Cookies()
         let data = this.state
-        RadiusApi.post('/voucher-transactions/add.json', data, {
+        RadiusApi.post('/voucher-transaction-details/add.json', data, {
             params: {
                 token : cookie.get('Token')
             }
         })
             .then(response => {
-                if (this.state.root){
-                    alert('Transfer amount successfully')
-                    this.props.history.push('/admin/root/voucher/transaction')
-                }
-                else {
-                    alert('Transfer amount successfully')
-                    this.props.history.push('/admin/voucher/transaction')
-                }
+                console.log(response)
+                // if (this.state.root){
+                //     alert('Transfer amount successfully')
+                //     this.props.history.push('/admin/root/voucher/transaction')
+                // }
+                // else {
+                //     alert('Transfer amount successfully')
+                //     this.props.history.push('/admin/voucher/transaction')
+                // }
             })
     }
 

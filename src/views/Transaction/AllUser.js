@@ -14,7 +14,7 @@ class AllUser extends Component {
 
     componentDidMount() {
         const token = new Cookies;
-        RadiusApi.get('/voucher-transactions/getUsers.json',{
+        RadiusApi.get('/voucher-transaction-details/getUsers.json',{
             params: {
                 token: token.get('Token')
             }

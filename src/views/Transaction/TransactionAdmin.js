@@ -24,7 +24,7 @@ class TransactionAdmin extends Component {
                 })
             })
 
-        RadiusApi.get('/voucher-transactions/index.json', {
+        RadiusApi.get('/voucher-transaction-details/index.json', {
             params: {
                 token: cookie.get('Token')
             }

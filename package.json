@@ -31,6 +31,7 @@
     "reactjs-popup": "^2.0.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "serve": "^11.3.2",
     "universal-cookie": "^4.0.4"
   },
   "optionalDependencies": {
@@ -40,14 +41,15 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && gulp licenses",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile:scss": "node-sass src/assets/scss/main-style.scss src/assets/css/light-bootstrap-dashboard-react.css",
     "minify:scss": "node-sass src/assets/scss/main-style.scss src/assets/css/light-bootstrap-dashboard-react.min.css --output-style compressed",
     "map:scss": "node-sass src/assets/scss/main-style.scss src/assets/css/light-bootstrap-dashboard-react.css --source-map true",
-    "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss"
+    "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss",
+    "prod": "npm run-script build && serve build"
   },
   "browserslist": {
     "production": [

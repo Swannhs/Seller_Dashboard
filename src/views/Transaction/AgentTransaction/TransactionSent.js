@@ -9,7 +9,7 @@ class TransactionSent extends Component {
 
     componentDidMount() {
         const cookie = new Cookies();
-        RadiusApi.get('/voucher-transactions/index.json', {
+        RadiusApi.get('/voucher-transaction-details/index.json', {
             params: {
                 token: cookie.get('Token')
             }
