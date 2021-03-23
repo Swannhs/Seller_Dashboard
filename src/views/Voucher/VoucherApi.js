@@ -21,7 +21,7 @@ class VoucherApi extends Component {
 
     onApiCall = () => {
         const cookie = new Cookies
-        RadiusApi.get('/vouchers/index.json', {
+        RadiusApi.get('/vouchers/index-user-vouchers.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
@@ -30,6 +30,7 @@ class VoucherApi extends Component {
             }
         })
             .then(response => {
+                console.log(response)
                 this.setState({
                     userData: response.data.items,
                     total: response.data.totalCount
