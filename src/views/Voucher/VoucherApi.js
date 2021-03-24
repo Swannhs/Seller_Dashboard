@@ -30,7 +30,6 @@ class VoucherApi extends Component {
             }
         })
             .then(response => {
-                console.log(response)
                 this.setState({
                     userData: response.data.items,
                     total: response.data.totalCount

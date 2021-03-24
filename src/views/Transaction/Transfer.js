@@ -45,7 +45,6 @@ class Transfer extends Component {
             }
         })
             .then(response => {
-                console.log(response.data)
                 if (this.state.root) {
                     if (response.data.success) {
                         alert('Transfer amount successfully')

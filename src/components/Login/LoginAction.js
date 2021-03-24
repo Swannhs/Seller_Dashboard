@@ -5,7 +5,6 @@ import RadiusApi from "../../radius-api/RadiusApi";
 class LoginAction extends Component {
 
     componentDidMount() {
-        console.log('componentDidMount')
         const cookie = new Cookies();
 
         if (cookie.get('Token')){
