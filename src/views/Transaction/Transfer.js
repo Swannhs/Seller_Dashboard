@@ -13,6 +13,7 @@ class Transfer extends Component {
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
+        quantity_rate: '',
         root: false,
         error: {
             partner: '',
@@ -125,6 +126,18 @@ class Transfer extends Component {
                                required={true}
                         />
                         <p className='text-danger'>{this.state.error.balance}</p>
+                        <h3 className='text-black-50'>Amount Per Quantity rate</h3>
+                        <Input type='number'
+                               placeholder='Quantity rate'
+                               value={this.state.quantity_rate}
+                               onChange={event => {
+                                   this.setState({
+                                       quantity_rate: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+
 
                         <button className='ui button primary' onClick={this.onTransactionComplete}>
                             Transfer
