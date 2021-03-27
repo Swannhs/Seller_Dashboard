@@ -10,6 +10,21 @@ class TransactionAdmin extends Component {
         transactions: []
     }
 
+
+    onGetData = () => {
+        const cookie = new Cookies();
+        RadiusApi.get('/voucher-transactions/index.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    transactions: response.data.items
+                })
+            })
+    }
+
     componentDidMount() {
         const cookie = new Cookies();
 
@@ -22,17 +37,9 @@ class TransactionAdmin extends Component {
                 this.setState({
                     root: response.data.data.isRootUser
                 })
-            })
-
-        RadiusApi.get('/voucher-transaction-details/index.json', {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    transactions: response.data.transactions
-                })
+                if (response.data.data.isRootUser) {
+                    this.onGetData();
+                }
             })
     }
 
@@ -69,12 +76,14 @@ class TransactionAdmin extends Component {
                         <table className="table table-striped">
                             <thead>
                             <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Trx ID</th>
                                 <th scope="col">Partner</th>
                                 <th scope="col">Profile</th>
+                                <th scope="col">Group</th>
                                 <th scope="col">credit</th>
                                 <th scope="col">Debit</th>
                                 <th scope="col">Balance</th>
-                                <th scope="col">Trx ID</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -82,12 +91,14 @@ class TransactionAdmin extends Component {
                                 this.state.transactions ? this.state.transactions.map((item) => {
                                     return (
                                         <tr key={item.id}>
-                                            <td>{item.partner_username}</td>
-                                            <td>{item.profile_id}</td>
+                                            <td>{item.id}</td>
+                                            <td>{item.transaction}</td>
+                                            <td>{item.user.username}</td>
+                                            <td>{item.profile.name}</td>
+                                            <td>{item.realm.name}</td>
                                             <td>{item.credit}</td>
                                             <td>{item.debit}</td>
                                             <td>{item.balance}</td>
-                                            <td>{item.tnx_id}</td>
                                         </tr>
                                     )
                                 }) : null

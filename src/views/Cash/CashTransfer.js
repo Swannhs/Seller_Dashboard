@@ -8,20 +8,22 @@ import RadiusApi from "../../radius-api/RadiusApi";
 class CashTransfer extends Component {
     state = {
         partner_user_id: '',
-        receivable: ''
+        paid: ''
     }
 
     onCashTransaction = () => {
         const cookie = new Cookies()
         let data = this.state
-        RadiusApi.post('/cash-transactions/add.json', data, {
+        RadiusApi.post('/balance-transaction-details/add.json', data, {
             params: {
                 token : cookie.get('Token')
             }
         })
             .then(response => {
-                alert('Transfer cash successfully')
-                this.props.history.push('/admin/cash/transaction')
+                // if (response.data.success){
+                //     alert('Transfer cash successfully')
+                //     this.props.history.push('/admin/cash/transaction')
+                // }
             })
     }
 
@@ -45,10 +47,10 @@ class CashTransfer extends Component {
                     <AllUser onChange={this.onCreatePartner}/>
                     <Input type='number'
                            placeholder='The amount you want to transfer'
-                           value={this.state.receivable}
+                           value={this.state.paid}
                            onChange={event => {
                                this.setState({
-                                   receivable: event.target.value
+                                   paid: event.target.value
                                })
                            }}
                            required={true}

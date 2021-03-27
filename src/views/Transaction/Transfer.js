@@ -40,38 +40,39 @@ class Transfer extends Component {
     onTransactionComplete = () => {
         const cookie = new Cookies()
         let data = this.state
-        RadiusApi.post('/voucher-transaction-details/add.json', data, {
+        RadiusApi.post('/voucher-transactions/add.json', data, {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
-                if (this.state.root) {
-                    if (response.data.success) {
-                        alert('Transfer amount successfully')
-                        this.props.history.push('/admin/root/voucher/transaction')
-                    } else {
-                        alert(response.data.message)
-                        this.setState({
-                            error: {
-                                partner: response.data.partner ? response.data.partner : null,
-                                balance: response.data.message ? response.data.message : null
-                            }
-                        })
-                    }
-                } else {
-                    if (response.data.success) {
-                        alert('Transfer amount successfully')
-                        this.props.history.push('/admin/voucher/transaction')
-                    } else {
-                        alert(response.data.message)
-                        this.setState({
-                            error: {
-                                balance: response.data.message
-                            }
-                        })
-                    }
-                }
+                // console.log(response)
+                // if (this.state.root) {
+                //     if (response.data.success) {
+                //         alert('Transfer amount successfully')
+                //         this.props.history.push('/admin/root/voucher/transaction')
+                //     } else {
+                //         alert(response.data.message)
+                //         this.setState({
+                //             error: {
+                //                 partner: response.data.partner ? response.data.partner : null,
+                //                 balance: response.data.message ? response.data.message : null
+                //             }
+                //         })
+                //     }
+                // } else {
+                //     if (response.data.success) {
+                //         alert('Transfer amount successfully')
+                //         this.props.history.push('/admin/voucher/transaction')
+                //     } else {
+                //         alert(response.data.message)
+                //         this.setState({
+                //             error: {
+                //                 balance: response.data.message
+                //             }
+                //         })
+                //     }
+                // }
             })
     }
 
