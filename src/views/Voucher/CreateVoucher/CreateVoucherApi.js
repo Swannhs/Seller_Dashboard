@@ -32,7 +32,7 @@ class CreateVoucherApi extends Component {
             }
         })
             .then(response => {
-                response.data.success ? alert('Voucher Created') : alert('Failed to create voucher')
+                response.data.success ? alert('Voucher Created') : alert(response.data.message)
             })
     }
 
