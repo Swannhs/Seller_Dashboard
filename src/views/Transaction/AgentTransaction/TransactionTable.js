@@ -10,41 +10,43 @@ class TransactionTable extends Component {
 
     render() {
         return (
-            <>
-                <div className='text-center'>
-                    <div className="ui buttons">
-                        <button className="ui button red"
-                                onClick={() => {
-                                    this.setState({
-                                        sent: true
-                                    })
-                                }}
-                        >Sent</button>
-                        <div className="or"/>
-                        <button className="ui button positive"
-                                onClick={() => {
-                                    this.setState({
-                                        sent: false
-                                    })
-                                }}
-                        >Received
-                        </button>
-                    </div>
-                </div>
-
-                <div className="ui grid">
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/voucher/transfer'>
-                            <button className='ui button primary'>
-                                Transfer
+            this.state.root ?
+                <>
+                    <div className='text-center'>
+                        <div className="ui buttons">
+                            <button className="ui button red"
+                                    onClick={() => {
+                                        this.setState({
+                                            sent: true
+                                        })
+                                    }}
+                            >Sent
                             </button>
-                        </Link>
+                            <div className="or"/>
+                            <button className="ui button positive"
+                                    onClick={() => {
+                                        this.setState({
+                                            sent: false
+                                        })
+                                    }}
+                            >Received
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                {this.state.sent ? <TransactionSent/> : <TransactionReceive/>}
-            </>
+                    <div className="ui grid">
+                        <div className="ui text-right floated column">
+                            <Link to='/admin/voucher/transfer'>
+                                <button className='ui button primary'>
+                                    Transfer
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
 
+                    {this.state.sent ? <TransactionSent/> : <TransactionReceive/>}
+                </>
+                : <h1 className='text-center text-danger'>You are not root user</h1>
         );
     }
 }
