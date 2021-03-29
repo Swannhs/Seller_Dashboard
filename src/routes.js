@@ -13,8 +13,9 @@ import TransactionAdmin from "./views/Transaction/TransactionAdmin";
 import Transfer from "./views/Transaction/Transfer";
 import GenerateBalance from "./views/Transaction/GenerateBalance";
 
-import CashTable from "./views/Cash/CashTable";
+import CashTableAdmin from "./views/Cash/CashTableAdmin";
 import CashTransfer from "./views/Cash/CashTransfer";
+import CashTableAgent from "./views/Cash/CashTableAgent";
 
 
 
@@ -96,9 +97,15 @@ const dashboardRoutes = [
 
 
     {
+        path: "/root/cash/transaction",
+        name: "Cash",
+        component: CashTableAdmin,
+        layout: '/admin'
+    },
+    {
         path: "/cash/transaction",
         name: "Cash",
-        component: CashTable,
+        component: CashTableAgent,
         layout: '/admin'
     },
     {
