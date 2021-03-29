@@ -3,22 +3,41 @@ import {Link} from "react-router-dom";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 
-class CashTable extends Component {
+class CashTableAdmin extends Component {
     state = {
+        root: false,
         cash: []
     }
 
-    componentDidMount() {
+    onGetData = () => {
         const cookie = new Cookies();
-        RadiusApi.get('/cash-transactions/index.json', {
+        RadiusApi.get('/balance-transaction-details/index.json', {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    cash: response.data.cash
+                    cash: response.data.items
                 })
+            })
+    }
+
+    componentDidMount() {
+        const cookie = new Cookies();
+
+        RadiusApi.get('/dashboard/check_token.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    root: response.data.data.isRootUser
+                })
+                if (response.data.data.isRootUser) {
+                    this.onGetData();
+                }
             })
     }
 
@@ -39,7 +58,8 @@ class CashTable extends Component {
                     <thead>
                     <tr>
                         <th scope="col">Trx ID</th>
-                        <th scope="col">Partner</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Receiver</th>
                         <th scope="col">Payable</th>
                         <th scope="col">Receivable</th>
                         <th scope="col">Status</th>
@@ -53,7 +73,8 @@ class CashTable extends Component {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.partner_user_id}</td>
+                                    <td>{item.sender_user_id}</td>
+                                    <td>{item.user.username}</td>
                                     <td>{item.payable}</td>
                                     <td>{item.receivable}</td>
                                     {item.status ? <td>Accepted</td> : <td>Pending</td>}
@@ -70,4 +91,4 @@ class CashTable extends Component {
     }
 }
 
-export default CashTable;
+export default CashTableAdmin;
