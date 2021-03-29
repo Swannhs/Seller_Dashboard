@@ -11,7 +11,7 @@ class CreateVoucherApi extends Component {
 
         this.state = {
             user_id: 0,
-            single_field: true,
+            single_field: false,
             realm_id: null,
             profile_id: null,
             quantity: 0,
