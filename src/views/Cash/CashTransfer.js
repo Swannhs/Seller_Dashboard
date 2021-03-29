@@ -4,11 +4,16 @@ import {Input} from "reactstrap";
 import AllUser from "../Transaction/AllUser";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
+import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
+import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 
 class CashTransfer extends Component {
     state = {
         partner_user_id: '',
-        paid: ''
+        paid: '',
+        realm_id: '',
+        profile_id: '',
+
     }
 
     onCashTransaction = () => {
@@ -20,6 +25,7 @@ class CashTransfer extends Component {
             }
         })
             .then(response => {
+                console.log(response)
                 // if (response.data.success){
                 //     alert('Transfer cash successfully')
                 //     this.props.history.push('/admin/cash/transaction')
@@ -30,6 +36,17 @@ class CashTransfer extends Component {
     onCreatePartner = async data => {
         this.setState({
             partner_user_id: data
+        })
+    }
+    onCreateGroup = async data => {
+        this.setState({
+            realm_id: data
+        })
+    }
+
+    onCreateProfile = async data => {
+        this.setState({
+            profile_id: data
         })
     }
 
@@ -45,6 +62,8 @@ class CashTransfer extends Component {
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
                     <AllUser onChange={this.onCreatePartner}/>
+                    <VoucherGroup onChange={this.onCreateGroup}/>
+                    <VoucherProfile onChange={this.onCreateProfile}/>
                     <Input type='number'
                            placeholder='The amount you want to transfer'
                            value={this.state.paid}
