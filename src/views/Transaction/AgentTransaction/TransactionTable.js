@@ -10,7 +10,6 @@ class TransactionTable extends Component {
 
     render() {
         return (
-            this.state.root ?
                 <>
                     <div className='text-center'>
                         <div className="ui buttons">
@@ -46,7 +45,6 @@ class TransactionTable extends Component {
 
                     {this.state.sent ? <TransactionSent/> : <TransactionReceive/>}
                 </>
-                : <h1 className='text-center text-danger'>You are not root user</h1>
         );
     }
 }
