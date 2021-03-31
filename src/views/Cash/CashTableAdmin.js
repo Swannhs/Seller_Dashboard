@@ -44,16 +44,6 @@ class CashTableAdmin extends Component {
     render() {
         return (
             <>
-                <div className="ui grid">
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/cash/transfer'>
-                            <button className='ui button primary'>
-                                Pay
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-
                 <table className="table table-striped">
                     <thead>
                     <tr>
