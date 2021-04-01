@@ -3,7 +3,15 @@ import {Link} from "react-router-dom";
 
 import {ProSidebar, Menu, MenuItem} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import {AiFillDashboard, AiOutlineUser, BsListNested, BiMoney, MdAttachMoney} from "react-icons/all";
+import {
+    AiFillDashboard,
+    AiOutlineUser,
+    BsListNested,
+    BiMoney,
+    MdAttachMoney,
+    BsServer,
+    AiOutlineCloudServer
+} from "react-icons/all";
 import {Nav} from "react-bootstrap";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
@@ -86,6 +94,26 @@ class Sidebar extends Component {
                                                 </Link>
                                         }
                                     </MenuItem>
+                                    <>
+                                        {
+                                            this.state.root ?
+                                                <>
+                                                    <MenuItem icon={<BsServer/>}>
+                                                        <Link to='/admin/root/server'>
+                                                            Server
+                                                        </Link>
+                                                    </MenuItem>
+
+                                                    <MenuItem icon={<AiOutlineCloudServer/>}>
+                                                        <Link to='/admin/root/tweak'>
+                                                            Tweak
+                                                        </Link>
+                                                    </MenuItem>
+                                                </>
+                                                : null
+                                        }
+                                    </>
+
                                 </Menu>
                             </ProSidebar>
                         </li>
