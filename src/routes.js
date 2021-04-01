@@ -18,7 +18,6 @@ import CashTransfer from "./views/Cash/CashTransfer";
 import CashTableAgent from "./views/Cash/CashTableAgent";
 
 
-
 const dashboardRoutes = [
     {
         path: "/dashboard",
@@ -28,7 +27,7 @@ const dashboardRoutes = [
         layout: "/admin",
     },
 
-
+    //--------------------------User Route Start----------------------------------
     {
         path: '/users/view/:id',
         name: 'View',
@@ -54,7 +53,10 @@ const dashboardRoutes = [
         component: EditUser,
         layout: "/admin",
     },
+    //-------------------------------User Route End----------------------------------
 
+
+    //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
         name: "Reseller",
@@ -94,8 +96,10 @@ const dashboardRoutes = [
         component: GenerateBalance,
         layout: '/admin'
     },
+    //-------------------------------Voucher Route End-----------------------------------
 
 
+    //-------------------------------Cash Route Start-----------------------------------
     {
         path: "/root/cash/transaction",
         name: "Cash",
@@ -110,6 +114,22 @@ const dashboardRoutes = [
     },
     {
         path: "/cash/transfer",
+        name: "Transfer",
+        component: CashTransfer,
+        layout: '/admin'
+    },
+    //-------------------------------Cash Route End-----------------------------------
+
+
+    //-------------------------------Server Route Start-------------------------------
+    {
+        path: "/root/server",
+        name: "Transfer",
+        component: CashTransfer,
+        layout: '/admin'
+    },
+    {
+        path: "/root/tweak",
         name: "Transfer",
         component: CashTransfer,
         layout: '/admin'
