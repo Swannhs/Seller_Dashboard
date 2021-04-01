@@ -97,7 +97,8 @@ class Transfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    {this.state.root ?
+                    {
+                        this.state.root ?
                         <Link to='/admin/root/voucher/transaction'>
                             <button className='ui button'>Back</button>
                         </Link> : <Link to='/admin/voucher/transaction'>

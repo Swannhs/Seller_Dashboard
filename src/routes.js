@@ -16,6 +16,9 @@ import GenerateBalance from "./views/Transaction/GenerateBalance";
 import CashTableAdmin from "./views/Cash/CashTableAdmin";
 import CashTransfer from "./views/Cash/CashTransfer";
 import CashTableAgent from "./views/Cash/CashTableAgent";
+import Server from "./views/server/Server";
+import Tweak from "./views/tweak/Tweak";
+import CreateServer from "./views/server/CreateServer";
 
 
 const dashboardRoutes = [
@@ -125,13 +128,19 @@ const dashboardRoutes = [
     {
         path: "/root/server",
         name: "Transfer",
-        component: CashTransfer,
+        component: Server,
+        layout: '/admin'
+    },
+    {
+        path: "/root/server-new",
+        name: "Transfer",
+        component: CreateServer,
         layout: '/admin'
     },
     {
         path: "/root/tweak",
         name: "Transfer",
-        component: CashTransfer,
+        component: Tweak,
         layout: '/admin'
     },
 ];
