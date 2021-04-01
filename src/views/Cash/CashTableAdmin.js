@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 
@@ -11,7 +10,7 @@ class CashTableAdmin extends Component {
 
     onGetData = () => {
         const cookie = new Cookies();
-        RadiusApi.get('/balance-transaction-details/index.json', {
+        RadiusApi.get('/balance-transactions/index.json', {
             params: {
                 token: cookie.get('Token')
             }
