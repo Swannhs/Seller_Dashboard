@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Form} from "react-bootstrap";
+import RadiusApi from "../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
 
 class CreateServer extends Component {
     state = {
@@ -12,6 +14,19 @@ class CreateServer extends Component {
         proxyPort: '',
         apiServerPort: '',
         note: ''
+    }
+
+    onCreateServer = () => {
+        let data = this.state
+        let cookie = new Cookies
+        RadiusApi.post('/servers/add.json', data, {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                console.log(response)
+            })
     }
 
     render() {
@@ -117,7 +132,7 @@ class CreateServer extends Component {
                         </div>
 
 
-                        <button onClick={this.onSubmitVoucher} className='ui button primary m-3'>
+                        <button onClick={this.onCreateServer} className='ui button primary m-3'>
                             Create
                         </button>
                     </div>

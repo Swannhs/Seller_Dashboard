@@ -1,12 +1,30 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import RadiusApi from "../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
 
 class Server extends Component {
     state = {
-        root: ''
+        root: '',
+        server: []
+    }
+
+    componentDidMount() {
+        let cookie = new Cookies
+        RadiusApi.get('/servers/index.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    server: response.data.server
+                })
+            })
     }
 
     render() {
+        console.log(this.state.server)
         return (
             <div>
                 <div className='container'>
@@ -39,17 +57,18 @@ class Server extends Component {
                     </thead>
                     <tbody>
                     {
-                        this.state.transactions ? this.state.transactions.map((item) => {
+                        this.state.server ? this.state.server.map((item) => {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.transaction}</td>
-                                    <td>{item.user.username}</td>
-                                    <td>{item.profile.name}</td>
-                                    <td>{item.realm.name}</td>
-                                    <td>{item.credit}</td>
-                                    <td>{item.debit}</td>
-                                    <td>{item.balance}</td>
+                                    <td>{item.type}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.cc}</td>
+                                    <td>{item.ip}</td>
+                                    <td>{item.ssl_port}</td>
+                                    <td>{item.proxy_port}</td>
+                                    <td>{item.api_server_port}</td>
+                                    <td>{item.note}</td>
                                 </tr>
                             )
                         }) : null
