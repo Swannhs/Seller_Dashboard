@@ -24,7 +24,6 @@ class Server extends Component {
     }
 
     render() {
-        console.log(this.state.server)
         return (
             <div>
                 <div className='container'>
