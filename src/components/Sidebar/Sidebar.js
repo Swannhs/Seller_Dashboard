@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-import {ProSidebar, Menu, MenuItem} from 'react-pro-sidebar';
+import {ProSidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import {
     AiFillDashboard,
@@ -98,17 +98,31 @@ class Sidebar extends Component {
                                         {
                                             this.state.root ?
                                                 <>
-                                                    <MenuItem icon={<BsServer/>}>
-                                                        <Link to='/admin/root/server'>
-                                                            Server
-                                                        </Link>
-                                                    </MenuItem>
+                                                    <SubMenu title='Server' icon={<BsServer/>}>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/server'>
+                                                                Servers
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/server-realms'>
+                                                                Server-Realms
+                                                            </Link>
+                                                        </MenuItem>
+                                                    </SubMenu>
 
-                                                    <MenuItem icon={<AiOutlineCloudServer/>}>
-                                                        <Link to='/admin/root/tweak'>
-                                                            Tweak
-                                                        </Link>
-                                                    </MenuItem>
+                                                    <SubMenu title='Tweak' icon={<AiOutlineCloudServer/>}>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/tweak'>
+                                                                Tweak
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/tweak-realms'>
+                                                                Tweak-Realms
+                                                            </Link>
+                                                        </MenuItem>
+                                                    </SubMenu>
                                                 </>
                                                 : null
                                         }
