@@ -1,9 +1,25 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import RadiusApi from "../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
 
 class TweakRealm extends Component {
     state = {
+        tweakRealms: []
+    }
 
+    componentDidMount() {
+        let cookie = new Cookies
+        RadiusApi.get('/tweak-realms/index.json', {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    tweakRealms: response.data.tweakRealms
+                })
+            })
     }
 
     render() {
@@ -12,7 +28,7 @@ class TweakRealm extends Component {
                 <div className='row'>
                     <div className='col'>
                         <div className="ui text-right floated column">
-                            <Link to='/admin/root/server-realms/new'>
+                            <Link to='/admin/root/tweak-realm/new'>
                                 <button className='ui button primary'>
                                     New
                                 </button>
@@ -25,17 +41,17 @@ class TweakRealm extends Component {
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Server</th>
+                        <th scope="col">Tweaks</th>
                         <th scope="col">Realms</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
-                        this.state.server_realm ? this.state.server_realm.map((item) => {
+                        this.state.tweakRealms ? this.state.tweakRealms.map((item) => {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.server.name}</td>
+                                    <td>{item.tweak.name}</td>
                                     <td>{item.realm.name}</td>
                                 </tr>
                             )

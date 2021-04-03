@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {Link} from "react-router-dom";
 
 class CashSent extends Component {
     state = {
