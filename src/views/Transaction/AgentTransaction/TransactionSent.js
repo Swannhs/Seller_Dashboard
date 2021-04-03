@@ -40,7 +40,7 @@ class TransactionSent extends Component {
                         this.state.transactions.map((item) => {
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.transaction}</td>
+                                    <td className='text-uppercase'>{item.transaction}</td>
                                     <td>{item.user.username}</td>
                                     <td>{item.realm.name}</td>
                                     <td>{item.profile.name}</td>
