@@ -1,4 +1,4 @@
-import Dashboard from "views/Dashboard.js";
+import Dashboard from "views/dashboard/Dashboard.js";
 
 import UserList from "./views/User/UserList";
 import CreateUserAction from "views/User/CreateUserAction.js";
