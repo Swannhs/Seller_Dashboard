@@ -47,6 +47,23 @@ class VoucherApi extends Component {
     }
 
 
+    onVoucherReset = (props) => {
+        let reset = {
+            reset: props
+        }
+
+        let cookie = new Cookies
+        RadiusApi.post('/vouchers/voucher-reset.json', reset, {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                console.log(response)
+            })
+    }
+
+
     onPagination() {
         let totalPage = this.state.total / this.state.limit
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
@@ -66,8 +83,7 @@ class VoucherApi extends Component {
                             <td>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">
-                                <BiReset/>
-                                <AiOutlineEye/>
+                                <BiReset onClick={() => this.onVoucherReset(item.id)}/>
                             </td>
                         </tr>
                     )
