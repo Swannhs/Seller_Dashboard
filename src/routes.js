@@ -23,6 +23,7 @@ import ServerRealm from "./views/server/ServerRealm";
 import CreateServerRealms from "./views/server/CreateServerRealms";
 import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
+import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
 
 
 const dashboardRoutes = [
@@ -172,6 +173,12 @@ const dashboardRoutes = [
         path: "/root/tweak-realms",
         name: "Tweak",
         component: TweakRealm,
+        layout: '/admin'
+    },
+    {
+        path: '/root/tweak-realm/new',
+        name: "Tweak",
+        component: CreateTweakRealm,
         layout: '/admin'
     },
 ];
