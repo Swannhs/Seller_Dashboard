@@ -42,6 +42,9 @@ class DashboardCash extends Component {
                                     <Card.Title as="h4">
                                         Receivable: ${this.state.cash[0]? this.state.cash[0].receivable: 0}
                                     </Card.Title>
+                                    <Card.Title as="h4">
+                                        Received: $0
+                                    </Card.Title>
                                 </div>
                             </Col>
                         </Row>
