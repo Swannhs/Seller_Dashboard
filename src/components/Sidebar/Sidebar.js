@@ -1,9 +1,17 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-import {ProSidebar, Menu, MenuItem} from 'react-pro-sidebar';
+import {ProSidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import {AiFillDashboard, AiOutlineUser, BsListNested, BiMoney, MdAttachMoney} from "react-icons/all";
+import {
+    AiFillDashboard,
+    AiOutlineUser,
+    BsListNested,
+    BiMoney,
+    MdAttachMoney,
+    BsServer,
+    AiOutlineCloudServer
+} from "react-icons/all";
 import {Nav} from "react-bootstrap";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
@@ -86,6 +94,40 @@ class Sidebar extends Component {
                                                 </Link>
                                         }
                                     </MenuItem>
+                                    <>
+                                        {
+                                            this.state.root ?
+                                                <>
+                                                    <SubMenu title='Server' icon={<BsServer/>}>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/server'>
+                                                                Servers
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/server-realms'>
+                                                                Server-Realms
+                                                            </Link>
+                                                        </MenuItem>
+                                                    </SubMenu>
+
+                                                    <SubMenu title='Tweak' icon={<AiOutlineCloudServer/>}>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/tweak'>
+                                                                Tweak
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem>
+                                                            <Link to='/admin/root/tweak-realms'>
+                                                                Tweak-Realms
+                                                            </Link>
+                                                        </MenuItem>
+                                                    </SubMenu>
+                                                </>
+                                                : null
+                                        }
+                                    </>
+
                                 </Menu>
                             </ProSidebar>
                         </li>

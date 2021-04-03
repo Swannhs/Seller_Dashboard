@@ -16,7 +16,13 @@ import GenerateBalance from "./views/Transaction/GenerateBalance";
 import CashTableAdmin from "./views/Cash/CashTableAdmin";
 import CashTransfer from "./views/Cash/CashTransfer";
 import CashTableAgent from "./views/Cash/CashTableAgent";
-
+import Server from "./views/server/Server";
+import Tweak from "./views/tweak/Tweak";
+import CreateServer from "./views/server/CreateServer";
+import ServerRealm from "./views/server/ServerRealm";
+import CreateServerRealms from "./views/server/CreateServerRealms";
+import TweakRealm from "./views/tweak/TweakRealm";
+import CreateTweak from "./views/tweak/CreateTweak";
 
 
 const dashboardRoutes = [
@@ -28,7 +34,7 @@ const dashboardRoutes = [
         layout: "/admin",
     },
 
-
+    //--------------------------User Route Start----------------------------------
     {
         path: '/users/view/:id',
         name: 'View',
@@ -54,7 +60,10 @@ const dashboardRoutes = [
         component: EditUser,
         layout: "/admin",
     },
+    //-------------------------------User Route End----------------------------------
 
+
+    //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
         name: "Reseller",
@@ -94,8 +103,10 @@ const dashboardRoutes = [
         component: GenerateBalance,
         layout: '/admin'
     },
+    //-------------------------------Voucher Route End-----------------------------------
 
 
+    //-------------------------------Cash Route Start-----------------------------------
     {
         path: "/root/cash/transaction",
         name: "Cash",
@@ -112,6 +123,55 @@ const dashboardRoutes = [
         path: "/cash/transfer",
         name: "Transfer",
         component: CashTransfer,
+        layout: '/admin'
+    },
+    //-------------------------------Cash Route End-----------------------------------
+
+
+    //-------------------------------Server Route Start-------------------------------
+    {
+        path: "/root/server",
+        name: "Server",
+        component: Server,
+        layout: '/admin'
+    },
+    {
+        path: "/root/server-new",
+        name: "Server",
+        component: CreateServer,
+        layout: '/admin'
+    },
+    {
+        path: "/root/server-realms/new",
+        name: "Server",
+        component: CreateServerRealms,
+        layout: '/admin'
+    },
+    {
+        path: "/root/server-realms",
+        name: "Server",
+        component: ServerRealm,
+        layout: '/admin'
+    },
+
+
+    //--------------------------------Tweak------------------------------
+    {
+        path: "/root/tweak",
+        name: "Tweak",
+        component: Tweak,
+        layout: '/admin'
+    },
+    {
+        path: "/root/tweak-new",
+        name: "Tweak",
+        component: CreateTweak,
+        layout: '/admin'
+    },
+    {
+        path: "/root/tweak-realms",
+        name: "Tweak",
+        component: TweakRealm,
         layout: '/admin'
     },
 ];
