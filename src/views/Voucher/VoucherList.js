@@ -71,6 +71,11 @@ function VoucherList() {
                             Name
                         </h4>
                     </th>
+                    <th>
+                        <h4 className='text-center'>
+                            Password
+                        </h4>
+                    </th>
 
                     {/*<th className='d-none d-sm-block'>*/}
                     {/*    <h4 className='text-center'>*/}

@@ -61,6 +61,7 @@ class VoucherApi extends Component {
                     return (
                         <tr key={item.id}>
                             <td>{item.name}</td>
+                            <td>{item.password}</td>
                             <td>{item.realm}</td>
                             <td>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
