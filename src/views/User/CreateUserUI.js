@@ -7,7 +7,6 @@ class CreateUserUi extends Component {
         parent_id: '0',
         username: '',
         password: '',
-        active: '',
         name: '',
         surname: '',
         phone: '',
@@ -61,16 +60,6 @@ class CreateUserUi extends Component {
                             />
                         </div>
 
-                        <div className="ui checkbox">
-                            <input type="checkbox" name="example"
-                                   onChange={event => {
-                                       this.setState({
-                                           active: event.target.checked ? 'active' : ''
-                                       })
-                                   }}
-                            />
-                            <label>Active</label>
-                        </div>
 
                         <div className="form-group input-group mt-2">
                             <div className="input-group-prepend">
