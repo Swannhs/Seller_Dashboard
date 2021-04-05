@@ -70,6 +70,7 @@ class VoucherApi extends Component {
     }
 
 
+
     render() {
         return (
             <>
@@ -83,7 +84,7 @@ class VoucherApi extends Component {
                             <td>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">
-                                <BiReset onClick={() => this.onVoucherReset(item.id)}/>
+                                <BiReset aria-placeholder='reset' onClick={() => this.onVoucherReset(item.id)}/>
                             </td>
                         </tr>
                     )
