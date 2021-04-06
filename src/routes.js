@@ -24,6 +24,7 @@ import CreateServerRealms from "./views/server/CreateServerRealms";
 import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
+import CashSummaryAdmin from "./views/Cash/CashSummaryTable";
 
 
 const dashboardRoutes = [
@@ -109,15 +110,9 @@ const dashboardRoutes = [
 
     //-------------------------------Cash Route Start-----------------------------------
     {
-        path: "/root/cash/transaction",
-        name: "Cash",
-        component: CashTableAdmin,
-        layout: '/admin'
-    },
-    {
         path: "/cash/transaction",
-        name: "Cash",
-        component: CashTableAgent,
+        name: "Cash Summary",
+        component: CashSummaryAdmin,
         layout: '/admin'
     },
     {

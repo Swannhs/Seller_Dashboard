@@ -5,6 +5,7 @@ import GetServer from "../Transaction/GetServer";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Modal} from "react-bootstrap";
 import {Button} from "semantic-ui-react";
+import MyModal from "../../components/modal/MyModal";
 
 class CreateServerRealms extends Component {
     state = {
@@ -71,33 +72,7 @@ class CreateServerRealms extends Component {
                     {/*    </Modal.Footer>*/}
                     {/*</Modal>*/}
 
-
-                    <div>
-                        {/* Button trigger modal */}
-                        <button type="button" className="ui button positive" data-toggle="modal" data-target="#exampleModal">
-                            Generate
-                        </button>
-                        {/* Modal */}
-                        <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        {/*<button type="ui button positive" className="close" data-dismiss="modal" aria-label="Close">*/}
-                                        {/*    <span aria-hidden="true">×</span>*/}
-                                        {/*</button>*/}
-                                    </div>
-                                    <div className="modal-body">
-                                        ...
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="ui button" data-dismiss="modal">Close</button>
-                                        <button type="button" className="ui button positive">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <MyModal/>
 
                 </article>
 
