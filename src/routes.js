@@ -13,9 +13,7 @@ import TransactionAdmin from "./views/Transaction/TransactionAdmin";
 import Transfer from "./views/Transaction/Transfer";
 import GenerateBalance from "./views/Transaction/GenerateBalance";
 
-import CashTableAdmin from "./views/Cash/CashTableAdmin";
 import CashTransfer from "./views/Cash/CashTransfer";
-import CashTableAgent from "./views/Cash/CashTableAgent";
 import Server from "./views/server/Server";
 import Tweak from "./views/tweak/Tweak";
 import CreateServer from "./views/server/CreateServer";
@@ -25,6 +23,8 @@ import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
 import CashSummaryAdmin from "./views/Cash/CashSummaryTable";
+import VoucherSummaryTable from "./views/Transaction/VoucherSummaryTable";
+import VoucherSummaryAdmin from "./views/Transaction/VoucherSummaryAdmin";
 
 
 const dashboardRoutes = [
@@ -82,14 +82,14 @@ const dashboardRoutes = [
     {
         path: "/voucher/transaction",
         name: "Transaction",
-        component: TransactionTable,
+        component: VoucherSummaryTable,
         layout: '/admin'
     },
 
     {
         path: "/root/voucher/transaction",
         name: "Transaction",
-        component: TransactionAdmin,
+        component: VoucherSummaryAdmin,
         layout: '/admin'
     },
 
