@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
+import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import Cookies from "universal-cookie/lib";
 
-class TransactionAdmin extends Component {
+class TransactionAdminReceived extends Component {
 
     state = {
         root: true,
@@ -13,14 +13,16 @@ class TransactionAdmin extends Component {
 
     onGetData = () => {
         const cookie = new Cookies();
-        RadiusApi.get('/voucher-transactions/index.json', {
+
+        RadiusApi.get('/voucher-transactions/view.json', {
             params: {
-                token: cookie.get('Token')
+                token: cookie.get('Token'),
+                key: this.props.id
             }
         })
             .then(response => {
                 this.setState({
-                    transactions: response.data.items
+                    transactions: response.data.received
                 })
             })
     }
@@ -49,30 +51,6 @@ class TransactionAdmin extends Component {
             <>
                 {this.state.root ?
                     <>
-                        <div className='container'>
-                            <div className='row'>
-                                <div className='col-1'>
-                                    <div className="ui text-right floated column">
-                                        <Link to='/admin/voucher/generate'>
-                                            <button className='ui button positive'>
-                                                Generate
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-
-                                <div className='col'>
-                                    <div className="ui text-right floated column">
-                                        <Link to='/admin/voucher/transfer'>
-                                            <button className='ui button primary'>
-                                                Transfer
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <table className="table table-striped">
                             <thead>
                             <tr>
@@ -105,7 +83,7 @@ class TransactionAdmin extends Component {
                             }
                             </tbody>
                         </table>
-                    </> : <h1 className='text-center text-danger'>You are not root user</h1>
+                    </> : <h3 className='text-center text-danger'>No received history yet</h3>
                 }
 
             </>
@@ -114,4 +92,4 @@ class TransactionAdmin extends Component {
     }
 }
 
-export default TransactionAdmin;
+export default TransactionAdminReceived;

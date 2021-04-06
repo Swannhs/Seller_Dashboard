@@ -9,7 +9,7 @@ import VoucherList from "views/Voucher/VoucherList.js";
 import CreateVoucherApi from "./views/Voucher/CreateVoucher/CreateVoucherApi";
 
 import TransactionTable from "./views/Transaction/AgentTransaction/TransactionTable";
-import TransactionAdmin from "./views/Transaction/TransactionAdmin";
+import TransactionAdminReceived from "./views/Transaction/Admin/TransactionAdminReceived";
 import Transfer from "./views/Transaction/Transfer";
 import GenerateBalance from "./views/Transaction/GenerateBalance";
 
@@ -24,7 +24,8 @@ import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
 import CashSummaryAdmin from "./views/Cash/CashSummaryTable";
 import VoucherSummaryTable from "./views/Transaction/VoucherSummaryTable";
-import VoucherSummaryAdmin from "./views/Transaction/VoucherSummaryAdmin";
+import VoucherSummaryAdmin from "./views/Transaction/Admin/VoucherSummaryAdmin";
+import TransactionAdmin from "./views/Transaction/Admin/TransactionAdmin";
 
 
 const dashboardRoutes = [
@@ -91,6 +92,13 @@ const dashboardRoutes = [
         name: "Transaction",
         component: VoucherSummaryAdmin,
         layout: '/admin'
+    },
+
+    {
+        path: "/root/voucher/transactions/:id",
+        name: "Transaction Details",
+        component: TransactionAdmin,
+        layout: "/admin",
     },
 
     {
