@@ -84,9 +84,17 @@ class Sidebar extends Component {
 
                                     </MenuItem>
                                     <MenuItem icon={<MdAttachMoney/>}>
-                                        <Link to='/admin/cash/transaction'>
-                                            Cash
-                                        </Link>
+                                        {
+                                            this.state.root ?
+                                                <Link to='/admin/root/cash/transaction'>
+                                                    Cash
+                                                </Link>
+                                                :
+                                                <Link to='/admin/cash/transaction'>
+                                                    Cash
+                                                </Link>
+                                        }
+
                                     </MenuItem>
                                     <>
                                         {

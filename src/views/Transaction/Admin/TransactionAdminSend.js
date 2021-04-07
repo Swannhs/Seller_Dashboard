@@ -58,7 +58,7 @@ class TransactionAdminSend extends Component {
                         <th scope="col">Group</th>
                         <th scope="col">credit</th>
                         <th scope="col">Debit</th>
-                        <th scope="col">Balance</th>
+                        <th scope="col">Cost</th>
                     </tr>
                     </thead>
                     <tbody>

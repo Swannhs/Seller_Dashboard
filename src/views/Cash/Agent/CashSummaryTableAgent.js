@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
+import RadiusApi from "../../../radius-api/RadiusApi";
+import {Link} from "react-router-dom";
 
-class CashSummaryAgent extends Component {
+class CashSummaryTableAgent extends Component {
     state = {
         items: []
     }
 
     componentDidMount() {
         let cookie = new Cookies
-        RadiusApi.get('/balance-transactions/summary.json', {
+        RadiusApi.get('/balance-transactions/index.json', {
             params: {
                 token: cookie.get('Token')
             }
@@ -24,6 +25,16 @@ class CashSummaryAgent extends Component {
     render() {
         return (
             <>
+                <div className="ui grid">
+                    <div className="ui text-right floated column">
+                        <Link to='/admin/cash/transfer'>
+                            <button className='ui button primary'>
+                                Pay
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+
                 <table className="table table-striped">
                     <thead>
                     <tr>
@@ -53,4 +64,4 @@ class CashSummaryAgent extends Component {
     }
 }
 
-export default CashSummaryAgent;
+export default CashSummaryTableAgent;
