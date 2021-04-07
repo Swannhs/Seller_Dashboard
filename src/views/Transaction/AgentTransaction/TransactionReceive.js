@@ -4,16 +4,17 @@ import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 
 class TransactionReceive extends Component {
-
     state = {
         transactions: []
     }
 
     componentDidMount() {
         const cookie = new Cookies();
-        RadiusApi.get('/voucher-transactions/index.json', {
+
+        RadiusApi.get('/voucher-transactions/view.json', {
             params: {
-                token: cookie.get('Token')
+                token: cookie.get('Token'),
+                key: this.props.id
             }
         })
             .then(response => {
@@ -21,39 +22,47 @@ class TransactionReceive extends Component {
                     transactions: response.data.received
                 })
             })
+
     }
+
 
     render() {
         return (
-            this.state.transactions.length ?
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Trx ID</th>
-                        <th scope="col">Partner</th>
-                        <th scope="col">Profile</th>
-                        <th scope="col">Group</th>
-                        <th scope="col">Credit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.transactions.map((item) => {
-                            return (
-                                <tr key={item.id}>
-                                    <td className='text-uppercase'>{item.transaction}</td>
-                                    <td>{item.user.username}</td>
-                                    <td>{item.profile.name}</td>
-                                    <td>{item.realm.name}</td>
-                                    <td>{item.credit}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                    </tbody>
-                </table> : <h3 className='text-center text-danger'>There is no received history</h3>
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Trx ID</th>
+                    <th scope="col">Partner</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">credit</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    this.state.transactions ? this.state.transactions.map((item) => {
+                        return (
+                            <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.transaction}</td>
+                                <td>{item.user.username}</td>
+                                <td>{item.profile.name}</td>
+                                <td>{item.realm.name}</td>
+                                <td>{item.credit}</td>
+                                <td>{item.debit}</td>
+                                <td>{item.balance}</td>
+                            </tr>
+                        )
+                    }) : null
+                }
+                </tbody>
+            </table>
         );
     }
+
 }
 
 export default TransactionReceive;
