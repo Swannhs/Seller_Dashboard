@@ -60,13 +60,12 @@ class TransactionAdminReceived extends Component {
                                 <th scope="col">Profile</th>
                                 <th scope="col">Group</th>
                                 <th scope="col">credit</th>
-                                <th scope="col">Debit</th>
-                                <th scope="col">Balance</th>
+                                <th scope="col">Cost</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
-                                this.state.transactions ? this.state.transactions.map((item) => {
+                                this.state.transactions.length ? this.state.transactions.map((item) => {
                                     return (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
@@ -75,7 +74,6 @@ class TransactionAdminReceived extends Component {
                                             <td>{item.profile.name}</td>
                                             <td>{item.realm.name}</td>
                                             <td>{item.credit}</td>
-                                            <td>{item.debit}</td>
                                             <td>{item.balance}</td>
                                         </tr>
                                     )

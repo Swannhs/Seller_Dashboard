@@ -13,7 +13,7 @@ import TransactionAdminReceived from "./views/Transaction/Admin/TransactionAdmin
 import Transfer from "./views/Transaction/Transfer";
 import GenerateBalance from "./views/Transaction/GenerateBalance";
 
-import CashTransfer from "./views/Cash/CashTransfer";
+import CashTransfer from "./views/Cash/Admin/CashTransfer";
 import Server from "./views/server/Server";
 import Tweak from "./views/tweak/Tweak";
 import CreateServer from "./views/server/CreateServer";
@@ -22,12 +22,14 @@ import CreateServerRealms from "./views/server/CreateServerRealms";
 import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
-import CashSummaryAdmin from "./views/Cash/CashSummaryTableAdmin";
+import CashSummaryAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
 import VoucherSummaryTable from "./views/Transaction/AgentTransaction/VoucherSummaryTable";
 import VoucherSummaryAdmin from "./views/Transaction/Admin/VoucherSummaryAdmin";
 import TransactionAdmin from "./views/Transaction/Admin/TransactionAdmin";
 import CashSummaryTableAgent from "./views/Cash/Agent/CashSummaryTableAgent";
-import CashSummaryTableAdmin from "./views/Cash/CashSummaryTableAdmin";
+import CashSummaryTableAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
+import CashTableAgent from "./views/Cash/Agent/CashTableAgent";
+import CashTableAdmin from "./views/Cash/Admin/CashTableAdmin";
 
 
 const dashboardRoutes = [
@@ -136,6 +138,18 @@ const dashboardRoutes = [
         name: "Cash Summary",
         component: CashSummaryTableAgent,
         layout: '/admin'
+    },
+    {
+        path: "/cash/transactions/:id",
+        name: "Cash Details",
+        component: CashTableAgent,
+        layout: "/admin",
+    },
+    {
+        path: "/root/cash/transactions/:id",
+        name: "Cash Details",
+        component: CashTableAdmin,
+        layout: "/admin",
     },
     {
         path: "/cash/transfer",

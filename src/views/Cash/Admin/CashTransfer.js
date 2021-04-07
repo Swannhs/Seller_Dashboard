@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Input} from "reactstrap";
 import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../radius-api/RadiusApi";
+import RadiusApi from "../../../radius-api/RadiusApi";
 
 class CashTransfer extends Component {
     state = {

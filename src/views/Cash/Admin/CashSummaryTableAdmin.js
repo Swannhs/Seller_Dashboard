@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
+import RadiusApi from "../../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 
-class CashReceived extends Component {
+class CashSummaryAgent extends Component {
     state = {
-        cash: []
+        items: []
     }
 
     componentDidMount() {
-        const cookie = new Cookies();
+        let cookie = new Cookies
         RadiusApi.get('/balance-transactions/index.json', {
             params: {
                 token: cookie.get('Token')
@@ -17,46 +17,48 @@ class CashReceived extends Component {
         })
             .then(response => {
                 this.setState({
-                    cash: response.data.received
+                    items: response.data.item
                 })
             })
     }
 
     render() {
         return (
-            this.state.cash.length ?
+            <>
+
                 <table className="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Trx ID</th>
-                        <th scope="col">Sender</th>
-                        <th scope="col">Receiver</th>
+                        <th scope="col">User Name</th>
                         <th scope="col">Payable</th>
                         <th scope="col">Receivable</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Received</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
-                        this.state.cash ? this.state.cash.map((item) => {
+                        this.state.items ? this.state.items.map((item) => {
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.transaction}</td>
-                                    <td>{item.receiver_user_id}</td>
                                     <td>{item.user.username}</td>
                                     <td>{item.payable}</td>
                                     <td>{item.receivable}</td>
-                                    {item.status ? <td>Accepted</td> : <td>Pending</td>}
-                                    <td>{item.sent}</td>
+                                    <td>{item.received}</td>
+                                    <td>
+                                        <Link to={'/admin/root/cash/transactions/' + item.id}>
+                                            Details
+                                        </Link>
+                                    </td>
                                 </tr>
                             )
                         }) : null
                     }
                     </tbody>
-                </table> : <h3 className='text-center text-danger'>There is no received history</h3>
+                </table>
+            </>
         );
     }
 }
 
-export default CashReceived;
+export default CashSummaryAgent;

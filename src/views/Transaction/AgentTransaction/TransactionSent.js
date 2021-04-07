@@ -18,7 +18,7 @@ class TransactionSent extends Component {
         })
             .then(response => {
                 this.setState({
-                    transactions: response.data.sent
+                    transactions: response.data.send
                 })
             })
 
@@ -55,7 +55,7 @@ class TransactionSent extends Component {
                                 <td>{item.balance}</td>
                             </tr>
                         )
-                    }) : null
+                    }) : <h3 className='text-center text-danger'>No send history yet</h3>
                 }
                 </tbody>
             </table>

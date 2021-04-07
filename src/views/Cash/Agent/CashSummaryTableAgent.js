@@ -52,7 +52,11 @@ class CashSummaryTableAgent extends Component {
                                     <td>{item.payable}</td>
                                     <td>{item.receivable}</td>
                                     <td>{item.received}</td>
-                                    <td>Details</td>
+                                    <td>
+                                        <Link to={'/admin/cash/transactions/' + item.id}>
+                                            Details
+                                        </Link>
+                                    </td>
                                 </tr>
                             )
                         }) : null

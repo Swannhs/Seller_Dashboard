@@ -34,7 +34,7 @@ class TransactionTable extends Component {
                     <div className='row'>
                         <div className='col-1'>
                             <div className="ui text-right floated column">
-                                <Link to='/admin/root/voucher/transaction'>
+                                <Link to='/admin/voucher/transaction'>
                                     <button className='ui button'>
                                         Back
                                     </button>

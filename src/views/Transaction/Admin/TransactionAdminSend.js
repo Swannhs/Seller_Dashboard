@@ -63,7 +63,7 @@ class TransactionAdminSend extends Component {
                     </thead>
                     <tbody>
                     {
-                        this.state.transactions ? this.state.transactions.map((item) => {
+                        this.state.transactions.length ? this.state.transactions.map((item) => {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>

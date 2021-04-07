@@ -56,7 +56,7 @@ class TransactionReceive extends Component {
                                 <td>{item.balance}</td>
                             </tr>
                         )
-                    }) : null
+                    }) : <h3 className='text-center text-danger'>No Received history yet</h3>
                 }
                 </tbody>
             </table>
