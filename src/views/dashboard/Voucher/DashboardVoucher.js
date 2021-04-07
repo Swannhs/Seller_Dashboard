@@ -40,7 +40,9 @@ class DashboardVoucher extends Component {
                                         as="h4">
                                         Total: {this.state.vouchers[0] ? this.state.vouchers[0].total : 0}
                                     </Card.Title>
-                                    <Card.Title as="h4">Active: 30</Card.Title>
+                                    <Card.Title as="h4">
+                                        Active: {this.state.vouchers[0] ? this.state.vouchers[0].online : 0}
+                                    </Card.Title>
                                     <Card.Title as="h4">Online: 13</Card.Title>
                                 </div>
                             </Col>

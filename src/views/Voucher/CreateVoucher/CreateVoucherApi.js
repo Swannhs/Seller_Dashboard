@@ -8,29 +8,28 @@ import {Link} from "react-router-dom";
 class CreateVoucherApi extends Component {
     constructor(props) {
         super(props);
+        let cookie = new Cookies
 
         this.state = {
             user_id: 0,
-            single_field: false,
+            single_field: true,
+            precede: '',
             realm_id: null,
             profile_id: null,
             quantity: 0,
+            pwd_length: 5,
             batch: '',
             never_expire: 'never_expire',
             extra_name: '',
-            extra_value: ''
-
+            extra_value: '',
+            token: cookie.get('Token'),
+            sel_language: 4_4
         }
     }
 
     onSubmitVoucher = () => {
         const cookie = new Cookies;
-        console.log(this.state)
-        RadiusApi.post('/vouchers/add.json', this.state, {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
+        RadiusApi.post('/vouchers/add.json', this.state)
             .then(response => {
                 response.data.success ? alert('Voucher Created') : alert(response.data.message)
             })
@@ -73,10 +72,18 @@ class CreateVoucherApi extends Component {
                                onChange={event => this.setState({quantity: event.target.value})}
                         />
                     </div>
+                    <h3 className='mt-3 pl-3 text-black-50'>Precede Name</h3>
+                    <div className="input-group pl-3 w-50">
+                        <input type="text" className="form-control" aria-label="Username" required='true'
+                               aria-describedby="basic-addon1"
+                               value={this.state.precede}
+                               onChange={event => this.setState({precede: event.target.value})}
+                        />
+                    </div>
 
                     <h3 className='mt-3 pl-3 text-black-50'>Batch Name</h3>
                     <div className="input-group pl-3 w-50">
-                        <input type="text" className="form-control" aria-label="Username"
+                        <input type="text" className="form-control" aria-label="Username" required='true'
                                aria-describedby="basic-addon1"
                                value={this.state.batch}
                                onChange={event => this.setState({batch: event.target.value})}

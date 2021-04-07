@@ -15,7 +15,8 @@ class VoucherApi extends Component {
             page: 1,
             start: 0,
             limit: 13,
-            total: 0
+            total: 0,
+            refresh: true
         }
     }
 
@@ -59,8 +60,14 @@ class VoucherApi extends Component {
             }
         })
             .then(response => {
-                console.log(response)
-            })
+                    if (response.data.success) {
+                        alert('Voucher reset successful')
+                    } else {
+                        alert(response.data.message)
+                    }
+                }
+            )
+        this.forceUpdate();
     }
 
 
@@ -68,7 +75,6 @@ class VoucherApi extends Component {
         let totalPage = this.state.total / this.state.limit
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
     }
-
 
 
     render() {
