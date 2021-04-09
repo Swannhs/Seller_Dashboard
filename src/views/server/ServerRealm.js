@@ -24,7 +24,7 @@ class ServerRealm extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <>
                 <div className='row'>
                     <div className='col'>
                         <div className="ui text-right floated column">
@@ -59,7 +59,7 @@ class ServerRealm extends Component {
                     }
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }

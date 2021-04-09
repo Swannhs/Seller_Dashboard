@@ -22,7 +22,17 @@ class CreateServerRealms extends Component {
         let data = this.state
         RadiusApi.post('/server-realms/add.json', data)
             .then(response => {
-                console.log(response)
+                if (response.data.success) {
+                    alert(response.data.message)
+                    this.props.history.push('/admin/root/server-realms')
+                } else {
+                    alert(response.data.message)
+                    this.setState({
+                        error: {
+                            balance: response.data.message
+                        }
+                    })
+                }
             })
     }
 
@@ -51,6 +61,9 @@ class CreateServerRealms extends Component {
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
                     <VoucherGroup onChange={this.onSelectGroup}/>
                     <GetServer onChange={this.onSelectServer}/>
+                    <Button onClick={this.onGenerateServer}>
+                        Generate
+                    </Button>
 
                     {/*<button className='ui button positive mt-4' onClick={this.onGenerateServer}>*/}
                     {/*    Generate*/}
@@ -72,7 +85,7 @@ class CreateServerRealms extends Component {
                     {/*    </Modal.Footer>*/}
                     {/*</Modal>*/}
 
-                    <MyModal/>
+                    {/*<MyModal/>*/}
 
                 </article>
 

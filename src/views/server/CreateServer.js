@@ -25,7 +25,17 @@ class CreateServer extends Component {
             }
         })
             .then(response => {
-                console.log(response)
+                if (response.data.success) {
+                    alert(response.data.message)
+                    this.props.history.push('/admin/root/server')
+                } else {
+                    alert(response.data.message)
+                    this.setState({
+                        error: {
+                            balance: response.data.message
+                        }
+                    })
+                }
             })
     }
 

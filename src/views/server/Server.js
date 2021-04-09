@@ -25,7 +25,7 @@ class Server extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <div className='container'>
                     <div className='row'>
                         <div className='col'>
@@ -74,7 +74,7 @@ class Server extends Component {
                     }
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }
