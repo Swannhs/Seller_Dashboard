@@ -31,7 +31,12 @@ class CreateVoucherApi extends Component {
         const cookie = new Cookies;
         RadiusApi.post('/vouchers/add.json', this.state)
             .then(response => {
-                response.data.success ? alert('Voucher Created') : alert(response.data.message)
+                if (response.data.success){
+                    alert('Voucher Created');
+                    this.props.history.push('/admin/voucher/view')
+                }else {
+                    alert(response.data.message)
+                }
             })
     }
 

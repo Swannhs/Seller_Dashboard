@@ -18,9 +18,10 @@ class VoucherApi extends Component {
             active: null,
             page: 1,
             start: 0,
-            limit: 5,
+            limit: 10,
             total: 0
         }
+        this.onApiCall();
     }
 
     onApiCall() {
@@ -42,10 +43,6 @@ class VoucherApi extends Component {
     }
 
 
-    componentDidMount() {
-        this.onApiCall();
-    }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         prevState.page !== this.state.page ? this.onApiCall() : null
     }
@@ -59,6 +56,13 @@ class VoucherApi extends Component {
     onHandleChange = event => {
         this.setState({
             active: event.target.checked
+        })
+    }
+
+    async onPageChaneHandler(event, data) {
+        await this.setState({
+            page: data.activePage,
+            start: (data.activePage - 1) * this.state.limit
         })
     }
 
@@ -183,10 +187,7 @@ class VoucherApi extends Component {
                                     secondary
                                     totalPages={this.onPagination()}
                                     onPageChange={(event, data) => {
-                                        this.setState({
-                                            page: data.activePage,
-                                            start: this.state.page * this.state.limit
-                                        })
+                                        this.onPageChaneHandler(event, data)
                                     }}
                                 />
                             </div>

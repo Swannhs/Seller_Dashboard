@@ -3,7 +3,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Cookies from "universal-cookie/lib";
 import {Pagination} from "semantic-ui-react";
-import {AiOutlineEye, BiReset} from "react-icons/all";
+import {BiReset} from "react-icons/all";
 
 
 class VoucherApi extends Component {
@@ -14,10 +14,11 @@ class VoucherApi extends Component {
             userData: [],
             page: 1,
             start: 0,
-            limit: 13,
+            limit: 10,
             total: 0,
             refresh: true
         }
+        this.onApiCall();
     }
 
     onApiCall = () => {
@@ -36,11 +37,6 @@ class VoucherApi extends Component {
                     total: response.data.totalCount
                 })
             })
-    }
-
-
-    componentDidMount() {
-        this.onApiCall()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -76,6 +72,13 @@ class VoucherApi extends Component {
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
     }
 
+    async onPageChaneHandler(event, data) {
+        await this.setState({
+            page: data.activePage,
+            start: (data.activePage - 1) * this.state.limit
+        })
+    }
+
 
     render() {
         return (
@@ -105,18 +108,15 @@ class VoucherApi extends Component {
                     <th colSpan={5}>
                         <div className="ui right floated pagination menu">
                             <Pagination
-                                defaultActivePage={1}
+                                defaultActivePage={this.state.page}
                                 firstItem={null}
                                 lastItem={null}
                                 pointing
                                 secondary
                                 totalPages={this.onPagination()}
-                                onPageChange={(event, data) => {
-                                    this.setState({
-                                        page: data.activePage,
-                                        start: this.state.page * this.state.limit
-                                    })
-                                }}
+                                onPageChange={async (event, data) =>
+                                    this.onPageChaneHandler(event, data)
+                                }
                             />
                         </div>
                     </th>

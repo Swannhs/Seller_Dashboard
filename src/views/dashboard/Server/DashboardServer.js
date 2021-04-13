@@ -1,10 +1,24 @@
 import React, {Component} from 'react';
 import {Card, Col, Row} from "react-bootstrap";
+import RadiusApi from "../../../radius-api/RadiusApi";
 
 class DashboardServer extends Component {
+    state = {
+        servers: 0
+    }
+
+    componentDidMount() {
+        RadiusApi.get('/dashboard/server.json')
+            .then(response => {
+                this.setState({
+                    servers: response.data.servers
+                })
+            })
+    }
+
     render() {
         return (
-            <Col lg="3" sm="6">
+            <Col lg="4" sm="6">
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
