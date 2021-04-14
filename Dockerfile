@@ -1,7 +1,11 @@
-FROM node:alpine
-WORKDIR '/app'
+FROM nginx:alpine
 
-COPY package.json .
-RUN npm install --legacy-peer-deps
-COPY . .
-CMD ["npm", "start"]
+WORKDIR /usr/share/nginx/html
+
+#set our application folder as an environment variable
+ENV APP_HOME /usr/share/nginx/html
+
+#copy source files and run composer
+COPY ./build $APP_HOME
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
