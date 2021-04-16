@@ -15,7 +15,6 @@ class LoginUI extends Component {
     }
 
 
-
     coChangeLoading = () => {
         this.setState({
             click: true
@@ -60,32 +59,32 @@ class LoginUI extends Component {
                 <h1 className='heading-text'>Admin Dashboard</h1>
                 <div className="wrapper-login fadeInDown">
                     <div id="formContent">
-                            {
-                                this.state.errors ? <div className="alert alert-danger">
-                                    Invalid username or password
-                                </div> : null
-                            }
-                            {
-                                this.state.network ? <div className="alert alert-danger">
-                                    Invalid response try again later
-                                </div> : null
-                            }
+                        {
+                            this.state.errors ? <div className="alert alert-danger">
+                                Invalid username or password
+                            </div> : null
+                        }
+                        {
+                            this.state.network ? <div className="alert alert-danger">
+                                Invalid response try again later
+                            </div> : null
+                        }
 
-                            {/*<div className="alert alert-info">*/}
-                            {/*    You have been logged out.*/}
-                            {/*</div>*/}
-                            <input type="text" id="login" className="fadeIn second" name="username"
-                                   placeholder="User Name" value={this.state.username}
-                                   onChange={event => this.setState({username: event.target.value})}
-                            />
-                            <input type="password" id="password" className="fadeIn third" name="password"
-                                   placeholder="Password" value={this.state.password}
-                                   onChange={event => this.setState({password: event.target.value})}
-                            />
-                            <input type="submit" className="fadeIn fourth" defaultValue="Log In"
-                                   value={this.state.click ? "Loading......"
-                                       : 'Login'} onClick={this.onLoginSubmit}
-                            />
+                        {/*<div className="alert alert-info">*/}
+                        {/*    You have been logged out.*/}
+                        {/*</div>*/}
+                        <input type="text" id="login" className="fadeIn second" name="username"
+                               placeholder="User Name" value={this.state.username}
+                               onChange={event => this.setState({username: event.target.value})}
+                        />
+                        <input type="password" id="password" className="fadeIn third" name="password"
+                               placeholder="Password" value={this.state.password}
+                               onChange={event => this.setState({password: event.target.value})}
+                        />
+                        <input type="submit" className="fadeIn fourth" defaultValue="Log In"
+                               value={this.state.click ? "Loading......"
+                                   : 'Login'} onClick={this.onLoginSubmit}
+                        />
                     </div>
                 </div>
             </div>

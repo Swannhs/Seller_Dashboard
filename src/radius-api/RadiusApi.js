@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: 'http://192.168.0.105:8180/cake3/rd_cake/',
+    baseURL: `${process.env.REACT_APP_BASE_URL}`,
     // baseURL: 'http://localhost:8765',
     // baseURL: process.env.ADMIN_BACKEND_BASE_URL,
     headers: {'Content-Type': 'application/json'},
