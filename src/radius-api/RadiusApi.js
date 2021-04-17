@@ -1,9 +1,9 @@
 import axios from "axios";
 
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 export default axios.create({
-    baseURL: `${process.env.REACT_APP_BASE_URL}`,
-    // baseURL: 'http://localhost:8765',
-    // baseURL: process.env.ADMIN_BACKEND_BASE_URL,
+    baseURL: BASE_URL,
     headers: {'Content-Type': 'application/json'},
     // params: {
     //     node: 0,
