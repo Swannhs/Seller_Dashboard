@@ -23,7 +23,12 @@ class CreateTweak extends Component {
             }
         })
             .then(response => {
-                console.log(response)
+                if (response.data.success){
+                    alert('Tweak Created');
+                    this.props.history.push('/admin/root/tweak')
+                }else {
+                    alert(response.data.message)
+                }
             })
     }
 
