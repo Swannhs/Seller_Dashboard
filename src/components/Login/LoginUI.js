@@ -11,7 +11,8 @@ class LoginUI extends Component {
         password: '',
         errors: '',
         network: '',
-        click: false
+        click: false,
+        inactive: ''
     }
 
 
@@ -35,13 +36,16 @@ class LoginUI extends Component {
 
                 const cookies = new Cookies();
 
-                if (response.data.errors) {
+                if (response.data.errors){
                     this.setState({errors: response.data.errors})
-                } else {
-                    cookies.set('Token', response.data.data.token);
-                    // cookies.set('id', response.data.data.user.id);
-                    this.props.history.push('/admin/dashboard')
 
+                }else {
+                    if (response.data.data.active) {
+                        cookies.set('Token', response.data.data.token);
+                        this.props.history.push('/admin/dashboard')
+                    } else {
+                        this.setState({inactive: true})
+                    }
                 }
             })
             .catch(error => {
@@ -69,22 +73,30 @@ class LoginUI extends Component {
                                 Invalid response try again later
                             </div> : null
                         }
+                        {
+                            this.state.inactive ? <div className="alert alert-danger">
+                                You are not enable
+                            </div> : null
+                        }
 
                         {/*<div className="alert alert-info">*/}
                         {/*    You have been logged out.*/}
                         {/*</div>*/}
-                        <input type="text" id="login" className="fadeIn second" name="username"
-                               placeholder="User Name" value={this.state.username}
-                               onChange={event => this.setState({username: event.target.value})}
-                        />
-                        <input type="password" id="password" className="fadeIn third" name="password"
-                               placeholder="Password" value={this.state.password}
-                               onChange={event => this.setState({password: event.target.value})}
-                        />
-                        <input type="submit" className="fadeIn fourth" defaultValue="Log In"
-                               value={this.state.click ? "Loading......"
-                                   : 'Login'} onClick={this.onLoginSubmit}
-                        />
+                        <form action={this.onLoginSubmit}>
+                            <input type="text" id="login" className="fadeIn second" name="username"
+                                   placeholder="User Name" value={this.state.username}
+                                   onChange={event => this.setState({username: event.target.value})}
+                            />
+                            <input type="password" id="password" className="fadeIn third" name="password"
+                                   placeholder="Password" value={this.state.password}
+                                   onChange={event => this.setState({password: event.target.value})}
+                            />
+                            <input type="submit" className="fadeIn fourth" defaultValue="Log In"
+                                   value={this.state.click ? "Loading......"
+                                       : 'Login'} onClick={this.onLoginSubmit}
+                            />
+                        </form>
+
                     </div>
                 </div>
             </div>
