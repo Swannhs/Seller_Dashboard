@@ -14,7 +14,8 @@ class CreateTweak extends Component {
         note: ''
     }
 
-    onCreateTweak = () => {
+    onCreateTweak = event => {
+        event.preventDefault();
         let data = this.state
         let cookie = new Cookies
         RadiusApi.post('/tweaks/add.json', data, {
@@ -23,7 +24,7 @@ class CreateTweak extends Component {
             }
         })
             .then(response => {
-                if (response.data.success){
+                if (response.data.status){
                     alert('Tweak Created');
                     this.props.history.push('/admin/root/tweak')
                 }else {
@@ -41,7 +42,7 @@ class CreateTweak extends Component {
                     </Link>
                 </div>
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <form action={this.onCreateTweak}>
+                    <form onSubmit={this.onCreateTweak}>
                         <h3>Name</h3>
                         <Input type='text'
                                placeholder='Define a name'
