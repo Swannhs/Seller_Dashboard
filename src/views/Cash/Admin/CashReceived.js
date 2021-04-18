@@ -32,10 +32,8 @@ class CashReceived extends Component {
                         <tr>
                             <th scope="col">Trx ID</th>
                             <th scope="col">Receiver</th>
-                            <th scope="col">Payable</th>
-                            <th scope="col">Receivable</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Amount</th>
+                            <th scope="col">Received</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,9 +43,7 @@ class CashReceived extends Component {
                                     <tr key={item.id}>
                                         <td>{item.transaction}</td>
                                         <td>{item.user.username}</td>
-                                        <td>{item.payable}</td>
-                                        <td>{item.receivable}</td>
-                                        {item.status ? <td>Accepted</td> : <td>Pending</td>}
+                                        {item.status ? <td className='text-success'>Accepted</td> : <td>Pending</td>}
                                         <td>{item.received}</td>
                                     </tr>
                                 )

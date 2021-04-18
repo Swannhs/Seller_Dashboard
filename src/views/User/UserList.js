@@ -141,7 +141,6 @@ class VoucherApi extends Component {
 
 
                                 <td className='text-center' data-label="Action">
-                                    <BiReset/>
                                     <Link to={'/admin/users/view/' + item.id}>
                                         <AiOutlineEye/>
                                     </Link>

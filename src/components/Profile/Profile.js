@@ -17,7 +17,6 @@ class Profile extends Component {
             }
         })
             .then(response => {
-                console.log(response.data.data)
                 this.setState({
                     username: response.data.data.user.username,
                     group: response.data.data.user.group
