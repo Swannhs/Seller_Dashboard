@@ -18,7 +18,8 @@ class CreateServerRealms extends Component {
     handleShow = () => this.setState({open: true})
 
 
-    onGenerateServer = () => {
+    onGenerateServer = event => {
+        event.preventDefault();
         let data = this.state
         RadiusApi.post('/server-realms/add.json', data)
             .then(response => {
@@ -59,7 +60,7 @@ class CreateServerRealms extends Component {
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <form action={this.onGenerateServer}>
+                    <form onSubmit={this.onGenerateServer}>
                         <VoucherGroup onChange={this.onSelectGroup}/>
                         <GetServer onChange={this.onSelectServer}/>
                         <button type='submit' className='ui button positive mt-4'>
