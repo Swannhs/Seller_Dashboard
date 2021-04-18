@@ -63,7 +63,7 @@ function VoucherList() {
                 </div>
             </div>
 
-            <table className="table table-bordered text-center mt-3" style={{fontSize: '20px'}}>
+            <table className="table table-striped">
                 <thead>
                 <tr className='ct-grid-background border-primary'>
                     <th>

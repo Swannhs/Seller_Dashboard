@@ -13,13 +13,12 @@ class VoucherApi extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
             userData: [],
-            active: null,
             page: 1,
             start: 0,
             limit: 10,
-            total: 0
+            total: 0,
+            refresh: true
         }
         this.onApiCall();
     }
@@ -43,21 +42,12 @@ class VoucherApi extends Component {
     }
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState.page !== this.state.page ? this.onApiCall() : null
-    }
-
     onPagination() {
         let totalPage = this.state.total / this.state.limit
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
     }
 
 
-    onHandleChange = event => {
-        this.setState({
-            active: event.target.checked
-        })
-    }
 
     async onPageChaneHandler(event, data) {
         await this.setState({
@@ -85,7 +75,7 @@ class VoucherApi extends Component {
 
                 {/* ---------------- New Button End ----------------*/}
 
-                <table className="table table-bordered text-center mt-3" style={{fontSize: '20px'}}>
+                <table className="table table-striped">
 
                     <thead>
                     <tr className='ct-grid-background border-primary'>
@@ -93,7 +83,6 @@ class VoucherApi extends Component {
                             <h4 className='text-center'>
                                 Name
                             </h4>
-
                         </th>
 
                         {/*<th className='d-none d-sm-block'>*/}
@@ -102,21 +91,19 @@ class VoucherApi extends Component {
                         {/*    </h4>*/}
                         {/*</th>*/}
 
-                        <th>
-                            <h4 className='text-center'>
-                                Balance
-                            </h4>
-                        </th>
                         <th className='w-25'>
                             <h4 className='text-center'>
-                                <Dropdown text='Status' multiple icon='filter'>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Menu scrolling>
-                                            <Dropdown.Item>Active</Dropdown.Item>
-                                            <Dropdown.Item>Inactive</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <h4 className='text-center'>
+                                    Status
+                                </h4>
+                                {/*<Dropdown text='Status' multiple icon='filter'>*/}
+                                {/*    <Dropdown.Menu>*/}
+                                {/*        <Dropdown.Menu scrolling>*/}
+                                {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
+                                {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
+                                {/*        </Dropdown.Menu>*/}
+                                {/*    </Dropdown.Menu>*/}
+                                {/*</Dropdown>*/}
                             </h4>
                         </th>
                         <th>
@@ -132,28 +119,28 @@ class VoucherApi extends Component {
                     {(this.state.userData) ? this.state.userData.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td data-label="Name">{item.username}</td>
+                                <td className='text-center' data-label="Name">{item.username}</td>
                                 {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}
-                                <td data-label="Balance">10$</td>
 
 
                                 {/*<td data-label="Status">*/}
                                 {/*    {item.active ? <span className='text-success'>Active</span>*/}
                                 {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
 
-                                <td>
-                                    <div className="ui toggle checkbox center aligned">
-                                        <input type="checkbox" name="public"
-                                            // value={item.active}
-                                               onChange={event => this.onHandleChange(event)}
-                                               checked={item.active}
-                                        />
-                                        <label/>
-                                    </div>
+                                <td className='text-center'>
+                                    {item.active?<span className='text-success'>Active</span>:<span className='text-danger'>Inactive</span>}
+                                    {/*<div className="ui toggle checkbox center aligned">*/}
+                                    {/*    <input type="checkbox" name="public"*/}
+                                    {/*        // value={item.active}*/}
+                                    {/*           onChange={event => this.onHandleChange(event)}*/}
+                                    {/*           checked={item.active}*/}
+                                    {/*    />*/}
+                                    {/*    <label/>*/}
+                                    {/*</div>*/}
                                 </td>
 
 
-                                <td data-label="Action">
+                                <td className='text-center' data-label="Action">
                                     <BiReset/>
                                     <Link to={'/admin/users/view/' + item.id}>
                                         <AiOutlineEye/>
@@ -180,15 +167,15 @@ class VoucherApi extends Component {
                         <th colSpan={5}>
                             <div className="ui right floated pagination menu">
                                 <Pagination
-                                    defaultActivePage={1}
+                                    defaultActivePage={this.state.page}
                                     firstItem={null}
                                     lastItem={null}
                                     pointing
                                     secondary
                                     totalPages={this.onPagination()}
-                                    onPageChange={(event, data) => {
+                                    onPageChange={async (event, data) =>
                                         this.onPageChaneHandler(event, data)
-                                    }}
+                                    }
                                 />
                             </div>
                         </th>
