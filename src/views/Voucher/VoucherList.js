@@ -63,7 +63,7 @@ function VoucherList() {
                 </div>
             </div>
 
-            <table className="table table-bordered text-center mt-3" style={{fontSize: '20px'}}>
+            <table className="table table-striped">
                 <thead>
                 <tr className='ct-grid-background border-primary'>
                     <th>
@@ -84,15 +84,10 @@ function VoucherList() {
                     {/*</th>*/}
 
                     <th>
-
-                        <Dropdown className='text-center'>
-                            <Dropdown.Toggle as={CustomToggle}/>
-
-                            <Dropdown.Menu as={CustomMenu}/>
-                        </Dropdown>
-
+                        <h4 className='text-center'>
+                            Group
+                        </h4>
                     </th>
-
 
                     <th>
                         <h4 className='text-center'>

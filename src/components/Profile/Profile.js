@@ -1,34 +1,28 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import RadiusApi from "../../../radius-api/RadiusApi";
+import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 
-class ViewUi extends Component {
+class Profile extends Component {
     state = {
         username: '',
-        fullName: '',
-        email: '',
-        address: '',
-        phone: ''
+        group: ''
     }
 
     componentDidMount() {
-        const cookie = new Cookies
-        RadiusApi.get('/access-providers/view.json', {
+        let cookie = new Cookies
+        RadiusApi.get('/dashboard/checkToken.json', {
             params: {
-                token: cookie.get('Token'),
-                ap_id: this.props.id
+                token: cookie.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    username: response.data.data.username,
-                    fullName: response.data.data.name,
-                    phone: response.data.data.phone,
-                    address: response.data.data.address,
-                    email: response.data.data.email
+                    username: response.data.data.user.username,
+                    group: response.data.data.user.group
                 })
             })
+
     }
 
     render() {
@@ -40,6 +34,15 @@ class ViewUi extends Component {
                     </Link>
                 </div>
                 <div className="main-body mt-2 ml-3">
+                    {/* Breadcrumb */}
+                    {/*<nav aria-label="breadcrumb" className="main-breadcrumb">*/}
+                    {/*    <ol className="breadcrumb">*/}
+                    {/*        <li className="breadcrumb-item"><a href="index.html">Home</a></li>*/}
+                    {/*        <li className="breadcrumb-item"><a href="javascript:void(0)">User</a></li>*/}
+                    {/*        <li className="breadcrumb-item active" aria-current="page">User Profile</li>*/}
+                    {/*    </ol>*/}
+                    {/*</nav>*/}
+                    {/* /Breadcrumb */}
                     <div className="row gutters-sm">
                         <div className="col-md-4 mb-3">
                             <div className="card">
@@ -50,6 +53,7 @@ class ViewUi extends Component {
                                              className="rounded-circle" width={150}/>
                                         <div className="mt-3">
                                             <h4>{this.state.username}</h4>
+                                            <p className="text-secondary mb-1">{this.state.group}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +67,7 @@ class ViewUi extends Component {
                                             <h6 className="mb-0">Full Name</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            {this.state.fullName}
+                                            Kenneth Valdez
                                         </div>
                                     </div>
                                     <hr/>
@@ -72,7 +76,7 @@ class ViewUi extends Component {
                                             <h6 className="mb-0">Email</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            {this.state.email}
+                                            fip@jukmuh.al
                                         </div>
                                     </div>
                                     <hr/>
@@ -81,7 +85,16 @@ class ViewUi extends Component {
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            {this.state.phone}
+                                            (239) 816-9029
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0">Mobile</h6>
+                                        </div>
+                                        <div className="col-sm-9 text-secondary">
+                                            (320) 380-4539
                                         </div>
                                     </div>
                                     <hr/>
@@ -90,7 +103,7 @@ class ViewUi extends Component {
                                             <h6 className="mb-0">Address</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            {this.state.address}
+                                            Bay Area, San Francisco, CA
                                         </div>
                                     </div>
                                 </div>
@@ -99,9 +112,8 @@ class ViewUi extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }
 
-export default ViewUi;
+export default Profile;

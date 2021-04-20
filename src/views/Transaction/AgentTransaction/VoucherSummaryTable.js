@@ -16,6 +16,7 @@ class VoucherSummaryTable extends Component {
             }
         })
             .then(response => {
+                console.log(response.data)
                 this.setState({
                     summary: response.data.item
                 })
@@ -55,8 +56,8 @@ class VoucherSummaryTable extends Component {
                         this.state.summary ? this.state.summary.map((item) => {
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.realm_id}</td>
-                                    <td>{item.profile_id}</td>
+                                    <td>{item.realm.name}</td>
+                                    <td>{item.profile.name}</td>
                                     <td>{item.credit}</td>
                                     <td>{item.debit}</td>
                                     <td>{item.balance}</td>

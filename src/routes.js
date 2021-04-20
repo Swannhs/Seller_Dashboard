@@ -22,7 +22,6 @@ import CreateServerRealms from "./views/server/CreateServerRealms";
 import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
-import CashSummaryAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
 import VoucherSummaryTable from "./views/Transaction/AgentTransaction/VoucherSummaryTable";
 import VoucherSummaryAdmin from "./views/Transaction/Admin/VoucherSummaryAdmin";
 import TransactionAdmin from "./views/Transaction/Admin/TransactionAdmin";
@@ -30,6 +29,7 @@ import CashSummaryTableAgent from "./views/Cash/Agent/CashSummaryTableAgent";
 import CashSummaryTableAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
 import CashTableAgent from "./views/Cash/Agent/CashTableAgent";
 import CashTableAdmin from "./views/Cash/Admin/CashTableAdmin";
+import Profile from "./components/Profile/Profile";
 
 
 const dashboardRoutes = [
@@ -40,6 +40,13 @@ const dashboardRoutes = [
         component: Dashboard,
         layout: "/admin",
     },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
+        layout: "/admin",
+    },
+
 
     //--------------------------User Route Start----------------------------------
     {

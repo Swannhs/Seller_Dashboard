@@ -8,7 +8,7 @@ class DashboardServer extends Component {
     }
 
     componentDidMount() {
-        RadiusApi.get('/dashboard/server.json')
+        RadiusApi.get('/dashboard/server-count.json')
             .then(response => {
                 this.setState({
                     servers: response.data.servers

@@ -13,7 +13,7 @@ function Header() {
 
     const onLogout = () => {
         const cookie = new Cookies;
-        console.log(cookie.remove('Token', null))
+        cookie.remove('Token', null)
 
     }
 
@@ -76,74 +76,18 @@ function Header() {
                                 <span className="d-lg-none ml-1">Dashboard</span>
                             </Nav.Link>
                         </Nav.Item>
-                        <Dropdown as={Nav.Item}>
-                            <Dropdown.Toggle
-                                as={Nav.Link}
-                                data-toggle="dropdown"
-                                id="dropdown-67443507"
-                                variant="default"
-                                className="m-0"
-                            >
-                                <span className="notification">5</span>
-                                <span className="d-lg-none ml-1">Notification</span>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Notification 1
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Notification 2
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Notification 3
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Notification 4
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    Another notification
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
                         <Nav.Item>
                             <Nav.Link
                                 className="m-0"
-                                href="#pablo"
                                 onClick={(e) => e.preventDefault()}
                             >
-                                <i className='pr-2'><BiSearch/></i>
-                                <span className="d-lg-block">
-                                    <Input className='mt-1 pr-2' type='text' placeholder='search'/>
-                                </span>
-
+                                <Link to='/admin/profile'>
+                                    <span className="no-icon">Account</span>
+                                </Link>
                             </Nav.Link>
                         </Nav.Item>
-                    </Nav>
-                    <Nav className="ml-auto" navbar>
-                        {/*<Nav.Item>*/}
-                        {/*    <Nav.Link*/}
-                        {/*        className="m-0"*/}
-                        {/*        href="#pablo"*/}
-                        {/*        onClick={(e) => e.preventDefault()}*/}
-                        {/*    >*/}
-                        {/*        <span className="no-icon">Account</span>*/}
-                        {/*    </Nav.Link>*/}
-                        {/*</Nav.Item>*/}
                         <Nav.Item>
                             <Nav.Link
                                 className="m-0"

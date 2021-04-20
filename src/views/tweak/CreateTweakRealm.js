@@ -10,11 +10,17 @@ class CreateTweakRealm extends Component {
         realm: ''
     }
 
-    onGenerateTweak = () => {
+    onGenerateTweak = event => {
+        event.preventDefault();
         let data = this.state
         RadiusApi.post('/tweak-realms/add.json', data)
             .then(response => {
-                console.log(response)
+                if (response.data.success) {
+                    alert('Generated successful');
+                    this.props.history.push('/admin/root/tweak-realms')
+                } else {
+                    alert(response.data.message)
+                }
             })
     }
 
@@ -39,12 +45,14 @@ class CreateTweakRealm extends Component {
                     </Link>
                 </div>
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <VoucherGroup onChange={this.onSelectGroup}/>
-                    <GetTweak onChange={this.onSelectTweak}/>
+                    <form onSubmit={this.onGenerateTweak}>
+                        <VoucherGroup onChange={this.onSelectGroup}/>
+                        <GetTweak onChange={this.onSelectTweak}/>
 
-                    <button className='ui button positive mt-4' onClick={this.onGenerateTweak}>
-                        Generate
-                    </button>
+                        <button type='submit' className='ui button positive mt-4'>
+                            Generate
+                        </button>
+                    </form>
                 </article>
             </>
         );
