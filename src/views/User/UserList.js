@@ -20,12 +20,15 @@ class VoucherApi extends Component {
             total: 0,
             refresh: true
         }
+    }
+
+    componentDidMount() {
         this.onApiCall();
     }
 
     onApiCall() {
         const cookie = new Cookies;
-        RadiusApi.get('/access-providers/index.json', {
+        RadiusApi.get('/access-providers/agent-list.json', {
             params: {
                 //Assign limit of row showing in table
                 page: this.state.page,
@@ -34,11 +37,14 @@ class VoucherApi extends Component {
                 token: cookie.get('Token')
             }
         })
-            .then(response => this.setState({
-                loading: false,
-                userData: response.data.items,
-                total: response.data.totalCount
-            }))
+            .then(response => {
+                    this.setState({
+                        loading: false,
+                        userData: response.data.item,
+                        total: response.data.total
+                    })
+                }
+            )
     }
 
 
@@ -46,7 +52,6 @@ class VoucherApi extends Component {
         let totalPage = this.state.total / this.state.limit
         return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
     }
-
 
 
     async onPageChaneHandler(event, data) {
@@ -84,7 +89,11 @@ class VoucherApi extends Component {
                                 Name
                             </h4>
                         </th>
-
+                        <th>
+                            <h4 className='text-center'>
+                                Role
+                            </h4>
+                        </th>
                         {/*<th className='d-none d-sm-block'>*/}
                         {/*    <h4 className='text-center'>*/}
                         {/*        Area*/}
@@ -120,6 +129,11 @@ class VoucherApi extends Component {
                         return (
                             <tr key={item.id}>
                                 <td className='text-center' data-label="Name">{item.username}</td>
+                                <td className='text-center' data-label="Role">
+                                    {
+                                        item.group_id === 9 ? <span className='text-primary'>Agent</span> : <span className='text-warning'>Seller</span>
+                                    }
+                                </td>
                                 {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}
 
 
@@ -128,7 +142,8 @@ class VoucherApi extends Component {
                                 {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
 
                                 <td className='text-center'>
-                                    {item.active?<span className='text-success'>Active</span>:<span className='text-danger'>Inactive</span>}
+                                    {item.active ? <span className='text-success'>Active</span> :
+                                        <span className='text-danger'>Inactive</span>}
                                     {/*<div className="ui toggle checkbox center aligned">*/}
                                     {/*    <input type="checkbox" name="public"*/}
                                     {/*        // value={item.active}*/}

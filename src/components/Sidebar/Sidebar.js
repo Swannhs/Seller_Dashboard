@@ -20,19 +20,20 @@ import Cookies from "universal-cookie/lib";
 class Sidebar extends Component {
 
     state = {
-        root: false
+        role: 0
     }
 
     componentDidMount() {
         const cookie = new Cookies
-        RadiusApi.get('/dashboard/checkToken/index.json', {
+        RadiusApi.get('/dashboard/role.json', {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
+                // console.log(response.data.user[0].group_id)
                 this.setState({
-                    root: response.data.data.isRootUser
+                    role: response.data.user[0].group_id
                 })
             })
     }
@@ -74,7 +75,7 @@ class Sidebar extends Component {
                                     <MenuItem icon={<BiMoney/>}>
 
                                         {
-                                            this.state.root ? <Link to='/admin/root/voucher/transaction'>
+                                            this.state.role === 8 ? <Link to='/admin/root/voucher/transaction'>
                                                     Transaction
                                                 </Link>
                                                 : <Link to='/admin/voucher/transaction'>
@@ -85,7 +86,7 @@ class Sidebar extends Component {
                                     </MenuItem>
                                     <MenuItem icon={<MdAttachMoney/>}>
                                         {
-                                            this.state.root ?
+                                            this.state.role === 8 ?
                                                 <Link to='/admin/root/cash/transaction'>
                                                     Cash
                                                 </Link>
@@ -98,7 +99,7 @@ class Sidebar extends Component {
                                     </MenuItem>
                                     <>
                                         {
-                                            this.state.root ?
+                                            this.state.role === 8 ?
                                                 <>
                                                     <SubMenu title='Server' icon={<BsServer/>}>
                                                         <MenuItem>

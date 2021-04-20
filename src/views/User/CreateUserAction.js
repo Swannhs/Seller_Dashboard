@@ -16,7 +16,6 @@ class CreateUserAction extends Component {
             }
         })
             .then(response => {
-
                 if (response.data.success) {
                     alert('User is created successfully')
                     this.props.history.push('/admin/users/view')

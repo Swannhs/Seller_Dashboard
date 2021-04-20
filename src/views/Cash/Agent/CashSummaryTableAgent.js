@@ -39,6 +39,7 @@ class CashSummaryTableAgent extends Component {
                     <thead>
                     <tr>
                         <th scope="col">Payable</th>
+                        {/*<th scope="col">Paid</th>*/}
                         <th scope="col">Receivable</th>
                         <th scope="col">Received</th>
                         <th scope="col">Action</th>
