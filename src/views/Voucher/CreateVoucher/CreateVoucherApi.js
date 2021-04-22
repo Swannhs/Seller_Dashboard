@@ -29,7 +29,11 @@ class CreateVoucherApi extends Component {
 
     onSubmitVoucher = () => {
         const cookie = new Cookies;
-        RadiusApi.post('/vouchers/add.json', this.state)
+        RadiusApi.post('/vouchers/add.json', this.state, {
+            params:{
+                token: cookie.get('Token')
+            }
+        })
             .then(response => {
                 if (response.data.success){
                     alert('Voucher Created');
@@ -45,7 +49,6 @@ class CreateVoucherApi extends Component {
         this.setState({
             realm_id: group
         })
-
     }
 
     onProfileHandle = async profile => {
@@ -67,7 +70,7 @@ class CreateVoucherApi extends Component {
 
                 <div className='pt-5'>
                     <VoucherGroup onChange={this.onGroupHandle}/>
-                    <VoucherProfile onChange={this.onProfileHandle}/>
+                    {/*<VoucherProfile onChange={this.onProfileHandle}/>*/}
 
                     <h3 className='mt-3 pl-3 text-black-50'>How Many?</h3>
                     <div className="input-group pl-3 w-50">

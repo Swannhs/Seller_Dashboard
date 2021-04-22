@@ -17,7 +17,11 @@ class DeleteUser extends Component {
             }
         })
             .then(response => {
-                    console.log(response)
+                    if (response.data.data.success){
+                        alert('Delete tweak successful')
+                    }else {
+                        alert('Error to delete this tweak')
+                    }
                 }
             )
     }

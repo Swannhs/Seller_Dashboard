@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
+import DeleteTweakRealms from "./DeleteTweakRealms";
 
 class TweakRealm extends Component {
     state = {
@@ -24,15 +25,17 @@ class TweakRealm extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col'>
-                        <div className="ui text-right floated column">
-                            <Link to='/admin/root/tweak-realm/new'>
-                                <button className='ui button primary'>
-                                    New
-                                </button>
-                            </Link>
+            <>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col'>
+                            <div className="ui text-right floated column">
+                                <Link to='/admin/root/tweak-realm/new'>
+                                    <button className='ui button primary'>
+                                        New
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,6 +46,7 @@ class TweakRealm extends Component {
                         <th scope="col">ID</th>
                         <th scope="col">Tweaks</th>
                         <th scope="col">Realms</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,13 +57,14 @@ class TweakRealm extends Component {
                                     <td>{item.id}</td>
                                     <td>{item.tweak.name}</td>
                                     <td>{item.realm.name}</td>
+                                    <td><DeleteTweakRealms delId={item.id}/></td>
                                 </tr>
                             )
                         }) : null
                     }
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }

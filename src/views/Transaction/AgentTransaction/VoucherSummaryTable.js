@@ -5,7 +5,8 @@ import {Link} from "react-router-dom";
 
 class VoucherSummaryTable extends Component {
     state = {
-        summary: []
+        summary: [],
+        role: ''
     }
 
     componentDidMount() {
@@ -16,9 +17,9 @@ class VoucherSummaryTable extends Component {
             }
         })
             .then(response => {
-                console.log(response.data)
                 this.setState({
-                    summary: response.data.item
+                    summary: response.data.item,
+                    role: cookie.get('Role')
                 })
             })
     }
@@ -26,19 +27,24 @@ class VoucherSummaryTable extends Component {
     render() {
         return (
             <>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col'>
-                            <div className="ui text-right floated column">
-                                <Link to='/admin/voucher/transfer'>
-                                    <button className='ui button primary'>
-                                        Transfer
-                                    </button>
-                                </Link>
+                {
+                    this.state.role === 'agent'?
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/voucher/transfer'>
+                                            <button className='ui button primary'>
+                                                Transfer
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        : <></>
+                }
+
 
                 <table className="table table-striped">
                     <thead>

@@ -13,7 +13,7 @@ class CreateUserUi extends Component {
         email: '',
         address: '',
         language: "4_4",
-        type: '',
+        role: 'agent',
 
         errors: []
     }
@@ -66,10 +66,10 @@ class CreateUserUi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-building"/> </span>
                             </div>
-                            <select className="form-control" value={this.state.type}
-                            onChange={event => this.setState({type: event.target.value})}>
-                                <option>Seller</option>
-                                <option>Agent</option>
+                            <select className="form-control" value={this.state.role}
+                            onChange={event => this.setState({role: event.target.value})}>
+                                <option selected={true} className='text-uppercase'>agent</option>
+                                <option className='text-uppercase'>seller</option>
                             </select>
                         </div>
 

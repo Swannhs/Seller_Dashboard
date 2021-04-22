@@ -38,9 +38,9 @@ class LoginUI extends Component {
 
                 if (response.data.errors){
                     this.setState({errors: response.data.errors})
-
                 }else {
                     if (response.data.data.active) {
+                        cookies.set('Role', response.data.data.role)
                         cookies.set('Token', response.data.data.token);
                         this.props.history.push('/admin/dashboard')
                     } else {

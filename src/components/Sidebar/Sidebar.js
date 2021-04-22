@@ -20,22 +20,25 @@ import Cookies from "universal-cookie/lib";
 class Sidebar extends Component {
 
     state = {
-        role: 0
+        role: ''
     }
 
     componentDidMount() {
-        const cookie = new Cookies
-        RadiusApi.get('/dashboard/role.json', {
-            params: {
-                token: cookie.get('Token')
-            }
+        let cookie = new Cookies
+        this.setState({
+            role: cookie.get('Role')
         })
-            .then(response => {
-                // console.log(response.data.user[0].group_id)
-                this.setState({
-                    role: response.data.user[0].group_id
-                })
-            })
+        // RadiusApi.get('/dashboard/role.json', {
+        //     params: {
+        //         token: cookie.get('Token')
+        //     }
+        // })
+        //     .then(response => {
+        //         // console.log(response.data.user[0].group_id)
+        //         this.setState({
+        //             role: response.data.user[0].group_id
+        //         })
+        //     })
     }
 
     render() {
@@ -62,11 +65,18 @@ class Sidebar extends Component {
                                             Dashboard
                                         </Link>
                                     </MenuItem>
-                                    <MenuItem icon={<AiOutlineUser/>}>
-                                        <Link to='/admin/users/view'>
-                                            User
-                                        </Link>
-                                    </MenuItem>
+                                    {
+                                        this.state.role === 'admin' || this.state.role === 'agent' ?
+
+                                            <MenuItem icon={<AiOutlineUser/>}>
+                                                <Link to='/admin/users/view'>
+                                                    User
+                                                </Link>
+                                            </MenuItem>
+
+                                            : <></>
+                                    }
+
                                     <MenuItem icon={<BsListNested/>}>
                                         <Link to='/admin/voucher/view'>
                                             Voucher
@@ -75,7 +85,7 @@ class Sidebar extends Component {
                                     <MenuItem icon={<BiMoney/>}>
 
                                         {
-                                            this.state.role === 8 ? <Link to='/admin/root/voucher/transaction'>
+                                            this.state.role === 'admin' ? <Link to='/admin/root/voucher/transaction'>
                                                     Transaction
                                                 </Link>
                                                 : <Link to='/admin/voucher/transaction'>
@@ -86,7 +96,7 @@ class Sidebar extends Component {
                                     </MenuItem>
                                     <MenuItem icon={<MdAttachMoney/>}>
                                         {
-                                            this.state.role === 8 ?
+                                            this.state.role === 'admin' ?
                                                 <Link to='/admin/root/cash/transaction'>
                                                     Cash
                                                 </Link>
@@ -99,7 +109,7 @@ class Sidebar extends Component {
                                     </MenuItem>
                                     <>
                                         {
-                                            this.state.role === 8 ?
+                                            this.state.role === 'admin' ?
                                                 <>
                                                     <SubMenu title='Server' icon={<BsServer/>}>
                                                         <MenuItem>
@@ -134,8 +144,6 @@ class Sidebar extends Component {
                                 </Menu>
                             </ProSidebar>
                         </li>
-
-
                     </Nav>
                 </div>
             </div>

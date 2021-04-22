@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
+import DeleteServerRealm from "./DeleteServerRealm";
 
 class ServerRealm extends Component {
     state = {
@@ -43,6 +44,7 @@ class ServerRealm extends Component {
                         <th scope="col">ID</th>
                         <th scope="col">Server</th>
                         <th scope="col">Realms</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,6 +55,7 @@ class ServerRealm extends Component {
                                     <td>{item.id}</td>
                                     <td>{item.server.name}</td>
                                     <td>{item.realm.name}</td>
+                                    <td><DeleteServerRealm delId={item.id}/></td>
                                 </tr>
                             )
                         }) : null
