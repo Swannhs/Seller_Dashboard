@@ -36,7 +36,7 @@ class DashboardServer extends Component {
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">Server</p>
-                                    <Card.Title as="h4">Total: 30</Card.Title>
+                                    <Card.Title as="h4">Total: {this.state.servers}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
