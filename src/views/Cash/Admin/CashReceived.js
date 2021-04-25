@@ -31,7 +31,7 @@ class CashReceived extends Component {
                         <thead>
                         <tr>
                             <th scope="col">Trx ID</th>
-                            <th scope="col">Receiver</th>
+                            <th scope="col">Sender</th>
                             <th scope="col">Status</th>
                             <th scope="col">Received</th>
                         </tr>

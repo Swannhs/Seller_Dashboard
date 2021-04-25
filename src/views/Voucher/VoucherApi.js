@@ -93,13 +93,13 @@ class VoucherApi extends Component {
                             {/*    <AiOutlinePlusCircle/>*/}
                             {/*</td>:null}*/}
 
-                            <td className='text-center'>{item.name}</td>
-                            <td className='text-center'>{item.password}</td>
+                            <td>{item.name}</td>
+                            <td>{item.password}</td>
 
-                            <td className='text-center'>{item.realm}</td>
-                            <td className='text-center'>{item.profile}</td>
+                            <td>{item.realm}</td>
+                            <td>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
-                            <td className='text-center' data-label="Action">
+                            <td data-label="Action">
                                 <BiReset aria-placeholder='reset' onClick={() => this.onVoucherReset(item.id)}/>
                             </td>
                         </tr>

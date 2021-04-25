@@ -63,8 +63,8 @@ class VoucherApi extends Component {
                 {(this.state.userData) ? this.state.userData.map((item) => {
                     return (
                         <tr key={item.id}>
-                            <td className='text-center text-capitalize' data-label="Name">{item.username}</td>
-                            <td className='text-center' data-label="Role">
+                            <td className='text-capitalize' data-label="Name">{item.username}</td>
+                            <td data-label="Role">
                                 {
                                     item.role === 'agent' ? <span className='text-primary'>Agent</span> :
                                         <span className='text-warning'>Seller</span>
@@ -77,7 +77,7 @@ class VoucherApi extends Component {
                             {/*    {item.active ? <span className='text-success'>Active</span>*/}
                             {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
 
-                            <td className='text-center'>
+                            <td>
                                 {item.active ? <span className='text-success'>Active</span> :
                                     <span className='text-danger'>Inactive</span>}
                                 {/*<div className="ui toggle checkbox center aligned">*/}
@@ -91,7 +91,7 @@ class VoucherApi extends Component {
                             </td>
 
 
-                            <td className='text-center' data-label="Action">
+                            <td data-label="Action">
                                 <Link to={'/admin/users/view/' + item.id}>
                                     <AiOutlineEye/>
                                 </Link>

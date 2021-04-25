@@ -25,7 +25,7 @@ class CashTableAgent extends Component {
                         </div>
                     </div>
                     <div className='text-center'>
-                        <div className="ui buttons">
+                        <div className="ui buttons small">
                             <button className="ui button red"
                                     onClick={() => {
                                         this.setState({

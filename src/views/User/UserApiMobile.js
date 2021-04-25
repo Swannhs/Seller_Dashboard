@@ -54,8 +54,8 @@ class UserApiMobile extends Component {
         const itemRows = [
             <tr key={item.id}>
                 <td><AiOutlinePlusCircle onClick={clickCallback} key={"row-data-" + item.id}/></td>
-                <td className='text-center text-capitalize'>{item.username}</td>
-                <td className='text-center' data-label="Action">
+                <td className='text-capitalize'>{item.username}</td>
+                <td data-label="Action">
                     <Link to={'/admin/users/view/' + item.id}>
                         <AiOutlineEye/>
                     </Link>
@@ -74,7 +74,7 @@ class UserApiMobile extends Component {
                     <td>
                         <AiOutlineArrowRight/>
                     </td>
-                    <td className='text-center' data-label="Role"><b>Role: </b>
+                    <td data-label="Role"><b>Role: </b>
                         {
                             item.role === 'agent' ? <span className='text-primary'>Agent</span> :
                                 <span className='text-warning'>Seller</span>
@@ -87,7 +87,7 @@ class UserApiMobile extends Component {
                     {/*    {item.active ? <span className='text-success'>Active</span>*/}
                     {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
 
-                    <td className='text-center'><b>Status: </b>
+                    <td><b>Status: </b>
                         {item.active ? <span className='text-success'>Active</span> :
                             <span className='text-danger'>Inactive</span>}
                         {/*<div className="ui toggle checkbox center aligned">*/}

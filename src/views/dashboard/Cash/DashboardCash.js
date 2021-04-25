@@ -30,19 +30,18 @@ class DashboardCash extends Component {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon fas fa-money-bill text-success"/>
+                                    <i className="fas fa-money-bill-alt text-success"/>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">Cash</p>
-                                    <Card.Title as="h4">
+                                    <Card.Title>
                                         Payable: ${this.state.cash[0]? this.state.cash[0].payable: 0}
                                     </Card.Title>
-                                    <Card.Title as="h4">
+                                    <Card.Title>
                                         Receivable: ${this.state.cash[0]? this.state.cash[0].receivable: 0}
                                     </Card.Title>
-                                    <Card.Title as="h4">
+                                    <Card.Title>
                                         Received: $0
                                     </Card.Title>
                                 </div>
@@ -52,8 +51,7 @@ class DashboardCash extends Component {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="far fa-calendar-alt mr-1"/>
-                            Last day
+                            <b>Cash</b>
                         </div>
                     </Card.Footer>
                 </Card>

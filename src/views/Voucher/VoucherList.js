@@ -54,36 +54,15 @@ class VoucherList extends Component {
                                     #
                                 </th> : null
                         }
-                        <th>
-                            <h4 className='text-center'>
-                                Name
-                            </h4>
-                        </th>
-                        <th>
-                            <h4 className='text-center'>
-                                Password
-                            </h4>
-                        </th>
+                        <th scope="col">name</th>
+                        <th scope="col">Password</th>
 
                         {
                             this.state.mobile ? <></> :
                                 <>
-                                    <th>
-                                        <h4 className='text-center'>
-                                            Group
-                                        </h4>
-                                    </th>
-
-                                    <th>
-                                        <h4 className='text-center'>
-                                            Plan
-                                        </h4>
-                                    </th>
-                                    <th>
-                                        <h4 className='text-center'>
-                                            Action
-                                        </h4>
-                                    </th>
+                                    <th scope="col">Group</th>
+                                    <th scope="col">Plan</th>
+                                    <th scope="col">Action</th>
                                 </>
                         }
 

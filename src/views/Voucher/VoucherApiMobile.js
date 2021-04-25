@@ -70,8 +70,8 @@ class VoucherApiMobile extends Component {
         const itemRows = [
             <tr key={item.id}>
                 <td><AiOutlinePlusCircle onClick={clickCallback} key={"row-data-" + item.id}/></td>
-                <td className='text-center'>{item.name}</td>
-                <td className='text-center'>{item.password}</td>
+                <td>{item.name}</td>
+                <td>{item.password}</td>
             </tr>
         ];
 
@@ -86,10 +86,10 @@ class VoucherApiMobile extends Component {
                         </span>
 
                     </td>
-                    <td className='text-center'>
+                    <td>
                         <b>Group: </b>{item.realm}
                     </td>
-                    <td className='text-center'>
+                    <td>
                         <b>Profile: </b>{item.profile}
                     </td>
                 </tr>

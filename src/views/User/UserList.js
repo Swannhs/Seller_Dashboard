@@ -52,42 +52,25 @@ class VoucherApi extends Component {
                                     #
                                 </th> : null
                         }
-                        <th>
-                            <h4 className='text-center'>
-                                Name
-                            </h4>
-                        </th>
+                        <th scope="col">Name</th>
                         {
                             this.state.mobile ? <></> :
                                 <>
-                                    <th>
-                                        <h4 className='text-center'>
-                                            Role
-                                        </h4>
-                                    </th>
 
-                                    <th className='w-25'>
-                                        <h4 className='text-center'>
-                                            <h4 className='text-center'>
-                                                Status
-                                            </h4>
-                                            {/*<Dropdown text='Status' multiple icon='filter'>*/}
-                                            {/*    <Dropdown.Menu>*/}
-                                            {/*        <Dropdown.Menu scrolling>*/}
-                                            {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
-                                            {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
-                                            {/*        </Dropdown.Menu>*/}
-                                            {/*    </Dropdown.Menu>*/}
-                                            {/*</Dropdown>*/}
-                                        </h4>
-                                    </th>
+                                    <th scope="col">Role</th>
+
+                                        <th scope="col">Status</th>
+                                        {/*<Dropdown text='Status' multiple icon='filter'>*/}
+                                        {/*    <Dropdown.Menu>*/}
+                                        {/*        <Dropdown.Menu scrolling>*/}
+                                        {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
+                                        {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
+                                        {/*        </Dropdown.Menu>*/}
+                                        {/*    </Dropdown.Menu>*/}
+                                        {/*</Dropdown>*/}
                                 </>
                         }
-                        <th>
-                            <h4 className='text-center'>
-                                Actions
-                            </h4>
-                        </th>
+                        <th scope="col">Actions</th>
 
                     </tr>
                     </thead>
