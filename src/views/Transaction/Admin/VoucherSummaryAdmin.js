@@ -20,7 +20,9 @@ class VoucherSummaryAdmin extends Component {
                     summary: response.data.item
                 })
             })
+
     }
+
 
     render() {
         return (

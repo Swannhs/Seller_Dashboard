@@ -1,118 +1,110 @@
-import React, {useState} from "react";
+import React, {Component} from 'react';
 import 'reactjs-popup/dist/index.css';
 import VoucherApi from "./VoucherApi";
 import {Link} from "react-router-dom";
-import {Dropdown, FormControl} from "react-bootstrap";
+import VoucherApiMobile from "./VoucherApiMobile";
 
-
-function VoucherList() {
-
-    const onFilter = (event) => {
-        console.log(event.target.value)
+class VoucherList extends Component {
+    state = {
+        mobile: false
     }
 
-    const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
-        <>
-            <h4>
-                Group
-            </h4>
-            <i className="filter icon d-inline cursor-pointer"
-               onClick={(e) => {
-                   e.preventDefault();
-                   onClick(e);
-               }}
-            > Filter</i>
-        </>
+    componentDidMount() {
+        this.setState({mobile: window.innerWidth <= 660})
+    }
 
+    /*
 
-    ));
+        //todo Live Screen Change detect
+        componentDidMount() {
+            window.addEventListener("resize", this.resize.bind(this));
+            this.resize();
+        }
 
-// forwardRef again here!
-// Dropdown needs access to the DOM of the Menu to measure it
-    const CustomMenu = React.forwardRef(
-        ({children, style, className, 'aria-labelledby': labeledBy}, ref) => {
+        resize() {
+            this.setState({hideNav: window.innerWidth <= 760});
+        }
 
-            return (
-                <div
-                    ref={ref}
-                    className={className}
-                    aria-labelledby={labeledBy}
-                >
-                    <FormControl
-                        autoFocus
-                        className="mx-3 my-2 w-auto"
-                        placeholder="Type to filter..."
-                        onChange={(event) => onFilter(event)}
-                    />
+        componentWillUnmount() {
+            window.removeEventListener("resize", this.resize.bind(this));
+        }
+
+     */
+
+    render() {
+        return (
+            <>
+                <div className="ui grid">
+
+                    <div className="ui text-right floated column">
+                        <Link to='/admin/voucher/create'>
+                            <button className='ui button primary'>
+                                New
+                            </button>
+                        </Link>
+                    </div>
                 </div>
-            );
-        },
-    );
 
-    return (
+                <table className="table table-striped">
+                    <thead>
+                    <tr className='ct-grid-background border-primary'>
+                        {
+                            this.state.mobile ?
+                                <th>
+                                    #
+                                </th> : null
+                        }
+                        <th>
+                            <h4 className='text-center'>
+                                Name
+                            </h4>
+                        </th>
+                        <th>
+                            <h4 className='text-center'>
+                                Password
+                            </h4>
+                        </th>
 
-        <>
-            <div className="ui grid">
+                        {
+                            this.state.mobile ? <></> :
+                                <>
+                                    <th>
+                                        <h4 className='text-center'>
+                                            Group
+                                        </h4>
+                                    </th>
 
-                <div className="ui text-right floated column">
-                    <Link to='/admin/voucher/create'>
-                        <button className='ui button primary'>
-                            New
-                        </button>
-                    </Link>
-                </div>
-            </div>
-
-            <table className="table table-striped">
-                <thead>
-                <tr className='ct-grid-background border-primary'>
-                    <th>
-                        <h4 className='text-center'>
-                            Name
-                        </h4>
-                    </th>
-                    <th>
-                        <h4 className='text-center'>
-                            Password
-                        </h4>
-                    </th>
-
-                    {/*<th className='d-none d-sm-block'>*/}
-                    {/*    <h4 className='text-center'>*/}
-                    {/*        More*/}
-                    {/*    </h4>*/}
-                    {/*</th>*/}
-
-                    <th>
-                        <h4 className='text-center'>
-                            Group
-                        </h4>
-                    </th>
-
-                    <th>
-                        <h4 className='text-center'>
-                            Plan
-                        </h4>
-                    </th>
-                    <th>
-                        <h4 className='text-center'>
-                            Action
-                        </h4>
-                    </th>
+                                    <th>
+                                        <h4 className='text-center'>
+                                            Plan
+                                        </h4>
+                                    </th>
+                                    <th>
+                                        <h4 className='text-center'>
+                                            Action
+                                        </h4>
+                                    </th>
+                                </>
+                        }
 
 
-                </tr>
-                </thead>
-                <VoucherApi/>
-                {/*<tr>*/}
-                {/*    <td>Test</td>*/}
-                {/*    <td>Test</td>*/}
-                {/*    <td>Test</td>*/}
-                {/*</tr>*/}
-            </table>
-        </>
+                    </tr>
+                    </thead>
 
-    )
+                    {
+                        this.state.mobile ?  <VoucherApiMobile/>
+                            : <VoucherApi/>
+                    }
+                    {/*<VoucherApi mobile={this.state.mobile}/>*/}
+                    {/*<tr>*/}
+                    {/*    <td>Test</td>*/}
+                    {/*    <td>Test</td>*/}
+                    {/*    <td>Test</td>*/}
+                    {/*</tr>*/}
+                </table>
+            </>
+        );
+    }
 }
 
 export default VoucherList;
