@@ -26,14 +26,35 @@ class Profile extends Component {
 
     }
 
+    onLogout = () => {
+        const cookie = new Cookies;
+        cookie.remove('Token', null)
+        cookie.remove('Role', null)
+        this.props.history.push('/')
+
+    }
+
     render() {
         return (
             <div className="container">
-                <div className='ml-3'>
-                    <Link to='/admin/users/view'>
-                        <button className='ui button'>Back</button>
-                    </Link>
+                <div className='row'>
+                    <div className='col-1'>
+                        <div className="ui text-right floated column">
+                            <Link to='/admin/dashboard'>
+                                <button className='ui button small'>Back</button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className='col'>
+                        <div className="ui text-right floated column">
+                            <Link to='/login'>
+                                <button className="ui red button small" onClick={this.onLogout}>Log out</button>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
+
                 <div className="main-body mt-2 ml-3">
                     {/* Breadcrumb */}
                     {/*<nav aria-label="breadcrumb" className="main-breadcrumb">*/}

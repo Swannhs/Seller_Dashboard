@@ -22,7 +22,7 @@ import CreateServerRealms from "./views/server/CreateServerRealms";
 import TweakRealm from "./views/tweak/TweakRealm";
 import CreateTweak from "./views/tweak/CreateTweak";
 import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
-import VoucherSummaryTable from "./views/Transaction/AgentTransaction/VoucherSummaryTable";
+import TransactionSummaryTable from "./views/Transaction/AgentTransaction/TransactionSummaryTable";
 import VoucherSummaryAdmin from "./views/Transaction/Admin/VoucherSummaryAdmin";
 import TransactionAdmin from "./views/Transaction/Admin/TransactionAdmin";
 import CashSummaryTableAgent from "./views/Cash/Agent/CashSummaryTableAgent";
@@ -96,7 +96,7 @@ const dashboardRoutes = [
     {
         path: "/voucher/transaction",
         name: "Transaction",
-        component: VoucherSummaryTable,
+        component: TransactionSummaryTable,
         layout: '/admin'
     },
 
