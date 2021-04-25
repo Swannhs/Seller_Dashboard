@@ -16,10 +16,11 @@ class VoucherApi extends Component {
             start: 0,
             limit: 10,
             total: 0,
-            refresh: true
+            refresh: true,
         }
         this.onApiCall();
     }
+
 
     onApiCall = () => {
         const cookie = new Cookies
@@ -87,12 +88,18 @@ class VoucherApi extends Component {
                 {(this.state.userData) ? this.state.userData.map((item) => {
                     return (
                         <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>{item.password}</td>
-                            <td>{item.realm}</td>
-                            <td>{item.profile}</td>
+
+                            {/*{this.props.mobile?<td>*/}
+                            {/*    <AiOutlinePlusCircle/>*/}
+                            {/*</td>:null}*/}
+
+                            <td className='text-center'>{item.name}</td>
+                            <td className='text-center'>{item.password}</td>
+
+                            <td className='text-center'>{item.realm}</td>
+                            <td className='text-center'>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
-                            <td data-label="Action">
+                            <td className='text-center' data-label="Action">
                                 <BiReset aria-placeholder='reset' onClick={() => this.onVoucherReset(item.id)}/>
                             </td>
                         </tr>
@@ -106,7 +113,7 @@ class VoucherApi extends Component {
                 <tfoot>
                 <tr>
                     <th colSpan={5}>
-                        <div className="ui right floated pagination menu">
+                        <div className="ui right floated pagination menu align-content-lg-end">
                             <Pagination
                                 defaultActivePage={this.state.page}
                                 firstItem={null}
