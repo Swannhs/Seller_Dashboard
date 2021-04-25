@@ -24,15 +24,6 @@ class CashTableAgent extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="ui grid">
-                        <div className="ui text-right floated column">
-                            <Link to='/admin/cash/transfer'>
-                                <button className='ui button primary'>
-                                    Pay
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
                     <div className='text-center'>
                         <div className="ui buttons">
                             <button className="ui button red"

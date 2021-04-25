@@ -38,109 +38,110 @@ class CreateUserUi extends Component {
 
 
                         <h2 className="card-title mt-3 text-center p-3">Create Account</h2>
-
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                        <form onSubmit={this.onFormSubmit}>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="User Name" type="text"
+                                       value={this.state.username}
+                                       onChange={event => this.setState({username: event.target.value})}
+                                       required={true}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="User Name" type="text"
-                                   value={this.state.username}
-                                   onChange={event => this.setState({username: event.target.value})}
-                            />
-                        </div>
 
-                        <p className='mr-0 p-0 text-danger'>{this.state.errors ? this.state.errors.username : null}</p>
+                            <p className='mr-0 p-0 text-danger'>{this.state.errors ? this.state.errors.username : null}</p>
 
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                                </div>
+                                <input className="form-control" placeholder="Create password" type="text"
+                                       value={this.state.password}
+                                       onChange={event => this.setState({password: event.target.value})}
+                                       required={true}
+                                />
                             </div>
-                            <input className="form-control" placeholder="Create password" type="text"
-                                   value={this.state.password}
-                                   onChange={event => this.setState({password: event.target.value})}
-                            />
-                        </div>
 
-
-                        <div className="form-group input-group mt-2">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-building"/> </span>
+                            <p className='text-danger m-0 p-0'>Don't forget to select role</p>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-building"/> </span>
+                                </div>
+                                <select className="form-control" value={this.state.role}
+                                        onChange={event => this.setState({role: event.target.value})}>
+                                    <option selected={true} className='text-uppercase'>agent</option>
+                                    <option className='text-uppercase'>seller</option>
+                                </select>
                             </div>
-                            <select className="form-control" value={this.state.role}
-                            onChange={event => this.setState({role: event.target.value})}>
-                                <option selected={true} className='text-uppercase'>agent</option>
-                                <option className='text-uppercase'>seller</option>
-                            </select>
-                        </div>
 
 
-                        {/* -------------------------Personal Info-------------------// */}
+                            {/* -------------------------Personal Info-------------------// */}
 
 
-                        <h4 className="card-title mt-3 text-center">Personal Information</h4>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
+                            <h4 className="card-title mt-3 text-center">Personal Information</h4>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="Email address" type="email"
+                                       value={this.state.email}
+                                       onChange={event => {
+                                           this.setState({email: event.target.value})
+                                       }}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="Email address" type="email"
-                                   value={this.state.email}
-                                   onChange={event => {
-                                       this.setState({email: event.target.value})
-                                   }}
-                            />
-                        </div>
-                        {/* form-group// */}
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-phone"/> </span>
+                            {/* form-group// */}
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-phone"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="Phone number" type="number"
+                                       value={this.state.phone}
+                                       onChange={event => {
+                                           this.setState({phone: event.target.value})
+                                       }}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="Phone number" type="number"
-                                   value={this.state.phone}
-                                   onChange={event => {
-                                       this.setState({phone: event.target.value})
-                                   }}
-                            />
-                        </div>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="Name" type="text"
+                                       value={this.state.name}
+                                       onChange={event => this.setState({name: event.target.value})}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="Name" type="text"
-                                   value={this.state.name}
-                                   onChange={event => this.setState({name: event.target.value})}
-                            />
-                        </div>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="Surname" type="text"
+                                       value={this.state.surname}
+                                       onChange={event => this.setState({surname: event.target.value})}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="Surname" type="text"
-                                   value={this.state.surname}
-                                   onChange={event => this.setState({surname: event.target.value})}
-                            />
-                        </div>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                </div>
+                                <input name className="form-control" placeholder="Address" type="text"
+                                       value={this.state.address}
+                                       onChange={event => this.setState({address: event.target.value})}
+                                />
                             </div>
-                            <input name className="form-control" placeholder="Address" type="text"
-                                   value={this.state.address}
-                                   onChange={event => this.setState({address: event.target.value})}
-                            />
-                        </div>
-                        {/* form-group// */}
-                        {/* form-group end.// */}
+                            {/* form-group// */}
+                            {/* form-group end.// */}
 
-                        {/* form-group// */}
-                        <div className="form-group">
-                            {/*<Link to='/admin/users/view'>*/}
-                            <button type="submit" className="ui button primary"
-                                    onClick={this.onFormSubmit}
-                            >
-                                Create
-                            </button>
-                            {/*</Link>*/}
-                        </div>
+                            {/* form-group// */}
+                            <div className="form-group">
+                                {/*<Link to='/admin/users/view'>*/}
+                                <button type="submit" className="ui button primary">
+                                    Create
+                                </button>
+                                {/*</Link>*/}
+                            </div>
+                        </form>
                     </article>
                 </div>
                 {/* card.// */}
