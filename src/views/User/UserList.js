@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Cookies from "universal-cookie";
-import {AiFillDelete, AiFillEdit, AiOutlineEye, BiReset} from "react-icons/all";
-import {Dropdown, Loader, Pagination} from "semantic-ui-react";
+import {AiFillEdit, AiOutlineEye} from "react-icons/all";
+import {Loader, Pagination} from "semantic-ui-react";
 import DeleteUser from "./Action/DeleteUser";
 import {Link} from "react-router-dom";
 
@@ -28,20 +28,21 @@ class VoucherApi extends Component {
 
     onApiCall() {
         const cookie = new Cookies;
-        RadiusApi.get('/access-providers/agent-list.json', {
+        RadiusApi.get('/access-providers/index-tree-grid.json', {
             params: {
                 //Assign limit of row showing in table
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
+                node: 0,
                 token: cookie.get('Token')
             }
         })
             .then(response => {
                     this.setState({
                         loading: false,
-                        userData: response.data.item,
-                        total: response.data.total
+                        userData: response.data.items,
+                        total: response.data.totalCount
                     })
                 }
             )
@@ -131,7 +132,8 @@ class VoucherApi extends Component {
                                 <td className='text-center' data-label="Name">{item.username}</td>
                                 <td className='text-center' data-label="Role">
                                     {
-                                        item.group_id === 9 ? <span className='text-primary'>Agent</span> : <span className='text-warning'>Seller</span>
+                                        item.role === 'agent' ? <span className='text-primary'>Agent</span> :
+                                            <span className='text-warning'>Seller</span>
                                     }
                                 </td>
                                 {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}

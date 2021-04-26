@@ -39,7 +39,7 @@ class CashSummaryTableAgent extends Component {
                     <thead>
                     <tr>
                         <th scope="col">Payable</th>
-                        {/*<th scope="col">Paid</th>*/}
+                        <th scope="col">Paid</th>
                         <th scope="col">Receivable</th>
                         <th scope="col">Received</th>
                         <th scope="col">Action</th>
@@ -51,6 +51,7 @@ class CashSummaryTableAgent extends Component {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.payable}</td>
+                                    <td>{item.paid}</td>
                                     <td>{item.receivable}</td>
                                     <td>{item.received}</td>
                                     <td>

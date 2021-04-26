@@ -6,6 +6,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Modal} from "react-bootstrap";
 import {Button} from "semantic-ui-react";
 import MyModal from "../../components/modal/MyModal";
+import Cookies from "universal-cookie/lib";
 
 class CreateServerRealms extends Component {
     state = {
@@ -20,8 +21,13 @@ class CreateServerRealms extends Component {
 
     onGenerateServer = event => {
         event.preventDefault();
+        let cookie = new Cookies
         let data = this.state
-        RadiusApi.post('/server-realms/add.json', data)
+        RadiusApi.post('/server-realms/add.json', data,{
+            params:{
+                token: cookie.get('Token')
+            }
+        })
             .then(response => {
                 if (response.data.success) {
                     alert(response.data.message)

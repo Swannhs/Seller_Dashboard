@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, Col, Row} from "react-bootstrap";
 import RadiusApi from "../../../radius-api/RadiusApi";
+import Cookies from "universal-cookie/lib";
 
 class DashboardServer extends Component {
     state = {
@@ -8,7 +9,12 @@ class DashboardServer extends Component {
     }
 
     componentDidMount() {
-        RadiusApi.get('/dashboard/server-count.json')
+        let cookie = new Cookies;
+        RadiusApi.get('/dashboard/server-count.json',{
+            params: {
+                token: cookie.get('Token')
+            }
+        })
             .then(response => {
                 this.setState({
                     servers: response.data.servers
@@ -30,7 +36,7 @@ class DashboardServer extends Component {
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">Server</p>
-                                    <Card.Title as="h4">Total: 30</Card.Title>
+                                    <Card.Title as="h4">Total: {this.state.servers}</Card.Title>
                                 </div>
                             </Col>
                         </Row>

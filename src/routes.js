@@ -30,6 +30,8 @@ import CashSummaryTableAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
 import CashTableAgent from "./views/Cash/Agent/CashTableAgent";
 import CashTableAdmin from "./views/Cash/Admin/CashTableAdmin";
 import Profile from "./components/Profile/Profile";
+import EditTweak from "./views/tweak/EditTweak";
+import EditServer from "./views/server/EditServer";
 
 
 const dashboardRoutes = [
@@ -175,6 +177,12 @@ const dashboardRoutes = [
         layout: '/admin'
     },
     {
+        path: "/root/server-edit/:id",
+        name: "Edit Server",
+        component: EditServer,
+        layout: "/admin",
+    },
+    {
         path: "/root/server-new",
         name: "Server",
         component: CreateServer,
@@ -200,6 +208,12 @@ const dashboardRoutes = [
         name: "Tweak",
         component: Tweak,
         layout: '/admin'
+    },
+    {
+        path: "/root/tweak-edit/:id",
+        name: "Edit Tweak",
+        component: EditTweak,
+        layout: "/admin",
     },
     {
         path: "/root/tweak-new",

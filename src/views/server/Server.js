@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
+import {AiFillEdit} from "react-icons/all";
 
 class Server extends Component {
     state = {
@@ -52,6 +53,7 @@ class Server extends Component {
                         <th scope="col">Proxy Port</th>
                         <th scope="col">API Service Port</th>
                         <th scope="col">Note</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,6 +70,11 @@ class Server extends Component {
                                     <td>{item.proxy_port}</td>
                                     <td>{item.api_server_port}</td>
                                     <td>{item.note}</td>
+                                    <td>
+                                        <Link to={'/admin/root/server-edit/' + item.id}>
+                                            <AiFillEdit/>
+                                        </Link>
+                                    </td>
                                 </tr>
                             )
                         }) : null

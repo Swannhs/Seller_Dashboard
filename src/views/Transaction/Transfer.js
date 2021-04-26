@@ -9,12 +9,13 @@ import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 
 class Transfer extends Component {
     state = {
+        id: 0,
         partner_user_id: '',
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
         quantity_rate: '',
-        root: false,
+        role: '',
         error: {
             partner: '',
             balance: ''
@@ -23,17 +24,10 @@ class Transfer extends Component {
 
 
     componentDidMount() {
-        const cookie = new Cookies
-        RadiusApi.get('/dashboard/checkToken/index.json', {
-            params: {
-                token: cookie.get('Token')
-            }
+        const cookie = new Cookies;
+        this.setState({
+            role: cookie.get('Role')
         })
-            .then(response => {
-                this.setState({
-                    root: response.data.data.isRootUser
-                })
-            })
     }
 
 
@@ -46,7 +40,7 @@ class Transfer extends Component {
             }
         })
             .then(response => {
-                if (this.state.root) {
+                if (this.state.role === 'admin') {
                     if (response.data.success) {
                         alert('Transfer amount successfully')
                         this.props.history.push('/admin/root/voucher/transaction')
@@ -83,7 +77,8 @@ class Transfer extends Component {
 
     onCreateGroup = async data => {
         this.setState({
-            realm_id: data
+            realm_id: data,
+            id: data
         })
     }
 
@@ -98,12 +93,12 @@ class Transfer extends Component {
             <div className='container'>
                 <div className='ml-3'>
                     {
-                        this.state.root ?
-                        <Link to='/admin/root/voucher/transaction'>
-                            <button className='ui button'>Back</button>
-                        </Link> : <Link to='/admin/voucher/transaction'>
-                            <button className='ui button'>Back</button>
-                        </Link>
+                        this.state.root === 'admin' ?
+                            <Link to='/admin/root/voucher/transaction'>
+                                <button className='ui button'>Back</button>
+                            </Link> : <Link to='/admin/voucher/transaction'>
+                                <button className='ui button'>Back</button>
+                            </Link>
                     }
 
                 </div>

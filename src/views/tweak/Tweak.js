@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
+import EditTweak from "./EditTweak";
+import {AiFillEdit} from "react-icons/all";
 
 class Tweak extends Component {
     state = {
@@ -24,7 +26,7 @@ class Tweak extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <div className='container'>
                     <div className='row'>
                         <div className='col'>
@@ -49,6 +51,7 @@ class Tweak extends Component {
                         <th scope="col">Injection Type</th>
                         <th scope="col">Payload</th>
                         <th scope="col">Note</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,13 +66,18 @@ class Tweak extends Component {
                                     <td>{item.injection_type}</td>
                                     <td>{item.payload}</td>
                                     <td>{item.note}</td>
+                                    <td>
+                                        <Link to={'/admin/root/tweak-edit/' + item.id}>
+                                            <AiFillEdit/>
+                                        </Link>
+                                    </td>
                                 </tr>
                             )
                         }) : null
                     }
                     </tbody>
                 </table>
-            </div>
+            </>
         );
     }
 }
