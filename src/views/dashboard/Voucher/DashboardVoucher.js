@@ -30,20 +30,18 @@ class DashboardVoucher extends Component {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon fas fa-credit-card text-warning"/>
+                                    <i className="far fa-credit-card text-warning"/>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
-                                    <p className="card-category">Voucher</p>
-                                    <Card.Title
-                                        as="h4">
+                                    <Card.Title>
                                         Total: {this.state.vouchers[0] ? this.state.vouchers[0].total : 0}
                                     </Card.Title>
-                                    <Card.Title as="h4">
+                                    <Card.Title>
                                         Active: {this.state.vouchers[0] ? this.state.vouchers[0].active : 0}
                                     </Card.Title>
-                                    <Card.Title as="h4">Online: 13</Card.Title>
+                                    <Card.Title>Online: 13</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -51,8 +49,7 @@ class DashboardVoucher extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <i className="fas fa-redo mr-1"/>
-                            Update Now
+                            <b>Voucher</b>
                         </div>
                     </Card.Footer>
                 </Card>

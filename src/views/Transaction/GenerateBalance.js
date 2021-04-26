@@ -58,7 +58,7 @@ class GenerateBalance extends Component {
                     <div className='pl-3'>
                         <h3 className='text-black-50'>Amount</h3>
                         <Input type='number'
-                               placeholder='The amount you want to transfer'
+                               placeholder='The amount you want to generate'
                                value={this.state.transfer_amount}
                                onChange={event => {
                                    this.setState({
@@ -69,7 +69,7 @@ class GenerateBalance extends Component {
                         />
                         <h3 className='text-black-50'>Quantity per rate</h3>
                         <Input type='number'
-                               placeholder='The amount you want to transfer'
+                               placeholder='The amount per voucher'
                                value={this.state.quantity_rate}
                                onChange={event => {
                                    this.setState({

@@ -28,17 +28,6 @@ class Sidebar extends Component {
         this.setState({
             role: cookie.get('Role')
         })
-        // RadiusApi.get('/dashboard/role.json', {
-        //     params: {
-        //         token: cookie.get('Token')
-        //     }
-        // })
-        //     .then(response => {
-        //         // console.log(response.data.user[0].group_id)
-        //         this.setState({
-        //             role: response.data.user[0].group_id
-        //         })
-        //     })
     }
 
     render() {

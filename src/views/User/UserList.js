@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Cookies from "universal-cookie";
-import {AiFillEdit, AiOutlineEye} from "react-icons/all";
-import {Loader, Pagination} from "semantic-ui-react";
-import DeleteUser from "./Action/DeleteUser";
 import {Link} from "react-router-dom";
+import UserApi from "./UserApi";
+import UserApiMobile from "./UserApiMobile";
 
 
 class VoucherApi extends Component {
@@ -18,48 +15,13 @@ class VoucherApi extends Component {
             start: 0,
             limit: 10,
             total: 0,
-            refresh: true
+            refresh: true,
+            mobile: false
         }
     }
 
     componentDidMount() {
-        this.onApiCall();
-    }
-
-    onApiCall() {
-        const cookie = new Cookies;
-        RadiusApi.get('/access-providers/index-tree-grid.json', {
-            params: {
-                //Assign limit of row showing in table
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                node: 0,
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                    this.setState({
-                        loading: false,
-                        userData: response.data.items,
-                        total: response.data.totalCount
-                    })
-                }
-            )
-    }
-
-
-    onPagination() {
-        let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
-    }
-
-
-    async onPageChaneHandler(event, data) {
-        await this.setState({
-            page: data.activePage,
-            start: (data.activePage - 1) * this.state.limit
-        })
+        this.setState({mobile: window.innerWidth <= 660})
     }
 
 
@@ -82,123 +44,43 @@ class VoucherApi extends Component {
                 {/* ---------------- New Button End ----------------*/}
 
                 <table className="table table-striped">
-
                     <thead>
                     <tr className='ct-grid-background border-primary'>
-                        <th>
-                            <h4 className='text-center'>
-                                Name
-                            </h4>
-                        </th>
-                        <th>
-                            <h4 className='text-center'>
-                                Role
-                            </h4>
-                        </th>
-                        {/*<th className='d-none d-sm-block'>*/}
-                        {/*    <h4 className='text-center'>*/}
-                        {/*        Area*/}
-                        {/*    </h4>*/}
-                        {/*</th>*/}
+                        {
+                            this.state.mobile ?
+                                <th>
+                                    #
+                                </th> : null
+                        }
+                        <th scope="col">Name</th>
+                        {
+                            this.state.mobile ? <></> :
+                                <>
 
-                        <th className='w-25'>
-                            <h4 className='text-center'>
-                                <h4 className='text-center'>
-                                    Status
-                                </h4>
-                                {/*<Dropdown text='Status' multiple icon='filter'>*/}
-                                {/*    <Dropdown.Menu>*/}
-                                {/*        <Dropdown.Menu scrolling>*/}
-                                {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
-                                {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
-                                {/*        </Dropdown.Menu>*/}
-                                {/*    </Dropdown.Menu>*/}
-                                {/*</Dropdown>*/}
-                            </h4>
-                        </th>
-                        <th>
-                            <h4 className='text-center'>
-                                Actions
-                            </h4>
-                        </th>
+                                    <th scope="col">Role</th>
+
+                                        <th scope="col">Status</th>
+                                        {/*<Dropdown text='Status' multiple icon='filter'>*/}
+                                        {/*    <Dropdown.Menu>*/}
+                                        {/*        <Dropdown.Menu scrolling>*/}
+                                        {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
+                                        {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
+                                        {/*        </Dropdown.Menu>*/}
+                                        {/*    </Dropdown.Menu>*/}
+                                        {/*</Dropdown>*/}
+                                </>
+                        }
+                        <th scope="col">Actions</th>
 
                     </tr>
                     </thead>
 
-                    <tbody>
-                    {(this.state.userData) ? this.state.userData.map((item) => {
-                        return (
-                            <tr key={item.id}>
-                                <td className='text-center' data-label="Name">{item.username}</td>
-                                <td className='text-center' data-label="Role">
-                                    {
-                                        item.role === 'agent' ? <span className='text-primary'>Agent</span> :
-                                            <span className='text-warning'>Seller</span>
-                                    }
-                                </td>
-                                {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}
 
-
-                                {/*<td data-label="Status">*/}
-                                {/*    {item.active ? <span className='text-success'>Active</span>*/}
-                                {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
-
-                                <td className='text-center'>
-                                    {item.active ? <span className='text-success'>Active</span> :
-                                        <span className='text-danger'>Inactive</span>}
-                                    {/*<div className="ui toggle checkbox center aligned">*/}
-                                    {/*    <input type="checkbox" name="public"*/}
-                                    {/*        // value={item.active}*/}
-                                    {/*           onChange={event => this.onHandleChange(event)}*/}
-                                    {/*           checked={item.active}*/}
-                                    {/*    />*/}
-                                    {/*    <label/>*/}
-                                    {/*</div>*/}
-                                </td>
-
-
-                                <td className='text-center' data-label="Action">
-                                    <Link to={'/admin/users/view/' + item.id}>
-                                        <AiOutlineEye/>
-                                    </Link>
-                                    {/*<AiFillEdit onClick={this.onEditUser}/>*/}
-                                    <Link to={'/admin/users/edit/' + item.id}>
-                                        <AiFillEdit/>
-                                    </Link>
-                                    <DeleteUser delId={item.id}/>
-                                </td>
-
-                            </tr>
-
-                        )
-                    }) : <Loader type="ThreeDots" color="#00BFFF" height={80} width={80}/>
-
+                    {/*-----------------Calling User List Api---------------------*/}
+                    {
+                        this.state.mobile ? <UserApiMobile/> : <UserApi/>
                     }
-                    </tbody>
-
-
-                    {/*--------------------Pagination------------------------*/}
-                    <tfoot>
-                    <tr>
-                        <th colSpan={5}>
-                            <div className="ui right floated pagination menu">
-                                <Pagination
-                                    defaultActivePage={this.state.page}
-                                    firstItem={null}
-                                    lastItem={null}
-                                    pointing
-                                    secondary
-                                    totalPages={this.onPagination()}
-                                    onPageChange={async (event, data) =>
-                                        this.onPageChaneHandler(event, data)
-                                    }
-                                />
-                            </div>
-                        </th>
-                    </tr>
-                    </tfoot>
-                    {/*--------------------Pagination End------------------------*/}
-
+                    {/*-----------------Calling User List Api---------------------*/}
                 </table>
             </>
         );

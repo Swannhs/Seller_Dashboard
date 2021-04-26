@@ -6,6 +6,8 @@ import Cookies from "universal-cookie/lib";
 class ViewUi extends Component {
     state = {
         username: '',
+        role: '',
+        active: false,
         fullName: '',
         email: '',
         address: '',
@@ -23,6 +25,8 @@ class ViewUi extends Component {
             .then(response => {
                 this.setState({
                     username: response.data.data.username,
+                    role: response.data.data.role,
+                    active: response.data.data.active,
                     fullName: response.data.data.name,
                     phone: response.data.data.phone,
                     address: response.data.data.address,
@@ -49,7 +53,14 @@ class ViewUi extends Component {
                                              alt="Admin"
                                              className="rounded-circle" width={150}/>
                                         <div className="mt-3">
-                                            <h4>{this.state.username}</h4>
+                                            <h4>Username: {this.state.username}</h4>
+                                        </div>
+                                        <div className="mt-3">
+                                            <h4 className='text-uppercase'>Role: {this.state.role}</h4>
+                                        </div>
+                                        <div className="mt-3">Status:
+                                            {this.state.active ? <span className='text-success'>Active</span> :
+                                                <span className='text-danger'>Inactive</span>}
                                         </div>
                                     </div>
                                 </div>

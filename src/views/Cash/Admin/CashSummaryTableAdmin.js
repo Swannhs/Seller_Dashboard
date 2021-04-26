@@ -16,6 +16,7 @@ class CashSummaryAgent extends Component {
             }
         })
             .then(response => {
+                console.log(response)
                 this.setState({
                     items: response.data.item
                 })

@@ -30,13 +30,13 @@ class DashboardServer extends Component {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="nc-icon fas fa-microchip text-danger"/>
+                                    <i className="fas fa-server text-danger"/>
                                 </div>
                             </Col>
                             <Col xs="7">
                                 <div className="numbers">
                                     <p className="card-category">Server</p>
-                                    <Card.Title as="h4">Total: {this.state.servers}</Card.Title>
+                                    <Card.Title>Total: {this.state.servers}</Card.Title>
                                 </div>
                             </Col>
                         </Row>
@@ -44,8 +44,7 @@ class DashboardServer extends Component {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <i className="far fa-clock-o mr-1"/>
-                            In the last hour
+                            <b>Server</b>
                         </div>
                     </Card.Footer>
                 </Card>

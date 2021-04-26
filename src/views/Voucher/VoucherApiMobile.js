@@ -1,28 +1,20 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Cookies from "universal-cookie/lib";
+import RadiusApi from "../../radius-api/RadiusApi";
+import {AiOutlinePlusCircle, BiReset} from "react-icons/all";
 import {Pagination} from "semantic-ui-react";
-import {BiReset} from "react-icons/all";
 
-
-class VoucherApi extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            userData: [],
-            page: 1,
-            start: 0,
-            limit: 10,
-            total: 0,
-            refresh: true,
-        }
-        this.onApiCall();
-    }
-
-
-    onApiCall = () => {
+class VoucherApiMobile extends Component {
+    state = {
+        data : [],
+        page: 1,
+        start: 0,
+        limit: 10,
+        total: 0,
+        refresh: true,
+        expandedRows : []
+    };
+    componentDidMount() {
         const cookie = new Cookies
         RadiusApi.get('/vouchers/index-user-vouchers.json', {
             params: {
@@ -34,16 +26,11 @@ class VoucherApi extends Component {
         })
             .then(response => {
                 this.setState({
-                    userData: response.data.items,
+                    data: response.data.items,
                     total: response.data.totalCount
                 })
             })
     }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState.page !== this.state.page ? this.onApiCall() : null
-    }
-
 
     onVoucherReset = (props) => {
         let reset = {
@@ -67,6 +54,50 @@ class VoucherApi extends Component {
         this.forceUpdate();
     }
 
+    handleRowClick(rowId) {
+        const currentExpandedRows = this.state.expandedRows;
+        const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
+
+        const newExpandedRows = isRowCurrentlyExpanded ?
+            currentExpandedRows.filter(id => id !== rowId) :
+            currentExpandedRows.concat(rowId);
+
+        this.setState({expandedRows : newExpandedRows});
+    }
+
+    renderItem(item) {
+        const clickCallback = () => this.handleRowClick(item.id);
+        const itemRows = [
+            <tr key={item.id}>
+                <td><AiOutlinePlusCircle onClick={clickCallback} key={"row-data-" + item.id}/></td>
+                <td>{item.name}</td>
+                <td>{item.password}</td>
+            </tr>
+        ];
+
+        if(this.state.expandedRows.includes(item.id)) {
+            itemRows.push(
+                <tr key={"row-expanded-" + item.id}>
+                    <td>
+                        <span className='text-danger'>
+                            <BiReset
+                                aria-placeholder='reset'
+                                onClick={() => this.onVoucherReset(item.id)}/>
+                        </span>
+
+                    </td>
+                    <td>
+                        <b>Group: </b>{item.realm}
+                    </td>
+                    <td>
+                        <b>Profile: </b>{item.profile}
+                    </td>
+                </tr>
+            );
+        }
+
+        return itemRows;
+    }
 
     onPagination() {
         let totalPage = this.state.total / this.state.limit
@@ -82,33 +113,16 @@ class VoucherApi extends Component {
 
 
     render() {
+        let allItemRows = [];
+
+        this.state.data.forEach(item => {
+            const perItemRows = this.renderItem(item);
+            allItemRows = allItemRows.concat(perItemRows);
+        });
+
         return (
             <>
-                <tbody>
-                {(this.state.userData) ? this.state.userData.map((item) => {
-                    return (
-                        <tr key={item.id}>
-
-                            {/*{this.props.mobile?<td>*/}
-                            {/*    <AiOutlinePlusCircle/>*/}
-                            {/*</td>:null}*/}
-
-                            <td>{item.name}</td>
-                            <td>{item.password}</td>
-
-                            <td>{item.realm}</td>
-                            <td>{item.profile}</td>
-                            {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
-                            <td data-label="Action">
-                                <BiReset aria-placeholder='reset' onClick={() => this.onVoucherReset(item.id)}/>
-                            </td>
-                        </tr>
-                    )
-                }) : null
-                }
-                </tbody>
-
-
+                <tbody>{allItemRows}</tbody>
                 {/*--------------------Pagination------------------------*/}
                 <tfoot>
                 <tr>
@@ -134,4 +148,4 @@ class VoucherApi extends Component {
     }
 }
 
-export default VoucherApi;
+export default VoucherApiMobile;
