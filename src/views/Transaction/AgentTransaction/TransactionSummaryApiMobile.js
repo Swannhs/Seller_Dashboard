@@ -1,97 +1,115 @@
-import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../../radius-api/RadiusApi";
-import {AiOutlinePlusCircle, BiCommentDetail, BiDetail, BiReset} from "react-icons/all";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {makeStyles} from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import {BsBoxArrowUpRight} from "react-icons/all";
 import {Link} from "react-router-dom";
+import {Button} from "reactstrap";
 
-class TransactionSummaryApiMobile extends Component {
-    state= {
-        data: [],
-        expandedRows : []
-    }
-    componentDidMount() {
-        let cookie = new Cookies
-        RadiusApi.get('/voucher-transactions/index.json', {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.item
-                })
-            })
-    }
 
-    handleRowClick(rowId) {
-        const currentExpandedRows = this.state.expandedRows;
-        const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
+const useRowStyles = makeStyles({
+    root: {
+        '& > *': {
+            borderBottom: 'unset',
+        },
+    },
+});
 
-        const newExpandedRows = isRowCurrentlyExpanded ?
-            currentExpandedRows.filter(id => id !== rowId) :
-            currentExpandedRows.concat(rowId);
 
-        this.setState({expandedRows : newExpandedRows});
-    }
 
-    renderItem(item) {
-        const clickCallback = () => this.handleRowClick(item.id);
-        const itemRows = [
-            <tr key={item.id}>
-                <td><AiOutlinePlusCircle onClick={clickCallback} key={"row-data-" + item.id}/></td>
-                <td>{item.profile.name}</td>
-                <td>{item.balance}</td>
-            </tr>
-        ];
+function Row(props) {
+    const {row} = props;
+    const [open, setOpen] = React.useState(false);
+    const classes = useRowStyles();
 
-        if(this.state.expandedRows.includes(item.id)) {
-            itemRows.push(
-                <tr key={"row-expanded-" + item.id}>
-                    <td>
-                        <td>
-                            <Link to={'/admin/voucher/transactions/' + item.id}>
-                                <BiDetail/>
-                            </Link>
-                        </td>
-                    </td>
-                    <td>
-                        <b>  Realm: {item.realm.name}</b>
-                    </td>
-                    <td>
-                        <b>Debit: </b>{item.debit}
-                        <b className='pl-3'>Credit: </b>{item.credit}
-                    </td>
-                </tr>
-            );
-        }
-
-        return itemRows;
-    }
-
-    onPagination() {
-        let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
-    }
-
-    async onPageChaneHandler(event, data) {
-        await this.setState({
-            page: data.activePage,
-            start: (data.activePage - 1) * this.state.limit
-        })
-    }
-
-    render() {
-        let allItemRows = [];
-
-        this.state.data.forEach(item => {
-            const perItemRows = this.renderItem(item);
-            allItemRows = allItemRows.concat(perItemRows);
-        });
-
-        return (
-            <tbody>{allItemRows}</tbody>
-        );
-    }
+    return (
+        <>
+            <TableRow className={classes.root} key={row.id}>
+                <TableCell>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                    </IconButton>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                    {row.profile.name}
+                </TableCell>
+                <TableCell>{row.balance}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box margin={1}>
+                            <Table size="small" aria-label="purchases">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Group</TableCell>
+                                        <TableCell>Credit</TableCell>
+                                        <TableCell>Debit</TableCell>
+                                        <TableCell/>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow key={row.id}>
+                                        <TableCell component="th" scope="row">
+                                            {row.realm.name}
+                                        </TableCell>
+                                        <TableCell>{row.credit}</TableCell>
+                                        <TableCell>{row.debit}</TableCell>
+                                        <TableCell>
+                                            <Link to={'/admin/voucher/transactions/' + row.id}>
+                                                <Button className='btn-sm btn-primary'>
+                                                    <BsBoxArrowUpRight/>
+                                                </Button>
+                                            </Link>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </>
+    );
 }
 
+Row.propTypes = {
+    row: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+    }).isRequired,
+};
+
+
+const TransactionSummaryApiMobile = ({data}) => {
+    return (
+        <TableContainer className='mt-2' component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell/>
+                        <TableCell>Profile</TableCell>
+                        <TableCell>Voucher</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data.map((row) => (
+                        <Row key={row.id} row={row}/>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+}
 export default TransactionSummaryApiMobile;

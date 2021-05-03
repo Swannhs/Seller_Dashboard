@@ -2,48 +2,28 @@ import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Cookies from "universal-cookie/lib";
-import {Pagination} from "semantic-ui-react";
 import {BiReset} from "react-icons/all";
+import {Button} from "reactstrap";
+import {confirmAlert} from "react-confirm-alert";
 
 
 class VoucherApi extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            userData: [],
-            page: 1,
-            start: 0,
-            limit: 10,
-            total: 0,
-            refresh: true,
-        }
-        this.onApiCall();
+    onVoucherConfirm = props => {
+        confirmAlert({
+            title: 'Confirm to reset',
+            message: 'Are you sure to reset this voucher',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.onVoucherReset(props)
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
     }
-
-
-    onApiCall = () => {
-        const cookie = new Cookies
-        RadiusApi.get('/vouchers/index-user-vouchers.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    userData: response.data.items,
-                    total: response.data.totalCount
-                })
-            })
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState.page !== this.state.page ? this.onApiCall() : null
-    }
-
 
     onVoucherReset = (props) => {
         let reset = {
@@ -68,24 +48,21 @@ class VoucherApi extends Component {
     }
 
 
-    onPagination() {
-        let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
-    }
-
-    async onPageChaneHandler(event, data) {
-        await this.setState({
-            page: data.activePage,
-            start: (data.activePage - 1) * this.state.limit
-        })
-    }
-
-
     render() {
         return (
             <>
+                <thead>
+                <tr className='ct-grid-background border-primary'>
+
+                    <th scope="col">Name</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Group</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
                 <tbody>
-                {(this.state.userData) ? this.state.userData.map((item) => {
+                {(this.props.data) ? this.props.data.map((item) => {
                     return (
                         <tr key={item.id}>
 
@@ -100,35 +77,15 @@ class VoucherApi extends Component {
                             <td>{item.profile}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">
-                                <BiReset aria-placeholder='reset' onClick={() => this.onVoucherReset(item.id)}/>
+                                <Button className='btn-sm btn-danger' onClick={() => this.onVoucherConfirm(item.id)}>
+                                    <BiReset aria-placeholder='reset'/>
+                                </Button>
                             </td>
                         </tr>
                     )
                 }) : null
                 }
                 </tbody>
-
-
-                {/*--------------------Pagination------------------------*/}
-                <tfoot>
-                <tr>
-                    <th colSpan={5}>
-                        <div className="ui right floated pagination menu align-content-lg-end">
-                            <Pagination
-                                defaultActivePage={this.state.page}
-                                firstItem={null}
-                                lastItem={null}
-                                pointing
-                                secondary
-                                totalPages={this.onPagination()}
-                                onPageChange={async (event, data) =>
-                                    this.onPageChaneHandler(event, data)
-                                }
-                            />
-                        </div>
-                    </th>
-                </tr>
-                </tfoot>
             </>
         );
     }

@@ -3,6 +3,10 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {Link} from "react-router-dom";
 import UserApi from "./UserApi";
 import UserApiMobile from "./UserApiMobile";
+import Cookies from "universal-cookie";
+import RadiusApi from "../../radius-api/RadiusApi";
+import {isMobile} from "react-device-detect";
+import {Pagination} from "semantic-ui-react";
 
 
 class VoucherApi extends Component {
@@ -10,18 +14,76 @@ class VoucherApi extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userData: [],
+            data: [],
             page: 1,
             start: 0,
             limit: 10,
             total: 0,
             refresh: true,
-            mobile: false
+            loading: true,
+            role: ''
         }
     }
 
     componentDidMount() {
-        this.setState({mobile: window.innerWidth <= 660})
+        this.onApiCall();
+    }
+
+    onApiCall = () => {
+        this.setState({loading: true})
+        const cookie = new Cookies;
+        RadiusApi.get('/access-providers/index-tree-grid.json', {
+            params: {
+                //Assign limit of row showing in table
+                page: this.state.page,
+                start: this.state.start,
+                limit: this.state.limit,
+                node: 0,
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                    this.setState({
+                        loading: false,
+                        data: response.data.items,
+                        total: response.data.totalCount,
+                    })
+                }
+            )
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        prevState.page !== this.state.page ? this.onApiCall() : null
+    }
+
+    /*
+
+        //todo Live Screen Change detect
+        componentDidMount() {
+            window.addEventListener("resize", this.resize.bind(this));
+            this.resize();
+        }
+
+        resize() {
+            this.setState({hideNav: window.innerWidth <= 760});
+        }
+
+        componentWillUnmount() {
+            window.removeEventListener("resize", this.resize.bind(this));
+        }
+
+     */
+
+    onPagination() {
+        let totalPage = this.state.total / this.state.limit
+        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
+    }
+
+    async onPageChaneHandler(event, data) {
+        await this.setState({
+            page: data.activePage,
+            start: (data.activePage - 1) * this.state.limit
+        })
     }
 
 
@@ -42,49 +104,42 @@ class VoucherApi extends Component {
                 </div>
 
                 {/* ---------------- New Button End ----------------*/}
-
-                <table className="table table-striped">
-                    <thead>
-                    <tr className='ct-grid-background border-primary'>
-                        {
-                            this.state.mobile ?
-                                <th>
-                                    #
-                                </th> : null
-                        }
-                        <th scope="col">Name</th>
-                        {
-                            this.state.mobile ? <></> :
-                                <>
-
-                                    <th scope="col">Role</th>
-
-                                        <th scope="col">Status</th>
-                                        {/*<Dropdown text='Status' multiple icon='filter'>*/}
-                                        {/*    <Dropdown.Menu>*/}
-                                        {/*        <Dropdown.Menu scrolling>*/}
-                                        {/*            <Dropdown.Item>Active</Dropdown.Item>*/}
-                                        {/*            <Dropdown.Item>Inactive</Dropdown.Item>*/}
-                                        {/*        </Dropdown.Menu>*/}
-                                        {/*    </Dropdown.Menu>*/}
-                                        {/*</Dropdown>*/}
-                                </>
-                        }
-                        <th scope="col">Actions</th>
-
-                    </tr>
-                    </thead>
-
-
-                    {/*-----------------Calling User List Api---------------------*/}
-                    {
-                        this.state.mobile ? <UserApiMobile/> : <UserApi/>
-                    }
-                    {/*-----------------Calling User List Api---------------------*/}
-                </table>
+                {
+                    this.state.loading ? <div className="ui active centered inline loader"/> :
+                        <>
+                            <table className="table table-striped">
+                                {/*-----------------Calling User List Api---------------------*/}
+                                {
+                                    isMobile ? <UserApiMobile data={this.state.data}/> :
+                                        <UserApi data={this.state.data}/>
+                                }
+                                {/*-----------------Calling User List Api---------------------*/}
+                            </table>
+                            <tfoot>
+                            <tr>
+                                <th colSpan={5}>
+                                    <div className="ui right floated pagination menu align-content-lg-end">
+                                        <Pagination
+                                            defaultActivePage={this.state.page}
+                                            firstItem={null}
+                                            lastItem={null}
+                                            pointing
+                                            secondary
+                                            totalPages={this.onPagination()}
+                                            onPageChange={async (event, data) =>
+                                                this.onPageChaneHandler(event, data)
+                                            }
+                                        />
+                                    </div>
+                                </th>
+                            </tr>
+                            </tfoot>
+                        </>
+                }
             </>
         );
     }
+
 }
 
 export default VoucherApi;

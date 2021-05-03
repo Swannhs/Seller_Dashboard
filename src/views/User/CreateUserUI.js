@@ -13,7 +13,7 @@ class CreateUserUi extends Component {
         email: '',
         address: '',
         language: "4_4",
-        role: 'agent',
+        role: 'seller',
 
         errors: []
     }
@@ -22,7 +22,6 @@ class CreateUserUi extends Component {
         event.preventDefault();
         this.props.onFormSubmit(this.state)
     }
-
 
     render() {
         return (
@@ -63,17 +62,17 @@ class CreateUserUi extends Component {
                                 />
                             </div>
 
-                            <p className='text-danger m-0 p-0'>Don't forget to select role</p>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-building"/> </span>
                                 </div>
-                                <select className="form-control" value={this.state.role}
+                                <select className="form-control text-capitalize" value={this.state.role}
                                         onChange={event => this.setState({role: event.target.value})}>
-                                    <option selected={true} className='text-uppercase'>agent</option>
-                                    <option className='text-uppercase'>seller</option>
+                                    <option selected={true} className='text-uppercase'>seller</option>
+                                    <option className='text-uppercase'>agent</option>
                                 </select>
                             </div>
+                            <p className='text-danger m-0 p-0'>Don't forget to specify role</p>
 
 
                             {/* -------------------------Personal Info-------------------// */}

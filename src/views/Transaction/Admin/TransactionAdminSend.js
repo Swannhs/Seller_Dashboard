@@ -29,7 +29,7 @@ class TransactionAdminSend extends Component {
     componentDidMount() {
         const cookie = new Cookies();
 
-        RadiusApi.get('/dashboard/check_token.json', {
+        RadiusApi.get('/Dashboard/check_token.json', {
             params: {
                 token: cookie.get('Token')
             }

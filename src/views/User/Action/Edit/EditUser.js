@@ -6,6 +6,8 @@ const EditUser = () => {
     let {id} = useParams();
 
     return <EditUi id={id}/>
+
 };
+
 
 export default EditUser;

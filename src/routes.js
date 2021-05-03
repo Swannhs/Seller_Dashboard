@@ -1,4 +1,4 @@
-import Dashboard from "views/dashboard/Dashboard.js";
+import Dashboard from "views/Dashboard/Dashboard.js";
 
 import UserList from "./views/User/UserList";
 import CreateUserAction from "views/User/CreateUserAction.js";
@@ -9,19 +9,18 @@ import VoucherList from "views/Voucher/VoucherList.js";
 import CreateVoucherApi from "./views/Voucher/CreateVoucher/CreateVoucherApi";
 
 import TransactionTable from "./views/Transaction/AgentTransaction/TransactionTable";
-import TransactionAdminReceived from "./views/Transaction/Admin/TransactionAdminReceived";
 import Transfer from "./views/Transaction/Transfer";
 import GenerateBalance from "./views/Transaction/GenerateBalance";
 
-import CashTransfer from "./views/Cash/Admin/CashTransfer";
-import Server from "./views/server/Server";
-import Tweak from "./views/tweak/Tweak";
-import CreateServer from "./views/server/CreateServer";
-import ServerRealm from "./views/server/ServerRealm";
-import CreateServerRealms from "./views/server/CreateServerRealms";
-import TweakRealm from "./views/tweak/TweakRealm";
-import CreateTweak from "./views/tweak/CreateTweak";
-import CreateTweakRealm from "./views/tweak/CreateTweakRealm";
+import CashTransfer from "./views/Cash/Agent/CashTransfer";
+import Server from "./views/Server/Server";
+import Tweak from "./views/Tweak/Tweak";
+import CreateServer from "./views/Server/CreateServer";
+import ServerRealm from "./views/Server/ServerRealm";
+import CreateServerRealms from "./views/Server/CreateServerRealms";
+import TweakRealm from "./views/Tweak/TweakRealm";
+import CreateTweak from "./views/Tweak/CreateTweak";
+import CreateTweakRealm from "./views/Tweak/CreateTweakRealm";
 import TransactionSummaryTable from "./views/Transaction/AgentTransaction/TransactionSummaryTable";
 import VoucherSummaryAdmin from "./views/Transaction/Admin/VoucherSummaryAdmin";
 import TransactionAdmin from "./views/Transaction/Admin/TransactionAdmin";
@@ -30,8 +29,8 @@ import CashSummaryTableAdmin from "./views/Cash/Admin/CashSummaryTableAdmin";
 import CashTableAgent from "./views/Cash/Agent/CashTableAgent";
 import CashTableAdmin from "./views/Cash/Admin/CashTableAdmin";
 import Profile from "./components/Profile/Profile";
-import EditTweak from "./views/tweak/EditTweak";
-import EditServer from "./views/server/EditServer";
+import EditTweak from "./views/Tweak/EditTweak";
+import EditServer from "./views/Server/EditServer";
 
 
 const dashboardRoutes = [
@@ -171,31 +170,31 @@ const dashboardRoutes = [
 
     //-------------------------------Server Route Start-------------------------------
     {
-        path: "/root/server",
+        path: "/root/Server",
         name: "Server",
         component: Server,
         layout: '/admin'
     },
     {
-        path: "/root/server-edit/:id",
+        path: "/root/Server-edit/:id",
         name: "Edit Server",
         component: EditServer,
         layout: "/admin",
     },
     {
-        path: "/root/server-new",
+        path: "/root/Server-new",
         name: "Server",
         component: CreateServer,
         layout: '/admin'
     },
     {
-        path: "/root/server-realms/new",
+        path: "/root/Server-realms/new",
         name: "Server",
         component: CreateServerRealms,
         layout: '/admin'
     },
     {
-        path: "/root/server-realms",
+        path: "/root/Server-realms",
         name: "Server",
         component: ServerRealm,
         layout: '/admin'
@@ -204,35 +203,36 @@ const dashboardRoutes = [
 
     //--------------------------------Tweak------------------------------
     {
-        path: "/root/tweak",
+        path: "/root/Tweak",
         name: "Tweak",
         component: Tweak,
         layout: '/admin'
     },
     {
-        path: "/root/tweak-edit/:id",
+        path: "/root/Tweak-edit/:id",
         name: "Edit Tweak",
         component: EditTweak,
         layout: "/admin",
     },
     {
-        path: "/root/tweak-new",
+        path: "/root/Tweak-new",
         name: "Tweak",
         component: CreateTweak,
         layout: '/admin'
     },
     {
-        path: "/root/tweak-realms",
+        path: "/root/Tweak-realms",
         name: "Tweak",
         component: TweakRealm,
         layout: '/admin'
     },
     {
-        path: '/root/tweak-realm/new',
+        path: '/root/Tweak-realm/new',
         name: "Tweak",
         component: CreateTweakRealm,
         layout: '/admin'
     },
+
 ];
 
 export default dashboardRoutes;

@@ -2,12 +2,27 @@ import React, {Component} from 'react';
 import RadiusApi from "../../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 import {AiFillDelete} from "react-icons/all";
+import {Button} from "reactstrap";
+import {confirmAlert} from "react-confirm-alert";
 
 class DeleteUser extends Component {
 
-    onConfirmDelete = () => {
-        confirm('Delete the user?') ? this.onDeleteUser(this.props.delId): null
+    onDeleteConfirm = () => {
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete the user',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.onDeleteUser(this.props.delId)
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
     }
+
 
     onDeleteUser = (id) => {
         const cookie = new Cookies;
@@ -17,10 +32,10 @@ class DeleteUser extends Component {
             }
         })
             .then(response => {
-                    if (response.data.data.success){
-                        alert('Delete tweak successful')
+                    if (response.data.success){
+                        alert('User deleted successful. Please reload')
                     }else {
-                        alert('Error to delete this tweak')
+                        alert('Error to delete the user')
                     }
                 }
             )
@@ -30,7 +45,9 @@ class DeleteUser extends Component {
     render() {
         return (
             <>
-                <AiFillDelete onClick={this.onConfirmDelete}/>
+                <Button className='btn-sm btn-danger' onClick={this.onDeleteConfirm}>
+                    <AiFillDelete />
+                </Button>
             </>
         );
     }

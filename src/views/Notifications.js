@@ -1,5 +1,5 @@
 import React from "react";
-// react plugin for creating notifications over the dashboard
+// react plugin for creating notifications over the Dashboard
 import NotificationAlert from "react-notification-alert";
 // react-bootstrap components
 import {

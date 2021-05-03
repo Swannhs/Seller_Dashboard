@@ -11,7 +11,7 @@ class GetTweak extends Component {
 
     componentDidMount() {
         const token = new Cookies;
-        RadiusApi.get('/tweak-realms/tweaks.json',{
+        RadiusApi.get('/Tweak-realms/tweaks.json',{
             params: {
                 token: token.get('Token')
             }

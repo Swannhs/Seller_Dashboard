@@ -4,20 +4,20 @@ import {Navbar, Container, Nav, Dropdown, Button} from "react-bootstrap";
 import routes from "routes.js";
 import {AiFillDashboard, AiOutlineUser, BiMoney, BsListNested} from "react-icons/all";
 import Cookies from "universal-cookie/lib";
+import {isMobile} from 'react-device-detect';
 
 class Header extends Component {
     state = {
-        mobile: false,
         role: ''
     }
 
     componentDidMount() {
-        this.setState({mobile: window.innerWidth <= 660})
         let cookie = new Cookies
         this.setState({
             role: cookie.get('Role')
         })
     }
+
     //----------------Sidebar open button-------------------------
     // mobileSidebarToggle = (e) => {
     //     e.preventDefault();
@@ -39,7 +39,7 @@ class Header extends Component {
                 return routes[i].name;
             }
         }
-        return "Brand";
+        return "Vpn";
     };
 
     render() {
@@ -73,7 +73,7 @@ class Header extends Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto" navbar>
                             {
-                                this.state.mobile ?
+                                isMobile ?
                                     <>
                                         <Nav.Item>
                                             <Nav.Link
@@ -85,7 +85,7 @@ class Header extends Component {
                                             </Nav.Link>
                                         </Nav.Item>
                                         {
-                                            this.state.role === 'agent'?
+                                            this.state.role === 'agent' ?
                                                 <Nav.Item>
                                                     <Nav.Link
                                                         className='m-0'
@@ -94,7 +94,7 @@ class Header extends Component {
                                                             <AiOutlineUser/> User
                                                         </Link>
                                                     </Nav.Link>
-                                                </Nav.Item>: <></>
+                                                </Nav.Item> : <></>
                                         }
 
                                         <Nav.Item>
@@ -124,6 +124,18 @@ class Header extends Component {
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
+                                        <Nav.Item>
+                                            <Nav.Link
+                                                className="m-0"
+                                                onClick={(e) => e.preventDefault()}
+                                            >
+                                                <Link to='/admin/profile'>
+                                                    <span className="no-icon">
+                                                        <i className="fas fa-user-alt"/> Profile
+                                                    </span>
+                                                </Link>
+                                            </Nav.Link>
+                                        </Nav.Item>
                                     </>
                                     :
                                     <>
@@ -133,9 +145,9 @@ class Header extends Component {
                                                 onClick={(e) => e.preventDefault()}
                                             >
                                                 <Link to='/admin/profile'>
-                                    <span className="no-icon">
-                                        <i className="fas fa-user-alt"/> Profile
-                                    </span>
+                                                    <span className="no-icon">
+                                                        <i className="fas fa-user-alt"/> Profile
+                                                    </span>
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>

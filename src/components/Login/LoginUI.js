@@ -1,34 +1,32 @@
 import React, {Component} from 'react';
-import './Login.css';
+import './style.css';
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie/lib";
 
 
-class LoginUI extends Component {
-
-    state = {
-        username: '',
-        password: '',
-        errors: '',
-        network: '',
-        click: false,
-        inactive: ''
+class LoginUi extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            errors: '',
+            network: '',
+            inactive: '',
+            loading: false
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
-    coChangeLoading = () => {
-        this.setState({
-            click: true
-        })
-    }
-
-    onLoginSubmit = async event => {
+    handleSubmit = async event => {
         event.preventDefault();
         const data = {
             username: this.state.username,
             password: this.state.password
         }
-        await RadiusApi.post('/dashboard/authenticate.json', data)
+        await RadiusApi.post('/Dashboard/authenticate.json', data)
             .then(response => {
 
                 // Get the token
@@ -36,9 +34,10 @@ class LoginUI extends Component {
 
                 const cookies = new Cookies();
 
-                if (response.data.errors){
+                if (response.data.errors) {
                     this.setState({errors: response.data.errors})
-                }else {
+                    this.setState({loading: false})
+                } else {
                     if (response.data.data.active) {
                         cookies.set('Role', response.data.data.role)
                         cookies.set('Token', response.data.data.token);
@@ -55,53 +54,73 @@ class LoginUI extends Component {
             });
     }
 
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
 
     render() {
-
         return (
-            <div className='login-container'>
-                <h1 className='heading-text'>Admin Dashboard</h1>
-                <div className="wrapper-login fadeInDown">
-                    <div id="formContent">
-                        {
-                            this.state.errors ? <div className="alert alert-danger">
-                                Invalid username or password
-                            </div> : null
-                        }
-                        {
-                            this.state.network ? <div className="alert alert-danger">
-                                Invalid response try again later
-                            </div> : null
-                        }
-                        {
-                            this.state.inactive ? <div className="alert alert-danger">
-                                You are not enable
-                            </div> : null
-                        }
+            <div className='login'>
+                <div className="limiter">
+                    <div className="box">
+                        <div className='heading'>
 
-                        {/*<div className="alert alert-info">*/}
-                        {/*    You have been logged out.*/}
-                        {/*</div>*/}
-                        <form action={this.onLoginSubmit}>
-                            <input type="text" id="login" className="fadeIn second" name="username"
-                                   placeholder="User Name" value={this.state.username}
-                                   onChange={event => this.setState({username: event.target.value})}
-                            />
-                            <input type="password" id="password" className="fadeIn third" name="password"
-                                   placeholder="Password" value={this.state.password}
-                                   onChange={event => this.setState({password: event.target.value})}
-                            />
-                            <input type="submit" className="fadeIn fourth" defaultValue="Log In"
-                                   value={this.state.click ? "Loading......"
-                                       : 'Login'} onClick={this.onLoginSubmit}
-                            />
-                        </form>
+                        <span className="login100-form-avatar">
+						            <img src='https://bootdey.com/img/Content/avatar/avatar7.png' alt="AVATAR"/>
+                        </span>
+                            <span className="login100-form-title p-b-70">
+                                    Welcome
+                        </span>
+                        </div>
+                        <div className="container-login100">
+                            <div className="wrap-login100 p-t-85 p-b-20">
+                                <form className="login100-form validate-form" onSubmit={this.handleSubmit}>
 
+                                    <div className="wrap-input100 validate-input m-t-85 m-b-35"
+                                         data-validate="Enter username">
+                                        <input className="input100" type="text" name="username"
+                                               placeholder='Username'
+                                               value={this.state.username}
+                                               onChange={this.handleChange}/>
+                                        <span className="focus-input100" placeholder="Username"/>
+                                    </div>
+
+
+                                    <div className="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                        <input className="input100" type="password" name="password"
+                                               placeholder='Password'
+                                               value={this.state.password}
+                                               onChange={this.handleChange}/>
+                                        <span className="focus-input100" placeholder="Password"/>
+                                    </div>
+                                    {
+                                        this.state.errors ?
+                                            <p className='text-danger'>Invalid username or password</p> : null
+                                    }
+                                    <div className="container-login100-form-btn">
+                                        {
+                                            this.state.loading ?
+                                                <button className="fluid ui primary loading button">Loading</button> :
+                                                <button className="fluid ui button primary"
+                                                        onClick={() => {
+                                                            this.setState({loading: true})
+                                                        }}>
+                                                    Login
+                                                </button>
+                                        }
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        )
+
+        );
     }
 }
 
-export default LoginUI;
+export default LoginUi;

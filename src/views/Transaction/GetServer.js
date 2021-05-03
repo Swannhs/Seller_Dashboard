@@ -11,7 +11,7 @@ class GetServer extends Component {
 
     componentDidMount() {
         const token = new Cookies;
-        RadiusApi.get('/server-realms/servers.json',{
+        RadiusApi.get('/Server-realms/servers.json',{
             params: {
                 token: token.get('Token')
             }

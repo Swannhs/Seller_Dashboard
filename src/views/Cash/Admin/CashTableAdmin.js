@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import CashSent from "./CashSent";
-import CashReceived from "./CashReceived";
+import CashSent from "../Agent/CashSent";
+import CashReceived from "../Agent/CashReceived";
 
 class CashTableAdmin extends Component {
     state = {

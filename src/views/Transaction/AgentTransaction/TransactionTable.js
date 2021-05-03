@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import TransactionReceive from "./TransactionReceive";
 import TransactionSent from "./TransactionSent";
+import {isMobile} from "react-device-detect";
+import TransactionReceivedMobileApi from "./TransactionReceivedMobileApi";
+import TransactionSentMobileApi from "./TransactionSentMobileApi";
 
 class TransactionTable extends Component {
     state = {
-        send: ''
+        send: false
     }
 
     componentDidMount() {
@@ -16,13 +19,13 @@ class TransactionTable extends Component {
 
     onTrueHandel = () => {
         this.setState({
-            sent: false
+            send: false
         })
     }
 
     onFalseHandel = () => {
         this.setState({
-            sent: true
+            send: true
         })
     }
 
@@ -52,7 +55,9 @@ class TransactionTable extends Component {
                                 }}
                         >Sent
                         </button>
+
                         <div className="or"/>
+
                         <button className="ui button positive"
                                 onClick={() => {
                                     this.onFalseHandel()
@@ -61,8 +66,21 @@ class TransactionTable extends Component {
                         </button>
                     </div>
                 </div>
-                {this.state.sent ? <TransactionReceive id={this.props.match.params.id}/> :
-                    <TransactionSent id={this.props.match.params.id}/>}
+                {
+                    isMobile ? <>
+                            {
+                                this.state.send ? <TransactionReceivedMobileApi id={this.props.match.params.id}/> :
+                                    <TransactionSentMobileApi id={this.props.match.params.id}/>
+                            }
+                        </> :
+                        <>
+                            {
+                                this.state.send ? <TransactionReceive id={this.props.match.params.id}/> :
+                                    <TransactionSent id={this.props.match.params.id}/>
+                            }
+                        </>
+                }
+
             </>
         );
     }

@@ -1,151 +1,150 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {makeStyles} from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {AiOutlinePlusCircle, BiReset} from "react-icons/all";
-import {Pagination} from "semantic-ui-react";
+import {BiReset} from "react-icons/all";
+import {Button} from "reactstrap";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-class VoucherApiMobile extends Component {
-    state = {
-        data : [],
-        page: 1,
-        start: 0,
-        limit: 10,
-        total: 0,
-        refresh: true,
-        expandedRows : []
-    };
-    componentDidMount() {
-        const cookie = new Cookies
-        RadiusApi.get('/vouchers/index-user-vouchers.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                token: cookie.get('Token')
+const useRowStyles = makeStyles({
+    root: {
+        '& > *': {
+            borderBottom: 'unset',
+        },
+    },
+});
+
+const onVoucherConfirm = props => {
+    confirmAlert({
+        title: 'Confirm to reset',
+        message: 'Are you sure to reset this voucher',
+        buttons: [
+            {
+                label: 'Yes',
+                onClick: () => onVoucherReset(props)
+            },
+            {
+                label: 'No',
             }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.items,
-                    total: response.data.totalCount
-                })
-            })
-    }
-
-    onVoucherReset = (props) => {
-        let reset = {
-            reset: props
-        }
-
-        let cookie = new Cookies
-        RadiusApi.post('/vouchers/voucher-reset.json', reset, {
-            params: {
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                    if (response.data.success) {
-                        alert('Voucher reset successful')
-                    } else {
-                        alert(response.data.message)
-                    }
-                }
-            )
-        this.forceUpdate();
-    }
-
-    handleRowClick(rowId) {
-        const currentExpandedRows = this.state.expandedRows;
-        const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
-
-        const newExpandedRows = isRowCurrentlyExpanded ?
-            currentExpandedRows.filter(id => id !== rowId) :
-            currentExpandedRows.concat(rowId);
-
-        this.setState({expandedRows : newExpandedRows});
-    }
-
-    renderItem(item) {
-        const clickCallback = () => this.handleRowClick(item.id);
-        const itemRows = [
-            <tr key={item.id}>
-                <td><AiOutlinePlusCircle onClick={clickCallback} key={"row-data-" + item.id}/></td>
-                <td>{item.name}</td>
-                <td>{item.password}</td>
-            </tr>
-        ];
-
-        if(this.state.expandedRows.includes(item.id)) {
-            itemRows.push(
-                <tr key={"row-expanded-" + item.id}>
-                    <td>
-                        <span className='text-danger'>
-                            <BiReset
-                                aria-placeholder='reset'
-                                onClick={() => this.onVoucherReset(item.id)}/>
-                        </span>
-
-                    </td>
-                    <td>
-                        <b>Group: </b>{item.realm}
-                    </td>
-                    <td>
-                        <b>Profile: </b>{item.profile}
-                    </td>
-                </tr>
-            );
-        }
-
-        return itemRows;
-    }
-
-    onPagination() {
-        let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
-    }
-
-    async onPageChaneHandler(event, data) {
-        await this.setState({
-            page: data.activePage,
-            start: (data.activePage - 1) * this.state.limit
-        })
-    }
-
-
-    render() {
-        let allItemRows = [];
-
-        this.state.data.forEach(item => {
-            const perItemRows = this.renderItem(item);
-            allItemRows = allItemRows.concat(perItemRows);
-        });
-
-        return (
-            <>
-                <tbody>{allItemRows}</tbody>
-                {/*--------------------Pagination------------------------*/}
-                <tfoot>
-                <tr>
-                    <th colSpan={5}>
-                        <div className="ui right floated pagination menu align-content-lg-end">
-                            <Pagination
-                                defaultActivePage={this.state.page}
-                                firstItem={null}
-                                lastItem={null}
-                                pointing
-                                secondary
-                                totalPages={this.onPagination()}
-                                onPageChange={async (event, data) =>
-                                    this.onPageChaneHandler(event, data)
-                                }
-                            />
-                        </div>
-                    </th>
-                </tr>
-                </tfoot>
-            </>
-        );
-    }
+        ]
+    });
 }
 
+const onVoucherReset = (props) => {
+    let reset = {
+        reset: props
+    }
+
+    let cookie = new Cookies
+    RadiusApi.post('/vouchers/voucher-reset.json', reset, {
+        params: {
+            token: cookie.get('Token')
+        }
+    })
+        .then(response => {
+                if (response.data.success) {
+                    alert('Voucher reset successful')
+                } else {
+                    alert(response.data.message)
+                }
+            }
+        )
+}
+
+
+function Row(props) {
+    const {row} = props;
+    const [open, setOpen] = React.useState(false);
+    const classes = useRowStyles();
+
+    return (
+        <>
+            <TableRow className={classes.root} key={row.id}>
+                <TableCell>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                    </IconButton>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                    {row.name}
+                </TableCell>
+                <TableCell>{row.password}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box margin={1}>
+                            <Table size="small" aria-label="purchases">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Profile</TableCell>
+                                        <TableCell>Realm</TableCell>
+                                        <TableCell>Reset</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow key={row.id}>
+                                        <TableCell component="th" scope="row">
+                                            {row.profile}
+                                        </TableCell>
+                                        <TableCell>{row.realm}</TableCell>
+                                        <TableCell>
+                                            <Button className='btn-sm btn-danger'  onClick={() => onVoucherConfirm(row.id)}>
+                                                <BiReset aria-placeholder='reset'/>
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </>
+    );
+}
+
+Row.propTypes = {
+    row: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+    }).isRequired,
+};
+
+
+const VoucherApiMobile = ({data}) => {
+    return (
+        <TableContainer className='mt-2' component={Paper}>
+            <Table aria-label="collapsible table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell/>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Password</TableCell>
+                        {/*<TableCell align="right">Passwor</TableCell>*/}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data.map((row) => (
+                        <Row key={row.id} row={row}/>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+}
 export default VoucherApiMobile;

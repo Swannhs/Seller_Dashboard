@@ -13,7 +13,7 @@ import {
     AiOutlineCloudServer
 } from "react-icons/all";
 import {Nav} from "react-bootstrap";
-import RadiusApi from "../../radius-api/RadiusApi";
+import {isMobile} from "react-device-detect";
 import Cookies from "universal-cookie/lib";
 
 
@@ -31,113 +31,120 @@ class Sidebar extends Component {
     }
 
     render() {
+
         return (
-            <div className="sidebar">
-                <div className="sidebar-wrapper">
-                    <div className="logo d-flex align-items-center justify-content-start">
-                        <Link
-                            to="/"
-                            className="simple-text logo-mini mx-1"
-                        >
-                        </Link>
-                        <Link className="simple-text" to='/'>
-                            Radius Admin
-                        </Link>
-                    </div>
-                    <Nav>
+            <>
+                {isMobile ? <></> :
+                    <div className="sidebar">
+                        <div className="sidebar-wrapper">
+                            <div className="logo d-flex align-items-center justify-content-start">
+                                <Link
+                                    to="/"
+                                    className="simple-text logo-mini mx-1"
+                                >
+                                </Link>
+                                <Link className="simple-text" to='/'>
+                                    Radius Admin
+                                </Link>
+                            </div>
+                            <Nav>
 
-                        <li>
-                            <ProSidebar>
-                                <Menu iconShape="square">
-                                    <MenuItem icon={<AiFillDashboard/>}>
-                                        <Link to='/admin/dashboard'>
-                                            Dashboard
-                                        </Link>
-                                    </MenuItem>
-                                    {
-                                        this.state.role === 'admin' || this.state.role === 'agent' ?
-
-                                            <MenuItem icon={<AiOutlineUser/>}>
-                                                <Link to='/admin/users/view'>
-                                                    User
+                                <li>
+                                    <ProSidebar>
+                                        <Menu iconShape="square">
+                                            <MenuItem icon={<AiFillDashboard/>}>
+                                                <Link to='/admin/dashboard'>
+                                                    Dashboard
                                                 </Link>
                                             </MenuItem>
+                                            {
+                                                this.state.role === 'admin' || this.state.role === 'agent' ?
 
-                                            : <></>
-                                    }
+                                                    <MenuItem icon={<AiOutlineUser/>}>
+                                                        <Link to='/admin/users/view'>
+                                                            User
+                                                        </Link>
+                                                    </MenuItem>
 
-                                    <MenuItem icon={<BsListNested/>}>
-                                        <Link to='/admin/voucher/view'>
-                                            Voucher
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem icon={<BiMoney/>}>
+                                                    : <></>
+                                            }
 
-                                        {
-                                            this.state.role === 'admin' ? <Link to='/admin/root/voucher/transaction'>
-                                                    Transaction
+                                            <MenuItem icon={<BsListNested/>}>
+                                                <Link to='/admin/voucher/view'>
+                                                    Voucher
                                                 </Link>
-                                                : <Link to='/admin/voucher/transaction'>
-                                                    Transaction
-                                                </Link>
-                                        }
+                                            </MenuItem>
+                                            <MenuItem icon={<BiMoney/>}>
 
-                                    </MenuItem>
-                                    <MenuItem icon={<MdAttachMoney/>}>
-                                        {
-                                            this.state.role === 'admin' ?
-                                                <Link to='/admin/root/cash/transaction'>
-                                                    Cash
-                                                </Link>
-                                                :
-                                                <Link to='/admin/cash/transaction'>
-                                                    Cash
-                                                </Link>
-                                        }
+                                                {
+                                                    this.state.role === 'admin' ?
+                                                        <Link to='/admin/root/voucher/transaction'>
+                                                            Transaction
+                                                        </Link>
+                                                        : <Link to='/admin/voucher/transaction'>
+                                                            Transaction
+                                                        </Link>
+                                                }
 
-                                    </MenuItem>
-                                    <>
-                                        {
-                                            this.state.role === 'admin' ?
-                                                <>
-                                                    <SubMenu title='Server' icon={<BsServer/>}>
-                                                        <MenuItem>
-                                                            <Link to='/admin/root/server'>
-                                                                Servers
-                                                            </Link>
-                                                        </MenuItem>
-                                                        <MenuItem>
-                                                            <Link to='/admin/root/server-realms'>
-                                                                Server-Realms
-                                                            </Link>
-                                                        </MenuItem>
-                                                    </SubMenu>
+                                            </MenuItem>
+                                            <MenuItem icon={<MdAttachMoney/>}>
+                                                {
+                                                    this.state.role === 'admin' ?
+                                                        <Link to='/admin/root/cash/transaction'>
+                                                            Cash
+                                                        </Link>
+                                                        :
+                                                        <Link to='/admin/cash/transaction'>
+                                                            Cash
+                                                        </Link>
+                                                }
 
-                                                    <SubMenu title='Tweak' icon={<AiOutlineCloudServer/>}>
-                                                        <MenuItem>
-                                                            <Link to='/admin/root/tweak'>
-                                                                Tweak
-                                                            </Link>
-                                                        </MenuItem>
-                                                        <MenuItem>
-                                                            <Link to='/admin/root/tweak-realms'>
-                                                                Tweak-Realms
-                                                            </Link>
-                                                        </MenuItem>
-                                                    </SubMenu>
-                                                </>
-                                                : null
-                                        }
-                                    </>
+                                            </MenuItem>
+                                            <>
+                                                {
+                                                    this.state.role === 'admin' ?
+                                                        <>
+                                                            <SubMenu title='Server' icon={<BsServer/>}>
+                                                                <MenuItem>
+                                                                    <Link to='/admin/root/server'>
+                                                                        Servers
+                                                                    </Link>
+                                                                </MenuItem>
+                                                                <MenuItem>
+                                                                    <Link to='/admin/root/server-realms'>
+                                                                        Server-Realms
+                                                                    </Link>
+                                                                </MenuItem>
+                                                            </SubMenu>
 
-                                </Menu>
-                            </ProSidebar>
-                        </li>
-                    </Nav>
-                </div>
-            </div>
+                                                            <SubMenu title='Tweak' icon={<AiOutlineCloudServer/>}>
+                                                                <MenuItem>
+                                                                    <Link to='/admin/root/tweak'>
+                                                                        Tweak
+                                                                    </Link>
+                                                                </MenuItem>
+                                                                <MenuItem>
+                                                                    <Link to='/admin/root/tweak-realms'>
+                                                                        Tweak-Realms
+                                                                    </Link>
+                                                                </MenuItem>
+                                                            </SubMenu>
+                                                        </>
+                                                        : null
+                                                }
+                                            </>
+
+                                        </Menu>
+                                    </ProSidebar>
+                                </li>
+                            </Nav>
+                        </div>
+                    </div>
+                }
+            </>
         );
     }
+
 }
 
 export default Sidebar;
