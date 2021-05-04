@@ -60,7 +60,7 @@ class DashboardCash extends Component {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <b>Cash</b>
+                            <b>Payments</b>
                         </div>
                     </Card.Footer>
                 </Card>

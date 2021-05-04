@@ -94,34 +94,34 @@ const dashboardRoutes = [
 
     {
         path: "/voucher/transaction",
-        name: "Transaction",
+        name: "Credits",
         component: TransactionSummaryTable,
         layout: '/admin'
     },
 
     {
         path: "/root/voucher/transaction",
-        name: "Transaction",
+        name: "Credits",
         component: VoucherSummaryAdmin,
         layout: '/admin'
     },
     {
         path: "/voucher/transactions/:id",
-        name: "Transaction Details",
+        name: "Credits Details",
         component: TransactionTable,
         layout: "/admin",
     },
 
     {
         path: "/root/voucher/transactions/:id",
-        name: "Transaction Details",
+        name: "Credits Details",
         component: TransactionAdmin,
         layout: "/admin",
     },
 
     {
         path: "/voucher/transfer",
-        name: "Transfer",
+        name: "Credits Transfer",
         component: Transfer,
         layout: '/admin'
     },
@@ -137,31 +137,31 @@ const dashboardRoutes = [
     //-------------------------------Cash Route Start-----------------------------------
     {
         path: "/root/cash/transaction",
-        name: "Cash Summary",
+        name: "Payments",
         component: CashSummaryTableAdmin,
         layout: '/admin'
     },
     {
         path: "/cash/transaction",
-        name: "Cash",
+        name: "Payments",
         component: CashSummaryTableAgent,
         layout: '/admin'
     },
     {
         path: "/cash/transactions/:id",
-        name: "Cash Details",
+        name: "Payments Details",
         component: CashTableAgent,
         layout: "/admin",
     },
     {
         path: "/root/cash/transactions/:id",
-        name: "Cash Details",
+        name: "Payments Details",
         component: CashTableAdmin,
         layout: "/admin",
     },
     {
         path: "/cash/transfer",
-        name: "Transfer",
+        name: "Payments",
         component: CashTransfer,
         layout: '/admin'
     },

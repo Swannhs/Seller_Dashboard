@@ -111,7 +111,7 @@ class Header extends Component {
                                                 className='m-0'
                                             >
                                                 <Link to='/admin/voucher/transaction'>
-                                                    <BiMoney/> Transaction
+                                                    <BiMoney/> Credits
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
@@ -120,7 +120,7 @@ class Header extends Component {
                                                 className='m-0'
                                             >
                                                 <Link to='/admin/cash/transaction'>
-                                                    <BiMoney/> Cash
+                                                    <BiMoney/> Payments
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
