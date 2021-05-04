@@ -3,9 +3,6 @@ import Cookies from "universal-cookie";
 import RadiusApi from "../../radius-api/RadiusApi";
 
 class LoginAction extends Component {
-    state = {
-        loading: true
-    }
 
 
     componentDidMount() {
@@ -19,9 +16,6 @@ class LoginAction extends Component {
             })
                 .then(response => {
                     if (response.data.success) {
-                        this.setState({
-                            loading: false
-                        })
                         this.props.history.push(
                             window.location.pathname !== '/' ?
                                 this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
@@ -41,9 +35,7 @@ class LoginAction extends Component {
     }
 
     render() {
-        return <>
-            {this.state.loading ? <div className="mt-5 ui active centered inline loader mt-3"/> : <></>}
-        </>
+        return null
     }
 
 }
