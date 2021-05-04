@@ -3,12 +3,13 @@ import {Link} from "react-router-dom";
 import {Input} from "reactstrap";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
+import {confirmAlert} from "react-confirm-alert";
 
 class CashTransfer extends Component {
     state = {
         partner_user_id: '',
         partner_user_name: '',
-        paid: '',
+        paid: 0,
     }
 
     componentDidMount() {
@@ -24,6 +25,32 @@ class CashTransfer extends Component {
                     partner_user_name: response.data.username
                 })
             })
+    }
+
+    checkTransferAmount = () => {
+        event.preventDefault();
+        if (this.state.paid < 10){
+            alert('Your amount is too low to transfer')
+        }else {
+            this.onCashTransaction();
+        }
+    }
+
+    onTransferConfirm = () => {
+        event.preventDefault();
+        confirmAlert({
+            title: 'Confirm transfer',
+            message: 'Are you sure to delete the user',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.checkTransferAmount()
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
     }
 
     onCashTransaction = () => {
@@ -56,7 +83,7 @@ class CashTransfer extends Component {
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
                     <h3>Note: You are going to transfer money with -> <span className='text-uppercase'>{this.state.partner_user_name}</span>
                     </h3>
-                    <form onSubmit={this.onCashTransaction}>
+                    <form onSubmit={this.onTransferConfirm}>
                         <Input type='number'
                                placeholder='The amount you want to transfer'
                                value={this.state.paid}

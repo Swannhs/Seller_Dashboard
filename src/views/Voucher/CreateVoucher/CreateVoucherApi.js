@@ -16,7 +16,7 @@ class CreateVoucherApi extends Component {
             precede: '',
             realm_id: null,
             profile_id: null,
-            quantity: 0,
+            quantity: null,
             pwd_length: 5,
             batch: '',
             never_expire: 'never_expire',
@@ -30,15 +30,15 @@ class CreateVoucherApi extends Component {
     onSubmitVoucher = () => {
         const cookie = new Cookies;
         RadiusApi.post('/vouchers/add.json', this.state, {
-            params:{
+            params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
-                if (response.data.success){
+                if (response.data.success) {
                     alert('Voucher Created');
                     this.props.history.push('/admin/voucher/view')
-                }else {
+                } else {
                     alert(response.data.message)
                 }
             })
@@ -68,39 +68,59 @@ class CreateVoucherApi extends Component {
                 </div>
 
 
-                <div className='pt-5'>
-                    <VoucherGroup onChange={this.onGroupHandle}/>
-                    <VoucherProfile onChange={this.onProfileHandle}/>
+                <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
-                    <h3 className='mt-3 pl-3 text-black-50'>How Many?</h3>
-                    <div className="input-group pl-3 w-50">
-                        <input type="number" className="form-control" aria-label="Username"
-                               aria-describedby="basic-addon1"
-                               value={this.state.quantity}
-                               onChange={event => this.setState({quantity: event.target.value})}
-                        />
-                    </div>
-                    <h3 className='mt-3 pl-3 text-black-50'>Precede Name</h3>
-                    <div className="input-group pl-3 w-50">
-                        <input type="text" className="form-control" aria-label="Username" required='true'
-                               aria-describedby="basic-addon1"
-                               value={this.state.precede}
-                               onChange={event => this.setState({precede: event.target.value})}
-                        />
-                    </div>
+                    <h2 className="card-title mt-3 text-center p-3">Create Voucher</h2>
 
-                    <h3 className='mt-3 pl-3 text-black-50'>Batch Name</h3>
-                    <div className="input-group pl-3 w-50">
-                        <input type="text" className="form-control" aria-label="Username" required='true'
-                               aria-describedby="basic-addon1"
-                               value={this.state.batch}
-                               onChange={event => this.setState({batch: event.target.value})}
-                        />
-                    </div>
-                    <button onClick={this.onSubmitVoucher} className='ui button primary m-3'>
-                        Create
-                    </button>
-                </div>
+                    <form onSubmit={this.onSubmitVoucher}>
+                        <VoucherGroup onChange={this.onGroupHandle}/>
+                        <VoucherProfile onChange={this.onProfileHandle}/>
+
+                        <h3 className='mt-3 text-black-50'>How Many?</h3>
+
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fa fa-database"/> </span>
+                            </div>
+                            <input className="form-control" placeholder="Quantity" type="number"
+                                   value={this.state.quantity}
+                                   onChange={event => this.setState({quantity: event.target.value})}
+                                   required={true}
+                            />
+                        </div>
+
+
+                        <h3 className='mt-3 text-black-50'>Precede Name</h3>
+
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fa fa-table"/> </span>
+                            </div>
+                            <input className="form-control" placeholder="Precede" type="text"
+                                   value={this.state.precede}
+                                   onChange={event => this.setState({precede: event.target.value})}
+                                   required={true}
+                            />
+                        </div>
+
+                        <h3 className='mt-3 text-black-50'>Batch Name</h3>
+
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                            </div>
+                            <input className="form-control" placeholder="Branch" type="text"
+                                   value={this.state.batch}
+                                   onChange={event => this.setState({batch: event.target.value})}
+                                   required={true}
+                            />
+                        </div>
+
+                        <button className='ui button primary mt-3'>
+                            Create
+                        </button>
+                    </form>
+                </article>
 
             </>
         );

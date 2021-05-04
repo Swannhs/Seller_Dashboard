@@ -37,8 +37,7 @@ class TransactionSummaryTable extends Component {
                     this.state.loading ? <div className="ui active centered inline loader"/> :
                         <>
                             {
-                                this.state.role === 'agent' ?
-                                    <div className='container'>
+                                this.state.role === 'agent' || this.state.role === 'admin' ?
                                         <div className='row'>
                                             <div className='col'>
                                                 <div className="ui text-right floated column">
@@ -50,7 +49,6 @@ class TransactionSummaryTable extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     : <></>
                             }
                             <table className="table table-striped">

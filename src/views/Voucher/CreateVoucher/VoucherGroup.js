@@ -44,20 +44,17 @@ class VoucherGroup extends Component {
 
     render() {
         return (
-            <Form.Group>
-                <div className="w-50 p-3">
-                    <h3 className='text-black-50'>Group</h3>
-                    <Form.Control
-                        as="select"
-                        className="mr-sm-2"
-                        id="inlineFormCustomSelect"
-                        custom
-                        value={this.state.select}
+            <>
+                <h3 className='text-black-50'>Realm</h3>
 
-                        onChange={event => this.onHandleChange(event)}
-                    >
+                <div className="form-group input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"> <i className="fab fa-cloudscale"/> </span>
+                    </div>
+                    <select className="form-control text-capitalize"
+                            value={this.state.select}
+                            onChange={event => this.onHandleChange(event)}>
                         <option>Choose...</option>
-
                         {this.state.group.map((items) => {
                             return (
                                 <>
@@ -65,9 +62,9 @@ class VoucherGroup extends Component {
                                 </>
                             )
                         })}
-                    </Form.Control>
+                    </select>
                 </div>
-            </Form.Group>
+            </>
         );
     }
 }

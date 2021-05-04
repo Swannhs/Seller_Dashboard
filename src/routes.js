@@ -143,7 +143,7 @@ const dashboardRoutes = [
     },
     {
         path: "/cash/transaction",
-        name: "Cash Summary",
+        name: "Cash",
         component: CashSummaryTableAgent,
         layout: '/admin'
     },

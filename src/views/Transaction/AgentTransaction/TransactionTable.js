@@ -47,7 +47,7 @@ class TransactionTable extends Component {
                     </div>
                 </div>
 
-                <div className='text-center'>
+                <div className='mt-3 text-center'>
                     <div className="ui buttons">
                         <button className="ui button red"
                                 onClick={() => {

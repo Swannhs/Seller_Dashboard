@@ -6,7 +6,7 @@ import Cookies from "universal-cookie/lib";
 class Profile extends Component {
     state = {
         username: '',
-        group: ''
+        role: '',
     }
 
     componentDidMount() {
@@ -20,7 +20,7 @@ class Profile extends Component {
             .then(response => {
                 this.setState({
                     username: response.data.data.user.username,
-                    group: response.data.data.role
+                    role: response.data.data.role
                 })
             })
 
@@ -65,7 +65,7 @@ class Profile extends Component {
                                              className="rounded-circle" width={150}/>
                                         <div className="mt-3">
                                             <h4 className='text-capitalize'>{this.state.username}</h4>
-                                            <p className="text-secondary mb-1 text-capitalize">{this.state.group}</p>
+                                            <p className="text-secondary mb-1 text-capitalize">{this.state.role}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -73,6 +73,8 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+
+
             </div>
         );
     }

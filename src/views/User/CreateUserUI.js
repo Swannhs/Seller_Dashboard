@@ -68,11 +68,12 @@ class CreateUserUi extends Component {
                                 </div>
                                 <select className="form-control text-capitalize" value={this.state.role}
                                         onChange={event => this.setState({role: event.target.value})}>
-                                    <option selected={true} className='text-uppercase'>seller</option>
-                                    <option className='text-uppercase'>agent</option>
+                                    <option selected={true} className='text-capitalize'>seller</option>
+                                    <option className='text-capitalize'>agent</option>
                                 </select>
                             </div>
                             <p className='text-danger m-0 p-0'>Don't forget to specify role</p>
+
 
 
                             {/* -------------------------Personal Info-------------------// */}
