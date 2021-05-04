@@ -4,44 +4,32 @@ import RadiusApi from "../../radius-api/RadiusApi";
 
 class LoginAction extends Component {
 
-    // componentDidMount() {
-    //     const cookie = new Cookies;
-    //
-    //     if (cookie.get('Token') && cookie.get('Role')){
-    //         RadiusApi.get('/dashboard/checkToken.json',{
-    //             params: {
-    //                 token: cookie.get('Token')
-    //             }
-    //         })
-    //             .then(response => {
-    //
-    //                 if (response.data.success){
-    //                     this.props.history.push(
-    //                         window.location.pathname !== '/' ?
-    //                             this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
-    //                     )
-    //                 }
-    //                 else {
-    //                     this.props.history.push('/login');
-    //                 }
-    //             })
-    //     }
-    //     else {
-    //         this.props.history.push('/login');
-    //     }
-    // }
-
 
     componentDidMount() {
         const cookie = new Cookies;
 
         if (cookie.get('Token') && cookie.get('Role')) {
-            this.props.history.push(
-                window.location.pathname !== '/' ?
-                    this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
-            )
+            RadiusApi.get('/dashboard/check-token.json', {
+                params: {
+                    token: cookie.get('Token')
+                }
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        this.props.history.push(
+                            window.location.pathname !== '/' ?
+                                this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
+                        )
+                    } else {
+                        cookie.remove('Token')
+                        cookie.remove('Role')
+                        this.props.history.push('/login');
+                    }
+                })
 
         } else {
+            cookie.remove('Token')
+            cookie.remove('Role')
             this.props.history.push('/login');
         }
     }
@@ -49,6 +37,7 @@ class LoginAction extends Component {
     render() {
         return null
     }
+
 }
 
 export default LoginAction;

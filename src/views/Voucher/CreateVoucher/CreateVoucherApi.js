@@ -28,6 +28,7 @@ class CreateVoucherApi extends Component {
     }
 
     onSubmitVoucher = () => {
+        event.preventDefault();
         const cookie = new Cookies;
         RadiusApi.post('/vouchers/add.json', this.state, {
             params: {

@@ -79,10 +79,10 @@ class Sidebar extends Component {
                                                 {
                                                     this.state.role === 'admin' ?
                                                         <Link to='/admin/root/voucher/transaction'>
-                                                            Transaction
+                                                            Credit
                                                         </Link>
                                                         : <Link to='/admin/voucher/transaction'>
-                                                            Transaction
+                                                            Credit
                                                         </Link>
                                                 }
 
@@ -91,11 +91,11 @@ class Sidebar extends Component {
                                                 {
                                                     this.state.role === 'admin' ?
                                                         <Link to='/admin/root/cash/transaction'>
-                                                            Cash
+                                                            Payments
                                                         </Link>
                                                         :
                                                         <Link to='/admin/cash/transaction'>
-                                                            Cash
+                                                            Payments
                                                         </Link>
                                                 }
 
