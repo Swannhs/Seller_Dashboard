@@ -16,6 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {BsBoxArrowUpRight} from "react-icons/all";
 import {Link} from "react-router-dom";
 import {Button} from "reactstrap";
+import {ListGroup} from "react-bootstrap";
 
 
 const useRowStyles = makeStyles({
@@ -25,7 +26,6 @@ const useRowStyles = makeStyles({
         },
     },
 });
-
 
 
 function Row(props) {
@@ -50,32 +50,86 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Group</TableCell>
-                                        <TableCell>Credit</TableCell>
-                                        <TableCell>Debit</TableCell>
-                                        <TableCell/>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
-                                            {row.realm.name}
-                                        </TableCell>
-                                        <TableCell>{row.credit}</TableCell>
-                                        <TableCell>{row.debit}</TableCell>
-                                        <TableCell>
-                                            <Link to={'/admin/voucher/transactions/' + row.id}>
-                                                <Button className='btn-sm btn-primary'>
-                                                    <BsBoxArrowUpRight/>
-                                                </Button>
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+
+                            <ListGroup>
+                                <ListGroup.Item>
+                                    <span className='ml-5 mr-5'>
+                                        <b>Group</b>
+                                    </span>
+
+                                    <span className='ml-5'>
+                                        {row.realm.name}
+                                    </span>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <span className='ml-5 mr-5'>
+                                        <b>Credit</b>
+                                    </span>
+
+                                    <span className='ml-5'>
+                                        {row.credit}
+                                    </span>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <span className='ml-5 mr-5'>
+                                        <b>Debit </b>
+                                    </span>
+
+                                    <span className='ml-5'>
+                                        {row.debit}
+                                    </span>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <span className='ml-5 mr-5'>
+                                        <b>Action</b>
+                                    </span>
+
+                                    <span className='ml-5'>
+                                        <Link to={'/admin/voucher/transactions/' + row.id}>
+                                            {/*<Button className='btn-sm btn-primary'>*/}
+                                            <div className='border border-success d-inline p-1'>
+                                                <BsBoxArrowUpRight/>
+                                            </div>
+
+                                            {/*</Button>*/}
+                                        </Link>
+                                    </span>
+                                </ListGroup.Item>
+                            </ListGroup>
+
+                            {/*<Table size="small" aria-label="purchases">*/}
+                            {/*    <TableHead>*/}
+                            {/*        <TableRow>*/}
+                            {/*            <TableCell>Group</TableCell>*/}
+                            {/*            <TableCell>Credit</TableCell>*/}
+                            {/*            <TableCell>Debit</TableCell>*/}
+                            {/*            <TableCell/>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableHead>*/}
+
+
+                            {/*    <TableBody>*/}
+                            {/*        <TableRow key={row.id}>*/}
+                            {/*            <TableCell component="th" scope="row">*/}
+                            {/*                {row.realm.name}*/}
+                            {/*            </TableCell>*/}
+                            {/*            <TableCell>{row.credit}</TableCell>*/}
+                            {/*            <TableCell>{row.debit}</TableCell>*/}
+                            {/*            <TableCell>*/}
+                            {/*                <Link to={'/admin/voucher/transactions/' + row.id}>*/}
+                            {/*                    <Button className='btn-sm btn-primary'>*/}
+                            {/*                        <BsBoxArrowUpRight/>*/}
+                            {/*                    </Button>*/}
+                            {/*                </Link>*/}
+                            {/*            </TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableBody>*/}
+                            {/*</Table>*/}
+
+
                         </Box>
                     </Collapse>
                 </TableCell>
