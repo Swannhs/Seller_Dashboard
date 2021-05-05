@@ -100,7 +100,7 @@ const TransactionSummaryApiMobile = ({data}) => {
                     <TableRow>
                         <TableCell/>
                         <TableCell>Profile</TableCell>
-                        <TableCell>Voucher</TableCell>
+                        <TableCell>Balance</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

@@ -43,8 +43,8 @@ class Sidebar extends Component {
                                     className="simple-text logo-mini mx-1"
                                 >
                                 </Link>
-                                <Link className="simple-text" to='/'>
-                                    Radius Admin
+                                <Link className="simple-text text-capitalize" to='/'>
+                                    Reseller Panel
                                 </Link>
                             </div>
                             <Nav>

@@ -12,7 +12,7 @@ class DashboardCash extends Component {
     componentDidMount() {
         this.setState({loading: true})
         let cookie = new Cookies
-        RadiusApi.get('/Dashboard/cash.json', {
+        RadiusApi.get('/dashboard/cash.json', {
             params: {
                 token: cookie.get('Token')
             }

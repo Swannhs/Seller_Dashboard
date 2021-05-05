@@ -5,6 +5,7 @@ import Cookies from "universal-cookie/lib";
 import {BiReset} from "react-icons/all";
 import {Button} from "reactstrap";
 import {confirmAlert} from "react-confirm-alert";
+import SearchField from 'react-search-field';
 
 
 class VoucherApi extends Component {
@@ -58,6 +59,7 @@ class VoucherApi extends Component {
                     <th scope="col">Password</th>
                     <th scope="col">Group</th>
                     <th scope="col">Profile</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -72,9 +74,9 @@ class VoucherApi extends Component {
 
                             <td>{item.name}</td>
                             <td>{item.password}</td>
-
                             <td>{item.realm}</td>
                             <td>{item.profile}</td>
+                            <td>{item.status}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">
                                 <Button className='btn-sm btn-danger' onClick={() => this.onVoucherConfirm(item.id)}>
