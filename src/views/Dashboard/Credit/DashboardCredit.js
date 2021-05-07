@@ -1,25 +1,25 @@
 import React, {Component} from 'react';
-import {Card, Col, Row} from "react-bootstrap";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
+import {Card, Col, Row} from "react-bootstrap";
 
-class DashboardCash extends Component {
+class DashboardCredit extends Component {
     state = {
-        cash: [],
+        credit: [],
         loading: true
     }
 
     componentDidMount() {
         this.setState({loading: true})
         let cookie = new Cookies
-        RadiusApi.get('/dashboard/cash.json', {
+        RadiusApi.get('/dashboard/credit.json', {
             params: {
                 token: cookie.get('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    cash: response.data.item,
+                    credit: response.data.item,
                     loading: false
                 })
             })
@@ -33,24 +33,21 @@ class DashboardCash extends Component {
                         <Row>
                             <Col xs="5">
                                 <div className="icon-big text-center icon-warning">
-                                    <i className="fas fa-money-bill-alt text-success"/>
+                                    <i className="far fa-money-bill text-info"/>
                                 </div>
                             </Col>
                             {
-                                this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
+                                this.state.loading ? <div className="mt-5 ui active centered inline loader mt-3"/> :
                                     <Col xs="7">
                                         <div className="numbers">
                                             <Card.Title>
-                                                Payable: $ {this.state.cash.payable}
+                                                Balance: $ {this.state.credit.balance}
                                             </Card.Title>
                                             <Card.Title>
-                                                Paid: $ {this.state.cash.paid}
+                                                Credit: $ {this.state.credit.credit}
                                             </Card.Title>
                                             <Card.Title>
-                                                Receivable: $ {this.state.cash.receivable}
-                                            </Card.Title>
-                                            <Card.Title>
-                                                Received: $ {this.state.cash.received}
+                                                Debit: $ {this.state.credit.debit}
                                             </Card.Title>
                                         </div>
                                     </Col>
@@ -60,7 +57,7 @@ class DashboardCash extends Component {
                     <Card.Footer>
                         <hr></hr>
                         <div className="stats">
-                            <b>Payments</b>
+                            <b>Credit</b>
                         </div>
                     </Card.Footer>
                 </Card>
@@ -69,4 +66,4 @@ class DashboardCash extends Component {
     }
 }
 
-export default DashboardCash;
+export default DashboardCredit;

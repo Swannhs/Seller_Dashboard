@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {BsBoxArrowUpRight} from "react-icons/all";
 import {Link} from "react-router-dom";
-import {Button} from "reactstrap";
+import {ListGroup} from "react-bootstrap";
 
 
 const useRowStyles = makeStyles({
@@ -25,7 +25,6 @@ const useRowStyles = makeStyles({
         },
     },
 });
-
 
 
 function Row(props) {
@@ -50,32 +49,90 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Group</TableCell>
-                                        <TableCell>Credit</TableCell>
-                                        <TableCell>Debit</TableCell>
-                                        <TableCell/>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
+
+                            <ListGroup>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Group</b>
+                                        </div>
+                                        <div className="eight wide column">
                                             {row.realm.name}
-                                        </TableCell>
-                                        <TableCell>{row.credit}</TableCell>
-                                        <TableCell>{row.debit}</TableCell>
-                                        <TableCell>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Credit</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.credit}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Debit</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.debit}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Action</b>
+                                        </div>
+                                        <div className="eight wide column">
                                             <Link to={'/admin/voucher/transactions/' + row.id}>
-                                                <Button className='btn-sm btn-primary'>
+                                                {/*<Button className='btn-sm btn-primary'>*/}
+                                                <div className='border border-success d-inline p-1'>
                                                     <BsBoxArrowUpRight/>
-                                                </Button>
+                                                </div>
+
+                                                {/*</Button>*/}
                                             </Link>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ListGroup>
+
+                            {/*<Table size="small" aria-label="purchases">*/}
+                            {/*    <TableHead>*/}
+                            {/*        <TableRow>*/}
+                            {/*            <TableCell>Group</TableCell>*/}
+                            {/*            <TableCell>Credit</TableCell>*/}
+                            {/*            <TableCell>Debit</TableCell>*/}
+                            {/*            <TableCell/>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableHead>*/}
+
+
+                            {/*    <TableBody>*/}
+                            {/*        <TableRow key={row.id}>*/}
+                            {/*            <TableCell component="th" scope="row">*/}
+                            {/*                {row.realm.name}*/}
+                            {/*            </TableCell>*/}
+                            {/*            <TableCell>{row.credit}</TableCell>*/}
+                            {/*            <TableCell>{row.debit}</TableCell>*/}
+                            {/*            <TableCell>*/}
+                            {/*                <Link to={'/admin/voucher/transactions/' + row.id}>*/}
+                            {/*                    <Button className='btn-sm btn-primary'>*/}
+                            {/*                        <BsBoxArrowUpRight/>*/}
+                            {/*                    </Button>*/}
+                            {/*                </Link>*/}
+                            {/*            </TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableBody>*/}
+                            {/*</Table>*/}
+
+
                         </Box>
                     </Collapse>
                 </TableCell>
@@ -100,7 +157,7 @@ const TransactionSummaryApiMobile = ({data}) => {
                     <TableRow>
                         <TableCell/>
                         <TableCell>Profile</TableCell>
-                        <TableCell>Voucher</TableCell>
+                        <TableCell>Balance</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

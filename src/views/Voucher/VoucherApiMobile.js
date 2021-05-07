@@ -16,9 +16,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {BiReset} from "react-icons/all";
-import {Button} from "reactstrap";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const useRowStyles = makeStyles({
     root: {
@@ -30,7 +29,7 @@ const useRowStyles = makeStyles({
 
 const onVoucherConfirm = props => {
     confirmAlert({
-        title: 'Confirm to reset',
+        title: 'Confirm',
         message: 'Are you sure to reset this voucher',
         buttons: [
             {
@@ -88,28 +87,65 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Profile</TableCell>
-                                        <TableCell>Realm</TableCell>
-                                        <TableCell>Reset</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Profile</b>
+                                        </div>
+                                        <div className="eight wide column">
                                             {row.profile}
-                                        </TableCell>
-                                        <TableCell>{row.realm}</TableCell>
-                                        <TableCell>
-                                            <Button className='btn-sm btn-danger'  onClick={() => onVoucherConfirm(row.id)}>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Realm</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.realm}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Action</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            <div className='border border-danger text-danger d-inline p-1'
+                                                    onClick={() => onVoucherConfirm(row.id)}>
                                                 <BiReset aria-placeholder='reset'/>
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {/*-----------------Previous---------------------*/}
+                            {/*<Table size="small" aria-label="purchases">*/}
+                            {/*    <TableHead>*/}
+                            {/*        <TableRow>*/}
+                            {/*            <TableCell>Profile</TableCell>*/}
+                            {/*            <TableCell>Realm</TableCell>*/}
+                            {/*            <TableCell>Reset</TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableHead>*/}
+                            {/*    <TableBody>*/}
+                            {/*        <TableRow key={row.id}>*/}
+                            {/*            <TableCell component="th" scope="row">*/}
+                            {/*                {row.profile}*/}
+                            {/*            </TableCell>*/}
+                            {/*            <TableCell>{row.realm}</TableCell>*/}
+                            {/*            <TableCell>*/}
+                            {/*                <Button className='btn-sm btn-danger'  onClick={() => onVoucherConfirm(row.id)}>*/}
+                            {/*                    <BiReset aria-placeholder='reset'/>*/}
+                            {/*                </Button>*/}
+                            {/*            </TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableBody>*/}
+                            {/*</Table>*/}
                         </Box>
                     </Collapse>
                 </TableCell>

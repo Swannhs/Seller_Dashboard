@@ -7,24 +7,31 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
 import {isMobile} from 'react-device-detect';
+import SearchField from "react-search-field";
 
 class VoucherList extends Component {
-    state = {
-        data: [],
-        page: 1,
-        start: 0,
-        limit: 10,
-        total: 0,
-        refresh: true,
-        loading: true
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            page: 1,
+            start: 0,
+            limit: 10,
+            total: 0,
+            refresh: true,
+            loading: true,
+            search: null
+        }
+        this.onChangeHandle = this.onChangeHandle.bind(this)
+        this.onSearchApiCall = this.onSearchApiCall.bind(this)
     }
+
 
     componentDidMount() {
         this.onApiCall();
     }
 
     onApiCall = () => {
-        this.setState({loading: true})
         const cookie = new Cookies
         RadiusApi.get('/vouchers/index-user-vouchers.json', {
             params: {
@@ -42,6 +49,28 @@ class VoucherList extends Component {
                 })
             })
     }
+
+    onSearchApiCall = () => {
+        this.setState({loading: true})
+        const cookie = new Cookies
+        RadiusApi.get('/vouchers/index-user-vouchers.json', {
+            params: {
+                page: this.state.page,
+                start: this.state.start,
+                limit: this.state.limit,
+                q: this.state.search,
+                token: cookie.get('Token')
+            }
+        })
+            .then(response => {
+                this.setState({
+                    data: response.data.items,
+                    total: response.data.totalCount,
+                    loading: false
+                })
+            })
+    }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         prevState.page !== this.state.page ? this.onApiCall() : null
@@ -77,21 +106,57 @@ class VoucherList extends Component {
         })
     }
 
+    onChangeHandle = () => {
+        this.setState({
+            search: event.target.value + '%'
+        })
+    }
+
 
     render() {
         return (
             <>
-                <div className="ui grid">
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/voucher/create'>
-                            <button className='ui button primary'>
-                                New
-                            </button>
-                        </Link>
+                <div className="group-item">
+                    <div className="ui grid">
+                        <div className="eight wide column">
+                            <SearchField
+                                placeholder='Search Name'
+                                onChange={this.onChangeHandle}
+                                onEnter={this.onSearchApiCall}
+                            />
+                        </div>
+                        {
+                            isMobile ?
+                                <div className="eight wide column right aligned">
+                                    <Link to='/admin/voucher/create'>
+                                        <button className='ui button primary small'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div>:
+                                <div className="eight wide column right aligned">
+                                    <Link to='/admin/voucher/create'>
+                                        <button className='ui button primary'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div>
+                        }
+
                     </div>
                 </div>
+                {/*<div className="ui grid">*/}
+                {/*    <div className="ui text-right floated column">*/}
+                {/*        <Link to='/admin/voucher/create'>*/}
+                {/*            <button className='ui button primary'>*/}
+                {/*                New*/}
+                {/*            </button>*/}
+                {/*        </Link>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
                 {
-                    this.state.loading ? <div className="ui active centered inline loader"/> :
+                    this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :
                         <>
                             <table className="table table-striped">
                                 {

@@ -15,6 +15,7 @@ import {
 import DashboardVoucher from "./Voucher/DashboardVoucher";
 import DashboardCash from "./Cash/DashboardCash";
 import DashboardServer from "./Server/DashboardServer";
+import DashboardCredit from "./Credit/DashboardCredit";
 
 function Dashboard() {
     return (
@@ -32,9 +33,13 @@ function Dashboard() {
                     <DashboardCash/>
                     {/*------------------------------Cash Section End----------------------------*/}
 
+                    {/*------------------------------Credit Section Start----------------------------*/}
+                    <DashboardCredit/>
+                    {/*------------------------------Credit Section End----------------------------*/}
+
                     {/*------------------------------Server Section Start----------------------------*/}
                     <DashboardServer/>
-                    {/*------------------------------Cash Section End----------------------------*/}
+                    {/*------------------------------Server Section End----------------------------*/}
                 </Row>
                 {/*---------------------------- End Card Section ------------------------------*/}
 

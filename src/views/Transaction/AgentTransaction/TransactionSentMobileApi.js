@@ -32,7 +32,13 @@ class TransactionSentMobileApi extends Component {
             <>
                 {
                     this.state.loading ? <div className="ui active centered inline loader mt-5"/> :
-                        <TransactionSentMobile data={this.state.transactions}/>
+                        <>
+                            {
+                                this.state.transactions[0] ? <TransactionSentMobile data={this.state.transactions}/>:
+                                    <h3 className='text-danger text-center'>No sent history is found</h3>
+                            }
+
+                        </>
                 }
             </>
         );

@@ -39,8 +39,8 @@ class CashTransfer extends Component {
     onTransferConfirm = () => {
         event.preventDefault();
         confirmAlert({
-            title: 'Confirm transfer',
-            message: 'Are you sure to delete the user',
+            title: 'Confirm',
+            message: 'Are you sure to transfer',
             buttons: [
                 {
                     label: 'Yes',

@@ -9,7 +9,7 @@ class TransactionSummaryApi extends Component {
                 <thead>
                 <tr className='ct-grid-background border-primary'>
                     <th scope="col">Profile</th>
-                    <th scope='col'>Voucher</th>
+                    <th scope='col'>Balance</th>
                     <th scope="col">Realm</th>
                     <th scope="col">Credit</th>
                     <th scope="col">Debit</th>

@@ -12,7 +12,7 @@ class DashboardVoucher extends Component {
     componentDidMount() {
         this.setState({loading: true})
         let cookie = new Cookies
-        RadiusApi.get('/Dashboard/voucher.json', {
+        RadiusApi.get('/dashboard/voucher.json', {
             params: {
                 token: cookie.get('Token')
             }
@@ -41,12 +41,14 @@ class DashboardVoucher extends Component {
                                     <Col xs="7">
                                         <div className="numbers">
                                             <Card.Title>
-                                                Total: {this.state.vouchers[0] ? this.state.vouchers[0].total : 0}
+                                                Total: {this.state.vouchers.total}
                                             </Card.Title>
                                             <Card.Title>
-                                                Active: {this.state.vouchers[0] ? this.state.vouchers[0].active : 0}
+                                                Active: {this.state.vouchers.active}
                                             </Card.Title>
-                                            <Card.Title>Online: 13</Card.Title>
+                                            <Card.Title>
+                                                Online: {this.state.vouchers.online}
+                                            </Card.Title>
                                         </div>
                                     </Col>
                             }
