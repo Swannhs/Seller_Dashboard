@@ -12,7 +12,7 @@ class DashboardServer extends Component {
     componentDidMount() {
         this.setState({loading: true})
         let cookie = new Cookies;
-        RadiusApi.get('/Dashboard/Server-count.json', {
+        RadiusApi.get('/dashboard/server-count.json', {
             params: {
                 token: cookie.get('Token')
             }
