@@ -3,14 +3,14 @@ import './CreateUser.css';
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 import CreateUserUi from "./CreateUserUI";
+import {confirmAlert} from "react-confirm-alert";
 
 class CreateUserAction extends Component {
 
-    onCreateUser = async data => {
-
+    onCreateUser = data => {
         const cookie = new Cookies();
 
-        await RadiusApi.post('/access-providers/add.json', data, {
+        RadiusApi.post('/access-providers/add.json', data, {
             params: {
                 token: cookie.get('Token')
             }
@@ -24,10 +24,27 @@ class CreateUserAction extends Component {
             })
     }
 
+    onCreateUserConfirm = async data => {
+        event.preventDefault();
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Are you sure to create new user',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.onCreateUser(data)
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
+    }
+
 
     render() {
         return (
-            <CreateUserUi onFormSubmit={this.onCreateUser}/>
+            <CreateUserUi onFormSubmit={this.onCreateUserConfirm}/>
         );
     }
 }

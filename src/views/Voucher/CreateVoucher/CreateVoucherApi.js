@@ -117,7 +117,7 @@ class CreateVoucherApi extends Component {
                             />
                         </div>
 
-                        <button className='ui button primary mt-3'>
+                        <button className='ui button primary mt-2'>
                             Create
                         </button>
                     </form>

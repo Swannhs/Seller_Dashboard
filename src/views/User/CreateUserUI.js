@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {confirmAlert} from "react-confirm-alert";
 
 class CreateUserUi extends Component {
 
@@ -22,6 +23,8 @@ class CreateUserUi extends Component {
         event.preventDefault();
         this.props.onFormSubmit(this.state)
     }
+
+
 
     render() {
         return (
@@ -72,9 +75,6 @@ class CreateUserUi extends Component {
                                     <option className='text-capitalize'>agent</option>
                                 </select>
                             </div>
-                            <p className='text-danger m-0 p-0'>Don't forget to specify role</p>
-
-
 
                             {/* -------------------------Personal Info-------------------// */}
 
@@ -114,7 +114,7 @@ class CreateUserUi extends Component {
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                    <span className="input-group-text"> <i className="fa fa-user-edit"/> </span>
                                 </div>
                                 <input name className="form-control" placeholder="Surname" type="text"
                                        value={this.state.surname}
@@ -123,7 +123,7 @@ class CreateUserUi extends Component {
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
+                                    <span className="input-group-text"> <i className="fa fa-address-card"/> </span>
                                 </div>
                                 <input name className="form-control" placeholder="Address" type="text"
                                        value={this.state.address}
