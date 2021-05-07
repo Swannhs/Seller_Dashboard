@@ -41,7 +41,7 @@ class DashboardVoucher extends Component {
                                     <Col xs="7">
                                         <div className="numbers">
                                             <Card.Title>
-                                                Total: {this.state.vouchers.balance}
+                                                Total: {this.state.vouchers.total}
                                             </Card.Title>
                                             <Card.Title>
                                                 Active: {this.state.vouchers.active}

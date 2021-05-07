@@ -19,7 +19,7 @@ class DashboardCash extends Component {
         })
             .then(response => {
                 this.setState({
-                    cash: response.data.cash,
+                    cash: response.data.item,
                     loading: false
                 })
             })
@@ -41,16 +41,16 @@ class DashboardCash extends Component {
                                     <Col xs="7">
                                         <div className="numbers">
                                             <Card.Title>
-                                                Payable: ${this.state.cash[0] ? this.state.cash[0].payable : 0}
+                                                Payable: $ {this.state.cash.payable}
                                             </Card.Title>
                                             <Card.Title>
-                                                Paid: ${this.state.cash[0] ? this.state.cash[0].paid : 0}
+                                                Paid: $ {this.state.cash.paid}
                                             </Card.Title>
                                             <Card.Title>
-                                                Receivable: ${this.state.cash[0] ? this.state.cash[0].receivable : 0}
+                                                Receivable: $ {this.state.cash.receivable}
                                             </Card.Title>
                                             <Card.Title>
-                                                Received: $0
+                                                Received: $ {this.state.cash.received}
                                             </Card.Title>
                                         </div>
                                     </Col>
