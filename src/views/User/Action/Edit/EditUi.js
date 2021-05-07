@@ -11,7 +11,7 @@ class EditUi extends Component {
         username: '',
         name: '',
         surname: '',
-        active: false,
+        status: false,
         phone: '',
         email: '',
         address: '',
@@ -30,7 +30,7 @@ class EditUi extends Component {
         })
             .then(response => {
                 this.setState({
-                    active: response.data.data.active,
+                    status: response.data.data.active,
                     username: response.data.data.username,
                     name: response.data.data.name,
                     email: response.data.data.email,
@@ -106,7 +106,7 @@ class EditUi extends Component {
                             control={
                                 <Checkbox
                                     disabled={true}
-                                    checked={this.state.active}
+                                    checked={this.state.status}
                                     onChange={this.handleChange}
                                     name="active"
                                     color="secondary"
