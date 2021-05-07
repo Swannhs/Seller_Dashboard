@@ -15,10 +15,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {BiReset} from "react-icons/all";
+import {BiReset, BsBoxArrowUpRight} from "react-icons/all";
 import {Button} from "reactstrap";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import {ListGroup} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const useRowStyles = makeStyles({
     root: {
@@ -88,28 +90,70 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Profile</TableCell>
-                                        <TableCell>Realm</TableCell>
-                                        <TableCell>Reset</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
+                            <ListGroup.Item>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Profile</b>
+                                        </div>
+                                        <div className="eight wide column">
                                             {row.profile}
-                                        </TableCell>
-                                        <TableCell>{row.realm}</TableCell>
-                                        <TableCell>
-                                            <Button className='btn-sm btn-danger'  onClick={() => onVoucherConfirm(row.id)}>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Realm</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.realm}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Action</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            <div className='border border-danger text-danger d-inline p-1'
+                                                    onClick={() => onVoucherConfirm(row.id)}>
                                                 <BiReset aria-placeholder='reset'/>
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ListGroup.Item>
+
+                            {/*-----------------Previous---------------------*/}
+                            {/*<Table size="small" aria-label="purchases">*/}
+                            {/*    <TableHead>*/}
+                            {/*        <TableRow>*/}
+                            {/*            <TableCell>Profile</TableCell>*/}
+                            {/*            <TableCell>Realm</TableCell>*/}
+                            {/*            <TableCell>Reset</TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableHead>*/}
+                            {/*    <TableBody>*/}
+                            {/*        <TableRow key={row.id}>*/}
+                            {/*            <TableCell component="th" scope="row">*/}
+                            {/*                {row.profile}*/}
+                            {/*            </TableCell>*/}
+                            {/*            <TableCell>{row.realm}</TableCell>*/}
+                            {/*            <TableCell>*/}
+                            {/*                <Button className='btn-sm btn-danger'  onClick={() => onVoucherConfirm(row.id)}>*/}
+                            {/*                    <BiReset aria-placeholder='reset'/>*/}
+                            {/*                </Button>*/}
+                            {/*            </TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableBody>*/}
+                            {/*</Table>*/}
                         </Box>
                     </Collapse>
                 </TableCell>
