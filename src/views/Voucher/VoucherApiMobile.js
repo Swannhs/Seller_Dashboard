@@ -15,12 +15,9 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {BiReset, BsBoxArrowUpRight} from "react-icons/all";
-import {Button} from "reactstrap";
+import {BiReset} from "react-icons/all";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import {ListGroup} from "react-bootstrap";
-import {Link} from "react-router-dom";
 
 const useRowStyles = makeStyles({
     root: {
@@ -90,7 +87,6 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <ListGroup.Item>
                                 <div className="list-group-item">
                                     <div className="ui grid text-center">
                                         <div className="eight wide column">
@@ -101,8 +97,7 @@ function Row(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
+
                                 <div className="list-group-item">
                                     <div className="ui grid text-center">
                                         <div className="eight wide column">
@@ -113,9 +108,7 @@ function Row(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </ListGroup.Item>
 
-                            <ListGroup.Item>
                                 <div className="list-group-item">
                                     <div className="ui grid text-center">
                                         <div className="eight wide column">
@@ -129,7 +122,6 @@ function Row(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </ListGroup.Item>
 
                             {/*-----------------Previous---------------------*/}
                             {/*<Table size="small" aria-label="purchases">*/}

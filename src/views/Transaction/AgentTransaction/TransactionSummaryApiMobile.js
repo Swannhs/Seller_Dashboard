@@ -15,7 +15,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {BsBoxArrowUpRight} from "react-icons/all";
 import {Link} from "react-router-dom";
-import {Button} from "reactstrap";
 import {ListGroup} from "react-bootstrap";
 
 
@@ -52,64 +51,56 @@ function Row(props) {
                         <Box margin={1}>
 
                             <ListGroup>
-                                <ListGroup.Item>
-                                    <div className="list-group-item">
-                                        <div className="ui grid text-center">
-                                            <div className="eight wide column">
-                                                <b>Group</b>
-                                            </div>
-                                            <div className="eight wide column">
-                                                {row.realm.name}
-                                            </div>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Group</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.realm.name}
                                         </div>
                                     </div>
-                                </ListGroup.Item>
+                                </div>
 
-                                <ListGroup.Item>
-                                    <div className="list-group-item">
-                                        <div className="ui grid text-center">
-                                            <div className="eight wide column">
-                                                <b>Credit</b>
-                                            </div>
-                                            <div className="eight wide column">
-                                                {row.credit}
-                                            </div>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Credit</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.credit}
                                         </div>
                                     </div>
-                                </ListGroup.Item>
+                                </div>
 
-                                <ListGroup.Item>
-                                    <div className="list-group-item">
-                                        <div className="ui grid text-center">
-                                            <div className="eight wide column">
-                                                <b>Debit</b>
-                                            </div>
-                                            <div className="eight wide column">
-                                                {row.debit}
-                                            </div>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Debit</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            {row.debit}
                                         </div>
                                     </div>
-                                </ListGroup.Item>
+                                </div>
 
-                                <ListGroup.Item>
-                                    <div className="list-group-item">
-                                        <div className="ui grid text-center">
-                                            <div className="eight wide column">
-                                                <b>Action</b>
-                                            </div>
-                                            <div className="eight wide column">
-                                                <Link to={'/admin/voucher/transactions/' + row.id}>
-                                                    {/*<Button className='btn-sm btn-primary'>*/}
-                                                    <div className='border border-success d-inline p-1'>
-                                                        <BsBoxArrowUpRight/>
-                                                    </div>
+                                <div className="list-group-item">
+                                    <div className="ui grid text-center">
+                                        <div className="eight wide column">
+                                            <b>Action</b>
+                                        </div>
+                                        <div className="eight wide column">
+                                            <Link to={'/admin/voucher/transactions/' + row.id}>
+                                                {/*<Button className='btn-sm btn-primary'>*/}
+                                                <div className='border border-success d-inline p-1'>
+                                                    <BsBoxArrowUpRight/>
+                                                </div>
 
-                                                    {/*</Button>*/}
-                                                </Link>
-                                            </div>
+                                                {/*</Button>*/}
+                                            </Link>
                                         </div>
                                     </div>
-                                </ListGroup.Item>
+                                </div>
                             </ListGroup>
 
                             {/*<Table size="small" aria-label="purchases">*/}
