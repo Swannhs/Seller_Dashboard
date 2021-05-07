@@ -53,50 +53,62 @@ function Row(props) {
 
                             <ListGroup>
                                 <ListGroup.Item>
-                                    <span className='ml-5 mr-5'>
-                                        <b>Group</b>
-                                    </span>
-
-                                    <span className='ml-5'>
-                                        {row.realm.name}
-                                    </span>
-                                </ListGroup.Item>
-
-                                <ListGroup.Item>
-                                    <span className='ml-5 mr-5'>
-                                        <b>Credit</b>
-                                    </span>
-
-                                    <span className='ml-5'>
-                                        {row.credit}
-                                    </span>
-                                </ListGroup.Item>
-
-                                <ListGroup.Item>
-                                    <span className='ml-5 mr-5'>
-                                        <b>Debit </b>
-                                    </span>
-
-                                    <span className='ml-5'>
-                                        {row.debit}
-                                    </span>
-                                </ListGroup.Item>
-
-                                <ListGroup.Item>
-                                    <span className='ml-5 mr-5'>
-                                        <b>Action</b>
-                                    </span>
-
-                                    <span className='ml-5'>
-                                        <Link to={'/admin/voucher/transactions/' + row.id}>
-                                            {/*<Button className='btn-sm btn-primary'>*/}
-                                            <div className='border border-success d-inline p-1'>
-                                                <BsBoxArrowUpRight/>
+                                    <div className="list-group-item">
+                                        <div className="ui grid text-center">
+                                            <div className="eight wide column">
+                                                <b>Group</b>
                                             </div>
+                                            <div className="eight wide column">
+                                                {row.realm.name}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ListGroup.Item>
 
-                                            {/*</Button>*/}
-                                        </Link>
-                                    </span>
+                                <ListGroup.Item>
+                                    <div className="list-group-item">
+                                        <div className="ui grid text-center">
+                                            <div className="eight wide column">
+                                                <b>Credit</b>
+                                            </div>
+                                            <div className="eight wide column">
+                                                {row.credit}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <div className="list-group-item">
+                                        <div className="ui grid text-center">
+                                            <div className="eight wide column">
+                                                <b>Debit</b>
+                                            </div>
+                                            <div className="eight wide column">
+                                                {row.debit}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ListGroup.Item>
+
+                                <ListGroup.Item>
+                                    <div className="list-group-item">
+                                        <div className="ui grid text-center">
+                                            <div className="eight wide column">
+                                                <b>Action</b>
+                                            </div>
+                                            <div className="eight wide column">
+                                                <Link to={'/admin/voucher/transactions/' + row.id}>
+                                                    {/*<Button className='btn-sm btn-primary'>*/}
+                                                    <div className='border border-success d-inline p-1'>
+                                                        <BsBoxArrowUpRight/>
+                                                    </div>
+
+                                                    {/*</Button>*/}
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ListGroup.Item>
                             </ListGroup>
 
