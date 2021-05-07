@@ -48,24 +48,56 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Transaction ID</TableCell>
-                                        <TableCell>Profile</TableCell>
-                                        <TableCell>Group</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
-                                            {row.transaction}
-                                        </TableCell>
-                                        <TableCell>{row.profile.name}</TableCell>
-                                        <TableCell>{row.realm.name}</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Transaction ID</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.transaction}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Profile</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.profile.name}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Group</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.realm.name}
+                                    </div>
+                                </div>
+                            </div>
+                            {/*----------------------------Previous----------------------*/}
+                            {/*<Table size="small" aria-label="purchases">*/}
+                            {/*    <TableHead>*/}
+                            {/*        <TableRow>*/}
+                            {/*            <TableCell>Transaction ID</TableCell>*/}
+                            {/*            <TableCell>Profile</TableCell>*/}
+                            {/*            <TableCell>Group</TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableHead>*/}
+                            {/*    <TableBody>*/}
+                            {/*        <TableRow key={row.id}>*/}
+                            {/*            <TableCell component="th" scope="row">*/}
+                            {/*                {row.transaction}*/}
+                            {/*            </TableCell>*/}
+                            {/*            <TableCell>{row.profile.name}</TableCell>*/}
+                            {/*            <TableCell>{row.realm.name}</TableCell>*/}
+                            {/*        </TableRow>*/}
+                            {/*    </TableBody>*/}
+                            {/*</Table>*/}
                         </Box>
                     </Collapse>
                 </TableCell>

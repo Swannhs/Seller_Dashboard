@@ -125,13 +125,24 @@ class VoucherList extends Component {
                                 onEnter={this.onSearchApiCall}
                             />
                         </div>
-                        <div className="eight wide column right aligned">
-                            <Link to='/admin/voucher/create'>
-                                <button className='ui button primary'>
-                                    New
-                                </button>
-                            </Link>
-                        </div>
+                        {
+                            isMobile ?
+                                <div className="eight wide column right aligned">
+                                    <Link to='/admin/voucher/create'>
+                                        <button className='ui button primary small'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div>:
+                                <div className="eight wide column right aligned">
+                                    <Link to='/admin/voucher/create'>
+                                        <button className='ui button primary'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div>
+                        }
+
                     </div>
                 </div>
                 {/*<div className="ui grid">*/}
