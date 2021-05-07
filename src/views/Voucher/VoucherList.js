@@ -116,22 +116,36 @@ class VoucherList extends Component {
     render() {
         return (
             <>
-                <div className="ui grid">
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/voucher/create'>
-                            <button className='ui button primary'>
-                                New
-                            </button>
-                        </Link>
+                <div className="group-item">
+                    <div className="ui grid">
+                        <div className="eight wide column">
+                            <SearchField
+                                placeholder='Search Name'
+                                onChange={this.onChangeHandle}
+                                onEnter={this.onSearchApiCall}
+                            />
+                        </div>
+                        <div className="eight wide column right aligned">
+                            <Link to='/admin/voucher/create'>
+                                <button className='ui button primary'>
+                                    New
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-                <SearchField
-                    placeholder='Search Name'
-                    onChange={this.onChangeHandle}
-                    onEnter={this.onSearchApiCall}
-                />
+                {/*<div className="ui grid">*/}
+                {/*    <div className="ui text-right floated column">*/}
+                {/*        <Link to='/admin/voucher/create'>*/}
+                {/*            <button className='ui button primary'>*/}
+                {/*                New*/}
+                {/*            </button>*/}
+                {/*        </Link>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
                 {
-                    this.state.loading ? <div className="ui active centered inline loader"/> :
+                    this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :
                         <>
                             <table className="table table-striped">
                                 {
