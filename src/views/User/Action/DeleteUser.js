@@ -9,7 +9,7 @@ class DeleteUser extends Component {
 
     onDeleteConfirm = () => {
         confirmAlert({
-            title: 'Confirm to delete',
+            title: 'Confirm',
             message: 'Are you sure to delete the user',
             buttons: [
                 {

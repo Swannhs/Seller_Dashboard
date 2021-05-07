@@ -12,7 +12,7 @@ class VoucherApi extends Component {
 
     onVoucherConfirm = props => {
         confirmAlert({
-            title: 'Confirm to reset',
+            title: 'Confirm',
             message: 'Are you sure to reset this voucher',
             buttons: [
                 {

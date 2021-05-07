@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import AllUser from "./AllUser";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {Input} from "reactstrap";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 
@@ -32,6 +31,8 @@ class Transfer extends Component {
 
 
     onTransactionComplete = () => {
+        event.preventDefault();
+
         const cookie = new Cookies()
         let data = this.state
         RadiusApi.post('/voucher-transactions/add.json', data, {
@@ -104,42 +105,55 @@ class Transfer extends Component {
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <AllUser onChange={this.onCreatePartner}/>
-                    <p className='text-danger'>{this.state.error.partner}</p>
-                    <VoucherGroup onChange={this.onCreateGroup}/>
-                    <VoucherProfile onChange={this.onCreateProfile}/>
+                    <form onSubmit={this.onTransactionComplete}>
+                        <AllUser onChange={this.onCreatePartner}/>
+                        <p className='text-danger'>{this.state.error.partner}</p>
+                        <VoucherGroup onChange={this.onCreateGroup}/>
+                        <VoucherProfile onChange={this.onCreateProfile}/>
 
-                    <div className='pl-3'>
-                        <h3 className='text-black-50'>Amount</h3>
-                        <Input type='number'
-                               placeholder='The amount you want to transfer'
-                               value={this.state.transfer_amount}
-                               onChange={event => {
-                                   this.setState({
-                                       transfer_amount: event.target.value
-                                   })
-                               }}
-                               required={true}
-                        />
+                        <h3 className='text-black-50'>Vouchers</h3>
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text">
+                                    <i className="fas fa-euro-sign"/>
+                                </span>
+                            </div>
+                            <input className="form-control" placeholder="Amount" type="number"
+                                   value={this.state.transfer_amount}
+                                   onChange={event => {
+                                       this.setState({
+                                           transfer_amount: event.target.value
+                                       })
+                                   }}
+                                   required={true}
+                            />
+                        </div>
+
                         <p className='text-danger'>{this.state.error.balance}</p>
+
+
                         <h3 className='text-black-50'>Amount Per Quantity rate</h3>
-                        <Input type='number'
-                               placeholder='Quantity rate'
-                               value={this.state.quantity_rate}
-                               onChange={event => {
-                                   this.setState({
-                                       quantity_rate: event.target.value
-                                   })
-                               }}
-                               required={true}
-                        />
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text">
+                                    <i className="fas fa-dollar-sign"/>
+                                </span>
+                            </div>
+                            <input className="form-control" placeholder="Rate" type="number"
+                                   value={this.state.quantity_rate}
+                                   onChange={event => {
+                                       this.setState({
+                                           quantity_rate: event.target.value
+                                       })
+                                   }}
+                                   required={true}
+                            />
+                        </div>
 
-
-                        <button className='ui button primary' onClick={this.onTransactionComplete}>
+                        <button className='ui button primary mt-2' type='submit'>
                             Transfer
                         </button>
-                    </div>
-
+                    </form>
                 </article>
 
             </div>

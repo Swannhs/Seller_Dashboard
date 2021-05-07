@@ -93,14 +93,24 @@ class VoucherApi extends Component {
 
                 {/* ---------------- New Button Start ----------------*/}
                 <div className="ui grid">
+                    {
+                        isMobile ?
+                            <div className="ui text-right floated column">
+                                <Link to='/admin/users/create'>
+                                    <button className='ui button primary small'>
+                                        New
+                                    </button>
+                                </Link>
+                            </div>:
+                            <div className="ui text-right floated column">
+                                <Link to='/admin/users/create'>
+                                    <button className='ui button primary'>
+                                        New
+                                    </button>
+                                </Link>
+                            </div>
+                    }
 
-                    <div className="ui text-right floated column">
-                        <Link to='/admin/users/create'>
-                            <button className='ui button primary'>
-                                New
-                            </button>
-                        </Link>
-                    </div>
                 </div>
 
                 {/* ---------------- New Button End ----------------*/}

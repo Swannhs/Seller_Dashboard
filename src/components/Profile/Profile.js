@@ -38,11 +38,12 @@ class Profile extends Component {
             <div className="container">
                 <div className='row'>
                     <div className='col-1'>
-                        <Link to='/admin/dashboard'>
-                            <div className="ui text-right floated column">
+                        <div className="ui text-right floated column">
+                            <Link to='/admin/dashboard'>
                                 <button className='ui button small'>Back</button>
-                            </div>
-                        </Link>
+                            </Link>
+
+                        </div>
                     </div>
 
                     <div className='col'>
