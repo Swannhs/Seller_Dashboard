@@ -92,15 +92,15 @@ class CreateTweak extends Component {
                         />
 
                         <h3>Payload</h3>
-                        <Input type='text'
-                               placeholder='Payload'
-                               value={this.state.payload}
-                               onChange={event => {
-                                   this.setState({
-                                       payload: event.target.value
-                                   })
-                               }}
-                               required={true}
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5"
+                                  placeholder='Payload'
+                                  value={this.state.payload}
+                                  onChange={event => {
+                                      this.setState({
+                                          payload: event.target.value
+                                      })
+                                  }}
+                                  required={true}
                         />
 
                         <h3>Note</h3>
