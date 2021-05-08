@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
-import EditTweak from "./EditTweak";
-import {AiFillEdit} from "react-icons/all";
+import {AiFillEdit, AiOutlineEye} from "react-icons/all";
+import {Button} from "reactstrap";
 
 class Tweak extends Component {
     state = {
@@ -67,8 +67,15 @@ class Tweak extends Component {
                                     <td>{item.payload}</td>
                                     <td>{item.note}</td>
                                     <td>
-                                        <Link to={'/admin/root/Tweak-edit/' + item.id}>
-                                            <AiFillEdit/>
+                                        <Link to={'/admin/root/tweak-view/' + item.id}>
+                                            <Button className='btn-sm btn-success'>
+                                                <AiOutlineEye/>
+                                            </Button>
+                                        </Link>
+                                        <Link to={'/admin/root/tweak-edit/' + item.id}>
+                                            <Button className='btn-sm btn-primary ml-1'>
+                                                <AiFillEdit/>
+                                            </Button>
                                         </Link>
                                     </td>
                                 </tr>

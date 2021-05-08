@@ -31,6 +31,7 @@ import CashTableAdmin from "./views/Cash/Admin/CashTableAdmin";
 import Profile from "./components/Profile/Profile";
 import EditTweak from "./views/Tweak/EditTweak";
 import EditServer from "./views/Server/EditServer";
+import ViewTweak from "./views/Tweak/ViewTweak";
 
 
 const dashboardRoutes = [
@@ -206,6 +207,12 @@ const dashboardRoutes = [
         path: "/root/Tweak",
         name: "Tweak",
         component: Tweak,
+        layout: '/admin'
+    },
+    {
+        path: "/root/Tweak-view/:id",
+        name: "Tweak",
+        component: ViewTweak,
         layout: '/admin'
     },
     {
