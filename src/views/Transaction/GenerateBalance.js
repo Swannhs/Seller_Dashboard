@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Input} from "reactstrap";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
@@ -55,33 +54,35 @@ class GenerateBalance extends Component {
                     <VoucherGroup onChange={this.onCreateGroup}/>
                     <VoucherProfile onChange={this.onCreateProfile}/>
 
-                    <div className='pl-3'>
-                        <h3 className='text-black-50'>Amount</h3>
-                        <Input type='number'
-                               placeholder='The amount you want to generate'
+                    <h3 className='mt-3 text-black-50'>Amount</h3>
+
+                    <div className="form-group input-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"> <i className="fa fa-table"/> </span>
+                        </div>
+                        <input className="form-control" placeholder="Amount" type="text"
                                value={this.state.transfer_amount}
-                               onChange={event => {
-                                   this.setState({
-                                       transfer_amount: event.target.value
-                                   })
-                               }}
+                               onChange={event => this.setState({transfer_amount: event.target.value})}
                                required={true}
                         />
-                        <h3 className='text-black-50'>Quantity per rate</h3>
-                        <Input type='number'
-                               placeholder='The amount per voucher'
-                               value={this.state.quantity_rate}
-                               onChange={event => {
-                                   this.setState({
-                                       quantity_rate: event.target.value
-                                   })
-                               }}
-                               required={true}
-                        />
-                        <button className='ui button positive mt-4' onClick={this.onGenerate}>
-                            Generate
-                        </button>
                     </div>
+
+                    <h3 className='mt-3 text-black-50'>Quantity Rate</h3>
+
+                    <div className="form-group input-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"> <i className="fa fa-table"/> </span>
+                        </div>
+                        <input className="form-control" placeholder="Rate" type="text"
+                               value={this.state.quantity_rate}
+                               onChange={event => this.setState({quantity_rate: event.target.value})}
+                               required={true}
+                        />
+                    </div>
+
+                    <button className='ui button positive mt-2' onClick={this.onGenerate}>
+                        Generate
+                    </button>
                 </article>
             </div>
         );
