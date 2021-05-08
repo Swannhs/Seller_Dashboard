@@ -101,6 +101,7 @@ class CreateVoucherApi extends Component {
                                    value={this.state.precede}
                                    onChange={event => this.setState({precede: event.target.value})}
                                    required={true}
+                                   pattern="[a-z]"
                             />
                         </div>
 

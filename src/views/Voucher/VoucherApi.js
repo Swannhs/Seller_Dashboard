@@ -28,11 +28,11 @@ class VoucherApi extends Component {
 
     onVoucherReset = (props) => {
         let reset = {
-            reset: props
+            voucher_id: props
         }
 
         let cookie = new Cookies
-        RadiusApi.post('/vouchers/voucher-reset.json', reset, {
+        RadiusApi.post('/vouchers/vouchers/reset.json', reset, {
             params: {
                 token: cookie.get('Token')
             }

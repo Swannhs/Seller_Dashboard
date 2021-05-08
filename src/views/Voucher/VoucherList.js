@@ -7,7 +7,6 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
 import {isMobile} from 'react-device-detect';
-import SearchField from "react-search-field";
 
 class VoucherList extends Component {
     constructor(props) {
@@ -51,6 +50,7 @@ class VoucherList extends Component {
     }
 
     onSearchApiCall = () => {
+        event.preventDefault();
         this.setState({loading: true})
         const cookie = new Cookies
         RadiusApi.get('/vouchers/index-user-vouchers.json', {
@@ -119,11 +119,21 @@ class VoucherList extends Component {
                 <div className="group-item">
                     <div className="ui grid">
                         <div className="eight wide column">
-                            <SearchField
-                                placeholder='Search Name'
-                                onChange={this.onChangeHandle}
-                                onEnter={this.onSearchApiCall}
-                            />
+                            <form onSubmit={this.onSearchApiCall}>
+                                <div className="ui icon input">
+                                    <input type="text" placeholder="Search Name"
+                                           onChange={this.onChangeHandle}
+                                    />
+                                    <i className="circular search link icon"
+                                       onClick={this.onSearchApiCall}
+                                    />
+                                </div>
+                            </form>
+                            {/*<SearchField*/}
+                            {/*    placeholder='Search Name'*/}
+                            {/*    onChange={this.onChangeHandle}*/}
+                            {/*    onEnter={this.onSearchApiCall}*/}
+                            {/*/>*/}
                         </div>
                         {
                             isMobile ?
@@ -133,7 +143,7 @@ class VoucherList extends Component {
                                             New
                                         </button>
                                     </Link>
-                                </div>:
+                                </div> :
                                 <div className="eight wide column right aligned">
                                     <Link to='/admin/voucher/create'>
                                         <button className='ui button primary'>

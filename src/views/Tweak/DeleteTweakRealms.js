@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {AiFillDelete} from "react-icons/all";
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
+import {Button} from "reactstrap";
 
 class DeleteTweakRealms extends Component {
     onConfirmDelete = () => {
-        confirm('Delete the user?') ? this.onDeleteTweakRealm(this.props.delId): null
+        confirm('Delete the tweak realm?') ? this.onDeleteTweakRealm(this.props.delId): null
     }
     onDeleteTweakRealm = (id) => {
         const cookie = new Cookies;
@@ -27,7 +28,9 @@ class DeleteTweakRealms extends Component {
     render() {
         return (
             <>
-                <AiFillDelete onClick={this.onConfirmDelete}/>
+                <Button className='btn-sm btn-danger' onClick={this.onConfirmDelete}>
+                    <AiFillDelete />
+                </Button>
             </>
         );
     }
