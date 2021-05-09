@@ -14,16 +14,19 @@ RUN buildDeps=" \
 
 WORKDIR /app
 
-COPY . .
+COPY ./package.json .
 
 RUN npm rebuild node-sass
 
 RUN npm install --legacy-peer-deps
 
+COPY . .
+
+RUN rm -rf /app/build
+
 RUN npm run build
 
 RUN set -e \
-    && ls -al \
     && mv /app/build/* ${APP_HOME}/ \
     && rm -rf /app \
     && apk del .build-deps \
@@ -37,5 +40,3 @@ WORKDIR ${APP_HOME}
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
-
-COPY ./.env ${APP_HOME}/
