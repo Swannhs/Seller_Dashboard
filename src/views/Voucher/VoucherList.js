@@ -52,6 +52,7 @@ class VoucherList extends Component {
     onSearchApiCall = () => {
         event.preventDefault();
         this.setState({loading: true})
+        this.onResetPagination()
         const cookie = new Cookies
         RadiusApi.get('/vouchers/index.json', {
             params: {
@@ -109,6 +110,15 @@ class VoucherList extends Component {
     onChangeHandle = () => {
         this.setState({
             search: event.target.value
+        })
+    }
+
+    onResetPagination() {
+        this.setState({
+            page: 1,
+            start: 0,
+            limit: 10,
+            total: 0
         })
     }
 
