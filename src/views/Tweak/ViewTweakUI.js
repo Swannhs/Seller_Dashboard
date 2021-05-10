@@ -18,7 +18,6 @@ class ViewTweakUi extends Component {
             }
         })
             .then(response => {
-                console.log(response)
                 this.setState({
                     tweak: response.data.data
                 })
@@ -38,23 +37,18 @@ class ViewTweakUi extends Component {
                         this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
                             <div className="main-body mt-2 ml-3">
                                 <div className="row gutters-sm">
-                                    <div className="col-md-4 mb-3">
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="d-flex flex-column align-items-center text-center">
-                                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                         alt="Admin"
-                                                         className="rounded-circle" width={150}/>
-                                                    <div className="mt-3">
-                                                        <h4>Name: {this.state.tweak.name}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="col-md-8">
                                         <div className="card mb-3">
                                             <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-sm-3">
+                                                        <h6 className="mb-0">Name</h6>
+                                                    </div>
+                                                    <div className="col-sm-9 text-secondary">
+                                                        {this.state.tweak.name}
+                                                    </div>
+                                                </div>
+                                                <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-3">
                                                         <h6 className="mb-0">Vendor</h6>
@@ -90,6 +84,7 @@ class ViewTweakUi extends Component {
                                                         {this.state.tweak.payload}
                                                     </div>
                                                 </div>
+                                                <hr/>
                                                 <div className="row">
                                                     <div className="col-sm-3">
                                                         <h6 className="mb-0">Note</h6>

@@ -57,9 +57,11 @@ class VoucherApi extends Component {
 
                     <th scope="col">Name</th>
                     <th scope="col">Password</th>
-                    <th scope="col">Group</th>
-                    <th scope="col">Profile</th>
+                    <th scope="col">Batch</th>
+                    <th scope="col">Vendor</th>
+                    <th scope="col">Plan</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Validity</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -74,9 +76,11 @@ class VoucherApi extends Component {
 
                             <td>{item.name}</td>
                             <td>{item.password}</td>
+                            <td>{item.batch}</td>
                             <td>{item.realm}</td>
                             <td>{item.profile}</td>
                             <td>{item.status}</td>
+                            <td>{item.time_valid_in_words}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">
                                 <Button className='btn-sm btn-danger' onClick={() => this.onVoucherConfirm(item.id)}>

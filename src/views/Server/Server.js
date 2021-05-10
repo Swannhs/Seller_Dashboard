@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 import {AiFillEdit} from "react-icons/all";
+import {Button} from "reactstrap";
 
 class Server extends Component {
     state = {
@@ -71,9 +72,12 @@ class Server extends Component {
                                     <td>{item.api_server_port}</td>
                                     <td>{item.note}</td>
                                     <td>
-                                        <Link to={'/admin/root/Server-edit/' + item.id}>
-                                            <AiFillEdit/>
-                                        </Link>
+                                        <Button className='btn-sm btn-primary'>
+                                            <Link to={'/admin/root/Server-edit/' + item.id}>
+                                                <AiFillEdit/>
+                                            </Link>
+                                        </Button>
+
                                     </td>
                                 </tr>
                             )

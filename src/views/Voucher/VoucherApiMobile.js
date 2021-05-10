@@ -82,46 +82,67 @@ function Row(props) {
                     {row.name}
                 </TableCell>
                 <TableCell>{row.password}</TableCell>
+                <TableCell>{row.status}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                                <div className="list-group-item">
-                                    <div className="ui grid text-center">
-                                        <div className="eight wide column">
-                                            <b>Profile</b>
-                                        </div>
-                                        <div className="eight wide column">
-                                            {row.profile}
-                                        </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Batch</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.batch}
                                     </div>
                                 </div>
+                            </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Vendor</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.realm}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Plan</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.profile}
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div className="list-group-item">
-                                    <div className="ui grid text-center">
-                                        <div className="eight wide column">
-                                            <b>Realm</b>
-                                        </div>
-                                        <div className="eight wide column">
-                                            {row.realm}
-                                        </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Validity</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        {row.time_valid_in_words}
                                     </div>
                                 </div>
+                            </div>
 
-                                <div className="list-group-item">
-                                    <div className="ui grid text-center">
-                                        <div className="eight wide column">
-                                            <b>Action</b>
-                                        </div>
-                                        <div className="eight wide column">
-                                            <div className='border border-danger text-danger d-inline p-1'
-                                                    onClick={() => onVoucherConfirm(row.id)}>
-                                                <BiReset aria-placeholder='reset'/>
-                                            </div>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Action</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        <div className='border border-danger text-danger d-inline p-1'
+                                                onClick={() => onVoucherConfirm(row.id)}>
+                                            <BiReset aria-placeholder='reset'/>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
                             {/*-----------------Previous---------------------*/}
                             {/*<Table size="small" aria-label="purchases">*/}
@@ -171,6 +192,7 @@ const VoucherApiMobile = ({data}) => {
                         <TableCell/>
                         <TableCell>Name</TableCell>
                         <TableCell>Password</TableCell>
+                        <TableCell>Status</TableCell>
                         {/*<TableCell align="right">Passwor</TableCell>*/}
                     </TableRow>
                 </TableHead>

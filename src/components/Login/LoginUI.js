@@ -26,7 +26,7 @@ class LoginUi extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        await RadiusApi.post('/Dashboard/authenticate.json', data)
+        await RadiusApi.post('/dashboard/authenticate.json', data)
             .then(response => {
 
                 // Get the token
@@ -39,6 +39,7 @@ class LoginUi extends Component {
                     this.setState({loading: false})
                 } else {
                     if (response.data.data.active) {
+                        cookies.set('Name', response.data.data.user.username)
                         cookies.set('Role', response.data.data.role)
                         cookies.set('Token', response.data.data.token);
                         this.props.history.push('/admin/dashboard')

@@ -32,7 +32,7 @@ class VoucherList extends Component {
 
     onApiCall = () => {
         const cookie = new Cookies
-        RadiusApi.get('/vouchers/index-user-vouchers.json', {
+        RadiusApi.get('/vouchers/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
@@ -53,12 +53,12 @@ class VoucherList extends Component {
         event.preventDefault();
         this.setState({loading: true})
         const cookie = new Cookies
-        RadiusApi.get('/vouchers/index-user-vouchers.json', {
+        RadiusApi.get('/vouchers/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                q: this.state.search,
+                query: this.state.search,
                 token: cookie.get('Token')
             }
         })
@@ -96,7 +96,7 @@ class VoucherList extends Component {
 
     onPagination() {
         let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
+        return Math.ceil(totalPage)
     }
 
     async onPageChaneHandler(event, data) {
@@ -108,7 +108,7 @@ class VoucherList extends Component {
 
     onChangeHandle = () => {
         this.setState({
-            search: event.target.value + '%'
+            search: event.target.value
         })
     }
 
@@ -118,26 +118,37 @@ class VoucherList extends Component {
             <>
                 <div className="group-item">
                     <div className="ui grid">
-                        <div className="eight wide column">
-                            <form onSubmit={this.onSearchApiCall}>
-                                <div className="ui icon input">
-                                    <input type="text" placeholder="Search Name"
-                                           onChange={this.onChangeHandle}
-                                    />
-                                    <i className="circular search link icon"
-                                       onClick={this.onSearchApiCall}
-                                    />
-                                </div>
-                            </form>
-                            {/*<SearchField*/}
-                            {/*    placeholder='Search Name'*/}
-                            {/*    onChange={this.onChangeHandle}*/}
-                            {/*    onEnter={this.onSearchApiCall}*/}
-                            {/*/>*/}
-                        </div>
                         {
                             isMobile ?
-                                <div className="eight wide column right aligned">
+                                <div className="ten wide column">
+                                    <form onSubmit={this.onSearchApiCall}>
+                                        <div className="ui icon input">
+                                            <input  type="text" placeholder="Search Name"
+                                                    onChange={this.onChangeHandle}
+                                            />
+                                            <i className="circular search link icon"
+                                               onClick={this.onSearchApiCall}
+                                            />
+                                        </div>
+                                    </form>
+                                </div> :
+                                <div className="eight wide column">
+                                    <form onSubmit={this.onSearchApiCall}>
+                                        <div className="ui icon input">
+                                            <input  type="text" placeholder="Search Name"
+                                                    onChange={this.onChangeHandle}
+                                            />
+                                            <i className="circular search link icon"
+                                               onClick={this.onSearchApiCall}
+                                            />
+                                        </div>
+                                    </form>
+                                </div>
+                        }
+
+                        {
+                            isMobile ?
+                                <div className="six wide column right aligned">
                                     <Link to='/admin/voucher/create'>
                                         <button className='ui button primary small'>
                                             New

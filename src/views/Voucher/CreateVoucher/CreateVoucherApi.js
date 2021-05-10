@@ -18,7 +18,6 @@ class CreateVoucherApi extends Component {
             profile_id: null,
             quantity: null,
             pwd_length: 5,
-            batch: '',
             never_expire: 'never_expire',
             extra_name: '',
             extra_value: '',
@@ -83,7 +82,7 @@ class CreateVoucherApi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-database"/> </span>
                             </div>
-                            <input className="form-control" placeholder="Quantity" type="number"
+                            <input className="form-control" placeholder="ex: 10" type="number" max="1000"
                                    value={this.state.quantity}
                                    onChange={event => this.setState({quantity: event.target.value})}
                                    required={true}
@@ -91,30 +90,17 @@ class CreateVoucherApi extends Component {
                         </div>
 
 
-                        <h3 className='mt-3 text-black-50'>Precede Name</h3>
+                        <h3 className='mt-3 text-black-50'>Prefix</h3>
 
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-table"/> </span>
                             </div>
-                            <input className="form-control" placeholder="Precede" type="text"
+                            <input className="form-control" placeholder="ex: abc" type="text"
                                    value={this.state.precede}
                                    onChange={event => this.setState({precede: event.target.value})}
                                    required={true}
-                                   pattern="[a-z]"
-                            />
-                        </div>
-
-                        <h3 className='mt-3 text-black-50'>Batch Name</h3>
-
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-user"/> </span>
-                            </div>
-                            <input className="form-control" placeholder="Branch" type="text"
-                                   value={this.state.batch}
-                                   onChange={event => this.setState({batch: event.target.value})}
-                                   required={true}
+                                   pattern="[a-z]{1-3}"
                             />
                         </div>
 

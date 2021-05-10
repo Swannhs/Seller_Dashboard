@@ -8,13 +8,15 @@ import {isMobile} from 'react-device-detect';
 
 class Header extends Component {
     state = {
-        role: ''
+        role: '',
+        name: ''
     }
 
     componentDidMount() {
         let cookie = new Cookies
         this.setState({
-            role: cookie.get('Role')
+            role: cookie.get('Role'),
+            name: cookie.get('Name')
         })
     }
 
@@ -30,8 +32,7 @@ class Header extends Component {
     //     };
     //     document.body.appendChild(node);
     // };
-    //----------------Sidebar open button-------------------------
-
+    //----------------Sidebar open button------------------------
 
     getBrandText = () => {
         for (let i = 0; i < routes.length; i++) {
@@ -78,9 +79,14 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className='m-0'
+                                                onClick={() => {
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/dashboard'>
-                                                    <AiFillDashboard/> Dashboard
+                                                    <div>
+                                                        <AiFillDashboard/> Dashboard
+                                                    </div>
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
@@ -89,6 +95,9 @@ class Header extends Component {
                                                 <Nav.Item>
                                                     <Nav.Link
                                                         className='m-0'
+                                                        onClick={() => {
+                                                            document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                        }}
                                                     >
                                                         <Link to='/admin/users/view'>
                                                             <AiOutlineUser/> User
@@ -100,6 +109,9 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className='m-0'
+                                                onClick={() => {
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/voucher/view'>
                                                     <BsListNested/> Voucher
@@ -109,6 +121,9 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className='m-0'
+                                                onClick={() => {
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/voucher/transaction'>
                                                     <BiMoney/> Credits
@@ -118,6 +133,9 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className='m-0'
+                                                onClick={() => {
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/cash/transaction'>
                                                     <BiMoney/> Payments
@@ -127,11 +145,14 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className="m-0"
-                                                onClick={(e) => e.preventDefault()}
+                                                onClick={event => {
+                                                    event.preventDefault()
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/profile'>
                                                     <span className="no-icon">
-                                                        <i className="fas fa-user-alt"/> Profile
+                                                        <i className="fas fa-user-alt"/> Hi, {this.state.name}
                                                     </span>
                                                 </Link>
                                             </Nav.Link>
@@ -142,11 +163,14 @@ class Header extends Component {
                                         <Nav.Item>
                                             <Nav.Link
                                                 className="m-0"
-                                                onClick={(e) => e.preventDefault()}
+                                                onClick={event => {
+                                                    event.preventDefault()
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                }}
                                             >
                                                 <Link to='/admin/profile'>
                                                     <span className="no-icon">
-                                                        <i className="fas fa-user-alt"/> Profile
+                                                        <i className="fas fa-user-alt"/> Hi, {this.state.name}
                                                     </span>
                                                 </Link>
                                             </Nav.Link>

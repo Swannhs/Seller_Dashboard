@@ -30,9 +30,7 @@ class Footer extends Component {
             {/*  </li>*/}
             {/*</ul>*/}
             <p className="copyright text-center">
-              © {new Date().getFullYear()}{" "}
-              made by
-              <a href="https://swann.netlify.app/"> Swann</a>
+              © {new Date().getFullYear()} <a href="https://securetunnel.xyz/"> Secure Tunnel</a>, All rights reserved
             </p>
           </nav>
         </Container>
