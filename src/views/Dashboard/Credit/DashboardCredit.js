@@ -56,7 +56,7 @@ class DashboardCredit extends Component {
                                             <Row>
                                                 <Col>
                                                     <div className='mt-2 text-left ml-4'>
-                                                        Active
+                                                        Credit
                                                     </div>
                                                 </Col>
                                                 <Col>
@@ -68,7 +68,7 @@ class DashboardCredit extends Component {
                                             <Row>
                                                 <Col>
                                                     <div className='mt-2 text-left ml-4'>
-                                                        Online
+                                                        Debit
                                                     </div>
                                                 </Col>
                                                 <Col>
