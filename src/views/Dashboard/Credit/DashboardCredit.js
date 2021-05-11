@@ -31,31 +31,57 @@ class DashboardCredit extends Component {
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
-                            <Col xs="5">
+                            <Col xs="3">
                                 <div className="icon-big text-center icon-warning">
                                     <i className="far fa-money-bill text-info"/>
                                 </div>
                             </Col>
                             {
                                 this.state.loading ? <div className="mt-5 ui active centered inline loader mt-3"/> :
-                                    <Col xs="7">
-                                        <div className="numbers">
-                                            <Card.Title>
-                                                Balance: $ {this.state.credit.balance}
-                                            </Card.Title>
-                                            <Card.Title>
-                                                Credit: $ {this.state.credit.credit}
-                                            </Card.Title>
-                                            <Card.Title>
-                                                Debit: $ {this.state.credit.debit}
-                                            </Card.Title>
-                                        </div>
+                                    <Col xs="9">
+                                        <Card.Title>
+                                            <Row>
+                                                <Col>
+                                                    <div className='mt-2 text-left ml-4'>
+                                                        Balance
+                                                    </div>
+                                                </Col>
+                                                <Col>
+                                                    <h3 className='text-right'>{this.state.credit.balance}</h3>
+                                                </Col>
+                                            </Row>
+                                        </Card.Title>
+
+                                        <Card.Title>
+                                            <Row>
+                                                <Col>
+                                                    <div className='mt-2 text-left ml-4'>
+                                                        Active
+                                                    </div>
+                                                </Col>
+                                                <Col>
+                                                    <h3 className='text-right'>{this.state.credit.credit}</h3>
+                                                </Col>
+                                            </Row>
+                                        </Card.Title>
+                                        <Card.Title>
+                                            <Row>
+                                                <Col>
+                                                    <div className='mt-2 text-left ml-4'>
+                                                        Online
+                                                    </div>
+                                                </Col>
+                                                <Col>
+                                                    <h3 className='text-right'>{this.state.credit.debit}</h3>
+                                                </Col>
+                                            </Row>
+                                        </Card.Title>
                                     </Col>
                             }
                         </Row>
                     </Card.Body>
                     <Card.Footer>
-                        <hr></hr>
+                        <hr/>
                         <div className="stats">
                             <b>Credit</b>
                         </div>

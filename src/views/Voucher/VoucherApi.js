@@ -79,7 +79,13 @@ class VoucherApi extends Component {
                             <td>{item.batch}</td>
                             <td>{item.realm}</td>
                             <td>{item.profile}</td>
-                            <td>{item.status}</td>
+                            <td>
+                                {
+                                    item.status === 'new'? <span className="ui green label small">New</span>:
+                                        item.status === 'used' ? <span className="ui yellow label small">Used</span> :
+                                            <span className="ui red label small text-capitalize">{item.status}</span>
+                                }
+                            </td>
                             <td>{item.time_valid_in_words}</td>
                             {/*<td>{item.active ? <span>Active</span> : <span>Inactive</span>}</td>*/}
                             <td data-label="Action">

@@ -176,15 +176,7 @@ class VoucherList extends Component {
 
                     </div>
                 </div>
-                {/*<div className="ui grid">*/}
-                {/*    <div className="ui text-right floated column">*/}
-                {/*        <Link to='/admin/voucher/create'>*/}
-                {/*            <button className='ui button primary'>*/}
-                {/*                New*/}
-                {/*            </button>*/}
-                {/*        </Link>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+
 
                 {
                     this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :

@@ -39,11 +39,11 @@ class Sidebar extends Component {
                         <div className="sidebar-wrapper">
                             <div className="logo d-flex align-items-center justify-content-start">
                                 <Link
-                                    to="/"
+                                    to="/admin/dashboard"
                                     className="simple-text logo-mini mx-1"
                                 >
                                 </Link>
-                                <Link className="simple-text text-capitalize" to='/'>
+                                <Link className="simple-text text-capitalize" to='/admin/dashboard'>
                                     Reseller Panel
                                 </Link>
                             </div>

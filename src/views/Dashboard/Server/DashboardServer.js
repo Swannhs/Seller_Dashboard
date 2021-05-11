@@ -31,24 +31,34 @@ class DashboardServer extends Component {
                 <Card className="card-stats">
                     <Card.Body>
                         <Row>
-                            <Col xs="5">
+                            <Col xs="3">
                                 <div className="icon-big text-center icon-warning">
                                     <i className="fas fa-server text-danger"/>
                                 </div>
                             </Col>
                             {
                                 this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
-                                    <Col xs="7">
+                                    <Col xs="9">
                                         <div className="numbers">
-                                            <p className="card-category">Server</p>
-                                            <Card.Title>Total: {this.state.servers}</Card.Title>
+                                            <Card.Title>
+                                                <Row>
+                                                    <Col>
+                                                        <div className='mt-2 text-left ml-4'>
+                                                            Total
+                                                        </div>
+                                                    </Col>
+                                                    <Col>
+                                                        <h3 className='text-right'>{this.state.servers}</h3>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Title>
                                         </div>
                                     </Col>
                             }
                         </Row>
                     </Card.Body>
                     <Card.Footer>
-                        <hr></hr>
+                        <hr/>
                         <div className="stats">
                             <b>Server</b>
                         </div>

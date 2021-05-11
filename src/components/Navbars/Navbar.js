@@ -65,7 +65,7 @@ class Header extends Component {
                             {this.getBrandText()}
                         </Navbar.Brand>
                     </div>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-2">
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-2" id='navbar-togglered'>
                         <span className="navbar-toggler-bar burger-lines"/>
                         <span className="navbar-toggler-bar burger-lines"/>
                         <span className="navbar-toggler-bar burger-lines"/>
@@ -80,7 +80,8 @@ class Header extends Component {
                                             <Nav.Link
                                                 className='m-0'
                                                 onClick={() => {
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse';
+                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                 }}
                                             >
                                                 <Link to='/admin/dashboard'>
@@ -97,6 +98,7 @@ class Header extends Component {
                                                         className='m-0'
                                                         onClick={() => {
                                                             document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                            document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                         }}
                                                     >
                                                         <Link to='/admin/users/view'>
@@ -111,6 +113,7 @@ class Header extends Component {
                                                 className='m-0'
                                                 onClick={() => {
                                                     document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                 }}
                                             >
                                                 <Link to='/admin/voucher/view'>
@@ -123,6 +126,7 @@ class Header extends Component {
                                                 className='m-0'
                                                 onClick={() => {
                                                     document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                 }}
                                             >
                                                 <Link to='/admin/voucher/transaction'>
@@ -135,6 +139,7 @@ class Header extends Component {
                                                 className='m-0'
                                                 onClick={() => {
                                                     document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                 }}
                                             >
                                                 <Link to='/admin/cash/transaction'>
@@ -148,6 +153,7 @@ class Header extends Component {
                                                 onClick={event => {
                                                     event.preventDefault()
                                                     document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
                                                 }}
                                             >
                                                 <Link to='/admin/profile'>

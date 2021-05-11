@@ -79,10 +79,16 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.name}
+                    <span>{row.name}</span>
                 </TableCell>
                 <TableCell>{row.password}</TableCell>
-                <TableCell>{row.status}</TableCell>
+                <TableCell>
+                    {
+                    row.status === 'new'? <span className="ui green label small">New</span>:
+                        row.status === 'used' ? <span className="ui yellow label small">Used</span> :
+                            <span className="ui red label small text-capitalize">{row.status}</span>
+                    }
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
