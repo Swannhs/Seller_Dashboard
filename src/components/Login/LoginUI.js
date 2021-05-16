@@ -29,9 +29,6 @@ class LoginUi extends Component {
         await RadiusApi.post('/dashboard/authenticate.json', data)
             .then(response => {
 
-                // Get the token
-                // console.log(response.data.errors)
-
                 const cookies = new Cookies();
 
                 if (response.data.errors) {
@@ -50,7 +47,8 @@ class LoginUi extends Component {
             })
             .catch(error => {
                 this.setState({
-                    network: error
+                    network: error,
+                    loading: false
                 })
             });
     }
