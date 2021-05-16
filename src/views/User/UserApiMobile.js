@@ -64,9 +64,15 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell className='text-capitalize' component="th" scope="row">
-                    {row.username}
+                    <Box margin={1}>
+                        {row.username}
+                    </Box>
                 </TableCell>
-                <TableCell className='text-capitalize'>{row.role}</TableCell>
+                <TableCell className='text-capitalize'>
+                    <Box margin={1}>
+                        {row.role}
+                    </Box>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -129,8 +135,12 @@ const CollapsibleTable = ({data}) => {
                 <TableHead>
                     <TableRow>
                         <TableCell/>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Role</TableCell>
+                        <TableCell>
+                            <span className='ml-2'>Name</span>
+                        </TableCell>
+                        <TableCell>
+                            <span className='ml-2'>Role</span>
+                        </TableCell>
                         {/*<TableCell align="right">Passwor</TableCell>*/}
                     </TableRow>
                 </TableHead>
