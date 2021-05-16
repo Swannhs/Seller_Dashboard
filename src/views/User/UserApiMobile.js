@@ -59,9 +59,11 @@ function Row(props) {
         <>
             <TableRow className={classes.root} key={row.id}>
                 <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>
+                    <div className='mt-1'>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                            {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                        </IconButton>
+                    </div>
                 </TableCell>
                 <TableCell className='text-capitalize' component="th" scope="row">
                     <Box margin={1}>

@@ -54,7 +54,7 @@ class GenerateBalance extends Component {
                     <VoucherGroup onChange={this.onCreateGroup}/>
                     <VoucherProfile onChange={this.onCreateProfile}/>
 
-                    <h3 className='mt-3 text-black-50'>Amount</h3>
+                    <h4 className='mt-3 text-black-50'>Amount</h4>
 
                     <div className="form-group input-group">
                         <div className="input-group-prepend">
@@ -67,7 +67,7 @@ class GenerateBalance extends Component {
                         />
                     </div>
 
-                    <h3 className='mt-3 text-black-50'>Quantity Rate</h3>
+                    <h4 className='mt-3 text-black-50'>Quantity Rate</h4>
 
                     <div className="form-group input-group">
                         <div className="input-group-prepend">

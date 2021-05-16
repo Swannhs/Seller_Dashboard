@@ -36,14 +36,22 @@ function Row(props) {
         <>
             <TableRow className={classes.root} key={row.id}>
                 <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>
+                    <div className='mt-1'>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                            {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                        </IconButton>
+                    </div>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.profile.name}
+                    <Box margin={1}>
+                        {row.profile.name}
+                    </Box>
                 </TableCell>
-                <TableCell>{row.balance}</TableCell>
+                <TableCell>
+                    <Box margin={1}>
+                        {row.balance}
+                    </Box>
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
