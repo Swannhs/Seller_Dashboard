@@ -32,6 +32,7 @@ import Profile from "./components/Profile/Profile";
 import EditTweak from "./views/Tweak/EditTweak";
 import EditServer from "./views/Server/EditServer";
 import ViewTweak from "./views/Tweak/ViewTweak";
+import ChangePassword from "./components/Password/ChangePassword";
 
 
 const dashboardRoutes = [
@@ -48,7 +49,12 @@ const dashboardRoutes = [
         component: Profile,
         layout: "/admin",
     },
-
+    {
+        path: "/change-password",
+        name: "Profile",
+        component: ChangePassword,
+        layout: "/admin",
+    },
 
     //--------------------------User Route Start----------------------------------
     {

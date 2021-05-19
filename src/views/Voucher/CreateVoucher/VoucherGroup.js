@@ -45,7 +45,7 @@ class VoucherGroup extends Component {
     render() {
         return (
             <>
-                <h3 className='text-black-50'>Realm</h3>
+                <h4 className='text-black-50'>Realm</h4>
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">

@@ -80,8 +80,7 @@ class Header extends Component {
                                             <Nav.Link
                                                 className='m-0'
                                                 onClick={() => {
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse';
-                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/dashboard'>
@@ -97,8 +96,7 @@ class Header extends Component {
                                                     <Nav.Link
                                                         className='m-0'
                                                         onClick={() => {
-                                                            document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
-                                                            document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                            document.getElementById('navbar-togglered').click();
                                                         }}
                                                     >
                                                         <Link to='/admin/users/view'>
@@ -112,8 +110,7 @@ class Header extends Component {
                                             <Nav.Link
                                                 className='m-0'
                                                 onClick={() => {
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
-                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/voucher/view'>
@@ -125,8 +122,7 @@ class Header extends Component {
                                             <Nav.Link
                                                 className='m-0'
                                                 onClick={() => {
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
-                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/voucher/transaction'>
@@ -138,8 +134,7 @@ class Header extends Component {
                                             <Nav.Link
                                                 className='m-0'
                                                 onClick={() => {
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
-                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/cash/transaction'>
@@ -152,8 +147,7 @@ class Header extends Component {
                                                 className="m-0"
                                                 onClick={event => {
                                                     event.preventDefault()
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
-                                                    document.getElementById('navbar-togglered').className = 'mr-2 navbar-toggler collapsed';
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/profile'>
@@ -171,7 +165,7 @@ class Header extends Component {
                                                 className="m-0"
                                                 onClick={event => {
                                                     event.preventDefault()
-                                                    document.getElementById('basic-navbar-nav').className = 'navbar-collapse collapse'
+                                                    document.getElementById('navbar-togglered').click();
                                                 }}
                                             >
                                                 <Link to='/admin/profile'>

@@ -16,7 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {BiReset} from "react-icons/all";
-import { confirmAlert } from 'react-confirm-alert';
+import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const useRowStyles = makeStyles({
@@ -74,20 +74,31 @@ function Row(props) {
         <>
             <TableRow className={classes.root} key={row.id}>
                 <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>
+                    <div className='mt-1'>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                            {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                        </IconButton>
+                    </div>
+
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    <span>{row.name}</span>
+                    <Box margin={1}>
+                        {row.name}
+                    </Box>
                 </TableCell>
-                <TableCell>{row.password}</TableCell>
                 <TableCell>
-                    {
-                    row.status === 'new'? <span className="ui green label small">New</span>:
-                        row.status === 'used' ? <span className="ui yellow label small">Used</span> :
-                            <span className="ui red label small text-capitalize">{row.status}</span>
-                    }
+                    <Box margin={1}>
+                        {row.password}
+                    </Box>
+                </TableCell>
+                <TableCell>
+                    <Box margin={1}>
+                        {
+                            row.status === 'new' ? <span className="ui green label small">New</span> :
+                                row.status === 'used' ? <span className="ui yellow label small">Used</span> :
+                                    <span className="ui red label small text-capitalize">{row.status}</span>
+                        }
+                    </Box>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -143,7 +154,7 @@ function Row(props) {
                                     </div>
                                     <div className="eight wide column">
                                         <div className='border border-danger text-danger d-inline p-1'
-                                                onClick={() => onVoucherConfirm(row.id)}>
+                                             onClick={() => onVoucherConfirm(row.id)}>
                                             <BiReset aria-placeholder='reset'/>
                                         </div>
                                     </div>

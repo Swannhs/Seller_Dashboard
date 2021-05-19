@@ -70,13 +70,13 @@ class CreateVoucherApi extends Component {
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
-                    <h2 className="card-title mt-3 text-center p-3">Create Voucher</h2>
+                    <h3 className="card-title mt-3 text-center p-3">Create Voucher</h3>
 
                     <form onSubmit={this.onSubmitVoucher}>
                         <VoucherGroup onChange={this.onGroupHandle}/>
                         <VoucherProfile onChange={this.onProfileHandle}/>
 
-                        <h3 className='mt-3 text-black-50'>How Many?</h3>
+                        <h4 className='mt-3 text-black-50'>How Many?</h4>
 
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
@@ -90,7 +90,7 @@ class CreateVoucherApi extends Component {
                         </div>
 
 
-                        <h3 className='mt-3 text-black-50'>Prefix</h3>
+                        <h4 className='mt-3 text-black-50'>Prefix</h4>
 
                         <div className="form-group input-group">
                             <div className="input-group-prepend">

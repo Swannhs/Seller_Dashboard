@@ -111,7 +111,7 @@ class Transfer extends Component {
                         <VoucherGroup onChange={this.onCreateGroup}/>
                         <VoucherProfile onChange={this.onCreateProfile}/>
 
-                        <h3 className='text-black-50'>Vouchers</h3>
+                        <h4 className='text-black-50'>Vouchers</h4>
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">
@@ -132,7 +132,7 @@ class Transfer extends Component {
                         <p className='text-danger'>{this.state.error.balance}</p>
 
 
-                        <h3 className='text-black-50'>Amount Per Quantity rate</h3>
+                        <h4 className='text-black-50'>Amount Per Quantity rate</h4>
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">

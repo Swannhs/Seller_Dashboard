@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {confirmAlert} from "react-confirm-alert";
 
 class CreateUserUi extends Component {
 
@@ -39,7 +38,7 @@ class CreateUserUi extends Component {
                     <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
 
-                        <h2 className="card-title mt-3 text-center p-3">Create Account</h2>
+                        <h3 className="card-title mt-3 text-center p-3">Create Account</h3>
                         <form onSubmit={this.onFormSubmit}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">

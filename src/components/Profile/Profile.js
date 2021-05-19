@@ -42,7 +42,6 @@ class Profile extends Component {
                             <Link to='/admin/dashboard'>
                                 <button className='ui button small'>Back</button>
                             </Link>
-
                         </div>
                     </div>
 
@@ -68,14 +67,19 @@ class Profile extends Component {
                                             <h4 className='text-capitalize'>{this.state.username}</h4>
                                             <p className="text-secondary mb-1 text-capitalize">{this.state.role}</p>
                                         </div>
+                                        <div className="mt-3">
+                                            <Link to='/admin/change-password'>
+                                                <button className='ui button green'>
+                                                    Change Password
+                                                </button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         );
     }
