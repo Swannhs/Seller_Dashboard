@@ -49,7 +49,7 @@ class CashSent extends Component {
                                                 <td>{item.user.username}</td>
                                                 {item.status ? <td className='text-success'>Accepted</td> :
                                                     <td>Pending</td>}
-                                                <td>${item.sent}</td>
+                                                <td>{item.sent}</td>
                                             </tr>
                                         )
                                     })
