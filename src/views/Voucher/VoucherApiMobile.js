@@ -49,7 +49,7 @@ const onVoucherReset = (props) => {
     }
 
     let cookie = new Cookies
-    RadiusApi.post('/vouchers/voucher-reset.json', reset, {
+    RadiusApi.post('/vouchers/reset.json', reset, {
         params: {
             token: cookie.get('Token')
         }
