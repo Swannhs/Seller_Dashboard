@@ -24,6 +24,9 @@ function Dashboard() {
 
             <Container>
                 <Row>
+                    {/*------------------------------Credit Section Start----------------------------*/}
+                    <DashboardCredit/>
+                    {/*------------------------------Credit Section End----------------------------*/}
 
                     {/*------------------------------Voucher Section Start--------------------------*/}
                     <DashboardVoucher/>
@@ -32,10 +35,6 @@ function Dashboard() {
                     {/*------------------------------Cash Section Start----------------------------*/}
                     <DashboardCash/>
                     {/*------------------------------Cash Section End----------------------------*/}
-
-                    {/*------------------------------Credit Section Start----------------------------*/}
-                    <DashboardCredit/>
-                    {/*------------------------------Credit Section End----------------------------*/}
 
                     {/*------------------------------Server Section Start----------------------------*/}
                     <DashboardServer/>

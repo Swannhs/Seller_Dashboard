@@ -83,7 +83,7 @@ class DashboardCredit extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <b>Credit</b>
+                            <b>Credits</b>
                         </div>
                     </Card.Footer>
                 </Card>
