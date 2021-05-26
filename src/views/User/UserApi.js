@@ -4,9 +4,23 @@ import {Link} from "react-router-dom";
 import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import DeleteUser from "./Action/DeleteUser";
 import {Button} from "reactstrap";
+import Cookies from "universal-cookie/lib";
 
 
 class VoucherApi extends Component {
+    state = {
+        root: false
+    }
+
+    componentDidMount() {
+        let cookie = new Cookies;
+        let role = cookie.get('Role')
+        if (role === 'admin') {
+            this.setState({
+                root: true
+            })
+        }
+    }
 
     render() {
         return (
@@ -19,6 +33,12 @@ class VoucherApi extends Component {
                     <th scope="col">Role</th>
 
                     <th scope="col">Status</th>
+
+                    {
+                        this.state.root ?
+                            <th scope="col">Token</th> : null
+                    }
+
                     {/*<Dropdown text='Status' multiple icon='filter'>*/}
                     {/*    <Dropdown.Menu>*/}
                     {/*        <Dropdown.Menu scrolling>*/}
@@ -62,6 +82,10 @@ class VoucherApi extends Component {
                                 {/*</div>*/}
                             </td>
 
+                            {
+                                this.state.root ?
+                                    <td data-label="Name">{item.token}</td> : null
+                            }
 
                             <td data-label="Action">
                                 <Link to={'/admin/users/view/' + item.id}>

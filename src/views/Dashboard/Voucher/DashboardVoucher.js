@@ -83,7 +83,7 @@ class DashboardVoucher extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <b>Voucher</b>
+                            <b>Vouchers</b>
                         </div>
                     </Card.Footer>
                 </Card>

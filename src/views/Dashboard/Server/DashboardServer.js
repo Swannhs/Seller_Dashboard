@@ -60,7 +60,7 @@ class DashboardServer extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <b>Server</b>
+                            <b>Servers</b>
                         </div>
                     </Card.Footer>
                 </Card>
