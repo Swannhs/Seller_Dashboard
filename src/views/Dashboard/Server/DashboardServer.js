@@ -43,12 +43,10 @@ class DashboardServer extends Component {
                                             <Card.Title>
                                                 <Row>
                                                     <Col>
-                                                        <div className='mt-2 text-left ml-4'>
-                                                            Total
-                                                        </div>
+                                                        <div className='text-left mt-2 ml-4'>Total</div>
                                                     </Col>
                                                     <Col>
-                                                        <h3 className='text-right'>{this.state.servers}</h3>
+                                                        <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.servers}</div>
                                                     </Col>
                                                 </Row>
                                             </Card.Title>
