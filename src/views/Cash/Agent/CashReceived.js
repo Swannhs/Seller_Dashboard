@@ -47,7 +47,7 @@ class CashReceived extends Component {
                                         return (
                                             <tr key={item.id}>
                                                 <td>{item.transaction}</td>
-                                                <td>{item.user.username}</td>
+                                                <td>{item.user}</td>
                                                 {item.status ? <td className='text-success'>Accepted</td> :
                                                     <td>Pending</td>}
                                                 <td>{item.received}</td>

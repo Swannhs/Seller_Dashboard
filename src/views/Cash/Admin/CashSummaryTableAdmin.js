@@ -42,7 +42,7 @@ class CashSummaryAgent extends Component {
                         this.state.items ? this.state.items.map((item) => {
                             return (
                                 <tr key={item.id}>
-                                    <td>{item.user.username}</td>
+                                    <td>{item.user}</td>
                                     <td>{item.payable}</td>
                                     <td>{item.paid}</td>
                                     <td>{item.receivable}</td>
