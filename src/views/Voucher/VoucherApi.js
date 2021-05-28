@@ -32,7 +32,7 @@ class VoucherApi extends Component {
         }
 
         let cookie = new Cookies
-        RadiusApi.post('/vouchers/vouchers/reset.json', reset, {
+        RadiusApi.post('/vouchers/reset.json', reset, {
             params: {
                 token: cookie.get('Token')
             }

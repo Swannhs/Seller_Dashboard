@@ -42,12 +42,10 @@ class DashboardCash extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Payable
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Payable</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.cash.payable}</h3>
+                                                    <div className='text-right font-weight-bold mt-2'>{this.state.cash.payable}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
@@ -55,36 +53,30 @@ class DashboardCash extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Paid
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Paid</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.cash.paid}</h3>
+                                                    <div className='text-right font-weight-bold mt-2'>{this.state.cash.paid}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Receivable
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Receivable</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.cash.receivable}</h3>
+                                                    <div className='text-right font-weight-bold mt-2'>{this.state.cash.receivable}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Received
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Received</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.cash.received}</h3>
+                                                    <div className='text-right font-weight-bold mt-2'>{this.state.cash.received}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>

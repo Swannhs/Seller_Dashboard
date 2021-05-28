@@ -45,7 +45,7 @@ const onVoucherConfirm = props => {
 
 const onVoucherReset = (props) => {
     let reset = {
-        reset: props
+        voucher_id: props
     }
 
     let cookie = new Cookies
