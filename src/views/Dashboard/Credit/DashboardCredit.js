@@ -42,12 +42,10 @@ class DashboardCredit extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Balance
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Balance</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.credit.balance}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.credit.balance}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
@@ -55,24 +53,20 @@ class DashboardCredit extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Credit
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Credit</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.credit.credit}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.credit.credit}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Debit
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Debit</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.credit.debit}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.credit.debit}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
@@ -83,7 +77,7 @@ class DashboardCredit extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <b>Credit</b>
+                            <b>Credits</b>
                         </div>
                     </Card.Footer>
                 </Card>

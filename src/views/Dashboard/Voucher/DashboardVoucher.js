@@ -42,12 +42,10 @@ class DashboardVoucher extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Total
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Online</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.vouchers.total}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.vouchers.online}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
@@ -55,24 +53,21 @@ class DashboardVoucher extends Component {
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Active
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Active</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.vouchers.active}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.vouchers.active}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
+
                                         <Card.Title>
                                             <Row>
                                                 <Col>
-                                                    <div className='mt-2 text-left ml-4'>
-                                                        Online
-                                                    </div>
+                                                    <div className='text-left mt-2 ml-4'>Total</div>
                                                 </Col>
                                                 <Col>
-                                                    <h3 className='text-right'>{this.state.vouchers.online}</h3>
+                                                    <div className='text-right font-weight-bold mt-2 ml-4'>{this.state.vouchers.total}</div>
                                                 </Col>
                                             </Row>
                                         </Card.Title>
@@ -83,7 +78,7 @@ class DashboardVoucher extends Component {
                     <Card.Footer>
                         <hr/>
                         <div className="stats">
-                            <b>Voucher</b>
+                            <b>Vouchers</b>
                         </div>
                     </Card.Footer>
                 </Card>
