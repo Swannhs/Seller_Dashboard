@@ -8,7 +8,6 @@ import {Pagination} from "semantic-ui-react";
 
 class Server extends Component {
     state = {
-        root: '',
         server: [],
         page: 1,
         start: 0,
