@@ -37,7 +37,7 @@ class DashboardCredit extends Component {
                                 </div>
                             </Col>
                             {
-                                this.state.loading ? <div className="mt-5 ui active centered inline loader mt-3"/> :
+                                this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
                                     <Col xs="9">
                                         <Card.Title>
                                             <Row>
