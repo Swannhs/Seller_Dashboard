@@ -72,36 +72,38 @@ class CashSent extends Component {
     render() {
         return (
             <>
-                {this.state.loading ? <div className="ui active centered inline loader mt-5"/> :
-                    <>
-                        {this.state.cash.length ?
-                            <table className="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Trx ID</th>
-                                    <th scope="col">Receiver</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Paid</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    this.state.cash.map((item) => {
-                                        return (
-                                            <tr key={item.id}>
-                                                <td>{item.transaction}</td>
-                                                <td>{item.user}</td>
-                                                {item.status ? <td className='text-success'>Accepted</td> :
-                                                    <td>Pending</td>}
-                                                <td>{item.sent}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                                </tbody>
-                            </table>
-                            : <h3 className='text-center text-danger'>There is no sent history</h3>}
-                    </>
+                {
+                    this.state.loading ? <div className="ui active centered inline loader mt-5"/> :
+                        <>
+                            {
+                                this.state.cash.length ?
+                                    <table className="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Trx ID</th>
+                                            <th scope="col">Receiver</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Paid</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {
+                                            this.state.cash.map((item) => {
+                                                return (
+                                                    <tr key={item.id}>
+                                                        <td>{item.transaction}</td>
+                                                        <td>{item.user}</td>
+                                                        {item.status ? <td className='text-success'>Accepted</td> :
+                                                            <td>Pending</td>}
+                                                        <td>{item.sent}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                        </tbody>
+                                    </table>
+                                    : <h3 className='text-center text-danger'>There is no sent history</h3>}
+                        </>
                 }
                 {/*--------------------Pagination------------------------*/}
                 <tfoot>
