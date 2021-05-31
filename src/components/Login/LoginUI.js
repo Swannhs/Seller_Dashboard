@@ -21,11 +21,11 @@ class LoginUi extends Component {
     }
 
     componentDidMount() {
-        fetch('text.txt')
-            .then(response => response.text())
+        fetch('static/image/logo/logo.png')
             .then(data => {
+                console.log(data)
                 this.setState({
-                    imageUrl: data
+                    imageUrl: data.url
                 })
             });
     }
@@ -78,7 +78,7 @@ class LoginUi extends Component {
                         <div className='heading'>
 
                         <span className="login100-form-avatar">
-						            <img src={this.state.imageUrl} alt="AVATAR"/>
+                            <img src={this.state.imageUrl} alt='Logo'/>
                         </span>
                             <span className="login100-form-title p-b-70">
                                     Welcome
