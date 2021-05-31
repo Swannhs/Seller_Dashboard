@@ -13,10 +13,21 @@ class LoginUi extends Component {
             errors: '',
             network: '',
             inactive: '',
-            loading: false
+            loading: false,
+            imageUrl: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        fetch('text.txt')
+            .then(response => response.text())
+            .then(data => {
+                this.setState({
+                    imageUrl: data
+                })
+            });
     }
 
 
@@ -67,7 +78,7 @@ class LoginUi extends Component {
                         <div className='heading'>
 
                         <span className="login100-form-avatar">
-						            <img src='https://bootdey.com/img/Content/avatar/avatar7.png' alt="AVATAR"/>
+						            <img src={this.state.imageUrl} alt="AVATAR"/>
                         </span>
                             <span className="login100-form-title p-b-70">
                                     Welcome
