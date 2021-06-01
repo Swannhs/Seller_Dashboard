@@ -98,7 +98,7 @@ class VoucherSummaryAdmin extends Component {
                     <thead>
                     <tr>
                         <th scope="col">User Name</th>
-                        <th scope="col">Realm</th>
+                        <th scope="col">Vendor</th>
                         <th scope="col">Profile</th>
                         <th scope="col">Credit</th>
                         <th scope="col">Debit</th>

@@ -65,14 +65,14 @@ const dashboardRoutes = [
     },
     {
         path: '/users/view',
-        name: 'Users',
+        name: 'Sellers',
         component: UserList,
         layout: '/admin'
     },
 
     {
         path: '/users/create',
-        name: 'Create User',
+        name: 'Create Seller',
         component: CreateUserAction,
         layout: '/admin'
     },
@@ -88,13 +88,13 @@ const dashboardRoutes = [
     //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
-        name: "Reseller",
+        name: "Create Voucher",
         component: CreateVoucherApi,
         layout: "/admin",
     },
     {
         path: "/voucher/view",
-        name: "Voucher",
+        name: "Vouchers",
         component: VoucherList,
         layout: "/admin",
     },

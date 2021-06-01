@@ -89,7 +89,7 @@ class TransactionSent extends Component {
                                                         <th scope="col">Trx ID</th>
                                                         <th scope="col">Partner</th>
                                                         <th scope="col">Profile</th>
-                                                        <th scope="col">Group</th>
+                                                        <th scope="col">Vendor</th>
                                                         <th scope="col">credit</th>
                                                         <th scope="col">Debit</th>
                                                         <th scope="col">Cost</th>
