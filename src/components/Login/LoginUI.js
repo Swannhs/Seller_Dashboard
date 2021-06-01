@@ -23,7 +23,6 @@ class LoginUi extends Component {
     componentDidMount() {
         fetch('static/image/logo/logo.png')
             .then(data => {
-                console.log(data)
                 this.setState({
                     imageUrl: data.url
                 })
