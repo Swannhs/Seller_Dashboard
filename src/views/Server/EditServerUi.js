@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {Form} from "react-bootstrap";
 
 class EditServerUi extends Component {
@@ -14,7 +14,8 @@ class EditServerUi extends Component {
         ssl_port: '',
         proxy_port: '',
         api_server_port: '',
-        note: ''
+        note: '',
+        redirect: false
     }
 
     componentDidMount() {
@@ -52,7 +53,11 @@ class EditServerUi extends Component {
         })
             .then(response => {
                 if (response.data.success) {
+                    this.setState({
+                        redirect: true
+                    })
                     alert(response.data.message)
+
                 } else {
                     alert(response.data.message)
                     this.setState({
@@ -66,6 +71,10 @@ class EditServerUi extends Component {
 
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to='/admin/root/server'/>;
+        }
+
         return (
             <>
                 <div className='ml-3'>

@@ -29,7 +29,7 @@ class CreateServer extends Component {
             .then(response => {
                 if (response.data.success) {
                     alert(response.data.message)
-                    this.props.history.push('/admin/root/Server')
+                    this.props.history.push('/admin/root/server')
                 } else {
                     alert(response.data.message)
                     this.setState({

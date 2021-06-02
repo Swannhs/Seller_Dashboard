@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {Input} from "reactstrap";
 
 class EditTweakUi extends Component {
@@ -12,7 +12,8 @@ class EditTweakUi extends Component {
         protocols: '',
         injection_type: '',
         payload: '',
-        note: ''
+        note: '',
+        redirect: false
     }
     componentDidMount() {
         const cookie = new Cookies;
@@ -46,6 +47,9 @@ class EditTweakUi extends Component {
         })
             .then(response => {
                 if (response.data.status){
+                    this.setState({
+                        redirect: true
+                    })
                     alert('Tweak Update successfully');
                 }else {
                     alert(response.data.message)
@@ -54,6 +58,9 @@ class EditTweakUi extends Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to='/admin/users/view'/>;
+        }
         return (
             <div className='container'>
                 <div className='ml-3'>

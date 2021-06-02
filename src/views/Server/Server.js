@@ -119,7 +119,7 @@ class Server extends Component {
                                             <td>{item.note}</td>
                                             <td>
                                                 <Button className='btn-sm btn-primary'>
-                                                    <Link to={'/admin/root/Server-edit/' + item.id}>
+                                                    <Link to={'/admin/root/server-edit/' + item.id}>
                                                         <AiFillEdit/>
                                                     </Link>
                                                 </Button>

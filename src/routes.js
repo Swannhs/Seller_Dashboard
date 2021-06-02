@@ -177,31 +177,31 @@ const dashboardRoutes = [
 
     //-------------------------------Server Route Start-------------------------------
     {
-        path: "/root/Server",
+        path: "/root/server",
         name: "Server",
         component: Server,
         layout: '/admin'
     },
     {
-        path: "/root/Server-edit/:id",
+        path: "/root/server-edit/:id",
         name: "Edit Server",
         component: EditServer,
         layout: "/admin",
     },
     {
-        path: "/root/Server-new",
+        path: "/root/server-new",
         name: "Server",
         component: CreateServer,
         layout: '/admin'
     },
     {
-        path: "/root/Server-realms/new",
+        path: "/root/server-realms/new",
         name: "Server",
         component: CreateServerRealms,
         layout: '/admin'
     },
     {
-        path: "/root/Server-realms",
+        path: "/root/server-realms",
         name: "Server",
         component: ServerRealm,
         layout: '/admin'
@@ -210,37 +210,37 @@ const dashboardRoutes = [
 
     //--------------------------------Tweak------------------------------
     {
-        path: "/root/Tweak",
+        path: "/root/tweak",
         name: "Tweak",
         component: Tweak,
         layout: '/admin'
     },
     {
-        path: "/root/Tweak-view/:id",
+        path: "/root/tweak-view/:id",
         name: "Tweak",
         component: ViewTweak,
         layout: '/admin'
     },
     {
-        path: "/root/Tweak-edit/:id",
+        path: "/root/tweak-edit/:id",
         name: "Edit Tweak",
         component: EditTweak,
         layout: "/admin",
     },
     {
-        path: "/root/Tweak-new",
+        path: "/root/tweak-new",
         name: "Tweak",
         component: CreateTweak,
         layout: '/admin'
     },
     {
-        path: "/root/Tweak-realms",
+        path: "/root/tweak-realms",
         name: "Tweak",
         component: TweakRealm,
         layout: '/admin'
     },
     {
-        path: '/root/Tweak-realm/new',
+        path: '/root/tweak-realm/new',
         name: "Tweak",
         component: CreateTweakRealm,
         layout: '/admin'
