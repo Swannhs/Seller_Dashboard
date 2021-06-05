@@ -31,6 +31,7 @@ class TransactionSummaryTable extends Component {
             .then(response => {
                 this.setState({
                     data: response.data.item,
+                    total: response.data.totalCount,
                     role: cookie.get('Role'),
                     loading: false
                 })

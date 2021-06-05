@@ -10,7 +10,7 @@ class ServerRealm extends Component {
         server_realm: [],
         page: 1,
         start: 0,
-        limit: 10,
+        limit: 20,
         total: 0,
         loading: true,
     }

@@ -1,42 +1,29 @@
-FROM nginx:alpine
-
-LABEL maintainer="Abu Noman <noman.ict.mbstu@gmail.com>" 
-
-#set our application folder as an environment variable
-ENV APP_HOME /usr/share/nginx/html
-
-RUN buildDeps=" \
-        nodejs \
-        nodejs-npm \
-        "; \
-    set -x \
-    && apk add --update --virtual .build-deps $buildDeps
-
+# Name the node stage "builder"
+FROM node:13.12.0-alpine AS builder
+# Set working directory
 WORKDIR /app
-
-COPY ./package.json .
-
-RUN npm rebuild node-sass
-
-RUN npm install --legacy-peer-deps
-
+# Copy all files from current directory to working dir in image
 COPY . .
+# install node modules
+RUN yarn install --ignore-engines
+# build assets
+RUN yarn build
 
-RUN rm -rf /app/build
 
-RUN npm run build
-
-RUN set -e \
-    && mv /app/build/* ${APP_HOME}/ \
-    && rm -rf /app \
-    && apk del .build-deps \
-    && rm -rf /var/cache/apk/*
-
-# Default port exposure
-EXPOSE 80
-
-WORKDIR ${APP_HOME}
-
+# nginx state for serving content
+FROM nginx:stable-alpine
+# set label maintainer
+LABEL maintainer="Abu Noman <noman.ict.mbstu@gmail.com>" 
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=builder /app/build .
 # Nginx config
 RUN rm -rf /etc/nginx/conf.d
-COPY conf /etc/nginx
+COPY --from=builder /app/conf /etc/nginx
+# Default port exposure
+EXPOSE 80
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

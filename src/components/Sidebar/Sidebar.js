@@ -20,7 +20,8 @@ import Cookies from "universal-cookie/lib";
 class Sidebar extends Component {
 
     state = {
-        role: ''
+        role: '',
+        app_name: document.title
     }
 
     componentDidMount() {
@@ -44,7 +45,7 @@ class Sidebar extends Component {
                                 >
                                 </Link>
                                 <Link className="simple-text text-capitalize" to='/admin/dashboard'>
-                                    Reseller Panel
+                                    {this.state.app_name}
                                 </Link>
                             </div>
                             <Nav>
