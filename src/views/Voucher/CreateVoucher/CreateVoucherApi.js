@@ -76,7 +76,7 @@ class CreateVoucherApi extends Component {
                         <VoucherGroup onChange={this.onGroupHandle}/>
                         <VoucherProfile onChange={this.onProfileHandle}/>
 
-                        <h4 className='mt-3 text-black-50'>How Many?</h4>
+                        <h4 className='mt-3 text-black-50'>Amount</h4>
 
                         <div className="form-group input-group">
                             <div className="input-group-prepend">

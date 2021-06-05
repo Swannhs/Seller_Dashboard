@@ -7,7 +7,7 @@ import {Button} from "reactstrap";
 import Cookies from "universal-cookie/lib";
 
 
-class VoucherApi extends Component {
+class UserApi extends Component {
     state = {
         root: false
     }
@@ -55,11 +55,11 @@ class VoucherApi extends Component {
                 {this.props.data.map((item) => {
                     return (
                         <tr key={item.id}>
-                            <td className='text-capitalize' data-label="Name">{item.username}</td>
+                            <td className='text' data-label="Name">{item.username}</td>
                             <td data-label="Role">
                                 {
-                                    item.role === 'agent' ? <span className='text-primary'>Agent</span> :
-                                        <span className='text-warning'>Seller</span>
+                                    item.role === 'agent' ? <span className='ui green label small'>{item.role}</span> :
+                                        <span className='ui yellow label small'>{item.role}</span>
                                 }
                             </td>
                             {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}
@@ -70,8 +70,8 @@ class VoucherApi extends Component {
                             {/*        : <span className='text-danger'>Inactive</span>}</td>*/}
 
                             <td>
-                                {item.active ? <span className='text-success'>Active</span> :
-                                    <span className='text-danger'>Inactive</span>}
+                                {item.active ? <span className='ui green label small'>Active</span> :
+                                    <span className='ui red label small'>Inactive</span>}
                                 {/*<div className="ui toggle checkbox center aligned">*/}
                                 {/*    <input type="checkbox" name="public"*/}
                                 {/*        // value={item.active}*/}
@@ -114,4 +114,4 @@ class VoucherApi extends Component {
 
 }
 
-export default VoucherApi;
+export default UserApi;

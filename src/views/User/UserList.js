@@ -9,7 +9,7 @@ import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
 
 
-class VoucherApi extends Component {
+class UserList extends Component {
 
     constructor(props) {
         super(props);
@@ -152,4 +152,4 @@ class VoucherApi extends Component {
 
 }
 
-export default VoucherApi;
+export default UserList;

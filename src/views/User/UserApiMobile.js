@@ -65,14 +65,17 @@ function Row(props) {
                         </IconButton>
                     </div>
                 </TableCell>
-                <TableCell className='text-capitalize' component="th" scope="row">
+                <TableCell className='text' component="th" scope="row">
                     <Box margin={1}>
                         {row.username}
                     </Box>
                 </TableCell>
-                <TableCell className='text-capitalize'>
+                <TableCell className='text'>
                     <Box margin={1}>
-                        {row.role}
+                    {
+                        row.role === 'agent' ? <span className='ui green label small'>{row.role}</span> :
+                                        <span className='ui yellow label small'>{row.role}</span>
+                    }
                     </Box>
                 </TableCell>
             </TableRow>
@@ -91,8 +94,8 @@ function Row(props) {
                                     <TableRow key={row.id}>
                                         <TableCell component="th" scope="row">
                                             {
-                                                row.active ? <span className='text-success'>Active</span>
-                                                    : <span className='text-danger'>Inactive</span>
+                                                row.active ? <span className='ui green label small'>Active</span>
+                                                    : <span className='ui red label small'>Inactive</span>
                                             }
                                         </TableCell>
                                         <TableCell>

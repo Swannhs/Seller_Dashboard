@@ -63,7 +63,7 @@ class Sidebar extends Component {
 
                                                     <MenuItem icon={<AiOutlineUser/>}>
                                                         <Link to='/admin/users/view'>
-                                                            User
+                                                            Sellers
                                                         </Link>
                                                     </MenuItem>
 
@@ -72,7 +72,7 @@ class Sidebar extends Component {
 
                                             <MenuItem icon={<BsListNested/>}>
                                                 <Link to='/admin/voucher/view'>
-                                                    Voucher
+                                                    Vouchers
                                                 </Link>
                                             </MenuItem>
                                             <MenuItem icon={<BiMoney/>}>
@@ -80,10 +80,10 @@ class Sidebar extends Component {
                                                 {
                                                     this.state.role === 'admin' ?
                                                         <Link to='/admin/root/voucher/transaction'>
-                                                            Credit
+                                                            Credits
                                                         </Link>
                                                         : <Link to='/admin/voucher/transaction'>
-                                                            Credit
+                                                            Credits
                                                         </Link>
                                                 }
 
@@ -121,7 +121,7 @@ class Sidebar extends Component {
                                                             <SubMenu title='Tweak' icon={<AiOutlineCloudServer/>}>
                                                                 <MenuItem>
                                                                     <Link to='/admin/root/tweak'>
-                                                                        Tweak
+                                                                        Tweaks
                                                                     </Link>
                                                                 </MenuItem>
                                                                 <MenuItem>
