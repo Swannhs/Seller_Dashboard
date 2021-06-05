@@ -49,7 +49,7 @@ class TransactionTable extends Component {
 
                 <div className='mt-3 text-center'>
                     <div className="ui buttons">
-                        <button className="ui button red"
+                        <button className="ui button red small"
                                 onClick={() => {
                                     this.onTrueHandel()
                                 }}
@@ -58,7 +58,7 @@ class TransactionTable extends Component {
 
                         <div className="or"/>
 
-                        <button className="ui button positive"
+                        <button className="ui button positive small button"
                                 onClick={() => {
                                     this.onFalseHandel()
                                 }}>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import Cookies from "universal-cookie/lib";
 
 class CreateUserUi extends Component {
 
@@ -15,6 +16,8 @@ class CreateUserUi extends Component {
         language: "4_4",
         role: 'seller',
 
+        root: false,
+
         errors: []
     }
 
@@ -23,6 +26,15 @@ class CreateUserUi extends Component {
         this.props.onFormSubmit(this.state)
     }
 
+    componentDidMount() {
+        let cookie = new Cookies
+        if (cookie.get('Role') === 'admin') {
+            this.setState({
+                root: true
+            })
+
+        }
+    }
 
 
     render() {
@@ -57,40 +69,44 @@ class CreateUserUi extends Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock"/> </span>
                                 </div>
-                                <input className="form-control" placeholder="Create password" type="text"
+                                <input className="form-control" placeholder="Password" type="text"
                                        value={this.state.password}
                                        onChange={event => this.setState({password: event.target.value})}
                                        required={true}
                                 />
                             </div>
+                            {
+                                this.state.root ?
+                                    <div className="form-group input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text"> <i className="fa fa-building"/> </span>
+                                        </div>
+                                        <select className="form-control text-capitalize" value={this.state.role}
+                                                onChange={event => this.setState({role: event.target.value})}>
+                                            <option selected={true} className='text-capitalize'>seller</option>
+                                            <option className='text-capitalize'>agent</option>
+                                        </select>
+                                    </div> : null
+                            }
 
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-building"/> </span>
-                                </div>
-                                <select className="form-control text-capitalize" value={this.state.role}
-                                        onChange={event => this.setState({role: event.target.value})}>
-                                    <option selected={true} className='text-capitalize'>seller</option>
-                                    <option className='text-capitalize'>agent</option>
-                                </select>
-                            </div>
 
                             {/* -------------------------Personal Info-------------------// */}
 
 
-                            <h4 className="card-title mt-3 text-center">Personal Information</h4>
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-envelope"/> </span>
-                                </div>
-                                <input name className="form-control" placeholder="Email address" type="email"
-                                       value={this.state.email}
-                                       onChange={event => {
-                                           this.setState({email: event.target.value})
-                                       }}
-                                />
-                            </div>
-                            {/* form-group// */}
+                            {/*<h4 className="card-title mt-3 text-center">Personal Information</h4>*/}
+
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text"> <i className="fa fa-envelope"/> </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input name className="form-control" placeholder="Email address" type="email"*/}
+                            {/*           value={this.state.email}*/}
+                            {/*           onChange={event => {*/}
+                            {/*               this.setState({email: event.target.value})*/}
+                            {/*           }}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-phone"/> </span>
@@ -102,37 +118,35 @@ class CreateUserUi extends Component {
                                        }}
                                 />
                             </div>
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-user"/> </span>
-                                </div>
-                                <input name className="form-control" placeholder="Name" type="text"
-                                       value={this.state.name}
-                                       onChange={event => this.setState({name: event.target.value})}
-                                />
-                            </div>
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-user-edit"/> </span>
-                                </div>
-                                <input name className="form-control" placeholder="Surname" type="text"
-                                       value={this.state.surname}
-                                       onChange={event => this.setState({surname: event.target.value})}
-                                />
-                            </div>
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fa fa-address-card"/> </span>
-                                </div>
-                                <input name className="form-control" placeholder="Address" type="text"
-                                       value={this.state.address}
-                                       onChange={event => this.setState({address: event.target.value})}
-                                />
-                            </div>
-                            {/* form-group// */}
-                            {/* form-group end.// */}
 
-                            {/* form-group// */}
+
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text"> <i className="fa fa-user"/> </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input name className="form-control" placeholder="Name" type="text"*/}
+                            {/*           value={this.state.name}*/}
+                            {/*           onChange={event => this.setState({name: event.target.value})}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text"> <i className="fa fa-user-edit"/> </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input name className="form-control" placeholder="Surname" type="text"*/}
+                            {/*           value={this.state.surname}*/}
+                            {/*           onChange={event => this.setState({surname: event.target.value})}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text"> <i className="fa fa-address-card"/> </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input name className="form-control" placeholder="Address" type="text"*/}
+                            {/*           value={this.state.address}*/}
+                            {/*           onChange={event => this.setState({address: event.target.value})}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
                             <div className="form-group">
                                 {/*<Link to='/admin/users/view'>*/}
                                 <button type="submit" className="ui button primary">

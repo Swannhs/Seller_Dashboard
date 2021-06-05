@@ -5,7 +5,6 @@ import Cookies from "universal-cookie/lib";
 import {BiReset} from "react-icons/all";
 import {Button} from "reactstrap";
 import {confirmAlert} from "react-confirm-alert";
-import SearchField from 'react-search-field';
 
 
 class VoucherApi extends Component {

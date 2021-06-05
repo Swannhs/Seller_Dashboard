@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Cookies from "universal-cookie";
 import RadiusApi from "../../../../radius-api/RadiusApi";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 
 class EditUi extends Component {
@@ -16,7 +16,8 @@ class EditUi extends Component {
         email: '',
         address: '',
         role: '',
-        language: '4_4'
+        language: '4_4',
+        redirect: false
     }
 
 
@@ -52,6 +53,9 @@ class EditUi extends Component {
         })
             .then(response => {
                 if (response.data.success) {
+                    this.setState({
+                        redirect: true
+                    })
                     alert('Updated successfully');
                 } else {
                     alert(response.data.errors.username)
@@ -65,6 +69,9 @@ class EditUi extends Component {
 
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to='/admin/users/view'/>;
+        }
         return (
             <>
                 <div className="container" style={{fontSize: '20px'}}>
