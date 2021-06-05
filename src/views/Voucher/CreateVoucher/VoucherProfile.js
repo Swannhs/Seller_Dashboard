@@ -47,7 +47,7 @@ class VoucherProfile extends Component {
     render() {
         return (
             <>
-                <h4 className='text-black-50'>Profile</h4>
+                <h4 className='text-black-50'>Plan</h4>
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">

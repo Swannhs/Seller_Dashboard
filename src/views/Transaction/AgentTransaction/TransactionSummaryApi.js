@@ -8,11 +8,11 @@ class TransactionSummaryApi extends Component {
             <>
                 <thead>
                 <tr className='ct-grid-background border-primary'>
-                    <th scope="col">Profile</th>
-                    <th scope='col'>Balance</th>
                     <th scope="col">Vendor</th>
+                    <th scope="col">Plan</th>
                     <th scope="col">Credit</th>
                     <th scope="col">Debit</th>
+                    <th scope='col'>Balance</th>
                     <th scope='col'>Action</th>
                 </tr>
                 </thead>
@@ -21,11 +21,11 @@ class TransactionSummaryApi extends Component {
                     this.props.data ? this.props.data.map((item) => {
                         return (
                             <tr key={item.id}>
-                                <td>{item.profile.name}</td>
-                                <td>{item.balance}</td>
                                 <td>{item.realm.name}</td>
+                                <td>{item.profile.name}</td>
                                 <td>{item.credit}</td>
                                 <td>{item.debit}</td>
+                                <td>{item.balance}</td>
 
                                 <td>
                                     <Link to={'/admin/voucher/transactions/' + item.id}>

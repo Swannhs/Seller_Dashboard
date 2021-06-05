@@ -44,6 +44,11 @@ function Row(props) {
                 </TableCell>
                 <TableCell component="th" scope="row">
                     <Box margin={1}>
+                        {row.realm.name}
+                    </Box>
+                </TableCell>
+                <TableCell>
+                    <Box margin={1}>
                         {row.profile.name}
                     </Box>
                 </TableCell>
@@ -59,17 +64,6 @@ function Row(props) {
                         <Box margin={1}>
 
                             <ListGroup>
-                                <div className="list-group-item">
-                                    <div className="ui grid text-center">
-                                        <div className="eight wide column">
-                                            <b>Vendor</b>
-                                        </div>
-                                        <div className="eight wide column">
-                                            {row.realm.name}
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div className="list-group-item">
                                     <div className="ui grid text-center">
                                         <div className="eight wide column">
@@ -164,7 +158,8 @@ const TransactionSummaryApiMobile = ({data}) => {
                 <TableHead>
                     <TableRow>
                         <TableCell/>
-                        <TableCell>Profile</TableCell>
+                        <TableCell>Vendor</TableCell>
+                        <TableCell>Plan</TableCell>
                         <TableCell>Balance</TableCell>
                     </TableRow>
                 </TableHead>

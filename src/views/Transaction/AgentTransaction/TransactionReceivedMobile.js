@@ -61,7 +61,7 @@ function Row(props) {
                             <div className="list-group-item">
                                 <div className="ui grid text-center">
                                     <div className="eight wide column">
-                                        <b>Profile</b>
+                                        <b>Plan</b>
                                     </div>
                                     <div className="eight wide column">
                                         {row.profile.name}

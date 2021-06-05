@@ -100,7 +100,7 @@ class Header extends Component {
                                                         }}
                                                     >
                                                         <Link to='/admin/users/view'>
-                                                            <AiOutlineUser/> User
+                                                            <AiOutlineUser/> Sellers
                                                         </Link>
                                                     </Nav.Link>
                                                 </Nav.Item> : <></>
@@ -114,7 +114,7 @@ class Header extends Component {
                                                 }}
                                             >
                                                 <Link to='/admin/voucher/view'>
-                                                    <BsListNested/> Voucher
+                                                    <BsListNested/> Vouchers
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>

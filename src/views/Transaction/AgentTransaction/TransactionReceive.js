@@ -86,7 +86,7 @@ class TransactionReceive extends Component {
                                                 <tr>
                                                     <th scope="col">Trx ID</th>
                                                     <th scope="col">Partner</th>
-                                                    <th scope="col">Profile</th>
+                                                    <th scope="col">Plan</th>
                                                     <th scope="col">Vendor</th>
                                                     <th scope="col">Credit</th>
                                                     <th scope="col">Debit</th>
