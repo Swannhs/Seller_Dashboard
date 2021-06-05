@@ -14,7 +14,8 @@ class LoginUi extends Component {
             network: '',
             inactive: '',
             loading: false,
-            imageUrl: null
+            imageUrl: null,
+            title: window.env.APP_NAME
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -80,7 +81,7 @@ class LoginUi extends Component {
                             <img src={this.state.imageUrl} alt='Logo'/>
                         </span>
                             <span className="login100-form-title p-b-70">
-                                    Welcome
+                                    {this.state.title}
                         </span>
                         </div>
                         <div className="container-login100">

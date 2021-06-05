@@ -10,27 +10,13 @@ class TweakRealm extends Component {
         tweakRealms: [],
         page: 1,
         start: 0,
-        limit: 10,
+        limit: 20,
         total: 0,
         loading: true,
     }
 
     componentDidMount() {
-        let cookie = new Cookies
-        RadiusApi.get('/Tweak-realms/index.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    tweakRealms: response.data.tweakRealms,
-                    loading:false
-                })
-            })
+        this.onApiCall();
     }
 
     onApiCall = () => {
