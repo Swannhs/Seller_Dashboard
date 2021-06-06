@@ -3,7 +3,6 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import GetTweak from "../Transaction/GetTweak";
-import Cookies from "universal-cookie/lib";
 
 class CreateTweakRealm extends Component {
     state = {
