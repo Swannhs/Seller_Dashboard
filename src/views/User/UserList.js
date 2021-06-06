@@ -30,7 +30,6 @@ class UserList extends Component {
     }
 
     onApiCall = () => {
-        this.setState({loading: true})
         const cookie = new Cookies;
         RadiusApi.get('/access-providers/index-tree-grid.json', {
             params: {
@@ -44,9 +43,9 @@ class UserList extends Component {
         })
             .then(response => {
                     this.setState({
-                        loading: false,
                         data: response.data.items,
                         total: response.data.totalCount,
+                        loading: false,
                     })
                 }
             )

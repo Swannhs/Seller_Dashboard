@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
-import GetServer from "../Transaction/GetServer";
+import GetServer from "../../components/Dropdown/GetServer";
 import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 
