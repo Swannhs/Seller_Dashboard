@@ -3,6 +3,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {Link} from "react-router-dom";
 import UserApi from "./UserApi";
 import UserApiMobile from "./UserApiMobile";
+import Cookies from "universal-cookie";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
@@ -20,7 +21,7 @@ class UserList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            role: '',
+            role: ''
         }
     }
 
@@ -33,6 +34,7 @@ class UserList extends Component {
     }
 
     onApiCall = () => {
+        this.setState({loading: true})
         RadiusApi.get('/access-providers/index-tree-grid.json', {
             params: {
                 //Assign limit of row showing in table
