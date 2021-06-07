@@ -14,7 +14,7 @@ class CreateUserUi extends Component {
         email: '',
         address: '',
         language: "4_4",
-        role: 'seller',
+        role: 'agent',
 
         root: false,
 
@@ -32,7 +32,6 @@ class CreateUserUi extends Component {
             this.setState({
                 root: true
             })
-
         }
     }
 
