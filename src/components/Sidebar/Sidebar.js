@@ -88,19 +88,18 @@ class Sidebar extends Component {
                                                 }
 
                                             </MenuItem>
-                                            <MenuItem icon={<MdAttachMoney/>}>
-                                                {
-                                                    this.state.role === 'admin' ?
-                                                        <Link to='/admin/root/cash/transaction'>
-                                                            Payments
-                                                        </Link>
-                                                        :
-                                                        <Link to='/admin/cash/transaction'>
-                                                            Payments
-                                                        </Link>
-                                                }
-
-                                            </MenuItem>
+                                            {/*<MenuItem icon={<MdAttachMoney/>}>*/}
+                                            {/*    {*/}
+                                            {/*        this.state.role === 'admin' ?*/}
+                                            {/*            <Link to='/admin/root/cash/transaction'>*/}
+                                            {/*                Payments*/}
+                                            {/*            </Link>*/}
+                                            {/*            :*/}
+                                            {/*            <Link to='/admin/cash/transaction'>*/}
+                                            {/*                Payments*/}
+                                            {/*            </Link>*/}
+                                            {/*    }*/}
+                                            {/*</MenuItem>*/}
                                             <>
                                                 {
                                                     this.state.role === 'admin' ?
