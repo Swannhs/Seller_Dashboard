@@ -92,24 +92,28 @@ class UserList extends Component {
 
                 {/* ---------------- New Button Start ----------------*/}
                 <div className="ui grid">
-                    {
-                        isMobile ?
-                            <div className="ui text-right floated column">
-                                <Link to='/admin/users/create'>
-                                    <button className='ui button primary small'>
-                                        New
-                                    </button>
-                                </Link>
-                            </div>:
-                            <div className="ui text-right floated column">
-                                <Link to='/admin/users/create'>
-                                    <button className='ui button primary'>
-                                        New
-                                    </button>
-                                </Link>
-                            </div>
-                    }
-
+                    <div className='four column row'>
+                        <div className='left floated column'>
+                            <h2 className='ml-3'>Total: {this.state.total}</h2>
+                        </div>
+                        {
+                            isMobile ?
+                                <div className="text-right right floated column">
+                                    <Link to='/admin/users/create'>
+                                        <button className='ui button primary small'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div> :
+                                <div className="text-right right floated column">
+                                    <Link to='/admin/users/create'>
+                                        <button className='ui button primary'>
+                                            New
+                                        </button>
+                                    </Link>
+                                </div>
+                        }
+                    </div>
                 </div>
 
                 {/* ---------------- New Button End ----------------*/}
