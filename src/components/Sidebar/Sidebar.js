@@ -8,7 +8,6 @@ import {
     AiOutlineUser,
     BsListNested,
     BiMoney,
-    MdAttachMoney,
     BsServer,
     AiOutlineCloudServer
 } from "react-icons/all";
