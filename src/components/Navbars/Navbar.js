@@ -130,18 +130,18 @@ class Header extends Component {
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
-                                        <Nav.Item>
-                                            <Nav.Link
-                                                className='m-0'
-                                                onClick={() => {
-                                                    document.getElementById('navbar-togglered').click();
-                                                }}
-                                            >
-                                                <Link to='/admin/cash/transaction'>
-                                                    <BiMoney/> Payments
-                                                </Link>
-                                            </Nav.Link>
-                                        </Nav.Item>
+                                        {/*<Nav.Item>*/}
+                                        {/*    <Nav.Link*/}
+                                        {/*        className='m-0'*/}
+                                        {/*        onClick={() => {*/}
+                                        {/*            document.getElementById('navbar-togglered').click();*/}
+                                        {/*        }}*/}
+                                        {/*    >*/}
+                                        {/*        <Link to='/admin/cash/transaction'>*/}
+                                        {/*            <BiMoney/> Payments*/}
+                                        {/*        </Link>*/}
+                                        {/*    </Nav.Link>*/}
+                                        {/*</Nav.Item>*/}
                                         <Nav.Item>
                                             <Nav.Link
                                                 className="m-0"
