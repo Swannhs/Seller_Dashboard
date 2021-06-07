@@ -24,7 +24,6 @@ class UserApi extends Component {
 
     render() {
         return (
-
             <>
                 <thead>
                 <tr className='ct-grid-background border-primary'>
