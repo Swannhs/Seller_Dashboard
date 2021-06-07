@@ -93,8 +93,8 @@ class UserList extends Component {
                 {/* ---------------- New Button Start ----------------*/}
                 <div className="ui grid">
                     <div className='four column row'>
-                        <div className='left floated column'>
-                            <h2 className='ml-3'>Total: {this.state.total}</h2>
+                        <div className='left floated five wide column'>
+                            <h2 className='ml-3'>Total:{this.state.total}</h2>
                         </div>
                         {
                             isMobile ?
