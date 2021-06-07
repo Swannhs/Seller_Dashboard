@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import Cookies from "universal-cookie/lib";
 
 class Profile extends Component {
     state = {
