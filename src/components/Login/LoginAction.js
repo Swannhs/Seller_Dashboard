@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie";
 import RadiusApi from "../../radius-api/RadiusApi";
 
 class LoginAction extends Component {
 
 
     componentDidMount() {
-        const cookie = new Cookies;
-
-        if (cookie.get('Token') && cookie.get('Role')) {
+        let token = localStorage.getItem('Token')
+        if (token) {
             RadiusApi.get('/dashboard/check-token.json', {
                 params: {
-                    token: cookie.get('Token')
+                    token: token
                 }
             })
                 .then(response => {
@@ -21,15 +19,13 @@ class LoginAction extends Component {
                                 this.props.history.push(window.location.pathname) : this.props.history.push('/admin/dashboard')
                         )
                     } else {
-                        cookie.remove('Token')
-                        cookie.remove('Role')
+                        localStorage.clear();
                         this.props.history.push('/login');
                     }
                 })
 
         } else {
-            cookie.remove('Token')
-            cookie.remove('Role')
+            localStorage.clear();
             this.props.history.push('/login');
         }
     }
