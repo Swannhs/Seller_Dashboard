@@ -30,7 +30,7 @@ class UserApi extends Component {
                 <tr className='ct-grid-background border-primary'>
                     <th scope="col">Name</th>
 
-                    <th scope="col">Role</th>
+                    {/*<th scope="col">Role</th>*/}
 
                     <th scope="col">Status</th>
 
@@ -56,12 +56,12 @@ class UserApi extends Component {
                     return (
                         <tr key={item.id}>
                             <td className='text' data-label="Name">{item.username}</td>
-                            <td data-label="Role">
-                                {
-                                    item.role === 'agent' ? <span className='ui green label small'>{item.role}</span> :
-                                        <span className='ui yellow label small'>{item.role}</span>
-                                }
-                            </td>
+                            {/*<td data-label="Role">*/}
+                            {/*    {*/}
+                            {/*        item.role === 'agent' ? <span className='ui green label small'>{item.role}</span> :*/}
+                            {/*            <span className='ui yellow label small'>{item.role}</span>*/}
+                            {/*    }*/}
+                            {/*</td>*/}
                             {/*<td className='d-none d-sm-block' data-label="Area">{item.username}</td>*/}
 
 
