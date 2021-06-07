@@ -73,8 +73,8 @@ function Row(props) {
                 <TableCell className='text'>
                     <Box margin={1}>
                     {
-                        row.role === 'agent' ? <span className='ui green label small'>{row.role}</span> :
-                                        <span className='ui yellow label small'>{row.role}</span>
+                        row.active ? <span className='ui green label small'>Active</span>
+                            : <span className='ui red label small'>Inactive</span>
                     }
                     </Box>
                 </TableCell>
@@ -83,40 +83,29 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Status</TableCell>
-                                        <TableCell>Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
-                                            {
-                                                row.active ? <span className='ui green label small'>Active</span>
-                                                    : <span className='ui red label small'>Inactive</span>
-                                            }
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link to={'/admin/users/view/' + row.id}>
-                                                <Button className='btn-sm btn-success'>
-                                                    <AiOutlineEye/>
-                                                </Button>
-                                            </Link>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Action</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        <Link to={'/admin/users/view/' + row.id}>
+                                            <Button className='btn-sm btn-success'>
+                                                <AiOutlineEye/>
+                                            </Button>
+                                        </Link>
 
-                                            {/*<AiFillEdit onClick={this.onEditUser}/>*/}
-                                            <Link to={'/admin/users/edit/' + row.id}>
-                                                <Button className='btn-sm primary'>
-                                                    <AiFillEdit/>
-                                                </Button>
-                                            </Link>
+                                        {/*<AiFillEdit onClick={this.onEditUser}/>*/}
+                                        <Link to={'/admin/users/edit/' + row.id}>
+                                            <Button className='btn-sm primary'>
+                                                <AiFillEdit/>
+                                            </Button>
+                                        </Link>
 
-                                            <DeleteUser delId={row.id}/>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                                        <DeleteUser delId={row.id}/>
+                                    </div>
+                                </div>
+                            </div>
                         </Box>
                     </Collapse>
                 </TableCell>
@@ -144,7 +133,7 @@ const CollapsibleTable = ({data}) => {
                             <span className='ml-2'>Name</span>
                         </TableCell>
                         <TableCell>
-                            <span className='ml-2'>Role</span>
+                            <span className='ml-2'>Status</span>
                         </TableCell>
                         {/*<TableCell align="right">Passwor</TableCell>*/}
                     </TableRow>
