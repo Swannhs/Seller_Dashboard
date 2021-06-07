@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import RadiusApi from "../../radius-api/RadiusApi";
 import Cookies from "universal-cookie/lib";
 
 class Profile extends Component {
@@ -10,26 +9,14 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        let cookie = new Cookies
-        RadiusApi.get('/Dashboard/checkToken.json', {
-
-            params: {
-                token: cookie.get('Token')
-            }
+        this.setState({
+            username: localStorage.getItem('Name'),
+            role: localStorage.getItem('Role')
         })
-            .then(response => {
-                this.setState({
-                    username: response.data.data.user.username,
-                    role: response.data.data.role
-                })
-            })
-
     }
 
     onLogout = () => {
-        const cookie = new Cookies;
-        cookie.remove('Token', null)
-        cookie.remove('Role', null)
+        localStorage.clear();
         this.props.history.push('/')
     }
 
