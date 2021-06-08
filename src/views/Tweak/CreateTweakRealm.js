@@ -3,6 +3,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import GetTweak from "../Transaction/GetTweak";
+import Cookies from "universal-cookie/lib";
 
 class CreateTweakRealm extends Component {
     state = {
@@ -12,12 +13,17 @@ class CreateTweakRealm extends Component {
 
     onGenerateTweak = event => {
         event.preventDefault();
+        let cookie = new Cookies
         let data = this.state
-        RadiusApi.post('/Tweak-realms/add.json', data)
+        RadiusApi.post('/tweak-realms/add.json', data, {
+            params: {
+                token: cookie.get('Token')
+            }
+        })
             .then(response => {
                 if (response.data.success) {
                     alert('Generated successful');
-                    this.props.history.push('/admin/root/Tweak-realms')
+                    this.props.history.push('/admin/root/tweak-realms')
                 } else {
                     alert(response.data.message)
                 }
