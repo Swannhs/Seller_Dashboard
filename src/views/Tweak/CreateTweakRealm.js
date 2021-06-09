@@ -13,7 +13,11 @@ class CreateTweakRealm extends Component {
     onGenerateTweak = event => {
         event.preventDefault();
         let data = this.state
-        RadiusApi.post('/Tweak-realms/add.json', data)
+        RadiusApi.post('/Tweak-realms/add.json', data,{
+            params: {
+                token: localStorage.getItem('Token')
+            }
+        })
             .then(response => {
                 if (response.data.success) {
                     alert('Generated successful');

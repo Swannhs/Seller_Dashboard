@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Input} from "reactstrap";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
 
 class CreateTweak extends Component {
@@ -17,10 +16,9 @@ class CreateTweak extends Component {
     onCreateTweak = event => {
         event.preventDefault();
         let data = this.state
-        let cookie = new Cookies
         RadiusApi.post('/tweaks/add.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
