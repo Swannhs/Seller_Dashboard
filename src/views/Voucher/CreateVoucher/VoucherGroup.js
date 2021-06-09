@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
-import {Form} from "react-bootstrap";
 
 class VoucherGroup extends Component {
 
@@ -13,11 +11,9 @@ class VoucherGroup extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies;
-
         RadiusApi.get('/realms/index-ap-create.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
