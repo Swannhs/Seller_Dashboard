@@ -27,7 +27,7 @@ class Tweak extends Component {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

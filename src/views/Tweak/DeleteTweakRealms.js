@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {AiFillDelete} from "react-icons/all";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Button} from "reactstrap";
 
@@ -9,10 +8,9 @@ class DeleteTweakRealms extends Component {
         confirm('Delete the tweak realm?') ? this.onDeleteTweakRealm(this.props.delId): null
     }
     onDeleteTweakRealm = (id) => {
-        const cookie = new Cookies;
         RadiusApi.post('/Tweak-realms/delete.json', {'id': id}, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
