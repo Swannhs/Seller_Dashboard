@@ -3,7 +3,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {Link} from "react-router-dom";
 import UserApi from "./UserApi";
 import UserApiMobile from "./UserApiMobile";
-import Cookies from "universal-cookie";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
@@ -30,7 +29,6 @@ class UserList extends Component {
     }
 
     onApiCall = () => {
-        const cookie = new Cookies;
         RadiusApi.get('/access-providers/index-tree-grid.json', {
             params: {
                 //Assign limit of row showing in table
@@ -38,7 +36,7 @@ class UserList extends Component {
                 start: this.state.start,
                 limit: this.state.limit,
                 node: 0,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
