@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import 'reactjs-popup/dist/index.css';
 import VoucherApi from "./VoucherApi";
 import {Link} from "react-router-dom";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
 import {isMobile} from 'react-device-detect';
+import {Dropdown, DropdownButton} from "react-bootstrap";
+import VoucherFilter from "../../components/Filter/VoucherFilter";
 
 class VoucherList extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class VoucherList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            search: null
+            search: null,
         }
         this.onChangeHandle = this.onChangeHandle.bind(this)
         this.onSearchApiCall = this.onSearchApiCall.bind(this)
@@ -31,13 +32,13 @@ class VoucherList extends Component {
     }
 
     onApiCall = () => {
-        const cookie = new Cookies
+        this.setState({loading: true})
         RadiusApi.get('/vouchers/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -53,14 +54,13 @@ class VoucherList extends Component {
         event.preventDefault();
         this.setState({loading: true})
         this.onResetPagination()
-        const cookie = new Cookies
         RadiusApi.get('/vouchers/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
                 query: this.state.search,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -70,6 +70,32 @@ class VoucherList extends Component {
                     loading: false
                 })
             })
+    }
+
+    onFilterApiCall = event => {
+        event.preventDefault();
+        if (event.target.value !== 'all') {
+            this.setState({loading: true})
+            this.onResetPagination();
+            RadiusApi.get('/vouchers/index.json', {
+                params: {
+                    page: this.state.page,
+                    start: this.state.start,
+                    limit: this.state.limit,
+                    filter: `[{"operator": "in","value": ["${event.target.value}"],"property": "status"}]`,
+                    token: localStorage.getItem('Token')
+                }
+            })
+                .then(response => {
+                    this.setState({
+                        data: response.data.items,
+                        total: response.data.totalCount,
+                        loading: false
+                    })
+                })
+        } else {
+            this.onApiCall();
+        }
     }
 
 
@@ -101,6 +127,7 @@ class VoucherList extends Component {
     }
 
     async onPageChaneHandler(event, data) {
+        this.setState({loading: true})
         await this.setState({
             page: data.activePage,
             start: (data.activePage - 1) * this.state.limit
@@ -112,6 +139,7 @@ class VoucherList extends Component {
             search: event.target.value
         })
     }
+
 
     onResetPagination() {
         this.setState({
@@ -130,30 +158,58 @@ class VoucherList extends Component {
                     <div className="ui grid">
                         {
                             isMobile ?
-                                <div className="ten wide column">
-                                    <form onSubmit={this.onSearchApiCall}>
-                                        <div className="ui icon input">
-                                            <input  type="text" placeholder="Search Name"
-                                                    onChange={this.onChangeHandle}
-                                            />
-                                            <i className="circular search link icon"
-                                               onClick={this.onSearchApiCall}
-                                            />
+                                <>
+                                    <div className="seven wide column">
+                                        <form onSubmit={this.onSearchApiCall}>
+                                            <div className="ui icon input" style={{width: '140px'}}>
+                                                <input type="text" placeholder="Search Name"
+                                                       onChange={this.onChangeHandle}
+                                                />
+                                                <i className="circular search link icon"
+                                                   onClick={this.onSearchApiCall}
+                                                />
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div className='two wide column'>
+                                        <VoucherFilter/>
+
+                                    </div>
+
+                                </>
+                                :
+                                <>
+                                    <div className="five wide column">
+                                        <form onSubmit={this.onSearchApiCall}>
+                                            <div className="ui icon input">
+                                                <input type="text" placeholder="Search Name"
+                                                       onChange={this.onChangeHandle}
+                                                />
+                                                <i className="circular search link icon"
+                                                   onClick={this.onSearchApiCall}
+                                                />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className='two wide column'>
+                                        {/*<VoucherFilter/>*/}
+
+                                        <div className="form-group input-group">
+                                            {/*<div className="input-group-prepend">*/}
+                                            {/*    <span className="input-group-text"> <i className="fab fa-cloudscale"/> </span>*/}
+                                            {/*</div>*/}
+                                            <select className="form-control text-capitalize"
+                                                    onChange={event => this.onFilterApiCall(event)}>
+                                                <option value='all'>All</option>
+                                                <option key={1} value='new'>New</option>
+                                                <option key={2} value='used'>Used</option>
+                                                <option key={3} value='depleted'>Depleted</option>
+                                                <option key={4} value='expired'>Expired</option>
+                                            </select>
                                         </div>
-                                    </form>
-                                </div> :
-                                <div className="eight wide column">
-                                    <form onSubmit={this.onSearchApiCall}>
-                                        <div className="ui icon input">
-                                            <input  type="text" placeholder="Search Name"
-                                                    onChange={this.onChangeHandle}
-                                            />
-                                            <i className="circular search link icon"
-                                               onClick={this.onSearchApiCall}
-                                            />
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </>
                         }
 
                         {
