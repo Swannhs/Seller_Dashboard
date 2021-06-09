@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {Form} from "react-bootstrap";
 
 class GetTweak extends Component {
     state = {
@@ -10,10 +8,9 @@ class GetTweak extends Component {
     }
 
     componentDidMount() {
-        const token = new Cookies;
         RadiusApi.get('/Tweak-realms/tweaks.json',{
             params: {
-                token: token.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

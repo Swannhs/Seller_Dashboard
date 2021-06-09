@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {Form} from "react-bootstrap";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 class AllUser extends Component {
     constructor(props) {
@@ -13,11 +11,10 @@ class AllUser extends Component {
     }
 
     componentDidMount() {
-        const token = new Cookies;
         RadiusApi.get('/access-providers/index-tree-grid.json',{
             params: {
                 node: 0,
-                token: token.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
