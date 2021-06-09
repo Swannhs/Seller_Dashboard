@@ -6,8 +6,6 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
 import {isMobile} from 'react-device-detect';
-import {Dropdown, DropdownButton} from "react-bootstrap";
-import VoucherFilter from "../../components/Filter/VoucherFilter";
 
 class VoucherList extends Component {
     constructor(props) {
@@ -159,9 +157,9 @@ class VoucherList extends Component {
                         {
                             isMobile ?
                                 <>
-                                    <div className="seven wide column">
+                                    <div className="six wide column">
                                         <form onSubmit={this.onSearchApiCall}>
-                                            <div className="ui icon input" style={{width: '140px'}}>
+                                            <div className="ui icon input" style={{width: '120px'}}>
                                                 <input type="text" placeholder="Search Name"
                                                        onChange={this.onChangeHandle}
                                                 />
@@ -172,9 +170,19 @@ class VoucherList extends Component {
                                         </form>
                                     </div>
 
-                                    <div className='two wide column'>
-                                        <VoucherFilter/>
+                                    <div className='five wide column'>
+                                        {/*<VoucherFilter/>*/}
 
+                                        <div className="form-group input-group">
+                                            <select className="form-control text-capitalize"
+                                                    onChange={event => this.onFilterApiCall(event)}>
+                                                <option value='all'>All</option>
+                                                <option key={1} value='new'>New</option>
+                                                <option key={2} value='used'>Used</option>
+                                                <option key={3} value='depleted'>Depleted</option>
+                                                <option key={4} value='expired'>Expired</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                 </>
@@ -196,9 +204,9 @@ class VoucherList extends Component {
                                         {/*<VoucherFilter/>*/}
 
                                         <div className="form-group input-group">
-                                            {/*<div className="input-group-prepend">*/}
-                                            {/*    <span className="input-group-text"> <i className="fab fa-cloudscale"/> </span>*/}
-                                            {/*</div>*/}
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text"> <i className="fas fa-filter"/> </span>
+                                            </div>
                                             <select className="form-control text-capitalize"
                                                     onChange={event => this.onFilterApiCall(event)}>
                                                 <option value='all'>All</option>
@@ -214,7 +222,7 @@ class VoucherList extends Component {
 
                         {
                             isMobile ?
-                                <div className="six wide column right aligned">
+                                <div className="ml-3 two wide column right aligned">
                                     <Link to='/admin/voucher/create'>
                                         <button className='ui button primary small'>
                                             New
