@@ -21,7 +21,6 @@ class Tweak extends Component {
     }
 
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/tweaks/index.json', {
             params: {
                 page: this.state.page,
