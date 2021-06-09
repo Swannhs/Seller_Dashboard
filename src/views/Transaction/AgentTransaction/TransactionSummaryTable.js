@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import TransactionSummaryApi from "./TransactionSummaryApi";
 import TransactionSummaryApiMobile from "./TransactionSummaryApiMobile";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
@@ -22,17 +21,16 @@ class TransactionSummaryTable extends Component {
         this.onApiCall();
     }
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/voucher-transactions/index.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                 this.setState({
                     data: response.data.item,
                     total: response.data.totalCount,
-                    role: cookie.get('Role'),
+                    role: localStorage.getItem('Role'),
                     loading: false
                 })
             })
