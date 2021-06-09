@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
-import {AiFillEdit, AiOutlineEye, BiReset} from "react-icons/all";
+import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 import DeleteUser from "./Action/DeleteUser";
@@ -72,10 +72,10 @@ function Row(props) {
                 </TableCell>
                 <TableCell className='text'>
                     <Box margin={1}>
-                    {
-                        row.active ? <span className='ui green label small'>Active</span>
-                            : <span className='ui red label small'>Inactive</span>
-                    }
+                        {
+                            row.active ? <span className='ui green label small'>Active</span>
+                                : <span className='ui red label small'>Inactive</span>
+                        }
                     </Box>
                 </TableCell>
             </TableRow>
@@ -122,7 +122,7 @@ Row.propTypes = {
 };
 
 
-const CollapsibleTable = ({data}) => {
+const UserApiMobile = ({data}) => {
     return (
         <TableContainer className='mt-2' component={Paper}>
             <Table aria-label="collapsible table">
@@ -139,12 +139,14 @@ const CollapsibleTable = ({data}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <Row key={row.id} row={row}/>
-                    ))}
+                    {
+                        data.map((row) => (
+                            <Row key={row.id} row={row}/>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
     );
 }
-export default CollapsibleTable;
+export default UserApiMobile;
