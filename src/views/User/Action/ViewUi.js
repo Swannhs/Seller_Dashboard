@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 class ViewUi extends Component {
     state = {
@@ -16,10 +15,9 @@ class ViewUi extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies
         RadiusApi.get('/access-providers/view.json', {
             params: {
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token'),
                 ap_id: this.props.id
             }
         })
