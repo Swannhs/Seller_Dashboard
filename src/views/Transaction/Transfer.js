@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import AllUser from "../../components/Dropdown/AllUser";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
@@ -13,7 +12,7 @@ class Transfer extends Component {
         realm_id: '',
         profile_id: '',
         transfer_amount: '',
-        quantity_rate: '',
+        quantity_rate: 0,
         role: '',
         error: {
             partner: '',
@@ -23,9 +22,8 @@ class Transfer extends Component {
 
 
     componentDidMount() {
-        const cookie = new Cookies;
         this.setState({
-            role: cookie.get('Role')
+            role: localStorage.getItem('Role')
         })
     }
 
@@ -33,11 +31,12 @@ class Transfer extends Component {
     onTransactionComplete = () => {
         event.preventDefault();
 
-        const cookie = new Cookies()
         let data = this.state
+        delete data.error;
+        delete data.role;
         RadiusApi.post('/voucher-transactions/add.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -132,23 +131,23 @@ class Transfer extends Component {
                         <p className='text-danger'>{this.state.error.balance}</p>
 
 
-                        <h4 className='text-black-50'>Amount Per Quantity rate</h4>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <i className="fas fa-dollar-sign"/>
-                                </span>
-                            </div>
-                            <input className="form-control" placeholder="Rate" type="number"
-                                   value={this.state.quantity_rate}
-                                   onChange={event => {
-                                       this.setState({
-                                           quantity_rate: event.target.value
-                                       })
-                                   }}
-                                   required={true}
-                            />
-                        </div>
+                        {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
+                        {/*<div className="form-group input-group">*/}
+                        {/*    <div className="input-group-prepend">*/}
+                        {/*        <span className="input-group-text">*/}
+                        {/*            <i className="fas fa-dollar-sign"/>*/}
+                        {/*        </span>*/}
+                        {/*    </div>*/}
+                        {/*    <input className="form-control" placeholder="Rate" type="number"*/}
+                        {/*           value={this.state.quantity_rate}*/}
+                        {/*           onChange={event => {*/}
+                        {/*               this.setState({*/}
+                        {/*                   quantity_rate: event.target.value*/}
+                        {/*               })*/}
+                        {/*           }}*/}
+                        {/*           required={true}*/}
+                        {/*    />*/}
+                        {/*</div>*/}
 
                         <button className='ui button primary mt-2' type='submit'>
                             Transfer
