@@ -13,8 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../radius-api/RadiusApi";
 import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
@@ -28,32 +26,15 @@ const useRowStyles = makeStyles({
     },
 });
 
-const onVoucherReset = (props) => {
-    let reset = {
-        reset: props
-    }
-
-    let cookie = new Cookies
-    RadiusApi.post('/vouchers/voucher-reset.json', reset, {
-        params: {
-            token: cookie.get('Token')
-        }
-    })
-        .then(response => {
-                if (response.data.success) {
-                    alert('Voucher reset successful')
-                } else {
-                    alert(response.data.message)
-                }
-            }
-        )
-}
-
 
 function Row(props) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+
+    const onRefresh = () => {
+        props.refresh.refresh();
+    }
 
     return (
         <>
@@ -102,7 +83,7 @@ function Row(props) {
                                             </Button>
                                         </Link>
 
-                                        <DeleteUser delId={row.id}/>
+                                        <DeleteUser delId={row.id} refresh={onRefresh}/>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +103,8 @@ Row.propTypes = {
 };
 
 
-const UserApiMobile = ({data}) => {
+const UserApiMobile = props => {
+
     return (
         <TableContainer className='mt-2' component={Paper}>
             <Table aria-label="collapsible table">
@@ -140,8 +122,8 @@ const UserApiMobile = ({data}) => {
                 </TableHead>
                 <TableBody>
                     {
-                        data.map((row) => (
-                            <Row key={row.id} row={row}/>
+                        props.data.map((row) => (
+                            <Row key={row.id} row={row} refresh={props}/>
                         ))
                     }
                 </TableBody>
