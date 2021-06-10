@@ -65,14 +65,14 @@ const dashboardRoutes = [
     },
     {
         path: '/users/view',
-        name: 'Sellers',
+        name: 'Resellers',
         component: UserList,
         layout: '/admin'
     },
 
     {
         path: '/users/create',
-        name: 'Create Seller',
+        name: 'Create',
         component: CreateUserAction,
         layout: '/admin'
     },
@@ -88,7 +88,7 @@ const dashboardRoutes = [
     //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
-        name: "Create Voucher",
+        name: "Create",
         component: CreateVoucherApi,
         layout: "/admin",
     },
@@ -114,21 +114,21 @@ const dashboardRoutes = [
     },
     {
         path: "/voucher/transactions/:id",
-        name: "Credits Details",
+        name: "Details",
         component: TransactionTable,
         layout: "/admin",
     },
 
     {
         path: "/root/voucher/transactions/:id",
-        name: "Credits Details",
+        name: "Details",
         component: TransactionAdmin,
         layout: "/admin",
     },
 
     {
         path: "/voucher/transfer",
-        name: "Credits Transfer",
+        name: "Transfer",
         component: Transfer,
         layout: '/admin'
     },
