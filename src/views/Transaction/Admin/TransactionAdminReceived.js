@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Pagination} from "semantic-ui-react";
 
 class TransactionAdminReceived extends Component {
@@ -12,15 +11,14 @@ class TransactionAdminReceived extends Component {
         start: 0,
         limit: 1,
         total: 0,
+        loading: true
     }
 
 
     componentDidMount() {
-        const cookie = new Cookies();
-
         RadiusApi.get('/Dashboard/check_token.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -35,11 +33,10 @@ class TransactionAdminReceived extends Component {
 
 
     onApiCall = () => {
-        const cookie = new Cookies();
-
+        this.setState({loading: true})
         RadiusApi.get('/voucher-transactions/view.json', {
             params: {
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token'),
                 key: this.props.id,
                 page: this.state.page,
                 start: this.state.start,
@@ -49,7 +46,8 @@ class TransactionAdminReceived extends Component {
             .then(response => {
                 this.setState({
                     transactions: response.data.received,
-                    total: response.data.received_total
+                    total: response.data.received_total,
+                    loading: false
                 })
             })
     }
@@ -90,65 +88,69 @@ class TransactionAdminReceived extends Component {
         return (
             <>
                 {
-                    this.state.root ?
-                        <>
-                            {
-                                this.state.transactions.length ?
-                                    <table className="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Trx ID</th>
-                                            <th scope="col">Partner</th>
-                                            <th scope="col">Profile</th>
-                                            <th scope="col">Vendor</th>
-                                            <th scope="col">credit</th>
-                                            <th scope="col">Cost</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {
-                                            this.state.transactions.map((item) => {
-                                                return (
-                                                    <tr key={item.id}>
-                                                        <td>{item.id}</td>
-                                                        <td>{item.transaction}</td>
-                                                        <td>{item.user.username}</td>
-                                                        <td>{item.profile.name}</td>
-                                                        <td>{item.realm.name}</td>
-                                                        <td>{item.credit}</td>
-                                                        <td>{item.balance}</td>
-                                                    </tr>
-                                                )
-                                            })
+                    this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :
+                    <>
+                        {
+                            this.state.root ?
+                                <>
+                                    {
+                                        this.state.transactions.length ?
+                                            <table className="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Trx ID</th>
+                                                    <th scope="col">Sender</th>
+                                                    <th scope="col">Profile</th>
+                                                    <th scope="col">Vendor</th>
+                                                    <th scope="col">credit</th>
+                                                    {/*<th scope="col">Cost</th>*/}
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {
+                                                    this.state.transactions.map((item) => {
+                                                        return (
+                                                            <tr key={item.id}>
+                                                                <td>{item.id}</td>
+                                                                <td>{item.transaction}</td>
+                                                                <td>{item.user.username}</td>
+                                                                <td>{item.profile.name}</td>
+                                                                <td>{item.realm.name}</td>
+                                                                <td>{item.credit}</td>
+                                                                {/*<td>{item.balance}</td>*/}
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+                                                </tbody>
+                                            </table>
+                                            : <h3 className='text-center text-danger'>No received history yet</h3>
+                                    }
+                                </> : <h3 className='text-center text-danger'>You are not allowed here</h3>
+                        }
+                        <tfoot>
+                        <tr>
+                            <th colSpan={5}>
+                                <div className="ui right floated pagination menu align-content-lg-end">
+                                    <Pagination
+                                        defaultActivePage={this.state.page}
+                                        firstItem={null}
+                                        lastItem={null}
+                                        pointing
+                                        secondary
+                                        totalPages={this.onPagination()}
+                                        onPageChange={async (event, data) =>
+                                            this.onPageChaneHandler(event, data)
                                         }
-                                        </tbody>
-                                    </table>
-                                    : <h3 className='text-center text-danger'>No received history yet</h3>
-                            }
-                        </> : <h3 className='text-center text-danger'>You are not allowed here</h3>
+                                    />
+                                </div>
+                            </th>
+                        </tr>
+                        </tfoot>
+                    </>
                 }
-                <tfoot>
-                <tr>
-                    <th colSpan={5}>
-                        <div className="ui right floated pagination menu align-content-lg-end">
-                            <Pagination
-                                defaultActivePage={this.state.page}
-                                firstItem={null}
-                                lastItem={null}
-                                pointing
-                                secondary
-                                totalPages={this.onPagination()}
-                                onPageChange={async (event, data) =>
-                                    this.onPageChaneHandler(event, data)
-                                }
-                            />
-                        </div>
-                    </th>
-                </tr>
-                </tfoot>
             </>
-
         );
     }
 
