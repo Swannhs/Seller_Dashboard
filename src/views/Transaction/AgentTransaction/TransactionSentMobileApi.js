@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import TransactionSentMobile from "./TransactionSentMobile";
 import {Pagination} from "semantic-ui-react";
@@ -19,11 +18,9 @@ class TransactionSentMobileApi extends Component {
     }
 
     onApiCall = () => {
-        let cookie = new Cookies();
-
         RadiusApi.get('/voucher-transactions/view.json', {
             params: {
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token'),
                 key: this.props.id,
                 page: this.state.page,
                 start: this.state.start,
