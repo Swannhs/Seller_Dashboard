@@ -1,42 +1,26 @@
 import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import {Dropdown, Icon} from 'semantic-ui-react'
 
-const friendOptions = [
-    {
-        key: 'Jenny Hess',
-        text: localStorage.getItem('Name'),
-        value: 'Jenny Hess',
-        image: { avatar: true, src: '../../assets/img/pf.png' },
-    },
-    {
-        key: 'Elliot Fu',
-        text: 'Elliot Fu',
-        value: 'Elliot Fu',
-        image: { avatar: true, src: '/images/avatar/small/elliot.jpg' },
-    },
-    {
-        key: 'Stevie Feliciano',
-        text: 'Stevie Feliciano',
-        value: 'Stevie Feliciano',
-        image: { avatar: true, src: '/images/avatar/small/stevie.jpg' },
-    },
-    {
-        key: 'Christian',
-        text: 'Christian',
-        value: 'Christian',
-        image: { avatar: true, src: '/images/avatar/small/christian.jpg' },
-    },
-]
-
-
-const ProfileDropdown = () => (
+const trigger = (
     <span>
-        <Dropdown
-            inline
-            options={friendOptions}
-            defaultValue={friendOptions[0].value}
-        />
+    <Icon name='user'/> {localStorage.getItem('Name')}
   </span>
 )
 
-export default ProfileDropdown;
+const logOut = event => {
+    localStorage.clear();
+    props.history.push('/')
+}
+
+const options = [
+    {key: 'profile', value: 'profile', text: 'Your Profile'},
+    {key: 'sign-out', value: 'logout', text: 'Sign Out'},
+]
+
+const ProfileDropdown = () => (
+    <Dropdown trigger={trigger} options={options}
+              onChange={event => logOut(event)}
+    />
+)
+
+export default ProfileDropdown
