@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import TransactionSentMobile from "./TransactionSentMobile";
 import {Pagination} from "semantic-ui-react";
@@ -20,11 +19,9 @@ class TransactionSent extends Component {
     }
 
     onApiCall = () => {
-        const cookie = new Cookies();
-
         RadiusApi.get('/voucher-transactions/view.json', {
             params: {
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token'),
                 key: this.props.id,
                 page: this.state.page,
                 start: this.state.start,
@@ -92,7 +89,7 @@ class TransactionSent extends Component {
                                                         <th scope="col">Vendor</th>
                                                         <th scope="col">credit</th>
                                                         <th scope="col">Debit</th>
-                                                        <th scope="col">Cost</th>
+                                                        {/*<th scope="col">Cost</th>*/}
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -106,7 +103,7 @@ class TransactionSent extends Component {
                                                                     <td>{item.realm.name}</td>
                                                                     <td>{item.credit}</td>
                                                                     <td>{item.debit}</td>
-                                                                    <td>{item.balance}$</td>
+                                                                    {/*<td>{item.balance}$</td>*/}
                                                                 </tr>
                                                             )
                                                         })
