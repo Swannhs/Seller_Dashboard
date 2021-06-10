@@ -4,22 +4,25 @@ import {Link} from "react-router-dom";
 import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import DeleteUser from "./Action/DeleteUser";
 import {Button} from "reactstrap";
-import Cookies from "universal-cookie/lib";
 
 
 class UserApi extends Component {
     state = {
-        root: false
+        root: false,
+        refresh: true
     }
 
     componentDidMount() {
-        let cookie = new Cookies;
-        let role = cookie.get('Role')
+        let role = localStorage.getItem('Role')
         if (role === 'admin') {
             this.setState({
                 root: true
             })
         }
+    }
+
+    onRefresh = () => {
+        this.props.refresh();
     }
 
     render() {
@@ -99,7 +102,7 @@ class UserApi extends Component {
                                     </Button>
                                 </Link>
 
-                                <DeleteUser delId={item.id}/>
+                                <DeleteUser delId={item.id} refresh={this.onRefresh}/>
                             </td>
 
                         </tr>
