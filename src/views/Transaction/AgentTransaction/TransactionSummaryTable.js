@@ -9,7 +9,6 @@ import {Pagination} from "semantic-ui-react";
 class TransactionSummaryTable extends Component {
     state = {
         data: [],
-        role: '',
         page: 1,
         start: 0,
         limit: 10,
@@ -20,6 +19,7 @@ class TransactionSummaryTable extends Component {
     componentDidMount() {
         this.onApiCall();
     }
+
     onApiCall = () => {
         RadiusApi.get('/voucher-transactions/index.json', {
             params: {
@@ -30,7 +30,6 @@ class TransactionSummaryTable extends Component {
                 this.setState({
                     data: response.data.item,
                     total: response.data.totalCount,
-                    role: localStorage.getItem('Role'),
                     loading: false
                 })
             })
@@ -73,21 +72,27 @@ class TransactionSummaryTable extends Component {
                 {
                     this.state.loading ? <div className="ui active centered inline loader"/> :
                         <>
-                            {
-                                this.state.role === 'agent' || this.state.role === 'admin' ?
-                                        <div className='row'>
-                                            <div className='col'>
-                                                <div className="ui text-right floated column">
-                                                    <Link to='/admin/voucher/transfer'>
-                                                        <button className='ui button primary'>
-                                                            Transfer
-                                                        </button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    : <></>
-                            }
+                            <div className='row'>
+                                <div className='col'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/voucher/refund'>
+                                            <button className='ui button green'>
+                                                Refund
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                <div className='col'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/voucher/transfer'>
+                                            <button className='ui button primary'>
+                                                Transfer
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                             <table className="table table-striped">
 
                                 {/*    -------------------------Table Api goes here------------------------------*/}
