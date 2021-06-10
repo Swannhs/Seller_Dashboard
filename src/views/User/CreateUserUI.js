@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import Cookies from "universal-cookie/lib";
 
 class CreateUserUi extends Component {
 
@@ -16,24 +15,16 @@ class CreateUserUi extends Component {
         language: "4_4",
         role: 'agent',
 
-        root: false,
-
         errors: []
     }
 
     onFormSubmit = event => {
         event.preventDefault();
-        this.props.onFormSubmit(this.state)
+        let data = this.state;
+        delete data.errors;
+        this.props.onFormSubmit(data)
     }
 
-    componentDidMount() {
-        let cookie = new Cookies
-        if (cookie.get('Role') === 'admin') {
-            this.setState({
-                root: true
-            })
-        }
-    }
 
 
     render() {
@@ -49,7 +40,8 @@ class CreateUserUi extends Component {
                     <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
 
-                        <h3 className="card-title mt-3 text-center p-3">Create Account</h3>
+                        <h3 className="card-title mt-3 text-center p-3">Create Reseller</h3>
+
                         <form onSubmit={this.onFormSubmit}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
@@ -74,19 +66,19 @@ class CreateUserUi extends Component {
                                        required={true}
                                 />
                             </div>
-                            {
-                                this.state.root ?
-                                    <div className="form-group input-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text"> <i className="fa fa-building"/> </span>
-                                        </div>
-                                        <select className="form-control text-capitalize" value={this.state.role}
-                                                onChange={event => this.setState({role: event.target.value})}>
-                                            <option selected={true} className='text-capitalize'>seller</option>
-                                            <option className='text-capitalize'>agent</option>
-                                        </select>
-                                    </div> : null
-                            }
+                            {/*{*/}
+                            {/*    this.state.root ?*/}
+                            {/*        <div className="form-group input-group">*/}
+                            {/*            <div className="input-group-prepend">*/}
+                            {/*                <span className="input-group-text"> <i className="fa fa-building"/> </span>*/}
+                            {/*            </div>*/}
+                            {/*            <select className="form-control text-capitalize" value={this.state.role}*/}
+                            {/*                    onChange={event => this.setState({role: event.target.value})}>*/}
+                            {/*                <option selected={true} className='text-capitalize'>seller</option>*/}
+                            {/*                <option className='text-capitalize'>agent</option>*/}
+                            {/*            </select>*/}
+                            {/*        </div> : null*/}
+                            {/*}*/}
 
 
                             {/* -------------------------Personal Info-------------------// */}
