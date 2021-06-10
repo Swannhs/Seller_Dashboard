@@ -33,6 +33,7 @@ import EditTweak from "./views/Tweak/EditTweak";
 import EditServer from "./views/Server/EditServer";
 import ViewTweak from "./views/Tweak/ViewTweak";
 import ChangePassword from "./components/Password/ChangePassword";
+import TransactionRefund from "./views/Transaction/TransactionRefund";
 
 
 const dashboardRoutes = [
@@ -130,6 +131,12 @@ const dashboardRoutes = [
         path: "/voucher/transfer",
         name: "Transfer",
         component: Transfer,
+        layout: '/admin'
+    },
+    {
+        path: "/voucher/refund",
+        name: "Refund",
+        component: TransactionRefund,
         layout: '/admin'
     },
     {
