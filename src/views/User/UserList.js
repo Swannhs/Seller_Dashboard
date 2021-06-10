@@ -20,11 +20,15 @@ class UserList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            role: ''
+            role: '',
         }
     }
 
     componentDidMount() {
+        this.onApiCall();
+    }
+
+    onRefresh = () => {
         this.onApiCall();
     }
 
@@ -121,8 +125,8 @@ class UserList extends Component {
                             <table className="table table-striped">
                                 {/*-----------------Calling User List Api---------------------*/}
                                 {
-                                    isMobile ? <UserApiMobile data={this.state.data}/> :
-                                        <UserApi data={this.state.data}/>
+                                    isMobile ? <UserApiMobile data={this.state.data} refresh={this.onRefresh}/> :
+                                        <UserApi data={this.state.data} refresh={this.onRefresh}/>
                                 }
                                 {/*-----------------Calling User List Api---------------------*/}
                             </table>
