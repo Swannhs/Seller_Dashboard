@@ -38,7 +38,7 @@ class AllUser extends Component {
     render() {
         return (
             <>
-                <h4 className='text-black-50'>Account</h4>
+                <h4 className='text-black-50'>Reseller</h4>
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
