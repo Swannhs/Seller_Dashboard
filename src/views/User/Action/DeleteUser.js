@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {AiFillDelete} from "react-icons/all";
 import {Button} from "reactstrap";
 import {confirmAlert} from "react-confirm-alert";
@@ -25,15 +24,15 @@ class DeleteUser extends Component {
 
 
     onDeleteUser = (id) => {
-        const cookie = new Cookies;
         RadiusApi.post('/access-providers/delete.json', {'id': id}, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                     if (response.data.success){
-                        alert('User deleted successful. Please reload')
+                        alert('User deleted successful.')
+                        this.props.refresh();
                     }else {
                         alert('Error to delete the user')
                     }
