@@ -21,7 +21,7 @@ class UserList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            role: ''
+            role: '',
         }
     }
 
