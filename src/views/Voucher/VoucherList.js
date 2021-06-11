@@ -18,7 +18,9 @@ class VoucherList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            search: null,
+            search: '',
+            filter: 'new',
+
         }
         this.onChangeHandle = this.onChangeHandle.bind(this)
         this.onSearchApiCall = this.onSearchApiCall.bind(this)
@@ -31,56 +33,14 @@ class VoucherList extends Component {
 
     onApiCall = () => {
         this.setState({loading: true})
-        RadiusApi.get('/vouchers/index.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                token: localStorage.getItem('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.items,
-                    total: response.data.totalCount,
-                    loading: false
-                })
-            })
-    }
-
-    onSearchApiCall = () => {
-        event.preventDefault();
-        this.setState({loading: true})
-        this.onResetPagination()
-        RadiusApi.get('/vouchers/index.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                query: this.state.search,
-                token: localStorage.getItem('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.items,
-                    total: response.data.totalCount,
-                    loading: false
-                })
-            })
-    }
-
-    onFilterApiCall = event => {
-        event.preventDefault();
-        if (event.target.value !== 'all') {
-            this.setState({loading: true})
-            this.onResetPagination();
+        if (!(this.state.filter === 'all')) {
             RadiusApi.get('/vouchers/index.json', {
                 params: {
                     page: this.state.page,
                     start: this.state.start,
                     limit: this.state.limit,
-                    filter: `[{"operator": "in","value": ["${event.target.value}"],"property": "status"}]`,
+                    query: this.state.search,
+                    filter: `[{"operator": "in","value": ["${this.state.filter}"],"property": "status"}]`,
                     token: localStorage.getItem('Token')
                 }
             })
@@ -92,31 +52,55 @@ class VoucherList extends Component {
                     })
                 })
         } else {
-            this.onApiCall();
+            RadiusApi.get('/vouchers/index.json', {
+                params: {
+                    page: this.state.page,
+                    start: this.state.start,
+                    limit: this.state.limit,
+                    query: this.state.search,
+                    token: localStorage.getItem('Token')
+                }
+            })
+                .then(response => {
+                    this.setState({
+                        data: response.data.items,
+                        total: response.data.totalCount,
+                        loading: false
+                    })
+                })
         }
+
+    }
+
+    onSearchApiCall = () => {
+        event.preventDefault();
+        this.onResetPagination();
+        this.onApiCall();
+    }
+
+    onFilterApiCall = event => {
+        event.preventDefault();
+        this.onResetPagination();
+        this.onApiCall();
     }
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState.page !== this.state.page ? this.onApiCall() : null
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     prevState.page !== this.state.page ? this.onApiCall() : null
+    // }
 
     /*
-
         //todo Live Screen Change detect
         componentDidMount() {
             window.addEventListener("resize", this.resize.bind(this));
             this.resize();
         }
-
         resize() {
             this.setState({hideNav: window.innerWidth <= 760});
         }
-
         componentWillUnmount() {
             window.removeEventListener("resize", this.resize.bind(this));
         }
-
      */
 
     onPagination() {
@@ -130,12 +114,22 @@ class VoucherList extends Component {
             page: data.activePage,
             start: (data.activePage - 1) * this.state.limit
         })
+        this.onApiCall();
     }
 
     onChangeHandle = () => {
         this.setState({
             search: event.target.value
         })
+    }
+
+    onChangeFilter = event => {
+        this.setState({
+            filter: event.target.value
+        }, function (){
+            this.onFilterApiCall(event);
+        })
+
     }
 
 
@@ -175,12 +169,14 @@ class VoucherList extends Component {
 
                                         <div className="form-group input-group">
                                             <select className="form-control text-capitalize"
-                                                    onChange={event => this.onFilterApiCall(event)}>
-                                                <option value='all'>All</option>
+                                                    onChange={event => {
+                                                        this.onChangeFilter(event)
+                                                    }}>
                                                 <option key={1} value='new'>New</option>
                                                 <option key={2} value='used'>Used</option>
                                                 <option key={3} value='depleted'>Depleted</option>
                                                 <option key={4} value='expired'>Expired</option>
+                                                <option key={5} value='all'>All</option>
                                             </select>
                                         </div>
                                     </div>
@@ -200,20 +196,23 @@ class VoucherList extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className='two wide column'>
+                                    <div className='three wide column'>
                                         {/*<VoucherFilter/>*/}
 
                                         <div className="form-group input-group">
                                             <div className="input-group-prepend">
-                                                <span className="input-group-text"> <i className="fas fa-filter"/> </span>
+                                                <span className="input-group-text"> <i
+                                                    className="fas fa-filter"/> </span>
                                             </div>
                                             <select className="form-control text-capitalize"
-                                                    onChange={event => this.onFilterApiCall(event)}>
-                                                <option value='all'>All</option>
+                                                    onChange={event => {
+                                                        this.onChangeFilter(event)
+                                                    }}>
                                                 <option key={1} value='new'>New</option>
                                                 <option key={2} value='used'>Used</option>
                                                 <option key={3} value='depleted'>Depleted</option>
                                                 <option key={4} value='expired'>Expired</option>
+                                                <option key={5} value='all'>All</option>
                                             </select>
                                         </div>
                                     </div>
