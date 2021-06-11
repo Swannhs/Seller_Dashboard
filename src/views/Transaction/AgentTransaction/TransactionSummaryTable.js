@@ -77,15 +77,20 @@ class TransactionSummaryTable extends Component {
                     this.state.loading ? <div className="ui active centered inline loader"/> :
                         <>
                             <div className='row'>
-                                <div className='col'>
-                                    <div className="ui text-right floated column">
-                                        <Link to='/admin/voucher/refund'>
-                                            <button className='ui button green'>
-                                                Refund
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
+                                {
+                                    this.state.root !== 'admin' ?
+                                        <div className='col'>
+                                            <div className="ui text-right floated column">
+                                                <Link to='/admin/voucher/refund'>
+                                                    <button className='ui button green'>
+                                                        Refund
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        : <></>
+                                }
+
 
 
                                 <div className='col'>
