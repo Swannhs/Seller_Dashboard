@@ -4,6 +4,7 @@ import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {confirmAlert} from "react-confirm-alert";
+import AllUser from "../../components/Dropdown/AllUser";
 
 class TransactionRefund extends Component {
     state = {
@@ -12,7 +13,6 @@ class TransactionRefund extends Component {
         realm_id: '',
         profile_id: '',
         transfer_amount: 0,
-        partner_user_name: '',
         role: '',
         error: {
             partner: '',
@@ -56,18 +56,24 @@ class TransactionRefund extends Component {
         });
     }
 
-    componentDidMount() {
-        RadiusApi.get('/balance-transactions/parent.json', {
-            params: {
-                token: localStorage.getItem('Token')
-            }
+    // componentDidMount() {
+    //     RadiusApi.get('/balance-transactions/parent.json', {
+    //         params: {
+    //             token: localStorage.getItem('Token')
+    //         }
+    //     })
+    //         .then(response => {
+    //             this.setState({
+    //                 partner_user_id: response.data.id,
+    //                 partner_user_name: response.data.username
+    //             })
+    //         })
+    // }
+
+    onCreatePartner = async data => {
+        this.setState({
+            partner_user_id: data
         })
-            .then(response => {
-                this.setState({
-                    partner_user_id: response.data.id,
-                    partner_user_name: response.data.username
-                })
-            })
     }
 
     onCreateGroup = async data => {
@@ -94,9 +100,10 @@ class TransactionRefund extends Component {
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
+
+                    <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve credits</p>
                     <form onSubmit={this.onRefundConfirm}>
-                        <h3>Note: You are going to refund credit with <span
-                            className='text-uppercase'>{this.state.partner_user_name}</span></h3>
+                        <AllUser onChange={this.onCreatePartner}/>
                         <VoucherGroup onChange={this.onCreateGroup}/>
                         <VoucherProfile onChange={this.onCreateProfile}/>
 
