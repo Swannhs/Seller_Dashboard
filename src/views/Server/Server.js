@@ -116,11 +116,11 @@ class Server extends Component {
                                             <td>{item.api_server_port}</td>
                                             <td>{item.note}</td>
                                             <td>
-                                                <Button className='btn-sm btn-primary'>
-                                                    <Link to={'/admin/root/server-edit/' + item.id}>
+                                                <Link to={'/admin/root/server-edit/' + item.id}>
+                                                    <Button className='btn-sm btn-primary'>
                                                         <AiFillEdit/>
-                                                    </Link>
-                                                </Button>
+                                                    </Button>
+                                                </Link>
 
                                             </td>
                                         </tr>
