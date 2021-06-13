@@ -126,7 +126,7 @@ class VoucherList extends Component {
     onChangeFilter = event => {
         this.setState({
             filter: event.target.value
-        }, function (){
+        }, function () {
             this.onFilterApiCall(event);
         })
 
@@ -251,25 +251,30 @@ class VoucherList extends Component {
                                 }
                             </table>
                             {/*--------------------Pagination------------------------*/}
-                            <tfoot>
-                            <tr>
-                                <th colSpan={5}>
-                                    <div className="ui right floated pagination menu align-content-lg-end">
-                                        <Pagination
-                                            defaultActivePage={this.state.page}
-                                            firstItem={null}
-                                            lastItem={null}
-                                            pointing
-                                            secondary
-                                            totalPages={this.onPagination()}
-                                            onPageChange={async (event, data) =>
-                                                this.onPageChaneHandler(event, data)
-                                            }
-                                        />
-                                    </div>
-                                </th>
-                            </tr>
-                            </tfoot>
+                            {
+                                this.state.total > 10 ?
+                                    <tfoot>
+                                    <tr>
+                                        <th colSpan={5}>
+                                            <div className="ui right floated pagination menu align-content-lg-end">
+                                                <Pagination
+                                                    defaultActivePage={this.state.page}
+                                                    firstItem={null}
+                                                    lastItem={null}
+                                                    pointing
+                                                    secondary
+                                                    totalPages={this.onPagination()}
+                                                    onPageChange={async (event, data) =>
+                                                        this.onPageChaneHandler(event, data)
+                                                    }
+                                                />
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </tfoot> : <></>
+                            }
+
+                            {/*    --------------------------------Pagination End --------------------------*/}
                         </>
                 }
 
