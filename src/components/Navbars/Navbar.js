@@ -6,6 +6,7 @@ import {
     AiFillDashboard, AiOutlineCloudServer, AiOutlineUser, BiMoney, BsListNested, BsServer,
 } from "react-icons/all";
 import {isMobile} from 'react-device-detect';
+import ProfileDropdown from "../Profile/ProfileDropdown";
 
 
 class Header extends Component {
@@ -18,12 +19,14 @@ class Header extends Component {
     }
 
 
+
     componentDidMount() {
         this.setState({
             role: localStorage.getItem('Role'),
             name: localStorage.getItem('Name')
         })
     }
+
 
     //----------------Sidebar open button-------------------------
     // mobileSidebarToggle = (e) => {
@@ -78,35 +81,9 @@ class Header extends Component {
 
 
                     </div>
-
                     {
                         isMobile ?
-                            <div className='justify-content-end'>
-                                <div className="dropdown">
-                                    <div className="dropdown-toggle" id="dropdownMenuButton"
-                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span className="no-icon">
-                                            <i className="fas fa-user-alt"/> {this.state.name}
-                                        </span>
-                                    </div>
-                                    <div className="dropdown-menu dropdown-menu-right"
-                                         aria-labelledby="dropdownMenuButton">
-                                        <Link to='/admin/profile' className='dropdown-item'>
-                                            Profile
-                                        </Link>
-                                        <div className="dropdown-item"
-                                             onClick={() => {
-                                                 localStorage.clear();
-                                             }}
-                                        >
-                                            <Link to='/login' className='text-danger'>
-                                                Logout
-                                            </Link>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ProfileDropdown/>
                             : <></>
                     }
                     {/*<Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-2" id='navbar-togglered'>*/}
@@ -136,21 +113,18 @@ class Header extends Component {
                                                 </Link>
                                             </Nav.Link>
                                         </Nav.Item>
-                                        {
-                                            this.state.role === 'agent' ?
-                                                <Nav.Item>
-                                                    <Nav.Link
-                                                        className='m-0'
-                                                        onClick={() => {
-                                                            document.getElementById('navbar-togglered').click();
-                                                        }}
-                                                    >
-                                                        <Link to='/admin/users/view'>
-                                                            <AiOutlineUser/> Resellers
-                                                        </Link>
-                                                    </Nav.Link>
-                                                </Nav.Item> : <></>
-                                        }
+                                        <Nav.Item>
+                                            <Nav.Link
+                                                className='m-0'
+                                                onClick={() => {
+                                                    document.getElementById('navbar-togglered').click();
+                                                }}
+                                            >
+                                                <Link to='/admin/users/view'>
+                                                    <AiOutlineUser/> Resellers
+                                                </Link>
+                                            </Nav.Link>
+                                        </Nav.Item>
 
                                         <Nav.Item>
                                             <Nav.Link
@@ -288,7 +262,11 @@ class Header extends Component {
                                         <Link to='/admin/profile' className='dropdown-item'>
                                             Profile
                                         </Link>
-                                        <div className="dropdown-item text-danger">Logout</div>
+                                        <Link to='/admin/api/logout'>
+                                            <div className="dropdown-item text-danger">
+                                                Logout
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </Navbar.Collapse>
