@@ -81,12 +81,12 @@ class TransactionReceive extends Component {
                                             <table className="table table-striped">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">Trx ID</th>
-                                                    <th scope="col">Partner</th>
+                                                    <th scope="col">Receiver</th>
                                                     <th scope="col">Plan</th>
                                                     <th scope="col">Vendor</th>
                                                     <th scope="col">Credit</th>
                                                     <th scope="col">Debit</th>
+                                                    <th scope="col">Trx ID</th>
                                                     {/*<th scope="col">Cost</th>*/}
                                                 </tr>
                                                 </thead>
@@ -95,12 +95,12 @@ class TransactionReceive extends Component {
                                                     this.state.transactions.map((item) => {
                                                         return (
                                                             <tr key={item.id}>
-                                                                <td>{item.transaction}</td>
                                                                 <td>{item.user.username}</td>
                                                                 <td>{item.profile.name}</td>
                                                                 <td>{item.realm.name}</td>
                                                                 <td>{item.credit}</td>
                                                                 <td>{item.debit}</td>
+                                                                <td>{item.transaction}</td>
                                                                 {/*<td>{item.balance}$</td>*/}
                                                             </tr>
                                                         )
