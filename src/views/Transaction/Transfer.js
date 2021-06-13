@@ -11,7 +11,7 @@ class Transfer extends Component {
         partner_user_id: '',
         realm_id: '',
         profile_id: '',
-        transfer_amount: '',
+        transfer_amount: 0,
         quantity_rate: 0,
         role: '',
         error: {
@@ -93,7 +93,7 @@ class Transfer extends Component {
             <div className='container'>
                 <div className='ml-3'>
                     {
-                        this.state.root === 'admin' ?
+                        this.state.role === 'admin' ?
                             <Link to='/admin/root/voucher/transaction'>
                                 <button className='ui button'>Back</button>
                             </Link> : <Link to='/admin/voucher/transaction'>
