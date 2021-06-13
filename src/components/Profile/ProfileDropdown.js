@@ -1,26 +1,51 @@
-import React from 'react'
-import {Dropdown, Icon} from 'semantic-ui-react'
+import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+import {Redirect} from "react-router";
 
-const trigger = (
-    <span>
-    <Icon name='user'/> {localStorage.getItem('Name')}
-  </span>
-)
+class ProfileDropdown extends Component {
+    state = {
+        role: '',
+        name: '',
+        redirect: false
+    }
 
-const logOut = event => {
-    localStorage.clear();
-    props.history.push('/')
+
+    componentDidMount() {
+        this.setState({
+            role: localStorage.getItem('Role'),
+            name: localStorage.getItem('Name')
+        })
+    }
+
+    render() {
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
+        return (
+            <div className='justify-content-end'>
+                <div className="dropdown">
+                    <div className="dropdown-toggle" id="dropdownMenuButton"
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span className="no-icon">
+                                            <i className="fas fa-user-alt"/> {this.state.name}
+                                        </span>
+                    </div>
+                    <div className="dropdown-menu dropdown-menu-right"
+                         aria-labelledby="dropdownMenuButton">
+                        <Link to='/admin/profile' className='dropdown-item'>
+                            Profile
+                        </Link>
+                        <Link to='/admin/api/logout'>
+                            <div className="dropdown-item text-danger">
+                                Logout
+                            </div>
+                        </Link>
+
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
-const options = [
-    {key: 'profile', value: 'profile', text: 'Your Profile'},
-    {key: 'sign-out', value: 'logout', text: 'Sign Out'},
-]
-
-const ProfileDropdown = () => (
-    <Dropdown trigger={trigger} options={options}
-              onChange={event => logOut(event)}
-    />
-)
-
-export default ProfileDropdown
+export default ProfileDropdown;
