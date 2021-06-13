@@ -36,6 +36,8 @@ class VoucherSummaryAdmin extends Component {
             })
     }
 
+
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         prevState.page !== this.state.page ? this.onApiCall() : null
     }
@@ -79,6 +81,14 @@ class VoucherSummaryAdmin extends Component {
                         </Link>
                     </div>
 
+                        <div className="ui two column">
+                            <Link to='/admin/voucher/refund'>
+                                <button className='ui button red'>
+                                    Refund
+                                </button>
+                            </Link>
+                        </div>
+
                     <div className="right floated column mr-5">
                         <Link to='/admin/voucher/transfer'>
                             <button className='ui button primary'>
@@ -91,10 +101,10 @@ class VoucherSummaryAdmin extends Component {
                     this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :
                         <>
                             <table className="table table-striped text-center mt-3">
-                                <tr>
-                                    {/*<th className='text-center'>Receiver</th>*/}
+                                <tr className='ct-grid-background border-primary'>
+                                    <th className='text-center'>Receiver</th>
                                     <th className='text-center'>Vendor</th>
-                                    <th className='text-center'>Profile</th>
+                                    <th className='text-center'>Plan</th>
                                     <th className='text-center'>Credit</th>
                                     <th className='text-center'>Debit</th>
                                     <th className='text-center'>Available</th>
@@ -105,7 +115,7 @@ class VoucherSummaryAdmin extends Component {
                                     this.state.summary ? this.state.summary.map((item) => {
                                         return (
                                             <tr key={item.id}>
-                                                {/*<td className='text-center'>{item.user.username}</td>*/}
+                                                <td className='text-center'>{item.user.username}</td>
                                                 <td className='text-center'>{item.realm.name}</td>
                                                 <td className='text-center'>{item.profile.name}</td>
                                                 <td className='text-center'>{item.credit}</td>
