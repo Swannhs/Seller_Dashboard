@@ -58,13 +58,15 @@ class ViewUi extends Component {
                                                     <div className="mt-3">
                                                         <h4>User Name: {this.state.username}</h4>
                                                     </div>
-                                                    <div className="mt-3">
-                                                        <h4 className='text-capitalize'>Role: {this.state.role}</h4>
-                                                    </div>
+                                                    {/*<div className="mt-3">*/}
+                                                    {/*    <h4 className='text-capitalize'>Upline(owner): {this.state.role}</h4>*/}
+                                                    {/*</div>*/}
                                                     <div className="mt-3">Status:
-                                                        {this.state.active ?
+                                                        {
+                                                            this.state.active ?
                                                             <span className='text-success'>Active</span> :
-                                                            <span className='text-danger'>Inactive</span>}
+                                                            <span className='text-danger'>Inactive</span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
