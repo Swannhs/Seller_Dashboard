@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import TransactionSummaryApi from "./TransactionSummaryApi";
 import TransactionSummaryApiMobile from "./TransactionSummaryApiMobile";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
@@ -10,29 +9,31 @@ import {Pagination} from "semantic-ui-react";
 class TransactionSummaryTable extends Component {
     state = {
         data: [],
-        role: '',
         page: 1,
         start: 0,
         limit: 10,
         total: 0,
         loading: true,
+        root: ''
     }
 
     componentDidMount() {
+        this.setState({
+            root: localStorage.getItem('Role')
+        })
         this.onApiCall();
     }
+
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/voucher-transactions/index.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                 this.setState({
                     data: response.data.item,
                     total: response.data.totalCount,
-                    role: cookie.get('Role'),
                     loading: false
                 })
             })
@@ -75,21 +76,33 @@ class TransactionSummaryTable extends Component {
                 {
                     this.state.loading ? <div className="ui active centered inline loader"/> :
                         <>
-                            {
-                                this.state.role === 'agent' || this.state.role === 'admin' ?
-                                        <div className='row'>
-                                            <div className='col'>
-                                                <div className="ui text-right floated column">
-                                                    <Link to='/admin/voucher/transfer'>
-                                                        <button className='ui button primary'>
-                                                            Transfer
-                                                        </button>
-                                                    </Link>
-                                                </div>
+                            <div className='row'>
+                                {
+                                    this.state.root !== 'admin' ?
+                                        <div className='col'>
+                                            <div className="ui text-right floated column">
+                                                <Link to='/admin/voucher/refund'>
+                                                    <button className='ui button green'>
+                                                        Refund
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
-                                    : <></>
-                            }
+                                        : <></>
+                                }
+
+
+
+                                <div className='col'>
+                                    <div className="ui text-right floated column">
+                                        <Link to='/admin/voucher/transfer'>
+                                            <button className='ui button primary'>
+                                                Transfer
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                             <table className="table table-striped">
 
                                 {/*    -------------------------Table Api goes here------------------------------*/}

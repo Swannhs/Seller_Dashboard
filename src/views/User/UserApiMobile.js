@@ -13,9 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../radius-api/RadiusApi";
-import {AiFillEdit, AiOutlineEye, BiReset} from "react-icons/all";
+import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 import DeleteUser from "./Action/DeleteUser";
@@ -28,32 +26,15 @@ const useRowStyles = makeStyles({
     },
 });
 
-const onVoucherReset = (props) => {
-    let reset = {
-        reset: props
-    }
-
-    let cookie = new Cookies
-    RadiusApi.post('/vouchers/voucher-reset.json', reset, {
-        params: {
-            token: cookie.get('Token')
-        }
-    })
-        .then(response => {
-                if (response.data.success) {
-                    alert('Voucher reset successful')
-                } else {
-                    alert(response.data.message)
-                }
-            }
-        )
-}
-
 
 function Row(props) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+
+    const onRefresh = () => {
+        props.refresh.refresh();
+    }
 
     return (
         <>
@@ -72,10 +53,10 @@ function Row(props) {
                 </TableCell>
                 <TableCell className='text'>
                     <Box margin={1}>
-                    {
-                        row.role === 'agent' ? <span className='ui green label small'>{row.role}</span> :
-                                        <span className='ui yellow label small'>{row.role}</span>
-                    }
+                        {
+                            row.active ? <span className='ui green label small'>Active</span>
+                                : <span className='ui red label small'>Inactive</span>
+                        }
                     </Box>
                 </TableCell>
             </TableRow>
@@ -83,40 +64,29 @@ function Row(props) {
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Status</TableCell>
-                                        <TableCell>Action</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
-                                            {
-                                                row.active ? <span className='ui green label small'>Active</span>
-                                                    : <span className='ui red label small'>Inactive</span>
-                                            }
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link to={'/admin/users/view/' + row.id}>
-                                                <Button className='btn-sm btn-success'>
-                                                    <AiOutlineEye/>
-                                                </Button>
-                                            </Link>
+                            <div className="list-group-item">
+                                <div className="ui grid text-center">
+                                    <div className="eight wide column">
+                                        <b>Action</b>
+                                    </div>
+                                    <div className="eight wide column">
+                                        <Link to={'/admin/users/view/' + row.id}>
+                                            <Button className='btn-sm btn-success'>
+                                                <AiOutlineEye/>
+                                            </Button>
+                                        </Link>
 
-                                            {/*<AiFillEdit onClick={this.onEditUser}/>*/}
-                                            <Link to={'/admin/users/edit/' + row.id}>
-                                                <Button className='btn-sm primary'>
-                                                    <AiFillEdit/>
-                                                </Button>
-                                            </Link>
+                                        {/*<AiFillEdit onClick={this.onEditUser}/>*/}
+                                        <Link to={'/admin/users/edit/' + row.id}>
+                                            <Button className='btn-sm primary'>
+                                                <AiFillEdit/>
+                                            </Button>
+                                        </Link>
 
-                                            <DeleteUser delId={row.id}/>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
+                                        <DeleteUser delId={row.id} refresh={onRefresh}/>
+                                    </div>
+                                </div>
+                            </div>
                         </Box>
                     </Collapse>
                 </TableCell>
@@ -133,7 +103,8 @@ Row.propTypes = {
 };
 
 
-const CollapsibleTable = ({data}) => {
+const UserApiMobile = props => {
+
     return (
         <TableContainer className='mt-2' component={Paper}>
             <Table aria-label="collapsible table">
@@ -144,18 +115,20 @@ const CollapsibleTable = ({data}) => {
                             <span className='ml-2'>Name</span>
                         </TableCell>
                         <TableCell>
-                            <span className='ml-2'>Role</span>
+                            <span className='ml-2'>Status</span>
                         </TableCell>
                         {/*<TableCell align="right">Passwor</TableCell>*/}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <Row key={row.id} row={row}/>
-                    ))}
+                    {
+                        props.data.map((row) => (
+                            <Row key={row.id} row={row} refresh={props}/>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
     );
 }
-export default CollapsibleTable;
+export default UserApiMobile;

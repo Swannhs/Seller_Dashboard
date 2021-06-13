@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import 'reactjs-popup/dist/index.css';
 import VoucherApi from "./VoucherApi";
 import {Link} from "react-router-dom";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
@@ -19,7 +18,9 @@ class VoucherList extends Component {
             total: 0,
             refresh: true,
             loading: true,
-            search: null
+            search: '',
+            filter: 'new',
+
         }
         this.onChangeHandle = this.onChangeHandle.bind(this)
         this.onSearchApiCall = this.onSearchApiCall.bind(this)
@@ -31,68 +32,75 @@ class VoucherList extends Component {
     }
 
     onApiCall = () => {
-        const cookie = new Cookies
-        RadiusApi.get('/vouchers/index.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.items,
-                    total: response.data.totalCount,
-                    loading: false
-                })
+        this.setState({loading: true})
+        if (!(this.state.filter === 'all')) {
+            RadiusApi.get('/vouchers/index.json', {
+                params: {
+                    page: this.state.page,
+                    start: this.state.start,
+                    limit: this.state.limit,
+                    query: this.state.search,
+                    filter: `[{"operator": "in","value": ["${this.state.filter}"],"property": "status"}]`,
+                    token: localStorage.getItem('Token')
+                }
             })
+                .then(response => {
+                    this.setState({
+                        data: response.data.items,
+                        total: response.data.totalCount,
+                        loading: false
+                    })
+                })
+        } else {
+            RadiusApi.get('/vouchers/index.json', {
+                params: {
+                    page: this.state.page,
+                    start: this.state.start,
+                    limit: this.state.limit,
+                    query: this.state.search,
+                    token: localStorage.getItem('Token')
+                }
+            })
+                .then(response => {
+                    this.setState({
+                        data: response.data.items,
+                        total: response.data.totalCount,
+                        loading: false
+                    })
+                })
+        }
+
     }
 
     onSearchApiCall = () => {
         event.preventDefault();
-        this.setState({loading: true})
-        this.onResetPagination()
-        const cookie = new Cookies
-        RadiusApi.get('/vouchers/index.json', {
-            params: {
-                page: this.state.page,
-                start: this.state.start,
-                limit: this.state.limit,
-                query: this.state.search,
-                token: cookie.get('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    data: response.data.items,
-                    total: response.data.totalCount,
-                    loading: false
-                })
-            })
+        this.onResetPagination();
+        this.onApiCall();
+    }
+
+    onFilterApiCall = event => {
+        event.preventDefault();
+        this.onResetPagination();
+        this.onApiCall();
     }
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        prevState.page !== this.state.page ? this.onApiCall() : null
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     prevState.page !== this.state.page ? this.onApiCall() : null
+    // }
 
     /*
-
         //todo Live Screen Change detect
         componentDidMount() {
             window.addEventListener("resize", this.resize.bind(this));
             this.resize();
         }
-
         resize() {
             this.setState({hideNav: window.innerWidth <= 760});
         }
-
         componentWillUnmount() {
             window.removeEventListener("resize", this.resize.bind(this));
         }
-
      */
 
     onPagination() {
@@ -101,10 +109,12 @@ class VoucherList extends Component {
     }
 
     async onPageChaneHandler(event, data) {
+        this.setState({loading: true})
         await this.setState({
             page: data.activePage,
             start: (data.activePage - 1) * this.state.limit
         })
+        this.onApiCall();
     }
 
     onChangeHandle = () => {
@@ -112,6 +122,16 @@ class VoucherList extends Component {
             search: event.target.value
         })
     }
+
+    onChangeFilter = event => {
+        this.setState({
+            filter: event.target.value
+        }, function (){
+            this.onFilterApiCall(event);
+        })
+
+    }
+
 
     onResetPagination() {
         this.setState({
@@ -130,35 +150,78 @@ class VoucherList extends Component {
                     <div className="ui grid">
                         {
                             isMobile ?
-                                <div className="ten wide column">
-                                    <form onSubmit={this.onSearchApiCall}>
-                                        <div className="ui icon input">
-                                            <input  type="text" placeholder="Search Name"
-                                                    onChange={this.onChangeHandle}
-                                            />
-                                            <i className="circular search link icon"
-                                               onClick={this.onSearchApiCall}
-                                            />
+                                <>
+                                    <div className="six wide column">
+                                        <form onSubmit={this.onSearchApiCall}>
+                                            <div className="ui icon input" style={{width: '120px'}}>
+                                                <input type="text" placeholder="Search Name"
+                                                       onChange={this.onChangeHandle}
+                                                />
+                                                <i className="circular search link icon"
+                                                   onClick={this.onSearchApiCall}
+                                                />
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div className='five wide column'>
+                                        {/*<VoucherFilter/>*/}
+
+                                        <div className="form-group input-group">
+                                            <select className="form-control text-capitalize"
+                                                    onChange={event => {
+                                                        this.onChangeFilter(event)
+                                                    }}>
+                                                <option key={1} value='new'>New</option>
+                                                <option key={2} value='used'>Used</option>
+                                                <option key={3} value='depleted'>Depleted</option>
+                                                <option key={4} value='expired'>Expired</option>
+                                                <option key={5} value='all'>All</option>
+                                            </select>
                                         </div>
-                                    </form>
-                                </div> :
-                                <div className="eight wide column">
-                                    <form onSubmit={this.onSearchApiCall}>
-                                        <div className="ui icon input">
-                                            <input  type="text" placeholder="Search Name"
-                                                    onChange={this.onChangeHandle}
-                                            />
-                                            <i className="circular search link icon"
-                                               onClick={this.onSearchApiCall}
-                                            />
+                                    </div>
+
+                                </>
+                                :
+                                <>
+                                    <div className="five wide column">
+                                        <form onSubmit={this.onSearchApiCall}>
+                                            <div className="ui icon input">
+                                                <input type="text" placeholder="Search Name"
+                                                       onChange={this.onChangeHandle}
+                                                />
+                                                <i className="circular search link icon"
+                                                   onClick={this.onSearchApiCall}
+                                                />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className='three wide column'>
+                                        {/*<VoucherFilter/>*/}
+
+                                        <div className="form-group input-group">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text"> <i
+                                                    className="fas fa-filter"/> </span>
+                                            </div>
+                                            <select className="form-control text-capitalize"
+                                                    onChange={event => {
+                                                        this.onChangeFilter(event)
+                                                    }}>
+                                                <option key={1} value='new'>New</option>
+                                                <option key={2} value='used'>Used</option>
+                                                <option key={3} value='depleted'>Depleted</option>
+                                                <option key={4} value='expired'>Expired</option>
+                                                <option key={5} value='all'>All</option>
+                                            </select>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </>
                         }
 
                         {
                             isMobile ?
-                                <div className="six wide column right aligned">
+                                <div className="ml-3 two wide column right aligned">
                                     <Link to='/admin/voucher/create'>
                                         <button className='ui button primary small'>
                                             New

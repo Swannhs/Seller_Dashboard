@@ -2,14 +2,11 @@ import React, {Component} from 'react';
 import VoucherGroup from "./VoucherGroup";
 import VoucherProfile from "./VoucherProfile";
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
 
 class CreateVoucherApi extends Component {
     constructor(props) {
         super(props);
-        let cookie = new Cookies
-
         this.state = {
             user_id: 0,
             single_field: true,
@@ -21,17 +18,16 @@ class CreateVoucherApi extends Component {
             never_expire: 'never_expire',
             extra_name: '',
             extra_value: '',
-            token: cookie.get('Token'),
+            token: localStorage.getItem('Token'),
             sel_language: 4_4
         }
     }
 
     onSubmitVoucher = () => {
         event.preventDefault();
-        const cookie = new Cookies;
         RadiusApi.post('/vouchers/add.json', this.state, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

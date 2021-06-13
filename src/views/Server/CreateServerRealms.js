@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
-import GetServer from "../Transaction/GetServer";
+import GetServer from "../../components/Dropdown/GetServer";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 class CreateServerRealms extends Component {
     state = {
@@ -18,11 +17,10 @@ class CreateServerRealms extends Component {
 
     onGenerateServer = event => {
         event.preventDefault();
-        let cookie = new Cookies
         let data = this.state
         RadiusApi.post('/Server-realms/add.json', data,{
             params:{
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

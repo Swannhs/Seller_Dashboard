@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import DeleteTweakRealms from "./DeleteTweakRealms";
 import {Pagination} from "semantic-ui-react";
 
@@ -20,13 +19,12 @@ class TweakRealm extends Component {
     }
 
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/Tweak-realms/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

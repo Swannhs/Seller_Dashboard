@@ -41,7 +41,7 @@ function Row(props) {
                 <TableCell className='text-capitalize' component="th" scope="row">
                     {row.user.username}
                 </TableCell>
-                <TableCell>{row.balance}$</TableCell>
+                {/*<TableCell>{row.balance}$</TableCell>*/}
                 <TableCell>{row.debit}</TableCell>
             </TableRow>
             <TableRow>
@@ -122,7 +122,7 @@ const TransactionSentMobile = ({data}) => {
                     <TableRow>
                         <TableCell/>
                         <TableCell>Receiver</TableCell>
-                        <TableCell>Cost</TableCell>
+                        {/*<TableCell>Cost</TableCell>*/}
                         <TableCell>Voucher</TableCell>
                         {/*<TableCell align="right">Passwor</TableCell>*/}
                     </TableRow>

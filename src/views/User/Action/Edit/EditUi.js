@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie";
 import RadiusApi from "../../../../radius-api/RadiusApi";
 import {Link, Redirect} from "react-router-dom";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
@@ -11,7 +10,7 @@ class EditUi extends Component {
         username: '',
         name: '',
         surname: '',
-        status: false,
+        active: '',
         phone: '',
         email: '',
         address: '',
@@ -22,16 +21,15 @@ class EditUi extends Component {
 
 
     componentDidMount() {
-        const cookie = new Cookies;
         RadiusApi.get('/access-providers/view.json', {
             params: {
                 ap_id: this.props.id,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                 this.setState({
-                    status: response.data.data.active,
+                    active: response.data.data.active,
                     username: response.data.data.username,
                     name: response.data.data.name,
                     email: response.data.data.email,
@@ -43,12 +41,17 @@ class EditUi extends Component {
     }
 
 
-    onUserEditSubmit = () => {
-        const cookie = new Cookies;
-        const data = this.state
+    onUserEditSubmit = event => {
+        event.preventDefault();
+        let data = this.state
+        if (!this.state.active){
+            delete data.active;
+        }
+        delete data.redirect;
+
         RadiusApi.post('/access-providers/edit.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -63,9 +66,6 @@ class EditUi extends Component {
             })
     }
 
-    handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.checked});
-    };
 
 
     render() {
@@ -97,24 +97,27 @@ class EditUi extends Component {
                             />
                         </div>
 
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text"> <i className="fa fa-building"/> </span>
-                            </div>
-                            <select className="form-control text-capitalize" value={this.state.role}
-                                    onChange={event => this.setState({role: event.target.value})}
-                                    disabled={true}>
-                                <option selected={true} className='text-capitalize'>{this.state.role}</option>
-                            </select>
-                        </div>
+                        {/*<div className="form-group input-group">*/}
+                        {/*    <div className="input-group-prepend">*/}
+                        {/*        <span className="input-group-text"> <i className="fa fa-building"/> </span>*/}
+                        {/*    </div>*/}
+                        {/*    <select className="form-control text-capitalize" value={this.state.role}*/}
+                        {/*            onChange={event => this.setState({role: event.target.value})}*/}
+                        {/*            disabled={true}>*/}
+                        {/*        <option selected={true} className='text-capitalize'>{this.state.role}</option>*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
 
                         {/*-----------------------Active Status-----------------------------*/}
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    disabled={true}
-                                    checked={this.state.status}
-                                    onChange={this.handleChange}
+                                    checked={this.state.active}
+                                    onChange={event => {
+                                        this.setState({
+                                            active: event.target.checked
+                                        })
+                                    }}
                                     name="active"
                                     color="secondary"
                                 />

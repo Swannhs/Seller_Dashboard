@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
@@ -10,23 +9,21 @@ class GenerateBalance extends Component {
         transfer_amount: '',
         realm_id: '',
         profile_id: '',
-        quantity_rate: '',
+        quantity_rate: 0,
         partner_user_id: 44
     }
 
 
     onGenerate = () => {
-        const cookie = new Cookies()
         let data = this.state
         RadiusApi.post('/voucher-transactions/generate.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                 alert('Amount generate successfully')
                 this.props.history.push('/admin/root/voucher/transaction')
-
             })
     }
 
@@ -67,18 +64,18 @@ class GenerateBalance extends Component {
                         />
                     </div>
 
-                    <h4 className='mt-3 text-black-50'>Quantity Rate</h4>
+                    {/*<h4 className='mt-3 text-black-50'>Quantity Rate</h4>*/}
 
-                    <div className="form-group input-group">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text"> <i className="fa fa-table"/> </span>
-                        </div>
-                        <input className="form-control" placeholder="Rate" type="text"
-                               value={this.state.quantity_rate}
-                               onChange={event => this.setState({quantity_rate: event.target.value})}
-                               required={true}
-                        />
-                    </div>
+                    {/*<div className="form-group input-group">*/}
+                    {/*    <div className="input-group-prepend">*/}
+                    {/*        <span className="input-group-text"> <i className="fa fa-table"/> </span>*/}
+                    {/*    </div>*/}
+                    {/*    <input className="form-control" placeholder="Rate" type="text"*/}
+                    {/*           value={this.state.quantity_rate}*/}
+                    {/*           onChange={event => this.setState({quantity_rate: event.target.value})}*/}
+                    {/*           required={true}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
 
                     <button className='ui button positive mt-2' onClick={this.onGenerate}>
                         Generate

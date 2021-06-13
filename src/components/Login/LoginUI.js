@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './style.css';
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 
 class LoginUi extends Component {
@@ -39,17 +38,14 @@ class LoginUi extends Component {
         }
         await RadiusApi.post('/dashboard/authenticate.json', data)
             .then(response => {
-
-                const cookies = new Cookies();
-
                 if (response.data.errors) {
                     this.setState({errors: response.data.errors})
                     this.setState({loading: false})
                 } else {
                     if (response.data.data.active) {
-                        cookies.set('Name', response.data.data.user.username)
-                        cookies.set('Role', response.data.data.role)
-                        cookies.set('Token', response.data.data.token);
+                        localStorage.setItem('Token', response.data.data.token);
+                        localStorage.setItem('Name', response.data.data.user.username);
+                        localStorage.setItem('Role', response.data.data.role);
                         this.props.history.push('/admin/dashboard')
                     } else {
                         this.setState({inactive: true})

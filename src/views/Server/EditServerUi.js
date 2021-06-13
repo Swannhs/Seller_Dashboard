@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Link, Redirect} from "react-router-dom";
 import {Form} from "react-bootstrap";
@@ -19,11 +18,10 @@ class EditServerUi extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies;
         RadiusApi.get('/servers/view.json', {
             params: {
                 id: this.props.id,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -44,11 +42,10 @@ class EditServerUi extends Component {
     onUpdateServer = event => {
         event.preventDefault();
         const data = this.state
-        let cookie = new Cookies
 
         RadiusApi.post('/servers/update.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

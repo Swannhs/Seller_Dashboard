@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import {Input} from "reactstrap";
@@ -16,11 +15,10 @@ class EditTweakUi extends Component {
         // redirect: false
     }
     componentDidMount() {
-        const cookie = new Cookies;
         RadiusApi.get('/tweaks/view.json', {
             params: {
                 id: this.props.id,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -39,10 +37,9 @@ class EditTweakUi extends Component {
     onCreateTweak = event => {
         event.preventDefault();
         let data = this.state
-        let cookie = new Cookies
         RadiusApi.post('/tweaks/update.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

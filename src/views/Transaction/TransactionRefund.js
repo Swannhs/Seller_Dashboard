@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import AllUser from "../../components/Dropdown/AllUser";
-import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
+import RadiusApi from "../../radius-api/RadiusApi";
+import {confirmAlert} from "react-confirm-alert";
+import AllUser from "../../components/Dropdown/AllUser";
 
-class Transfer extends Component {
+class TransactionRefund extends Component {
     state = {
         id: 0,
         partner_user_id: '',
         realm_id: '',
         profile_id: '',
         transfer_amount: 0,
-        quantity_rate: 0,
         role: '',
         error: {
             partner: '',
@@ -20,54 +20,55 @@ class Transfer extends Component {
         }
     }
 
-
-    componentDidMount() {
-        this.setState({
-            role: localStorage.getItem('Role')
-        })
-    }
-
-
-    onTransactionComplete = () => {
-        event.preventDefault();
-
+    onRefundComplete = () => {
         let data = this.state
         delete data.error;
-        delete data.role;
-        RadiusApi.post('/voucher-transactions/add.json', data, {
+        delete data.role
+        RadiusApi.post('/voucher-transactions/refund.json', data, {
             params: {
                 token: localStorage.getItem('Token')
             }
         })
             .then(response => {
-                if (this.state.role === 'admin') {
-                    if (response.data.success) {
-                        alert('Transfer amount successfully')
-                        this.props.history.push('/admin/root/voucher/transaction')
-                    } else {
-                        alert(response.data.message)
-                        this.setState({
-                            error: {
-                                partner: response.data.partner ? response.data.partner : null,
-                                balance: response.data.message ? response.data.message : null
-                            }
-                        })
-                    }
-                } else {
-                    if (response.data.success) {
-                        alert('Transfer amount successfully')
-                        this.props.history.push('/admin/voucher/transaction')
-                    } else {
-                        alert(response.data.message)
-                        this.setState({
-                            error: {
-                                balance: response.data.message
-                            }
-                        })
-                    }
+                if (response.data.success){
+                    alert(response.data.message)
+                    this.props.history.push('/admin/voucher/transaction')
+                }else {
+                    alert(response.data.message)
                 }
             })
     }
+
+    onRefundConfirm = () => {
+        event.preventDefault();
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Are you sure to refund',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.onRefundComplete()
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
+    }
+
+    // componentDidMount() {
+    //     RadiusApi.get('/balance-transactions/parent.json', {
+    //         params: {
+    //             token: localStorage.getItem('Token')
+    //         }
+    //     })
+    //         .then(response => {
+    //             this.setState({
+    //                 partner_user_id: response.data.id,
+    //                 partner_user_name: response.data.username
+    //             })
+    //         })
+    // }
 
     onCreatePartner = async data => {
         this.setState({
@@ -92,21 +93,17 @@ class Transfer extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    {
-                        this.state.role === 'admin' ?
-                            <Link to='/admin/root/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link> : <Link to='/admin/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link>
-                    }
+                    <Link to='/admin/voucher/transaction'>
+                        <button className='ui button'>Back</button>
+                    </Link>
 
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <form onSubmit={this.onTransactionComplete}>
+
+                    <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve credits</p>
+                    <form onSubmit={this.onRefundConfirm}>
                         <AllUser onChange={this.onCreatePartner}/>
-                        <p className='text-danger'>{this.state.error.partner}</p>
                         <VoucherGroup onChange={this.onCreateGroup}/>
                         <VoucherProfile onChange={this.onCreateProfile}/>
 
@@ -149,8 +146,8 @@ class Transfer extends Component {
                         {/*    />*/}
                         {/*</div>*/}
 
-                        <button className='ui button primary mt-2' type='submit'>
-                            Transfer
+                        <button className='ui button green mt-2' type='submit'>
+                            Refund
                         </button>
                     </form>
                 </article>
@@ -160,4 +157,4 @@ class Transfer extends Component {
     }
 }
 
-export default Transfer;
+export default TransactionRefund;

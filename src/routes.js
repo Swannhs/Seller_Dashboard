@@ -33,6 +33,8 @@ import EditTweak from "./views/Tweak/EditTweak";
 import EditServer from "./views/Server/EditServer";
 import ViewTweak from "./views/Tweak/ViewTweak";
 import ChangePassword from "./components/Password/ChangePassword";
+import TransactionRefund from "./views/Transaction/TransactionRefund";
+import Logout from "./components/Login/Logout";
 
 
 const dashboardRoutes = [
@@ -65,14 +67,14 @@ const dashboardRoutes = [
     },
     {
         path: '/users/view',
-        name: 'Sellers',
+        name: 'Resellers',
         component: UserList,
         layout: '/admin'
     },
 
     {
         path: '/users/create',
-        name: 'Create Seller',
+        name: 'Create',
         component: CreateUserAction,
         layout: '/admin'
     },
@@ -88,7 +90,7 @@ const dashboardRoutes = [
     //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
-        name: "Create Voucher",
+        name: "Create",
         component: CreateVoucherApi,
         layout: "/admin",
     },
@@ -114,22 +116,28 @@ const dashboardRoutes = [
     },
     {
         path: "/voucher/transactions/:id",
-        name: "Credits Details",
+        name: "Details",
         component: TransactionTable,
         layout: "/admin",
     },
 
     {
         path: "/root/voucher/transactions/:id",
-        name: "Credits Details",
+        name: "Details",
         component: TransactionAdmin,
         layout: "/admin",
     },
 
     {
         path: "/voucher/transfer",
-        name: "Credits Transfer",
+        name: "Transfer",
         component: Transfer,
+        layout: '/admin'
+    },
+    {
+        path: "/voucher/refund",
+        name: "Refund",
+        component: TransactionRefund,
         layout: '/admin'
     },
     {
@@ -243,6 +251,14 @@ const dashboardRoutes = [
         path: '/root/tweak-realm/new',
         name: "Tweak",
         component: CreateTweakRealm,
+        layout: '/admin'
+    },
+
+//    ----------------------Logout----------------
+    {
+        path: '/api/logout',
+        name: "Logout",
+        component: Logout,
         layout: '/admin'
     },
 

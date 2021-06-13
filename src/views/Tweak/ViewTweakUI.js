@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 class ViewTweakUi extends Component {
     state = {
@@ -10,10 +9,9 @@ class ViewTweakUi extends Component {
     }
 
     componentDidMount() {
-        let cookie = new Cookies
         RadiusApi.get('/tweaks/view.json', {
             params: {
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token'),
                 id: this.props.id
             }
         })

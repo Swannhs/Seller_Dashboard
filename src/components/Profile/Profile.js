@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 
 class Profile extends Component {
     state = {
@@ -10,26 +8,14 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        let cookie = new Cookies
-        RadiusApi.get('/Dashboard/checkToken.json', {
-
-            params: {
-                token: cookie.get('Token')
-            }
+        this.setState({
+            username: localStorage.getItem('Name'),
+            role: localStorage.getItem('Role')
         })
-            .then(response => {
-                this.setState({
-                    username: response.data.data.user.username,
-                    role: response.data.data.role
-                })
-            })
-
     }
 
     onLogout = () => {
-        const cookie = new Cookies;
-        cookie.remove('Token', null)
-        cookie.remove('Role', null)
+        localStorage.clear();
         this.props.history.push('/')
     }
 
@@ -37,21 +23,21 @@ class Profile extends Component {
         return (
             <div className="container">
                 <div className='row'>
-                    <div className='col-1'>
-                        <div className="ui text-right floated column">
+                    <div className='col'>
+                        <div className="ui left floated column">
                             <Link to='/admin/dashboard'>
                                 <button className='ui button small'>Back</button>
                             </Link>
                         </div>
                     </div>
 
-                    <div className='col'>
-                        <div className="ui text-right floated column">
-                            <Link to='/login'>
-                                <button className="ui red button small" onClick={this.onLogout}>Log out</button>
-                            </Link>
-                        </div>
-                    </div>
+                    {/*<div className='col'>*/}
+                    {/*    <div className="ui text-right floated column">*/}
+                    {/*        <Link to='/login'>*/}
+                    {/*            <button className="ui red button small" onClick={this.onLogout}>Log out</button>*/}
+                    {/*        </Link>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="main-body mt-2 ml-3">
@@ -65,7 +51,7 @@ class Profile extends Component {
                                              className="rounded-circle" width={150}/>
                                         <div className="mt-3">
                                             <h4 className='text-capitalize'>{this.state.username}</h4>
-                                            <p className="text-secondary mb-1 text-capitalize">{this.state.role}</p>
+                                            <p className="text-secondary mb-1 text-capitalize">Reseller</p>
                                         </div>
                                         <div className="mt-3">
                                             <Link to='/admin/change-password'>
@@ -73,6 +59,15 @@ class Profile extends Component {
                                                     Change Password
                                                 </button>
                                             </Link>
+                                        </div>
+                                        <div className="mt-3">
+                                            <div className="ui text-right floated column">
+                                                <Link to='/login'>
+                                                    <button className="ui red button small"
+                                                            onClick={this.onLogout}>Log out
+                                                    </button>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

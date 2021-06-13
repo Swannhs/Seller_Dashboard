@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
 import DeleteServerRealm from "./DeleteServerRealm";
 import {Pagination} from "semantic-ui-react";
@@ -20,13 +19,12 @@ class ServerRealm extends Component {
     }
 
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/Server-realms/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
