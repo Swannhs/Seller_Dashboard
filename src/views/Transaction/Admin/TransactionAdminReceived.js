@@ -9,7 +9,7 @@ class TransactionAdminReceived extends Component {
         transactions: [],
         page: 1,
         start: 0,
-        limit: 1,
+        limit: 10,
         total: 0,
         loading: true
     }
@@ -99,11 +99,11 @@ class TransactionAdminReceived extends Component {
                                                 <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Trx ID</th>
                                                     <th scope="col">Sender</th>
-                                                    <th scope="col">Profile</th>
+                                                    <th scope="col">Plan</th>
                                                     <th scope="col">Vendor</th>
                                                     <th scope="col">credit</th>
+                                                    <th scope="col">Trx ID</th>
                                                     {/*<th scope="col">Cost</th>*/}
                                                 </tr>
                                                 </thead>
@@ -113,11 +113,11 @@ class TransactionAdminReceived extends Component {
                                                         return (
                                                             <tr key={item.id}>
                                                                 <td>{item.id}</td>
-                                                                <td>{item.transaction}</td>
                                                                 <td>{item.user.username}</td>
                                                                 <td>{item.profile.name}</td>
                                                                 <td>{item.realm.name}</td>
                                                                 <td>{item.credit}</td>
+                                                                <td>{item.transaction}</td>
                                                                 {/*<td>{item.balance}</td>*/}
                                                             </tr>
                                                         )
