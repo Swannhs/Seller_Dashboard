@@ -34,6 +34,7 @@ import EditServer from "./views/Server/EditServer";
 import ViewTweak from "./views/Tweak/ViewTweak";
 import ChangePassword from "./components/Password/ChangePassword";
 import TransactionRefund from "./views/Transaction/TransactionRefund";
+import Logout from "./components/Login/Logout";
 
 
 const dashboardRoutes = [
@@ -250,6 +251,14 @@ const dashboardRoutes = [
         path: '/root/tweak-realm/new',
         name: "Tweak",
         component: CreateTweakRealm,
+        layout: '/admin'
+    },
+
+//    ----------------------Logout----------------
+    {
+        path: '/api/logout',
+        name: "Logout",
+        component: Logout,
         layout: '/admin'
     },
 
