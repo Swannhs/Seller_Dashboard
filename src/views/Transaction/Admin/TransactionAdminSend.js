@@ -99,7 +99,7 @@ class TransactionAdminSend extends Component {
                                                     <tr>
                                                         <th scope="col">ID</th>
                                                         <th scope="col">Receiver</th>
-                                                        <th scope="col">Profile</th>
+                                                        <th scope="col">Plan</th>
                                                         <th scope="col">Vendor</th>
                                                         <th scope="col">credit</th>
                                                         <th scope="col">Debit</th>
