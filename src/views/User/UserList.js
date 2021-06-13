@@ -11,18 +11,15 @@ import {Pagination} from "semantic-ui-react";
 
 class UserList extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            page: 1,
-            start: 0,
-            limit: 10,
-            total: 0,
-            refresh: true,
-            loading: true,
-            role: '',
-        }
+    state = {
+        data: [],
+        page: 1,
+        start: 0,
+        limit: 10,
+        total: 0,
+        refresh: true,
+        loading: true,
+        role: ''
     }
 
     componentDidMount() {
@@ -79,7 +76,7 @@ class UserList extends Component {
 
     onPagination() {
         let totalPage = this.state.total / this.state.limit
-        return Math.trunc(totalPage) + parseInt((totalPage % 1).toFixed())
+        return Math.ceil(totalPage)
     }
 
     async onPageChaneHandler(event, data) {
@@ -93,13 +90,9 @@ class UserList extends Component {
     render() {
         return (
             <>
-
                 {/* ---------------- New Button Start ----------------*/}
                 <div className="ui grid">
                     <div className='four column row'>
-                        <div className='left floated five wide column'>
-                            <h2 className='ml-3'>Total:{this.state.total}</h2>
-                        </div>
                         {
                             isMobile ?
                                 <div className="text-right right floated column">
@@ -132,25 +125,37 @@ class UserList extends Component {
                                 }
                                 {/*-----------------Calling User List Api---------------------*/}
                             </table>
-                            <tfoot>
-                            <tr>
-                                <th colSpan={5}>
-                                    <div className="ui right floated pagination menu align-content-lg-end">
-                                        <Pagination
-                                            defaultActivePage={this.state.page}
-                                            firstItem={null}
-                                            lastItem={null}
-                                            pointing
-                                            secondary
-                                            totalPages={this.onPagination()}
-                                            onPageChange={async (event, data) =>
-                                                this.onPageChaneHandler(event, data)
-                                            }
-                                        />
+                            <div className='ui grid'>
+                                <div className='twelve wide column'>
+                                    <tfoot>
+                                    <tr>
+                                        <th colSpan={5}>
+                                            <div className="ui right floated pagination menu align-content-lg-end">
+                                                <Pagination
+                                                    defaultActivePage={this.state.page}
+                                                    firstItem={null}
+                                                    lastItem={null}
+                                                    pointing
+                                                    secondary
+                                                    totalPages={this.onPagination()}
+                                                    onPageChange={async (event, data) =>
+                                                        this.onPageChaneHandler(event, data)
+                                                    }
+                                                />
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </tfoot>
+                                </div>
+
+                                <div className='two wide column'>
+                                    <div className='left floated five wide column'>
+                                        <h3 className='ml-3'>Total:{this.state.total}</h3>
                                     </div>
-                                </th>
-                            </tr>
-                            </tfoot>
+                                </div>
+                            </div>
+
+
                         </>
                 }
             </>
