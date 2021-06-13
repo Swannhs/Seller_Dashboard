@@ -1,7 +1,7 @@
 import React from "react";
-import { useLocation, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import AdminNavbar from "components/Navbars/Navbar";
+import Navbar from "components/Navbars/Navbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import routes from "routes.js";
@@ -42,7 +42,7 @@ function Admin() {
       <div className="wrapper">
         <Sidebar routes={routes} />
         <div className="main-panel" ref={mainPanel}>
-          <AdminNavbar />
+          <Navbar />
           <div className="content">
             <Switch>{getRoutes(routes)}</Switch>
           </div>
