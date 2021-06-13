@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Cookies from "universal-cookie/lib";
 import {BiReset} from "react-icons/all";
 import {Button} from "reactstrap";
 import {confirmAlert} from "react-confirm-alert";
@@ -30,10 +29,9 @@ class VoucherApi extends Component {
             voucher_id: props
         }
 
-        let cookie = new Cookies
         RadiusApi.post('/vouchers/reset.json', reset, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
