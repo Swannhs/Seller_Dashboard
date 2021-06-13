@@ -44,7 +44,7 @@ class AllUser extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text"> <i className="fas fa-user"/> </span>
                     </div>
-                    <select className="form-control text-capitalize"
+                    <select className="form-control"
                             value={this.state.select}
                             onChange={event => {
                                 this.setState({
