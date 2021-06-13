@@ -12,11 +12,10 @@ class CreateTweakRealm extends Component {
 
     onGenerateTweak = event => {
         event.preventDefault();
-        let cookie = new Cookies
         let data = this.state
-        RadiusApi.post('/tweak-realms/add.json', data, {
+        RadiusApi.post('/Tweak-realms/add.json', data,{
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
