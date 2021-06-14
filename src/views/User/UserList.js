@@ -125,27 +125,31 @@ class UserList extends Component {
                                 {/*-----------------Calling User List Api---------------------*/}
                             </table>
                             <div className='ui grid'>
-                                <div className='left aligned twelve wide column'>
-                                    <tfoot>
-                                    <tr>
-                                        <th colSpan={5}>
-                                            <div className="ui right floated pagination menu align-content-lg-end">
-                                                <Pagination
-                                                    defaultActivePage={this.state.page}
-                                                    firstItem={null}
-                                                    lastItem={null}
-                                                    pointing
-                                                    secondary
-                                                    totalPages={this.onPagination()}
-                                                    onPageChange={async (event, data) =>
-                                                        this.onPageChaneHandler(event, data)
-                                                    }
-                                                />
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    </tfoot>
-                                </div>
+                                {
+                                    this.state.total > 10 ?
+                                        <div className='left aligned twelve wide column'>
+                                            <tfoot>
+                                            <tr>
+                                                <th colSpan={5}>
+                                                    <div
+                                                        className="ui right floated pagination menu align-content-lg-end">
+                                                        <Pagination
+                                                            defaultActivePage={this.state.page}
+                                                            firstItem={null}
+                                                            lastItem={null}
+                                                            pointing
+                                                            secondary
+                                                            totalPages={this.onPagination()}
+                                                            onPageChange={async (event, data) =>
+                                                                this.onPageChaneHandler(event, data)
+                                                            }
+                                                        />
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            </tfoot>
+                                        </div> : <div className='left aligned twelve wide column'/>
+                                }
 
                                 <div className='right aligned four wide column'>
                                     <h3 className='ml-3'>Total:{this.state.total}</h3>
