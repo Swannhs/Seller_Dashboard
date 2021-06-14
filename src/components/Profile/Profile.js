@@ -20,17 +20,24 @@ class Profile extends Component {
             role: localStorage.getItem('Role')
         })
 
-        RadiusApi.get('/dashboard/check-owner.json', {
-            params: {
-                token: localStorage.getItem('Token')
-            }
-        })
-            .then(response => {
-                this.setState({
-                    owner: response.data.owner,
-                    loading: false
-                })
+        if (localStorage.getItem('Role') !== 'admin') {
+            RadiusApi.get('/dashboard/check-owner.json', {
+                params: {
+                    token: localStorage.getItem('Token')
+                }
             })
+                .then(response => {
+                    this.setState({
+                        owner: response.data.owner,
+                        loading: false
+                    })
+                })
+        } else {
+            this.setState({
+                loading: false
+            })
+        }
+
     }
 
     // onLogout = () => {
@@ -86,7 +93,11 @@ class Profile extends Component {
                                                          className="rounded-circle" width={150}/>
                                                     <div className="mt-3">
                                                         <h4>{this.state.username}</h4>
-                                                        <p className="text-secondary mb-1">Uplink: {this.state.owner}</p>
+                                                        {
+                                                            this.state.role !== 'admin' ?
+                                                                <p className="text-secondary mb-1">Uplink: {this.state.owner}</p>
+                                                                : <></>
+                                                        }
                                                     </div>
 
                                                     {
