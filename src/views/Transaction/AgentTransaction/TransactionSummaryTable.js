@@ -92,7 +92,6 @@ class TransactionSummaryTable extends Component {
                                 }
 
 
-
                                 <div className='col'>
                                     <div className="ui text-right floated column">
                                         <Link to='/admin/voucher/transfer'>
@@ -112,25 +111,29 @@ class TransactionSummaryTable extends Component {
                                 }
                                 {/*    -------------------------Table Api goes here------------------------------*/}
                             </table>
-                            <tfoot>
-                            <tr>
-                                <th colSpan={5}>
-                                    <div className="ui right floated pagination menu align-content-lg-end">
-                                        <Pagination
-                                            defaultActivePage={this.state.page}
-                                            firstItem={null}
-                                            lastItem={null}
-                                            pointing
-                                            secondary
-                                            totalPages={this.onPagination()}
-                                            onPageChange={async (event, data) =>
-                                                this.onPageChaneHandler(event, data)
-                                            }
-                                        />
-                                    </div>
-                                </th>
-                            </tr>
-                            </tfoot>
+                            {
+                                this.state.total > 10 ?
+                                    <tfoot>
+                                    <tr>
+                                        <th colSpan={5}>
+                                            <div className="ui right floated pagination menu align-content-lg-end">
+                                                <Pagination
+                                                    defaultActivePage={this.state.page}
+                                                    firstItem={null}
+                                                    lastItem={null}
+                                                    pointing
+                                                    secondary
+                                                    totalPages={this.onPagination()}
+                                                    onPageChange={async (event, data) =>
+                                                        this.onPageChaneHandler(event, data)
+                                                    }
+                                                />
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </tfoot> : <></>
+                            }
+
                         </>
                 }
             </>
