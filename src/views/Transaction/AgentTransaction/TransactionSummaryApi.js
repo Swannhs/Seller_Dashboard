@@ -8,12 +8,13 @@ class TransactionSummaryApi extends Component {
             <>
                 <thead>
                 <tr className='ct-grid-background border-primary'>
+                    <th scope="col">Reseller</th>
                     <th scope="col">Vendor</th>
                     <th scope="col">Plan</th>
                     <th scope="col">Credit</th>
                     <th scope="col">Debit</th>
                     <th scope='col'>Balance</th>
-                    <th scope='col'>Action</th>
+                    {/*<th scope='col'>Action</th>*/}
                 </tr>
                 </thead>
                 <tbody>
@@ -21,17 +22,18 @@ class TransactionSummaryApi extends Component {
                     this.props.data ? this.props.data.map((item) => {
                         return (
                             <tr key={item.id}>
+                                <td>{item.user.username}</td>
                                 <td>{item.realm.name}</td>
                                 <td>{item.profile.name}</td>
                                 <td>{item.credit}</td>
                                 <td>{item.debit}</td>
                                 <td>{item.balance}</td>
 
-                                <td>
-                                    <Link to={'/admin/voucher/transactions/' + item.id}>
-                                        Details
-                                    </Link>
-                                </td>
+                                {/*<td>*/}
+                                {/*    <Link to={'/admin/voucher/transactions/' + item.id}>*/}
+                                {/*        Details*/}
+                                {/*    </Link>*/}
+                                {/*</td>*/}
                             </tr>
                         )
                     }) : <h3 className='text-danger'>No record available</h3>

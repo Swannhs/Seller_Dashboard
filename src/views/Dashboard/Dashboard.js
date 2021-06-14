@@ -1,50 +1,55 @@
-import React from "react";
-import ChartistGraph from "react-chartist";
-// react-bootstrap components
+import React, {Component} from "react";
 import {
-    Button,
-    Card,
-    Table,
     Container,
     Row,
-    Col,
-    Form,
-    OverlayTrigger,
-    Tooltip,
 } from "react-bootstrap";
 import DashboardVoucher from "./Voucher/DashboardVoucher";
-import DashboardCash from "./Cash/DashboardCash";
 import DashboardServer from "./Server/DashboardServer";
 import DashboardCredit from "./Credit/DashboardCredit";
 
-function Dashboard() {
-    return (
-        <>
-            {/* ----------------------- Card Section  -------------------------------*/}
 
-            <Container>
-                <Row>
-                    {/*------------------------------Credit Section Start----------------------------*/}
-                    <DashboardCredit/>
-                    {/*------------------------------Credit Section End----------------------------*/}
+class Dashboard extends Component {
+    state = {
+        root: ''
+    }
+    componentDidMount() {
+        this.setState({
+            root: localStorage.getItem('Role')
+        })
+    }
 
-                    {/*------------------------------Voucher Section Start--------------------------*/}
-                    <DashboardVoucher/>
-                    {/*------------------------------Voucher Section End--------------------------*/}
+    render() {
+        return (
+            <>
+                {/* ----------------------- Card Section  -------------------------------*/}
 
-                    {/*------------------------------Cash Section Start----------------------------*/}
-                    {/*<DashboardCash/>*/}
-                    {/*------------------------------Cash Section End----------------------------*/}
+                <Container>
+                    <Row>
+                        {/*------------------------------Credit Section Start----------------------------*/}
+                        <DashboardCredit/>
+                        {/*------------------------------Credit Section End----------------------------*/}
 
-                    {/*------------------------------Server Section Start----------------------------*/}
-                    {/*<DashboardServer/>*/}
-                    {/*------------------------------Server Section End----------------------------*/}
-                </Row>
-                {/*---------------------------- End Card Section ------------------------------*/}
+                        {/*------------------------------Voucher Section Start--------------------------*/}
+                        <DashboardVoucher/>
+                        {/*------------------------------Voucher Section End--------------------------*/}
 
-            </Container>
-        </>
-    );
+                        {/*------------------------------Cash Section Start----------------------------*/}
+                        {/*<DashboardCash/>*/}
+                        {/*------------------------------Cash Section End----------------------------*/}
+
+                        {/*------------------------------Server Section Start----------------------------*/}
+                        {
+                            this.state.root === 'admin' ?
+                                <DashboardServer/>: <></>
+                        }
+                        {/*------------------------------Server Section End----------------------------*/}
+                    </Row>
+                    {/*---------------------------- End Card Section ------------------------------*/}
+
+                </Container>
+            </>
+        );
+    }
 }
 
 export default Dashboard;

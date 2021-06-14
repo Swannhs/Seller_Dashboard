@@ -3,7 +3,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {Link} from "react-router-dom";
 import UserApi from "./UserApi";
 import UserApiMobile from "./UserApiMobile";
-import Cookies from "universal-cookie";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
@@ -126,7 +125,7 @@ class UserList extends Component {
                                 {/*-----------------Calling User List Api---------------------*/}
                             </table>
                             <div className='ui grid'>
-                                <div className='twelve wide column'>
+                                <div className='left aligned twelve wide column'>
                                     <tfoot>
                                     <tr>
                                         <th colSpan={5}>
@@ -148,10 +147,8 @@ class UserList extends Component {
                                     </tfoot>
                                 </div>
 
-                                <div className='two wide column'>
-                                    <div className='left floated five wide column'>
-                                        <h3 className='ml-3'>Total:{this.state.total}</h3>
-                                    </div>
+                                <div className='right aligned four wide column'>
+                                    <h3 className='ml-3'>Total:{this.state.total}</h3>
                                 </div>
                             </div>
 
