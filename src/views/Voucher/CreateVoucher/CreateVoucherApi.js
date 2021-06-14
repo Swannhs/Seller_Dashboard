@@ -94,9 +94,9 @@ class CreateVoucherApi extends Component {
                             </div>
                             <input className="form-control" placeholder="ex: abc" type="text"
                                    value={this.state.precede}
-                                   onChange={event => this.setState({precede: event.target.value})}
+                                   onChange={event => this.setState({precede: event.target.value.toLowerCase()})}
                                    required={true}
-                                   pattern="[a-z]{1-3}"
+                                   pattern="[a-z]"
                             />
                         </div>
 
