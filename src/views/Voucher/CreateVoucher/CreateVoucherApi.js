@@ -66,13 +66,13 @@ class CreateVoucherApi extends Component {
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
-                    <h3 className="card-title mt-3 text-center p-3">Create Voucher</h3>
+                    <h3 className="card-title mt-3 text-center p-3">Bulk Create Voucher</h3>
 
                     <form onSubmit={this.onSubmitVoucher}>
                         <VoucherGroup onChange={this.onGroupHandle}/>
                         <VoucherProfile onChange={this.onProfileHandle}/>
 
-                        <h4 className='mt-3 text-black-50'>Amount</h4>
+                        <h4 className='mt-3 text-black-50'>Bulk Amount</h4>
 
                         <div className="form-group input-group">
                             <div className="input-group-prepend">
@@ -96,7 +96,7 @@ class CreateVoucherApi extends Component {
                                    value={this.state.precede}
                                    onChange={event => this.setState({precede: event.target.value.toLowerCase()})}
                                    required={true}
-                                   pattern="[a-z]"
+                                   pattern="[a-z]{1,5}"
                             />
                         </div>
 
