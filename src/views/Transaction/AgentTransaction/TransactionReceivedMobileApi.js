@@ -18,7 +18,7 @@ class TransactionReceivedMobileApi extends Component {
     }
 
     onApiCall = () => {
-        RadiusApi.get('/voucher-transactions/view.json', {
+        RadiusApi.get('/voucher-transactions/received-credit.json', {
             params: {
                 token: localStorage.getItem('Token'),
                 key: this.props.id,
@@ -29,9 +29,9 @@ class TransactionReceivedMobileApi extends Component {
         })
             .then(response => {
                 this.setState({
-                    transactions: response.data.received,
+                    transactions: response.data.item,
                     loading: false,
-                    total: response.data.received_total,
+                    total: response.data.total
                 })
             })
     }

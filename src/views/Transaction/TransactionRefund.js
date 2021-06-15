@@ -16,8 +16,14 @@ class TransactionRefund extends Component {
         role: '',
         error: {
             partner: '',
-            balance: ''
+            balance: false
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            role: localStorage.getItem('Role')
+        })
     }
 
     onRefundComplete = () => {
@@ -30,30 +36,48 @@ class TransactionRefund extends Component {
             }
         })
             .then(response => {
-                if (response.data.success){
-                    alert(response.data.message)
-                    this.props.history.push('/admin/voucher/transaction')
-                }else {
-                    alert(response.data.message)
+                if (localStorage.getItem('Role') === 'admin') {
+                    if (response.data.success) {
+                        alert(response.data.message)
+                        this.props.history.push('/admin/root/voucher/transaction')
+                    } else {
+                        alert(response.data.message)
+                    }
+                } else {
+                    if (response.data.success) {
+                        alert(response.data.message)
+                        this.props.history.push('/admin/voucher/transaction')
+                    } else {
+                        alert(response.data.message)
+                    }
                 }
             })
     }
 
     onRefundConfirm = () => {
         event.preventDefault();
-        confirmAlert({
-            title: 'Confirm',
-            message: 'Are you sure to refund',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => this.onRefundComplete()
-                },
-                {
-                    label: 'No',
+        if (this.state.transfer_amount > 0) {
+            confirmAlert({
+                title: 'Confirm',
+                message: 'Are you sure to refund',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => this.onRefundComplete()
+                    },
+                    {
+                        label: 'No',
+                    }
+                ]
+            });
+        } else {
+            this.setState({
+                error: {
+                    balance: true
                 }
-            ]
-        });
+            })
+        }
+
     }
 
     // componentDidMount() {
@@ -93,15 +117,24 @@ class TransactionRefund extends Component {
         return (
             <div className='container'>
                 <div className='ml-3'>
-                    <Link to='/admin/voucher/transaction'>
-                        <button className='ui button'>Back</button>
-                    </Link>
+                    {
+                        this.state.role === 'admin' ?
+                            <Link to='/admin/root/voucher/transaction'>
+                                <button className='ui button'>Back</button>
+                            </Link> :
+                            <Link to='/admin/voucher/transaction'>
+                                <button className='ui button'>Back</button>
+                            </Link>
+                    }
+
 
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
-                    <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve credits</p>
+                    <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve
+                        credits
+                    </p>
                     <form onSubmit={this.onRefundConfirm}>
                         <AllUser onChange={this.onCreatePartner}/>
                         <VoucherGroup onChange={this.onCreateGroup}/>
@@ -125,7 +158,11 @@ class TransactionRefund extends Component {
                             />
                         </div>
 
-                        <p className='text-danger'>{this.state.error.balance}</p>
+                        {
+                            this.state.error.balance ?
+                                <p className='text-danger'>Please add minimum balance</p>
+                                : <></>
+                        }
 
 
                         {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}

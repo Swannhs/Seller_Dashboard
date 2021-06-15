@@ -19,7 +19,7 @@ class ServerRealm extends Component {
     }
 
     onApiCall = () => {
-        RadiusApi.get('/Server-realms/index.json', {
+        RadiusApi.get('/server-realms/index.json', {
             params: {
                 page: this.state.page,
                 start: this.state.start,

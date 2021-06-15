@@ -95,7 +95,7 @@ class Profile extends Component {
                                                         <h4>{this.state.username}</h4>
                                                         {
                                                             this.state.role !== 'admin' ?
-                                                                <p className="text-secondary mb-1">Uplink: {this.state.owner}</p>
+                                                                <p className="text-secondary mb-1">Owner: {this.state.owner}</p>
                                                                 : <></>
                                                         }
                                                     </div>

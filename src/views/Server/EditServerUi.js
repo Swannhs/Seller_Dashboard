@@ -41,7 +41,8 @@ class EditServerUi extends Component {
 
     onUpdateServer = event => {
         event.preventDefault();
-        const data = this.state
+        let data = this.state
+        delete data.redirect;
 
         RadiusApi.post('/servers/update.json', data, {
             params: {

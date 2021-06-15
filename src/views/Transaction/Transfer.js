@@ -4,6 +4,7 @@ import AllUser from "../../components/Dropdown/AllUser";
 import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
 import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
+import {confirmAlert} from "react-confirm-alert";
 
 class Transfer extends Component {
     state = {
@@ -13,18 +14,10 @@ class Transfer extends Component {
         profile_id: '',
         transfer_amount: 0,
         quantity_rate: 0,
-        role: '',
         error: {
             partner: '',
-            balance: ''
+            balance: false
         }
-    }
-
-
-    componentDidMount() {
-        this.setState({
-            role: localStorage.getItem('Role')
-        })
     }
 
 
@@ -40,7 +33,7 @@ class Transfer extends Component {
             }
         })
             .then(response => {
-                if (this.state.role === 'admin') {
+                if (localStorage.getItem('Role') === 'admin') {
                     if (response.data.success) {
                         alert('Transfer amount successfully')
                         this.props.history.push('/admin/root/voucher/transaction')
@@ -69,6 +62,31 @@ class Transfer extends Component {
             })
     }
 
+    onTransactionConfirm = () => {
+        event.preventDefault();
+        if (this.state.transfer_amount > 0) {
+            confirmAlert({
+                title: 'Confirm',
+                message: 'Are you sure to transfer',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => this.onTransactionComplete()
+                    },
+                    {
+                        label: 'No',
+                    }
+                ]
+            });
+        } else {
+            this.setState({
+                error: {
+                    balance: true
+                }
+            })
+        }
+    }
+
     onCreatePartner = async data => {
         this.setState({
             partner_user_id: data
@@ -93,7 +111,7 @@ class Transfer extends Component {
             <div className='container'>
                 <div className='ml-3'>
                     {
-                        this.state.role === 'admin' ?
+                        localStorage.getItem('Role') === 'admin' ?
                             <Link to='/admin/root/voucher/transaction'>
                                 <button className='ui button'>Back</button>
                             </Link> : <Link to='/admin/voucher/transaction'>
@@ -104,7 +122,7 @@ class Transfer extends Component {
                 </div>
 
                 <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <form onSubmit={this.onTransactionComplete}>
+                    <form onSubmit={this.onTransactionConfirm}>
                         <AllUser onChange={this.onCreatePartner}/>
                         <p className='text-danger'>{this.state.error.partner}</p>
                         <VoucherGroup onChange={this.onCreateGroup}/>
@@ -128,7 +146,11 @@ class Transfer extends Component {
                             />
                         </div>
 
-                        <p className='text-danger'>{this.state.error.balance}</p>
+                        {
+                            this.state.error.balance ?
+                                <p className='text-danger'>Please add minimum balance</p>
+                                : <></>
+                        }
 
 
                         {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
@@ -148,7 +170,6 @@ class Transfer extends Component {
                         {/*           required={true}*/}
                         {/*    />*/}
                         {/*</div>*/}
-
                         <button className='ui button primary mt-2' type='submit'>
                             Transfer
                         </button>

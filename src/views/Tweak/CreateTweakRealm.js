@@ -21,7 +21,7 @@ class CreateTweakRealm extends Component {
             .then(response => {
                 if (response.data.success) {
                     alert('Generated successful');
-                    this.props.history.push('/admin/root/Tweak-realms')
+                    this.props.history.push('/admin/root/tweak-realms')
                 } else {
                     alert(response.data.message)
                 }
