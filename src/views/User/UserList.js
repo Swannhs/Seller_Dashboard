@@ -152,7 +152,7 @@ class UserList extends Component {
                                 }
 
                                 <div className='right aligned four wide column'>
-                                    <h3 className='ml-3'>Total:{this.state.total}</h3>
+                                    <h3 className='mr-4'>Total:{this.state.total}</h3>
                                 </div>
                             </div>
 
