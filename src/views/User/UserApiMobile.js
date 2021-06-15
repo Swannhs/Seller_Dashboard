@@ -67,10 +67,10 @@ function Row(props) {
                         <Box margin={1}>
                             <div className="list-group-item">
                                 <div className="ui grid text-center">
-                                    <div className="eight wide column">
+                                    <div className="four wide column">
                                         <b>Action</b>
                                     </div>
-                                    <div className="eight wide column">
+                                    <div className="twelve wide column">
                                         <Link to={'/admin/users/view/' + row.id}>
                                             <Button className='btn-sm btn-success'>
                                                 <AiOutlineEye/>
