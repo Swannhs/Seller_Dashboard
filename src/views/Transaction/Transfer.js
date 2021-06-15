@@ -16,10 +16,9 @@ class Transfer extends Component {
         quantity_rate: 0,
         error: {
             partner: '',
-            balance: ''
+            balance: false
         }
     }
-
 
 
     onTransactionComplete = () => {
@@ -65,19 +64,27 @@ class Transfer extends Component {
 
     onTransactionConfirm = () => {
         event.preventDefault();
-        confirmAlert({
-            title: 'Confirm',
-            message: 'Are you sure to transfer',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => this.onTransactionComplete()
-                },
-                {
-                    label: 'No',
+        if (this.state.transfer_amount > 0) {
+            confirmAlert({
+                title: 'Confirm',
+                message: 'Are you sure to transfer',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => this.onTransactionComplete()
+                    },
+                    {
+                        label: 'No',
+                    }
+                ]
+            });
+        } else {
+            this.setState({
+                error: {
+                    balance: true
                 }
-            ]
-        });
+            })
+        }
     }
 
     onCreatePartner = async data => {
@@ -139,7 +146,11 @@ class Transfer extends Component {
                             />
                         </div>
 
-                        <p className='text-danger'>{this.state.error.balance}</p>
+                        {
+                            this.state.error.balance ?
+                                <p className='text-danger'>Please add minimum balance</p>
+                                : <></>
+                        }
 
 
                         {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}

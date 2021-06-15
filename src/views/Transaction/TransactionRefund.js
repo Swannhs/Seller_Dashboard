@@ -16,7 +16,7 @@ class TransactionRefund extends Component {
         role: '',
         error: {
             partner: '',
-            balance: ''
+            balance: false
         }
     }
 
@@ -56,19 +56,28 @@ class TransactionRefund extends Component {
 
     onRefundConfirm = () => {
         event.preventDefault();
-        confirmAlert({
-            title: 'Confirm',
-            message: 'Are you sure to refund',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => this.onRefundComplete()
-                },
-                {
-                    label: 'No',
+        if (this.state.transfer_amount > 0) {
+            confirmAlert({
+                title: 'Confirm',
+                message: 'Are you sure to refund',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => this.onRefundComplete()
+                    },
+                    {
+                        label: 'No',
+                    }
+                ]
+            });
+        } else {
+            this.setState({
+                error: {
+                    balance: true
                 }
-            ]
-        });
+            })
+        }
+
     }
 
     // componentDidMount() {
@@ -149,7 +158,11 @@ class TransactionRefund extends Component {
                             />
                         </div>
 
-                        <p className='text-danger'>{this.state.error.balance}</p>
+                        {
+                            this.state.error.balance ?
+                                <p className='text-danger'>Please add minimum balance</p>
+                                : <></>
+                        }
 
 
                         {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
