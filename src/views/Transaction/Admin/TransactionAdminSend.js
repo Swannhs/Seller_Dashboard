@@ -5,7 +5,7 @@ import {Pagination} from "semantic-ui-react";
 class TransactionAdminSend extends Component {
 
     state = {
-        root: true,
+        root: false,
         transactions: [],
         page: 1,
         start: 0,
@@ -16,36 +16,27 @@ class TransactionAdminSend extends Component {
 
 
     componentDidMount() {
-        RadiusApi.get('/Dashboard/check_token.json', {
-            params: {
-                token: localStorage.getItem('Token')
-            }
+        this.setState({
+            root: localStorage.getItem('Role')
         })
-            .then(response => {
-                this.setState({
-                    root: response.data.data.isRootUser
-                })
-                if (response.data.data.isRootUser) {
-                    this.onApiCall();
-                }
-            })
+        this.onApiCall();
     }
 
     onApiCall = () => {
         this.setState({loading: true})
-        RadiusApi.get('/voucher-transactions/view.json', {
+        RadiusApi.get('/voucher-transactions/send-credit.json', {
             params: {
                 token: localStorage.getItem('Token'),
                 key: this.props.id,
                 page: this.state.page,
                 start: this.state.start,
-                limit: this.state.limit,
+                limit: this.state.limit
             }
         })
             .then(response => {
                 this.setState({
-                    transactions: response.data.send,
-                    total: response.data.send_total,
+                    transactions: response.data.item,
+                    total: response.data.total,
                     loading: false
                 })
             })
@@ -90,7 +81,7 @@ class TransactionAdminSend extends Component {
                     this.state.loading ? <div className="mt-5 ui active centered inline loader"/> :
                         <>
                             {
-                                this.state.root ?
+                                this.state.root === 'admin' ?
                                     <>
                                         {
                                             this.state.transactions.length ?
