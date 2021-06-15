@@ -8,7 +8,7 @@ class CreateServerRealms extends Component {
     state = {
         open: false,
         server: '',
-        realm: ''
+        realm: '',
     }
 
     handleClose = () => this.setState({open: false})
@@ -17,7 +17,9 @@ class CreateServerRealms extends Component {
 
     onGenerateServer = event => {
         event.preventDefault();
-        let data = this.state
+        let data = this.state;
+        delete data.open;
+
         RadiusApi.post('/Server-realms/add.json', data,{
             params:{
                 token: localStorage.getItem('Token')
@@ -26,7 +28,7 @@ class CreateServerRealms extends Component {
             .then(response => {
                 if (response.data.success) {
                     alert(response.data.message)
-                    this.props.history.push('/admin/root/Server-realms')
+                    this.props.history.push('/admin/root/server-realms')
                 } else {
                     alert(response.data.message)
                     this.setState({

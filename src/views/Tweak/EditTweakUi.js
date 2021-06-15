@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import {Input} from "reactstrap";
+import {Redirect} from "react-router";
 
 class EditTweakUi extends Component {
     state = {
@@ -12,7 +13,7 @@ class EditTweakUi extends Component {
         injection_type: '',
         payload: '',
         note: '',
-        // redirect: false
+        redirect: false
     }
     componentDidMount() {
         RadiusApi.get('/tweaks/view.json', {
@@ -37,13 +38,14 @@ class EditTweakUi extends Component {
     onCreateTweak = event => {
         event.preventDefault();
         let data = this.state
+        delete data.redirect;
         RadiusApi.post('/tweaks/update.json', data, {
             params: {
                 token: localStorage.getItem('Token')
             }
         })
             .then(response => {
-                if (response.data.status){
+                if (response.data.success){
                     this.setState({
                         redirect: true
                     })
@@ -55,9 +57,9 @@ class EditTweakUi extends Component {
     }
 
     render() {
-        // if (this.state.redirect) {
-        //     return <Redirect to='/admin/users/view'/>;
-        // }
+        if (this.state.redirect) {
+            return <Redirect to='/admin/root/tweak'/>;
+        }
         return (
             <div className='container'>
                 <div className='ml-3'>
