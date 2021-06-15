@@ -92,7 +92,7 @@ class CreateVoucherApi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-table"/> </span>
                             </div>
-                            <input className="form-control" placeholder="ex: abc" type="text"
+                            <input className="form-control" placeholder="ex: abc, format: [a-z]{1-5}" type="text"
                                    value={this.state.precede}
                                    onChange={event => this.setState({precede: event.target.value.toLowerCase()})}
                                    required={true}
