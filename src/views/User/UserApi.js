@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import DeleteUser from "./Action/DeleteUser";
 import {Button} from "reactstrap";
+import ChangePassword from "./Action/ChangePassword";
 
 
 class UserApi extends Component {
@@ -101,6 +102,8 @@ class UserApi extends Component {
                                         <AiFillEdit/>
                                     </Button>
                                 </Link>
+
+                                <ChangePassword id={item.id}/>
 
                                 <DeleteUser delId={item.id} refresh={this.onRefresh}/>
                             </td>

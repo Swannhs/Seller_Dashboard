@@ -17,6 +17,7 @@ import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 import DeleteUser from "./Action/DeleteUser";
+import ChangePassword from "./Action/ChangePassword";
 
 const useRowStyles = makeStyles({
     root: {
@@ -76,12 +77,13 @@ function Row(props) {
                                             </Button>
                                         </Link>
 
-                                        {/*<AiFillEdit onClick={this.onEditUser}/>*/}
                                         <Link to={'/admin/users/edit/' + row.id}>
                                             <Button className='btn-sm primary'>
                                                 <AiFillEdit/>
                                             </Button>
                                         </Link>
+
+                                        <ChangePassword id={row.id}/>
 
                                         <DeleteUser delId={row.id} refresh={onRefresh}/>
                                     </div>
