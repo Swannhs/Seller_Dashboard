@@ -29,8 +29,8 @@ class Footer extends Component {
             {/*    </a>*/}
             {/*  </li>*/}
             {/*</ul>*/}
-            <p className="copyright text-center">
-              © {new Date().getFullYear()} <a href="https://securetunnel.xyz/"> Secure Tunnel</a>, All rights reserved
+            <p className="copyright text-center"> 
+              {window.env.APP_VERSION} © {new Date().getFullYear()} <a href="#"> {document.title}</a>, All rights reserved. <i>Powered by the <b>SecureTunnel.</b></i>
             </p>
           </nav>
         </Container>
