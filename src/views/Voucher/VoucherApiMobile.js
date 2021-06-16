@@ -94,7 +94,7 @@ function Row(props) {
                 <TableCell>
                     <Box margin={1}>
                         {
-                            row.status === 'new' ? <span className="ui green label small">New</span> :
+                            row.status === 'new' || !row.status ? <span className="ui green label small">New</span> :
                                 row.status === 'used' ? <span className="ui yellow label small">Used</span> :
                                     <span className="ui red label small text-capitalize">{row.status}</span>
                         }

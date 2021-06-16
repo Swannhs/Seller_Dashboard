@@ -82,7 +82,7 @@ class VoucherApi extends Component {
                                             <td>{item.profile}</td>
                                             <td>
                                                 {
-                                                    item.status === 'new' ?
+                                                    item.status === 'new' || !item.status ?
                                                         <span className="ui green label small">New</span> :
                                                         item.status === 'used' ?
                                                             <span className="ui yellow label small">Used</span> :
