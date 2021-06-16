@@ -3,6 +3,9 @@ import VoucherGroup from "../../../components/Dropdown/VoucherGroup";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import VoucherProfileAgent from "../../../components/Dropdown/VoucherProfileAgent";
+import VoucherApi from "../VoucherApi";
+import {isMobile} from "react-device-detect";
+import VoucherApiMobile from "../VoucherApiMobile";
 
 class CreateVoucherApi extends Component {
     constructor(props) {
@@ -19,13 +22,17 @@ class CreateVoucherApi extends Component {
             extra_name: '',
             extra_value: '',
             token: localStorage.getItem('Token'),
-            sel_language: 4_4
+            sel_language: 4_4,
+            response: false,
+            newData: []
         }
     }
 
     onSubmitVoucher = () => {
         event.preventDefault();
-        RadiusApi.post('/vouchers/add.json', this.state, {
+        let data = this.state;
+        delete data.token;
+        RadiusApi.post('/vouchers/add.json', data, {
             params: {
                 token: localStorage.getItem('Token')
             }
@@ -33,7 +40,12 @@ class CreateVoucherApi extends Component {
             .then(response => {
                 if (response.data.success) {
                     alert('Voucher Created');
-                    this.props.history.push('/admin/voucher/view')
+                    this.setState({
+                        response: true,
+                        newData: response.data.data
+                    })
+
+                    // this.props.history.push('/admin/voucher/view');
                 } else {
                     alert(response.data.message)
                 }
@@ -55,6 +67,27 @@ class CreateVoucherApi extends Component {
 
 
     render() {
+        if (this.state.response) {
+            return (
+                <>
+                    <div className='ml-3'>
+                        <Link to='/admin/voucher/view'>
+                            <button className='ui button'>Back</button>
+                        </Link>
+                    </div>
+
+                    <h3 className="card-title mt-3 text-center p-3">Just new created</h3>
+
+                    <table className="table table-striped">
+                        {
+                            isMobile ?
+                                <VoucherApiMobile data={this.state.newData}/> :
+                                <VoucherApi data={this.state.newData}/>
+                        }
+                    </table>
+                </>
+            )
+        }
         return (
             <>
                 <div className='ml-3'>
@@ -110,6 +143,7 @@ class CreateVoucherApi extends Component {
             </>
         );
     }
+
 }
 
 export default CreateVoucherApi;
