@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import VoucherGroup from "./VoucherGroup";
-import VoucherProfile from "./VoucherProfile";
+import VoucherGroup from "../../../components/Dropdown/VoucherGroup";
+import VoucherProfile from "../../../components/Dropdown/VoucherProfile";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 

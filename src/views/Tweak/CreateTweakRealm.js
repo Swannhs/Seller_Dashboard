@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
-import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
+import VoucherGroup from "../../components/Dropdown/VoucherGroup";
 import GetTweak from "../../components/Dropdown/GetTweak";
 
 class CreateTweakRealm extends Component {

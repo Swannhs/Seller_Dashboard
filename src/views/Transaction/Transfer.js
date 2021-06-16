@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import AllUser from "../../components/Dropdown/AllUser";
 import RadiusApi from "../../radius-api/RadiusApi";
-import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
-import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
+import VoucherGroup from "../../components/Dropdown/VoucherGroup";
+import VoucherProfile from "../../components/Dropdown/VoucherProfile";
 import {confirmAlert} from "react-confirm-alert";
 
 class Transfer extends Component {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../../radius-api/RadiusApi";
+import RadiusApi from "../../radius-api/RadiusApi";
 
 class VoucherGroup extends Component {
 

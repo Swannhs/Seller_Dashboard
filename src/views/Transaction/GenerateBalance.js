@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
-import VoucherGroup from "../Voucher/CreateVoucher/VoucherGroup";
-import VoucherProfile from "../Voucher/CreateVoucher/VoucherProfile";
+import VoucherGroup from "../../components/Dropdown/VoucherGroup";
+import VoucherProfile from "../../components/Dropdown/VoucherProfile";
 import {Link} from "react-router-dom";
 
 class GenerateBalance extends Component {
