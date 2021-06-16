@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import VoucherGroup from "../../../components/Dropdown/VoucherGroup";
-import VoucherProfile from "../../../components/Dropdown/VoucherProfile";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
+import VoucherProfileAgent from "../../../components/Dropdown/VoucherProfileAgent";
 
 class CreateVoucherApi extends Component {
     constructor(props) {
@@ -70,7 +70,8 @@ class CreateVoucherApi extends Component {
 
                     <form onSubmit={this.onSubmitVoucher}>
                         <VoucherGroup onChange={this.onGroupHandle}/>
-                        <VoucherProfile onChange={this.onProfileHandle}/>
+
+                        <VoucherProfileAgent onChange={this.onProfileHandle}/>
 
                         <h4 className='mt-3 text-black-50'>Bulk Amount</h4>
 
