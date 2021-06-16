@@ -13,8 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Cookies from "universal-cookie/lib";
-import RadiusApi from "../../radius-api/RadiusApi";
 import {BiReset} from "react-icons/all";
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -34,7 +32,7 @@ const onVoucherConfirm = props => {
         buttons: [
             {
                 label: 'Yes',
-                onClick: () => onVoucherReset(props)
+                onClick: () => props.props.onVoucherReset(props.row.id)
             },
             {
                 label: 'No',
@@ -43,26 +41,6 @@ const onVoucherConfirm = props => {
     });
 }
 
-const onVoucherReset = (props) => {
-    let reset = {
-        voucher_id: props
-    }
-
-    let cookie = new Cookies
-    RadiusApi.post('/vouchers/reset.json', reset, {
-        params: {
-            token: cookie.get('Token')
-        }
-    })
-        .then(response => {
-                if (response.data.success) {
-                    alert('Voucher reset successful')
-                } else {
-                    alert(response.data.message)
-                }
-            }
-        )
-}
 
 
 function Row(props) {
@@ -154,7 +132,7 @@ function Row(props) {
                                     </div>
                                     <div className="eight wide column">
                                         <div className='border border-danger text-danger d-inline p-1'
-                                             onClick={() => onVoucherConfirm(row.id)}>
+                                             onClick={() => onVoucherConfirm(props)}>
                                             <BiReset aria-placeholder='reset'/>
                                         </div>
                                     </div>
@@ -200,7 +178,7 @@ Row.propTypes = {
 };
 
 
-const VoucherApiMobile = ({data}) => {
+const VoucherApiMobile = props => {
     return (
         <TableContainer className='mt-2' component={Paper}>
             <Table aria-label="collapsible table">
@@ -214,8 +192,8 @@ const VoucherApiMobile = ({data}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
-                        <Row key={row.id} row={row}/>
+                    {props.data.map((row) => (
+                        <Row key={row.id} row={row} props={props}/>
                     ))}
                 </TableBody>
             </Table>

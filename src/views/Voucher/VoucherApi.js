@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import RadiusApi from "../../radius-api/RadiusApi";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {BiReset} from "react-icons/all";
 import {Button} from "reactstrap";
@@ -7,6 +6,10 @@ import {confirmAlert} from "react-confirm-alert";
 
 
 class VoucherApi extends Component {
+    state = {
+        reset: false,
+        resetData: []
+    }
 
     onVoucherConfirm = props => {
         confirmAlert({
@@ -15,7 +18,7 @@ class VoucherApi extends Component {
             buttons: [
                 {
                     label: 'Yes',
-                    onClick: () => this.onVoucherReset(props)
+                    onClick: () => this.props.onVoucherReset(props)
                 },
                 {
                     label: 'No',
@@ -24,26 +27,6 @@ class VoucherApi extends Component {
         });
     }
 
-    onVoucherReset = (props) => {
-        let reset = {
-            voucher_id: props
-        }
-
-        RadiusApi.post('/vouchers/reset.json', reset, {
-            params: {
-                token: localStorage.getItem('Token')
-            }
-        })
-            .then(response => {
-                    if (response.data.success) {
-                        alert('Voucher reset successful')
-                    } else {
-                        alert(response.data.message)
-                    }
-                }
-            )
-        this.forceUpdate();
-    }
 
 
     render() {

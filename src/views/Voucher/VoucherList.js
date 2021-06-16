@@ -72,6 +72,32 @@ class VoucherList extends Component {
 
     }
 
+
+    onVoucherReset = (props) => {
+        let reset = {
+            voucher_id: props
+        }
+
+        RadiusApi.post('/vouchers/reset.json', reset, {
+            params: {
+                token: localStorage.getItem('Token')
+            }
+        })
+            .then(response => {
+                    if (response.data.success) {
+                        alert('Voucher reset successful')
+                        console.log(response.data.data)
+                        this.setState({
+                            data: response.data.data,
+                            total: 0
+                        })
+                    } else {
+                        alert(response.data.message)
+                    }
+                }
+            )
+    }
+
     onSearchApiCall = () => {
         event.preventDefault();
         this.onResetPagination();
@@ -246,8 +272,8 @@ class VoucherList extends Component {
                         <>
                             <table className="table table-striped">
                                 {
-                                    isMobile ? <VoucherApiMobile data={this.state.data}/>
-                                        : <VoucherApi data={this.state.data}/>
+                                    isMobile ? <VoucherApiMobile data={this.state.data} onVoucherReset={this.onVoucherReset}/>
+                                        : <VoucherApi data={this.state.data} onVoucherReset={this.onVoucherReset}/>
                                 }
                             </table>
                             {/*--------------------Pagination------------------------*/}
