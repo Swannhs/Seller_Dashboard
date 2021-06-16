@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 import AllUser from "../../components/Dropdown/AllUser";
 import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../../components/Dropdown/VoucherGroup";
-import VoucherProfile from "../../components/Dropdown/VoucherProfile";
 import {confirmAlert} from "react-confirm-alert";
+import VoucherProfileAgent from "../../components/Dropdown/VoucherProfileAgent";
 
 class Transfer extends Component {
     state = {
@@ -126,7 +126,7 @@ class Transfer extends Component {
                         <AllUser onChange={this.onCreatePartner}/>
                         <p className='text-danger'>{this.state.error.partner}</p>
                         <VoucherGroup onChange={this.onCreateGroup}/>
-                        <VoucherProfile onChange={this.onCreateProfile}/>
+                        <VoucherProfileAgent onChange={this.onCreateProfile}/>
 
                         <h4 className='text-black-50'>Vouchers</h4>
                         <div className="form-group input-group">
