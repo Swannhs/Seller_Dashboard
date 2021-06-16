@@ -22,6 +22,10 @@ class VoucherList extends Component {
             filter: 'new',
 
         }
+        
+        if(this.props.location.state && this.props.location.state){
+            this.state.search = this.props.location.state.search
+        }
         this.onChangeHandle = this.onChangeHandle.bind(this)
         this.onSearchApiCall = this.onSearchApiCall.bind(this)
     }
@@ -85,12 +89,11 @@ class VoucherList extends Component {
         })
             .then(response => {
                     if (response.data.success) {
-                        alert('Voucher reset successful')
-                        console.log(response.data.data)
-                        this.setState({
-                            data: response.data.data,
-                            total: 0
-                        })
+                        alert('Voucher reset successfully')
+                        if(response.data.data.length == 1){
+                            this.state.search = response.data.data[0].name
+                            this.onApiCall();
+                        }
                     } else {
                         alert(response.data.message)
                     }
@@ -180,7 +183,7 @@ class VoucherList extends Component {
                                     <div className="six wide column">
                                         <form onSubmit={this.onSearchApiCall}>
                                             <div className="ui icon input" style={{width: '120px'}}>
-                                                <input type="text" placeholder="Search Name"
+                                                <input type="text" placeholder="Search Name" defaultValue={this.state.search}
                                                        onChange={this.onChangeHandle}
                                                 />
                                                 <i className="circular search link icon"
@@ -213,7 +216,7 @@ class VoucherList extends Component {
                                     <div className="five wide column">
                                         <form onSubmit={this.onSearchApiCall}>
                                             <div className="ui icon input">
-                                                <input type="text" placeholder="Search Name"
+                                                <input type="text" placeholder="Search Name" defaultValue={this.state.search}
                                                        onChange={this.onChangeHandle}
                                                 />
                                                 <i className="circular search link icon"

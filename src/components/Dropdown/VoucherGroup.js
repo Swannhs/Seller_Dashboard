@@ -18,7 +18,7 @@ class VoucherGroup extends Component {
         })
             .then(response => {
                 this.setState({
-                    select: '',
+                    select: response.data.items.length == 1 ? response.data.items[0].id : '',
                     group: response.data.items
                 })
             })
@@ -40,6 +40,7 @@ class VoucherGroup extends Component {
 
     render() {
         return (
+            this.state.group.length == 1 ? <></> :
             <>
                 <h4 className='text-black-50'>Vendor</h4>
 
@@ -47,7 +48,7 @@ class VoucherGroup extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text"> <i className="fab fa-cloudscale"/> </span>
                     </div>
-                    <select className="form-control text-capitalize"
+                    <select className="form-control text"
                             value={this.state.select}
                             onChange={event => this.onHandleChange(event)}>
                         <option>Choose...</option>
