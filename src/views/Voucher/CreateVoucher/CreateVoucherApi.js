@@ -8,7 +8,7 @@ class CreateVoucherApi extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_id: 0,
+            user_id: '0', //unused, just for backend
             single_field: true,
             precede: '',
             realm_id: null,
@@ -87,11 +87,12 @@ class CreateVoucherApi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-table"/> </span>
                             </div>
-                            <input className="form-control" placeholder="ex: abc, format: [a-z]{1-5}" type="text"
+                            <input className="form-control" placeholder="e.g. noman" type="text"
                                    value={this.state.precede}
                                    onChange={event => this.setState({precede: event.target.value.toLowerCase()})}
                                    required={true}
                                    pattern="[a-z]{1,5}"
+                                   onInvalid={event => event.target.setCustomValidity('Prefix should only contain lowercase letters and max length 5. e.g. noman')}
                             />
                         </div>
 
@@ -101,7 +102,7 @@ class CreateVoucherApi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-database"/> </span>
                             </div>
-                            <input className="form-control" placeholder="ex: 10" type="number" max="1000"
+                            <input className="form-control" placeholder="e.g. 10" type="number" max="1000"
                                    value={this.state.quantity}
                                    onChange={event => this.setState({quantity: event.target.value})}
                                    required={true}

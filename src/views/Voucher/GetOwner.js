@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Col, Form} from "react-bootstrap";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../radius-api/RadiusApi";
 
 class GetOwner extends Component {
@@ -13,12 +12,10 @@ class GetOwner extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies;
-
         RadiusApi.get('/access-providers/index-tree.json', {
             params: {
                 node: 0,
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         }).then(response => {
             this.setState({

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/es6";
 
 class CashSummaryTableAgent extends Component {
     state = {
@@ -11,10 +10,9 @@ class CashSummaryTableAgent extends Component {
 
     componentDidMount() {
         this.setState({loading: true})
-        let cookie = new Cookies
         RadiusApi.get('/balance-transactions/index.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

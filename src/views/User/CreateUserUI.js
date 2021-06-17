@@ -47,10 +47,12 @@ class CreateUserUi extends Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"/> </span>
                                 </div>
-                                <input name className="form-control" placeholder="User Name" type="text"
+                                <input name className="form-control" placeholder="Username" type="text"
                                        value={this.state.username}
                                        onChange={event => this.setState({username: event.target.value})}
                                        required={true}
+                                       pattern="[a-z0-9]{3,15}"
+                                       onInvalid={event => event.target.setCustomValidity('Username should only contain lowercase letters and max length 15. e.g. noman')}
                                 />
                             </div>
 

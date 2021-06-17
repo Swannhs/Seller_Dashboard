@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
 import {Pagination} from "semantic-ui-react";
 
@@ -19,10 +18,9 @@ class CashSummaryAgent extends Component {
     }
 
     onApiCall = () => {
-        let cookie = new Cookies
         RadiusApi.get('/balance-transactions/index.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

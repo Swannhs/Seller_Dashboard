@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 
@@ -18,14 +17,13 @@ class CashReceived extends Component {
     }
 
     onApiCall = () => {
-        const cookie = new Cookies();
         RadiusApi.get('/balance-transactions/view.json', {
             params: {
                 key: this.props.id,
                 page: this.state.page,
                 start: this.state.start,
                 limit: this.state.limit,
-                token: cookie.get('Token'),
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

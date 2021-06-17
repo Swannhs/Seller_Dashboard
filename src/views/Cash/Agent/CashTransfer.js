@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Input} from "reactstrap";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {confirmAlert} from "react-confirm-alert";
 
@@ -13,10 +12,9 @@ class CashTransfer extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies()
         RadiusApi.get('/balance-transactions/parent.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -54,11 +52,10 @@ class CashTransfer extends Component {
     }
 
     onCashTransaction = () => {
-        const cookie = new Cookies()
         let data = this.state
         RadiusApi.post('/balance-transactions/add.json', data, {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {

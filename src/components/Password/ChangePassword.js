@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {Link} from "react-router-dom";
 
 class ChangePassword extends Component {
@@ -15,10 +14,9 @@ class ChangePassword extends Component {
     }
 
     componentDidMount() {
-        const cookie = new Cookies
         RadiusApi.get('/dashboard/check-token.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
@@ -31,12 +29,11 @@ class ChangePassword extends Component {
 
 
     onChangePassword() {
-        const cookie = new Cookies
         let data = {
             password: this.state.password,
             confirm: this.state.confirm,
             sel_language: 4_4,
-            token: cookie.get('Token')
+            token: localStorage.getItem('Token')
         }
         RadiusApi.post('/dashboard/change_password.json', data)
             .then(response => {

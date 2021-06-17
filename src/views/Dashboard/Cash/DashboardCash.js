@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Card, Col, Row} from "react-bootstrap";
-import Cookies from "universal-cookie/lib";
 import RadiusApi from "../../../radius-api/RadiusApi";
 
 class DashboardCash extends Component {
@@ -11,10 +10,9 @@ class DashboardCash extends Component {
 
     componentDidMount() {
         this.setState({loading: true})
-        let cookie = new Cookies
         RadiusApi.get('/dashboard/cash.json', {
             params: {
-                token: cookie.get('Token')
+                token: localStorage.getItem('Token')
             }
         })
             .then(response => {
