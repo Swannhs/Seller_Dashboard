@@ -9,15 +9,12 @@ class CreateVoucherApi extends Component {
         super(props);
         this.state = {
             user_id: '0', //unused, just for backend
-            single_field: true,
+            single_field: false,
             precede: '',
             realm_id: null,
             profile_id: null,
             quantity: null,
-            pwd_length: 5,
             never_expire: 'never_expire',
-            extra_name: '',
-            extra_value: '',
             token: localStorage.getItem('Token'),
             sel_language: 4_4,
             newData: []
@@ -28,7 +25,21 @@ class CreateVoucherApi extends Component {
         event.preventDefault();
         let data = this.state;
         delete data.token;
-        RadiusApi.post('/vouchers/add.json', data, {
+        delete data.newData;
+
+        let body = new FormData();
+
+        body.append('user_id', this.state.user_id)
+        body.append('single_field', this.state.single_field)
+        body.append('precede', this.state.precede)
+        body.append('realm_id', this.state.realm_id)
+        body.append('profile_id', this.state.profile_id)
+        body.append('quantity', this.state.quantity)
+        body.append('never_expire', this.state.never_expire)
+        body.append('sel_language', this.state.sel_language)
+
+
+        RadiusApi.post('/vouchers/add.json', body, {
             params: {
                 token: localStorage.getItem('Token')
             }
