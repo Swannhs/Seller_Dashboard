@@ -61,7 +61,7 @@ const dashboardRoutes = [
     //--------------------------User Route Start----------------------------------
     {
         path: '/users/view/:id',
-        name: 'View',
+        name: 'Reseller Details',
         component: ViewUser,
         layout: '/admin'
     },
@@ -74,13 +74,13 @@ const dashboardRoutes = [
 
     {
         path: '/users/create',
-        name: 'Create',
+        name: 'Create Reseller',
         component: CreateUserAction,
         layout: '/admin'
     },
     {
         path: "/users/edit/:id",
-        name: "Edit",
+        name: "Edit Reseller",
         component: EditUser,
         layout: "/admin",
     },
@@ -90,7 +90,7 @@ const dashboardRoutes = [
     //-------------------------------Voucher Route Start-----------------------------------
     {
         path: '/voucher/create',
-        name: "Create",
+        name: "Create Voucher",
         component: CreateVoucherApi,
         layout: "/admin",
     },
@@ -103,46 +103,46 @@ const dashboardRoutes = [
 
     {
         path: "/voucher/transaction",
-        name: "Credits",
+        name: "Credit Balance",
         component: TransactionSummaryTable,
         layout: '/admin'
     },
 
     {
         path: "/root/voucher/transaction",
-        name: "Credits",
+        name: "Credit Balance",
         component: VoucherSummaryAdmin,
         layout: '/admin'
     },
     {
         path: "/voucher/transactions/:id",
-        name: "Details",
+        name: "Balance Details",
         component: TransactionTable,
         layout: "/admin",
     },
 
     {
         path: "/root/voucher/transactions/:id",
-        name: "Details",
+        name: "Balance Details",
         component: TransactionAdmin,
         layout: "/admin",
     },
 
     {
         path: "/voucher/transfer",
-        name: "Transfer",
+        name: "Transfer Balance",
         component: Transfer,
         layout: '/admin'
     },
     {
         path: "/voucher/refund",
-        name: "Refund",
+        name: "Refund Balance",
         component: TransactionRefund,
         layout: '/admin'
     },
     {
         path: "/voucher/generate",
-        name: "Transfer",
+        name: "Generate Balance",
         component: GenerateBalance,
         layout: '/admin'
     },
@@ -186,7 +186,7 @@ const dashboardRoutes = [
     //-------------------------------Server Route Start-------------------------------
     {
         path: "/root/server",
-        name: "Server",
+        name: "Servers",
         component: Server,
         layout: '/admin'
     },
@@ -198,19 +198,19 @@ const dashboardRoutes = [
     },
     {
         path: "/root/server-new",
-        name: "Server",
+        name: "Add Server",
         component: CreateServer,
         layout: '/admin'
     },
     {
         path: "/root/server-realms/new",
-        name: "Server",
+        name: "Map Server and Vendor",
         component: CreateServerRealms,
         layout: '/admin'
     },
     {
         path: "/root/server-realms",
-        name: "Server",
+        name: "Server and Vendor Mapping",
         component: ServerRealm,
         layout: '/admin'
     },
@@ -225,7 +225,7 @@ const dashboardRoutes = [
     },
     {
         path: "/root/tweak-view/:id",
-        name: "Tweak",
+        name: "Tweak Details",
         component: ViewTweak,
         layout: '/admin'
     },
@@ -237,19 +237,19 @@ const dashboardRoutes = [
     },
     {
         path: "/root/tweak-new",
-        name: "Tweak",
+        name: "Create Tweak",
         component: CreateTweak,
         layout: '/admin'
     },
     {
         path: "/root/tweak-realms",
-        name: "Tweak",
+        name: "Tweak and Vendor Mapping",
         component: TweakRealm,
         layout: '/admin'
     },
     {
         path: '/root/tweak-realm/new',
-        name: "Tweak",
+        name: "Map Tweak and Vendor",
         component: CreateTweakRealm,
         layout: '/admin'
     },

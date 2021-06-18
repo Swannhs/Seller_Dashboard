@@ -27,7 +27,7 @@ class Transfer extends Component {
         let data = this.state
         delete data.error;
         delete data.role;
-        RadiusApi.post('/voucher-transactions/add.json', data, {
+        RadiusApi.post('/voucher-transactions/transfer.json', data, {
             params: {
                 token: localStorage.getItem('Token')
             }

@@ -113,7 +113,7 @@ class CreateVoucherApi extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fa fa-database"/> </span>
                             </div>
-                            <input className="form-control" placeholder="e.g. 10" type="number" max="1000"
+                            <input className="form-control" placeholder="e.g. 10" type="number" min="1" max="1000"
                                    value={this.state.quantity}
                                    onChange={event => this.setState({quantity: event.target.value})}
                                    required={true}
