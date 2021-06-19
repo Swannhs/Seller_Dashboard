@@ -5,6 +5,7 @@ import TransactionSummaryApiMobile from "./TransactionSummaryApiMobile";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
+import {ToastContainer} from "react-toastify";
 
 class TransactionSummaryTable extends Component {
     state = {
@@ -73,6 +74,7 @@ class TransactionSummaryTable extends Component {
     render() {
         return (
             <>
+                <ToastContainer/>
                 {
                     this.state.loading ? <div className="ui active centered inline loader"/> :
                         <>
