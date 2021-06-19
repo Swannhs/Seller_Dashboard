@@ -5,6 +5,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import VoucherGroup from "../../components/Dropdown/VoucherGroup";
 import {confirmAlert} from "react-confirm-alert";
 import VoucherProfileAgent from "../../components/Dropdown/VoucherProfileAgent";
+import {toast, ToastContainer} from "react-toastify";
 
 class Transfer extends Component {
     state = {
@@ -35,10 +36,26 @@ class Transfer extends Component {
             .then(response => {
                 if (localStorage.getItem('Role') === 'admin') {
                     if (response.data.success) {
-                        alert('Transfer amount successfully')
                         this.props.history.push('/admin/root/voucher/transaction')
+                        toast.success('Transfer amount successfully', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     } else {
-                        alert(response.data.message)
+                        toast.error(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         this.setState({
                             error: {
                                 partner: response.data.partner ? response.data.partner : null,
@@ -48,10 +65,26 @@ class Transfer extends Component {
                     }
                 } else {
                     if (response.data.success) {
-                        alert('Transfer amount successfully')
                         this.props.history.push('/admin/voucher/transaction')
+                        toast.success('Transfer amount successfully', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     } else {
-                        alert(response.data.message)
+                        toast.error(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         this.setState({
                             error: {
                                 balance: response.data.message
@@ -108,75 +141,78 @@ class Transfer extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='ml-3'>
-                    {
-                        localStorage.getItem('Role') === 'admin' ?
-                            <Link to='/admin/root/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link> : <Link to='/admin/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link>
-                    }
+            <>
+                <ToastContainer/>
+                <div className='container'>
+                    <div className='ml-3'>
+                        {
+                            localStorage.getItem('Role') === 'admin' ?
+                                <Link to='/admin/root/voucher/transaction'>
+                                    <button className='ui button'>Back</button>
+                                </Link> : <Link to='/admin/voucher/transaction'>
+                                    <button className='ui button'>Back</button>
+                                </Link>
+                        }
 
-                </div>
+                    </div>
 
-                <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-                    <form onSubmit={this.onTransactionConfirm}>
-                        <AllUser onChange={this.onCreatePartner}/>
-                        <p className='text-danger'>{this.state.error.partner}</p>
-                        <VoucherGroup onChange={this.onCreateGroup}/>
-                        <VoucherProfileAgent onChange={this.onCreateProfile}/>
+                    <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
+                        <form onSubmit={this.onTransactionConfirm}>
+                            <AllUser onChange={this.onCreatePartner}/>
+                            <p className='text-danger'>{this.state.error.partner}</p>
+                            <VoucherGroup onChange={this.onCreateGroup}/>
+                            <VoucherProfileAgent onChange={this.onCreateProfile}/>
 
-                        <h4 className='text-black-50'>Vouchers</h4>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
+                            <h4 className='text-black-50'>Vouchers</h4>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
                                 <span className="input-group-text">
                                     <i className="fas fa-euro-sign"/>
                                 </span>
+                                </div>
+                                <input className="form-control" placeholder="Amount" type="number"
+                                       value={this.state.transfer_amount}
+                                       onChange={event => {
+                                           this.setState({
+                                               transfer_amount: event.target.value
+                                           })
+                                       }}
+                                       required={true}
+                                />
                             </div>
-                            <input className="form-control" placeholder="Amount" type="number"
-                                   value={this.state.transfer_amount}
-                                   onChange={event => {
-                                       this.setState({
-                                           transfer_amount: event.target.value
-                                       })
-                                   }}
-                                   required={true}
-                            />
-                        </div>
 
-                        {
-                            this.state.error.balance ?
-                                <p className='text-danger'>Please add minimum balance</p>
-                                : <></>
-                        }
+                            {
+                                this.state.error.balance ?
+                                    <p className='text-danger'>Please add minimum balance</p>
+                                    : <></>
+                            }
 
 
-                        {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
-                        {/*<div className="form-group input-group">*/}
-                        {/*    <div className="input-group-prepend">*/}
-                        {/*        <span className="input-group-text">*/}
-                        {/*            <i className="fas fa-dollar-sign"/>*/}
-                        {/*        </span>*/}
-                        {/*    </div>*/}
-                        {/*    <input className="form-control" placeholder="Rate" type="number"*/}
-                        {/*           value={this.state.quantity_rate}*/}
-                        {/*           onChange={event => {*/}
-                        {/*               this.setState({*/}
-                        {/*                   quantity_rate: event.target.value*/}
-                        {/*               })*/}
-                        {/*           }}*/}
-                        {/*           required={true}*/}
-                        {/*    />*/}
-                        {/*</div>*/}
-                        <button className='ui button primary mt-2' type='submit'>
-                            Transfer
-                        </button>
-                    </form>
-                </article>
+                            {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text">*/}
+                            {/*            <i className="fas fa-dollar-sign"/>*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input className="form-control" placeholder="Rate" type="number"*/}
+                            {/*           value={this.state.quantity_rate}*/}
+                            {/*           onChange={event => {*/}
+                            {/*               this.setState({*/}
+                            {/*                   quantity_rate: event.target.value*/}
+                            {/*               })*/}
+                            {/*           }}*/}
+                            {/*           required={true}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+                            <button className='ui button primary mt-2' type='submit'>
+                                Transfer
+                            </button>
+                        </form>
+                    </article>
 
-            </div>
+                </div>
+            </>
         );
     }
 }
