@@ -52,7 +52,8 @@ class CreateUserUi extends Component {
                                        onChange={event => this.setState({username: event.target.value})}
                                        required={true}
                                        pattern="[a-z0-9]{3,15}"
-                                       onInvalid={event => event.target.setCustomValidity('Username should only contain lowercase letters and max length 15. e.g. noman')}
+                                       onInvalid={event => event.target.setCustomValidity('Username should only contain lowercase letters, min length 3 and max length 15. e.g. noman')}
+                                       onInput={event => event.target.setCustomValidity('')}
                                 />
                             </div>
 

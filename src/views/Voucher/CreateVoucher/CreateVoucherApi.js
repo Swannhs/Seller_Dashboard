@@ -132,6 +132,7 @@ class CreateVoucherApi extends Component {
                                    required={true}
                                    pattern="[a-z]{1,5}"
                                    onInvalid={event => event.target.setCustomValidity('Prefix should only contain lowercase letters and max length 5. e.g. noman')}
+                                   onInput={event => event.target.setCustomValidity('')}
                             />
                         </div>
 
