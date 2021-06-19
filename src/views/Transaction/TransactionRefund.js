@@ -5,6 +5,7 @@ import VoucherProfile from "../../components/Dropdown/VoucherProfile";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {confirmAlert} from "react-confirm-alert";
 import AllUser from "../../components/Dropdown/AllUser";
+import {toast, ToastContainer} from "react-toastify";
 
 class TransactionRefund extends Component {
     state = {
@@ -38,17 +39,41 @@ class TransactionRefund extends Component {
             .then(response => {
                 if (localStorage.getItem('Role') === 'admin') {
                     if (response.data.success) {
-                        alert(response.data.message)
                         this.props.history.push('/admin/root/voucher/transaction')
+                        toast.success(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     } else {
-                        alert(response.data.message)
+                        toast.error(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
                 } else {
                     if (response.data.success) {
                         alert(response.data.message)
                         this.props.history.push('/admin/voucher/transaction')
                     } else {
-                        alert(response.data.message)
+                        toast.error(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
                 }
             })
@@ -115,81 +140,84 @@ class TransactionRefund extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='ml-3'>
-                    {
-                        this.state.role === 'admin' ?
-                            <Link to='/admin/root/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link> :
-                            <Link to='/admin/voucher/transaction'>
-                                <button className='ui button'>Back</button>
-                            </Link>
-                    }
-
-
-                </div>
-
-                <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-
-                    <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve
-                        credits
-                    </p>
-                    <form onSubmit={this.onRefundConfirm}>
-                        <AllUser onChange={this.onCreatePartner}/>
-                        <VoucherGroup onChange={this.onCreateGroup}/>
-                        <VoucherProfile onChange={this.onCreateProfile}/>
-
-                        <h4 className='text-black-50'>Vouchers</h4>
-                        <div className="form-group input-group">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <i className="fas fa-euro-sign"/>
-                                </span>
-                            </div>
-                            <input className="form-control" placeholder="Amount" type="number"
-                                   value={this.state.transfer_amount}
-                                   onChange={event => {
-                                       this.setState({
-                                           transfer_amount: event.target.value
-                                       })
-                                   }}
-                                   required={true}
-                            />
-                        </div>
-
+            <>
+                <ToastContainer/>
+                <div className='container'>
+                    <div className='ml-3'>
                         {
-                            this.state.error.balance ?
-                                <p className='text-danger'>Please add minimum balance</p>
-                                : <></>
+                            this.state.role === 'admin' ?
+                                <Link to='/admin/root/voucher/transaction'>
+                                    <button className='ui button'>Back</button>
+                                </Link> :
+                                <Link to='/admin/voucher/transaction'>
+                                    <button className='ui button'>Back</button>
+                                </Link>
                         }
 
 
-                        {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
-                        {/*<div className="form-group input-group">*/}
-                        {/*    <div className="input-group-prepend">*/}
-                        {/*        <span className="input-group-text">*/}
-                        {/*            <i className="fas fa-dollar-sign"/>*/}
-                        {/*        </span>*/}
-                        {/*    </div>*/}
-                        {/*    <input className="form-control" placeholder="Rate" type="number"*/}
-                        {/*           value={this.state.quantity_rate}*/}
-                        {/*           onChange={event => {*/}
-                        {/*               this.setState({*/}
-                        {/*                   quantity_rate: event.target.value*/}
-                        {/*               })*/}
-                        {/*           }}*/}
-                        {/*           required={true}*/}
-                        {/*    />*/}
-                        {/*</div>*/}
+                    </div>
 
-                        <button className='ui button green mt-2' type='submit'>
-                            Refund
-                        </button>
-                    </form>
-                </article>
+                    <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
 
-            </div>
+                        <p className='d-inline-block'><h3 className='text-danger'>Note:</h3> You are going to retrieve
+                            credits
+                        </p>
+                        <form onSubmit={this.onRefundConfirm}>
+                            <AllUser onChange={this.onCreatePartner}/>
+                            <VoucherGroup onChange={this.onCreateGroup}/>
+                            <VoucherProfile onChange={this.onCreateProfile}/>
+
+                            <h4 className='text-black-50'>Vouchers</h4>
+                            <div className="form-group input-group">
+                                <div className="input-group-prepend">
+                                <span className="input-group-text">
+                                    <i className="fas fa-euro-sign"/>
+                                </span>
+                                </div>
+                                <input className="form-control" placeholder="Amount" type="number"
+                                       value={this.state.transfer_amount}
+                                       onChange={event => {
+                                           this.setState({
+                                               transfer_amount: event.target.value
+                                           })
+                                       }}
+                                       required={true}
+                                />
+                            </div>
+
+                            {
+                                this.state.error.balance ?
+                                    <p className='text-danger'>Please add minimum balance</p>
+                                    : <></>
+                            }
+
+
+                            {/*<h4 className='text-black-50'>Amount Per Quantity rate</h4>*/}
+                            {/*<div className="form-group input-group">*/}
+                            {/*    <div className="input-group-prepend">*/}
+                            {/*        <span className="input-group-text">*/}
+                            {/*            <i className="fas fa-dollar-sign"/>*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*    <input className="form-control" placeholder="Rate" type="number"*/}
+                            {/*           value={this.state.quantity_rate}*/}
+                            {/*           onChange={event => {*/}
+                            {/*               this.setState({*/}
+                            {/*                   quantity_rate: event.target.value*/}
+                            {/*               })*/}
+                            {/*           }}*/}
+                            {/*           required={true}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
+                            <button className='ui button green mt-2' type='submit'>
+                                Refund
+                            </button>
+                        </form>
+                    </article>
+
+                </div>
+            </>
         );
     }
 }
