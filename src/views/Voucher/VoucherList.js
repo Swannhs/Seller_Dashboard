@@ -107,7 +107,7 @@ class VoucherList extends Component {
                         }
                     } else {
                         // alert(response.data.message)
-                        toast.error(response.data.data.message, {
+                        toast.error(response.data.message, {
                             position: "top-right",
                             autoClose: 5000,
                             hideProgressBar: false,

@@ -17,9 +17,8 @@ class CreateUserAction extends Component {
             .then(response => {
                 if (response.data.success) {
                     // alert('User is created successfully')
-
                     this.props.history.push('/admin/users/view')
-                    toast.success('User is created successfully', {
+                    toast.success('User(s) are created successfully', {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -30,8 +29,7 @@ class CreateUserAction extends Component {
                     });
                 } else{
                     // alert(response.data.errors.username)
-
-                    toast.error(response.data.errors.username, {
+                    toast.error(response.data.message.message, {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,
