@@ -18,7 +18,7 @@ class CreateUserAction extends Component {
                 if (response.data.success) {
                     // alert('User is created successfully')
                     this.props.history.push('/admin/users/view')
-                    toast.success('User(s) are created successfully', {
+                    toast.success('User is created successfully', {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,

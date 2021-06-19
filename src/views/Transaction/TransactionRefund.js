@@ -62,7 +62,16 @@ class TransactionRefund extends Component {
                     }
                 } else {
                     if (response.data.success) {
-                        alert(response.data.message)
+                        // alert(response.data.message)
+                        toast.success(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         this.props.history.push('/admin/voucher/transaction')
                     } else {
                         toast.error(response.data.message, {

@@ -55,7 +55,7 @@ class CreateVoucherApi extends Component {
                             search: response.data.batch
                         }
                     });
-                    toast.success('Vouchers are created successfully', {
+                    toast.success('Voucher(s) are created successfully', {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -65,7 +65,15 @@ class CreateVoucherApi extends Component {
                         progress: undefined,
                     });
                 } else {
-                    alert(response.data.message)
+                    toast.error(response.data.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
     }
@@ -104,6 +112,7 @@ class CreateVoucherApi extends Component {
     render() {
         return (
             <>
+            <ToastContainer/>
                 <div className='ml-3'>
                     <Link to='/admin/voucher/view'>
                         <button className='ui button'>Back</button>

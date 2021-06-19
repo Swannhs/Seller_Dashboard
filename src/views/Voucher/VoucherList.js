@@ -92,7 +92,7 @@ class VoucherList extends Component {
             .then(response => {
                     if (response.data.success) {
                         // alert('Voucher reset successfully')
-                        toast.warn('Voucher reset successfully', {
+                        toast.success('Voucher reseted successfully', {
                             position: "top-right",
                             autoClose: 5000,
                             hideProgressBar: false,
@@ -106,7 +106,6 @@ class VoucherList extends Component {
                             this.onApiCall();
                         }
                     } else {
-                        // alert(response.data.message)
                         toast.error(response.data.message, {
                             position: "top-right",
                             autoClose: 5000,

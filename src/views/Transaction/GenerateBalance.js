@@ -22,8 +22,28 @@ class GenerateBalance extends Component {
             }
         })
             .then(response => {
-                alert('Amount generate successfully')
-                this.props.history.push('/admin/root/voucher/transaction')
+                if (response.data.success) {
+                    toast.success(response.data.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    this.props.history.push('/admin/root/voucher/transaction')
+                } else {
+                    toast.error(response.data.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
             })
     }
 
