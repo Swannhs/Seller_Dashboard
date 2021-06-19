@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import RadiusApi from "../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
 
 class ChangePassword extends Component {
     state = {
@@ -38,12 +39,28 @@ class ChangePassword extends Component {
         RadiusApi.post('/dashboard/change_password.json', data)
             .then(response => {
                 if (response.data.success) {
-                    cookie.remove('Token')
-                    cookie.set('Token', response.data.data.token)
-                    alert('Password changed successfully')
+                    localStorage.removeItem('Token')
+                    localStorage.setItem('Token', response.data.data.token)
                     this.props.history.push('/admin/dashboard')
+                    toast.success('Password changed successfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 } else {
-                    alert('Failed to change password')
+                    toast.error('Failed to change password', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
     }
@@ -80,83 +97,87 @@ class ChangePassword extends Component {
 
     render() {
         return (
-            <div className="container">
-                <div className='ml-3'>
-                    <Link to='/admin/profile'>
-                        <button className='ui button small'>Back</button>
-                    </Link>
+            <>
+                <ToastContainer/>
+                <div className="container">
+                    <div className='ml-3'>
+                        <Link to='/admin/profile'>
+                            <button className='ui button small'>Back</button>
+                        </Link>
+                    </div>
+
+                    {
+                        this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
+
+                            <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
+
+
+                                <form onSubmit={this.onConfirmPassword}>
+                                    {
+                                        this.state.failed ?
+                                            <p className='m-0 p-0 text-danger'>Password don't match</p> :
+                                            <p className='m-0 p-0'>Previous Password</p>
+                                    }
+                                    <div className="form-group input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                                        </div>
+                                        <input className="form-control" placeholder="Previous password" type="password"
+                                               name='previous'
+                                               value={this.state.previous}
+                                               onChange={event => this.onChangeHandle(event)}
+                                               required={true}
+                                        />
+                                    </div>
+
+                                    {
+                                        this.state.match ? <p className='m-0 p-0 text-danger'>Password don't match</p> :
+                                            <p className='m-0 p-0'>New Password</p>
+                                    }
+
+
+                                    <div className="form-group input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                                        </div>
+                                        <input className="form-control" placeholder="Create password" type="password"
+                                               name='password'
+                                               value={this.state.password}
+                                               onChange={event => this.onChangeHandle(event)}
+                                               required={true}
+                                        />
+                                    </div>
+
+                                    <p className='m-0 p-0'>Confirm Password</p>
+                                    <div className="form-group input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text"> <i className="fa fa-lock"/> </span>
+                                        </div>
+                                        <input className="form-control" placeholder="Confirm password" type="password"
+                                               name='confirm'
+                                               value={this.state.confirm}
+                                               onChange={event => this.onChangeHandle(event)}
+                                               required={true}
+                                        />
+                                    </div>
+
+
+                                    {/* form-group// */}
+                                    {/* form-group end.// */}
+
+                                    {/* form-group// */}
+                                    <div className="form-group">
+                                        {/*<Link to='/admin/users/view'>*/}
+                                        <button type="submit" className="ui button primary small">
+                                            Change
+                                        </button>
+                                        {/*</Link>*/}
+                                    </div>
+                                </form>
+                            </article>
+                    }
                 </div>
-
-                {
-                    this.state.loading ? <div className="ui active centered inline loader mt-3"/> :
-
-                        <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
-
-
-                            <form onSubmit={this.onConfirmPassword}>
-                                {
-                                    this.state.failed ? <p className='m-0 p-0 text-danger'>Password don't match</p> :
-                                        <p className='m-0 p-0'>Previous Password</p>
-                                }
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-lock"/> </span>
-                                    </div>
-                                    <input className="form-control" placeholder="Previous password" type="password"
-                                           name='previous'
-                                           value={this.state.previous}
-                                           onChange={event => this.onChangeHandle(event)}
-                                           required={true}
-                                    />
-                                </div>
-
-                                {
-                                    this.state.match ? <p className='m-0 p-0 text-danger'>Password don't match</p> :
-                                        <p className='m-0 p-0'>New Password</p>
-                                }
-
-
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-lock"/> </span>
-                                    </div>
-                                    <input className="form-control" placeholder="Create password" type="password"
-                                           name='password'
-                                           value={this.state.password}
-                                           onChange={event => this.onChangeHandle(event)}
-                                           required={true}
-                                    />
-                                </div>
-
-                                <p className='m-0 p-0'>Confirm Password</p>
-                                <div className="form-group input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text"> <i className="fa fa-lock"/> </span>
-                                    </div>
-                                    <input className="form-control" placeholder="Confirm password" type="password"
-                                           name='confirm'
-                                           value={this.state.confirm}
-                                           onChange={event => this.onChangeHandle(event)}
-                                           required={true}
-                                    />
-                                </div>
-
-
-                                {/* form-group// */}
-                                {/* form-group end.// */}
-
-                                {/* form-group// */}
-                                <div className="form-group">
-                                    {/*<Link to='/admin/users/view'>*/}
-                                    <button type="submit" className="ui button primary small">
-                                        Change
-                                    </button>
-                                    {/*</Link>*/}
-                                </div>
-                            </form>
-                        </article>
-                }
-            </div>
+            </>
         );
     }
 }
