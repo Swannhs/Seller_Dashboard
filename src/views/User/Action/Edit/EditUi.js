@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RadiusApi from "../../../../radius-api/RadiusApi";
 import {Link, Redirect} from "react-router-dom";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
+import {toast} from "react-toastify";
 
 class EditUi extends Component {
     state = {
@@ -59,9 +60,26 @@ class EditUi extends Component {
                     this.setState({
                         redirect: true
                     })
-                    alert('Updated successfully');
+                    // alert('Updated successfully');
+                    toast.success('Updated successfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 } else {
-                    alert(response.data.errors.username)
+                    toast.error('Updated unsuccessfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
     }
