@@ -6,6 +6,7 @@ import RadiusApi from "../../radius-api/RadiusApi";
 import {Pagination} from "semantic-ui-react";
 import VoucherApiMobile from "./VoucherApiMobile";
 import {isMobile} from 'react-device-detect';
+import {toast, ToastContainer} from "react-toastify";
 
 class VoucherList extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class VoucherList extends Component {
             filter: 'new',
 
         }
-        
+
         if(this.props.location.state && this.props.location.state){
             this.state.search = this.props.location.state.search
         }
@@ -33,6 +34,7 @@ class VoucherList extends Component {
 
     componentDidMount() {
         this.onApiCall();
+
     }
 
     onApiCall = () => {
@@ -89,13 +91,31 @@ class VoucherList extends Component {
         })
             .then(response => {
                     if (response.data.success) {
-                        alert('Voucher reset successfully')
-                        if(response.data.data.length == 1){
+                        // alert('Voucher reset successfully')
+                        toast.warn('Voucher reset successfully', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        if(response.data.data.length === 1){
                             this.state.search = response.data.data[0].name
                             this.onApiCall();
                         }
                     } else {
-                        alert(response.data.message)
+                        // alert(response.data.message)
+                        toast.error(response.data.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
                 }
             )
@@ -175,6 +195,7 @@ class VoucherList extends Component {
     render() {
         return (
             <>
+                <ToastContainer/>
                 <div className="group-item">
                     <div className="ui grid">
                         {
