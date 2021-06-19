@@ -3,6 +3,8 @@ import './CreateUser.css';
 import RadiusApi from "../../radius-api/RadiusApi";
 import CreateUserUi from "./CreateUserUI";
 import {confirmAlert} from "react-confirm-alert";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CreateUserAction extends Component {
 
@@ -14,10 +16,31 @@ class CreateUserAction extends Component {
         })
             .then(response => {
                 if (response.data.success) {
-                    alert('User is created successfully')
+                    // alert('User is created successfully')
+
                     this.props.history.push('/admin/users/view')
-                } else
-                    alert(response.data.errors.username)
+                    toast.success('User is created successfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                } else{
+                    // alert(response.data.errors.username)
+
+                    toast.error(response.data.errors.username, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
             })
     }
 
@@ -41,7 +64,10 @@ class CreateUserAction extends Component {
 
     render() {
         return (
-            <CreateUserUi onFormSubmit={this.onCreateUserConfirm}/>
+            <>
+                <ToastContainer/>
+                <CreateUserUi onFormSubmit={this.onCreateUserConfirm}/>
+            </>
         );
     }
 }
