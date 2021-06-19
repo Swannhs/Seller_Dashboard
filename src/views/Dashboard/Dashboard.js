@@ -6,6 +6,7 @@ import {
 import DashboardVoucher from "./Voucher/DashboardVoucher";
 import DashboardServer from "./Server/DashboardServer";
 import DashboardCredit from "./Credit/DashboardCredit";
+import {ToastContainer} from "react-toastify";
 
 
 class Dashboard extends Component {
@@ -22,7 +23,7 @@ class Dashboard extends Component {
         return (
             <>
                 {/* ----------------------- Card Section  -------------------------------*/}
-
+                <ToastContainer/>
                 <Container>
                     <Row>
                         {/*------------------------------Credit Section Start----------------------------*/}
