@@ -17,18 +17,10 @@ class VoucherGroup extends Component {
             }
         })
             .then(response => {
-                if (localStorage.getItem('Role') === 'admin') {
-                    this.setState({
-                        select: '',
-                        group: response.data.items
-                    })
-                } else {
-                    this.setState({
-                        select: response.data.items.length === 1 ? response.data.items[0].id : '',
-                        group: response.data.items
-                    })
-                }
-
+                this.setState({
+                    select: response.data.items.length === 1 ? response.data.items[0].id : '',
+                    group: response.data.items
+                })
             })
     }
 
@@ -49,7 +41,7 @@ class VoucherGroup extends Component {
 
     render() {
         return (
-            this.state.group.length === 1 && localStorage.getItem('Role') === 'admin' ? <></> :
+            this.state.group.length === 1 ? <></> :
                 <>
                     <h4 className='text-black-50'>Vendor</h4>
 
