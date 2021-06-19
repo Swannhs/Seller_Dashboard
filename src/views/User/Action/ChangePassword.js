@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import {AiFillUnlock} from "react-icons/all";
 import {Button} from "react-bootstrap";
 import RadiusApi from "../../../radius-api/RadiusApi";
+import {toast} from "react-toastify";
 
 
 function getModalStyle() {
@@ -61,9 +62,25 @@ export default function ChangePassword(props) {
             .then(response => {
                 if (response.data.success){
                     handleClose();
-                    alert('Password is changed successfully')
+                    toast.success('Password is changed successfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }else {
-                    alert('We did not manage to change password')
+                    toast.error('We did not manage to change password', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 }
             })
     }
