@@ -3,6 +3,7 @@ import RadiusApi from "../../../radius-api/RadiusApi";
 import {AiFillDelete} from "react-icons/all";
 import {Button} from "reactstrap";
 import {confirmAlert} from "react-confirm-alert";
+import {toast} from "react-toastify";
 
 class DeleteUser extends Component {
 
@@ -31,10 +32,27 @@ class DeleteUser extends Component {
         })
             .then(response => {
                     if (response.data.success){
-                        alert('User deleted successful.')
+                        // alert('User deleted successful.')
+                        toast.error('User is deleted successful', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         this.props.refresh();
                     }else {
-                        alert('Error to delete the user')
+                        toast.warn('We can not delete this user', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                     }
                 }
             )
