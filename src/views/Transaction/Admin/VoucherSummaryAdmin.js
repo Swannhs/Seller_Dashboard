@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import {Pagination} from "semantic-ui-react";
+import {ToastContainer} from "react-toastify";
 
 class VoucherSummaryAdmin extends Component {
     state = {
@@ -72,6 +73,7 @@ class VoucherSummaryAdmin extends Component {
     render() {
         return (
             <>
+                <ToastContainer/>
                 <div className='ui grid'>
                     <div className="left floated column">
                         <Link to='/admin/voucher/generate'>

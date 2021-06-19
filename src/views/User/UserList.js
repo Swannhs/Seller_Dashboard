@@ -6,6 +6,7 @@ import UserApiMobile from "./UserApiMobile";
 import RadiusApi from "../../radius-api/RadiusApi";
 import {isMobile} from "react-device-detect";
 import {Pagination} from "semantic-ui-react";
+import {ToastContainer} from "react-toastify";
 
 
 class UserList extends Component {
@@ -89,6 +90,7 @@ class UserList extends Component {
     render() {
         return (
             <>
+                <ToastContainer/>
                 {/* ---------------- New Button Start ----------------*/}
                 <div className="ui grid">
                     <div className='four column row'>
