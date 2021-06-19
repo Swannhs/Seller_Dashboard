@@ -3,6 +3,8 @@ import VoucherGroup from "../../../components/Dropdown/VoucherGroup";
 import RadiusApi from "../../../radius-api/RadiusApi";
 import {Link} from "react-router-dom";
 import VoucherProfileAgent from "../../../components/Dropdown/VoucherProfileAgent";
+import {toast} from "react-toastify";
+import {confirmAlert} from "react-confirm-alert";
 
 class CreateVoucherApi extends Component {
     constructor(props) {
@@ -46,17 +48,43 @@ class CreateVoucherApi extends Component {
         })
             .then(response => {
                 if (response.data.success) {
-                    alert('Voucher Created');
+                    // alert('Voucher Created');
                     this.props.history.push({
                         pathname: '/admin/voucher/view',
                         state: {
                             search: response.data.batch
                         }
                     });
+                    toast.success('Vouchers are created successfully', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 } else {
                     alert(response.data.message)
                 }
             })
+    }
+
+    onCreateVoucherConfirm = () => {
+        event.preventDefault();
+        confirmAlert({
+            title: 'Confirm',
+            message: 'Are you sure to create new vouchers',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => this.onSubmitVoucher()
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
     }
 
 
@@ -87,7 +115,7 @@ class CreateVoucherApi extends Component {
 
                     <h3 className="card-title mt-3 text-center p-3">Create Bulk Vouchers</h3>
 
-                    <form onSubmit={this.onSubmitVoucher}>
+                    <form onSubmit={this.onCreateVoucherConfirm}>
                         <VoucherGroup onChange={this.onGroupHandle}/>
 
                         <VoucherProfileAgent onChange={this.onProfileHandle}/>
