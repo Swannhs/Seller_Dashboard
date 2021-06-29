@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
-import Cookies from "universal-cookie/lib";
 import {AiFillEdit, AiOutlineEye} from "react-icons/all";
 import {Button} from "reactstrap";
 import {Pagination} from "semantic-ui-react";
@@ -94,6 +93,9 @@ class Tweak extends Component {
                         <th scope="col">Vendor</th>
                         <th scope="col">Protocols</th>
                         <th scope="col">Injection Type</th>
+                        <th scope="col">Target Port</th>
+                        <th scope="col">Country Tag</th>
+                        <th scope="col">Network Tag</th>
                         <th scope="col">Payload</th>
                         <th scope="col">Note</th>
                         <th scope="col">Action</th>
@@ -109,6 +111,39 @@ class Tweak extends Component {
                                     <td>{item.vendor}</td>
                                     <td>{item.protocols}</td>
                                     <td>{item.injection_type}</td>
+                                    <td>{item.target_port}</td>
+                                    <td>
+                                        <div className="dropdown">
+                                            <div className="dropdown-toggle"
+                                                 id="dropdownMenuButton" data-toggle="dropdown"
+                                                 aria-haspopup="true" aria-expanded="false">
+                                                Country
+                                            </div>
+                                            <div className="dropdown-menu">
+                                                {
+                                                    item.country_tag.map((item) => {
+                                                        return <p className="dropdown-item">{item}</p>
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="dropdown">
+                                            <div className="dropdown-toggle"
+                                                 id="dropdownMenuButton" data-toggle="dropdown"
+                                                 aria-haspopup="true" aria-expanded="false">
+                                                Network
+                                            </div>
+                                            <div className="dropdown-menu">
+                                                {
+                                                    item.network_tag.map((item) => {
+                                                        return <p className="dropdown-item">{item}</p>
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{item.payload}</td>
                                     <td>{item.note}</td>
                                     <td>
