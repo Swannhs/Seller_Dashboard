@@ -29,6 +29,7 @@ class Server extends Component {
             }
         })
             .then(response => {
+                console.log(response.data.server)
                 this.setState({
                     server: response.data.server,
                     total: response.data.totalCount,
@@ -96,7 +97,10 @@ class Server extends Component {
                                 <th scope="col">IP</th>
                                 <th scope="col">SSL Port</th>
                                 <th scope="col">Proxy Port</th>
-                                <th scope="col">API Service Port</th>
+                                <th scope="col">Open Port</th>
+                                <th scope="col">Country Tag</th>
+                                <th scope="col">Network Tag</th>
+                                <th scope="col">Api Server Port</th>
                                 <th scope="col">Note</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -113,6 +117,54 @@ class Server extends Component {
                                             <td>{item.ip}</td>
                                             <td>{item.ssl_port}</td>
                                             <td>{item.proxy_port}</td>
+                                            <td>
+                                                <div className="dropdown">
+                                                    <div className="dropdown-toggle"
+                                                            id="dropdownMenuButton" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                        Ports
+                                                    </div>
+                                                    <div className="dropdown-menu">
+                                                        {
+                                                            item.open_port.map((item) => {
+                                                                return <p className="dropdown-item">{item}</p>
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="dropdown">
+                                                    <div className="dropdown-toggle"
+                                                         id="dropdownMenuButton" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false">
+                                                        Country
+                                                    </div>
+                                                    <div className="dropdown-menu">
+                                                        {
+                                                            item.country_tag.map((item) => {
+                                                                return <p className="dropdown-item">{item}</p>
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="dropdown">
+                                                    <div className="dropdown-toggle"
+                                                         id="dropdownMenuButton" data-toggle="dropdown"
+                                                         aria-haspopup="true" aria-expanded="false">
+                                                        Network
+                                                    </div>
+                                                    <div className="dropdown-menu">
+                                                        {
+                                                            item.network_tag.map((item) => {
+                                                                return <p className="dropdown-item">{item}</p>
+                                                            })
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>{item.api_server_port}</td>
                                             <td>{item.note}</td>
                                             <td>
