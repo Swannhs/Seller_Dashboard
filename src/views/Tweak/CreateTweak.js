@@ -10,6 +10,9 @@ class CreateTweak extends Component {
         protocol: '',
         injectionType: '',
         payload: '',
+        targetPort: null,
+        countryTag: '',
+        networkTag: '',
         note: ''
     }
 
@@ -84,6 +87,42 @@ class CreateTweak extends Component {
                                onChange={event => {
                                    this.setState({
                                        injectionType: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+
+                        <h3>Target Port</h3>
+                        <Input type='text'
+                               placeholder='Target Post'
+                               value={this.state.targetPort}
+                               onChange={event => {
+                                   this.setState({
+                                       targetPort: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+
+                        <h3>Country Tag</h3>
+                        <Input type='text'
+                               placeholder='Country Tag'
+                               value={this.state.countryTag}
+                               onChange={event => {
+                                   this.setState({
+                                       countryTag: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+
+                        <h3>Network Tag</h3>
+                        <Input type='text'
+                               placeholder='Network Tag'
+                               value={this.state.networkTag}
+                               onChange={event => {
+                                   this.setState({
+                                       networkTag: event.target.value
                                    })
                                }}
                                required={true}

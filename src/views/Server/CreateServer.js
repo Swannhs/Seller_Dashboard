@@ -11,6 +11,9 @@ class CreateServer extends Component {
         ip: '',
         sslPort: '',
         proxyPort: '',
+        openPort: null,
+        countryTag: '',
+        networkTag: '',
         apiServerPort: '',
         note: ''
     }
@@ -150,6 +153,40 @@ class CreateServer extends Component {
                                 />
                             </div>
 
+                            <h3 className='mt-3 pl-3 text-black-50'>Open Port</h3>
+                            <div className="input-group pl-3 w-50">
+                                <input type="text" className="form-control" aria-label="VoIP"
+                                       placeholder='443'
+                                       aria-describedby="basic-addon1"
+                                       value={this.state.openPort}
+                                       onChange={event => this.setState({openPort: event.target.value})}
+                                       required={true}
+                                />
+                            </div>
+
+                            <h3 className='mt-3 pl-3 text-black-50'>Country Tag</h3>
+                            <div className="input-group pl-3 w-50">
+                                <input type="text" className="form-control" aria-label="VoIP"
+                                       placeholder='GP'
+                                       aria-describedby="basic-addon1"
+                                       value={this.state.countryTag}
+                                       onChange={event => this.setState({countryTag: event.target.value})}
+                                       required={true}
+                                />
+                            </div>
+
+                            <h3 className='mt-3 pl-3 text-black-50'>Network Tag</h3>
+                            <div className="input-group pl-3 w-50">
+                                <input type="text" className="form-control" aria-label="VoIP"
+                                       placeholder='GP'
+                                       aria-describedby="basic-addon1"
+                                       value={this.state.networkTag}
+                                       onChange={event => this.setState({networkTag: event.target.value})}
+                                       required={true}
+                                />
+                            </div>
+
+
                             <h3 className='mt-3 pl-3 text-black-50'>Note</h3>
                             <div className="input-group pl-3 w-50">
                                 <input type="text" className="form-control" aria-label="VoIP"
@@ -164,7 +201,6 @@ class CreateServer extends Component {
                             <button type='submit' className='ui button primary m-3'>
                                 Create
                             </button>
-
 
 
                         </form>
