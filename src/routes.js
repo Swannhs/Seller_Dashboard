@@ -35,6 +35,9 @@ import ViewTweak from "./views/Tweak/ViewTweak";
 import ChangePassword from "./components/Password/ChangePassword";
 import TransactionRefund from "./views/Transaction/TransactionRefund";
 import Logout from "./components/Login/Logout";
+import Version from "./views/Version/Version";
+import CreateVersion from "./views/Version/CreateVersion";
+import EditVersion from "./views/Version/EditVersion";
 
 
 const dashboardRoutes = [
@@ -251,6 +254,26 @@ const dashboardRoutes = [
         path: '/root/tweak-realm/new',
         name: "Map Tweak and Vendor",
         component: CreateTweakRealm,
+        layout: '/admin'
+    },
+
+//------------------------------------Version-----------------------------
+    {
+        path: '/root/version',
+        name: "Versions",
+        component: Version,
+        layout: '/admin'
+    },
+    {
+        path: '/root/version-create',
+        name: "Create Version",
+        component: CreateVersion,
+        layout: '/admin'
+    },
+    {
+        path: '/root/version-edit/:id',
+        name: "Edit Version",
+        component: EditVersion,
         layout: '/admin'
     },
 
