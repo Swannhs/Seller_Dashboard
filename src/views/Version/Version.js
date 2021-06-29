@@ -90,7 +90,7 @@ class Version extends Component {
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">App ID</th>
+                        <th scope="col">App(User)</th>
                         <th scope="col">App Version</th>
                         <th scope="col">Server Version</th>
                         <th scope="col">Tweak Version</th>
@@ -103,7 +103,7 @@ class Version extends Component {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.app_id}</td>
+                                    <td>{item.user.username}</td>
                                     <td>{item.app_version}</td>
                                     <td>{item.server_version}</td>
                                     <td>{item.tweak_version}</td>
