@@ -8,7 +8,7 @@ import {
     BsListNested,
     BiMoney,
     BsServer,
-    AiOutlineCloudServer
+    AiOutlineCloudServer, BsLayoutTextWindowReverse
 } from "react-icons/all";
 import {Nav} from "react-bootstrap";
 import {isMobile} from "react-device-detect";
@@ -148,6 +148,11 @@ class Sidebar extends Component {
                                                                         </Link>
                                                                     </MenuItem>
                                                                 </SubMenu>
+                                                                <MenuItem icon={<BsLayoutTextWindowReverse/>}>
+                                                                    <Link to='/admin/root/version'>
+                                                                        Version
+                                                                    </Link>
+                                                                </MenuItem>
                                                             </>
                                                             : null
                                                     }
