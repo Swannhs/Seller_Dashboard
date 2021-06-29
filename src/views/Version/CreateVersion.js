@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import AllUser from "../../components/Dropdown/AllUser";
 import {Link} from "react-router-dom";
 import RadiusApi from "../../radius-api/RadiusApi";
+import VersionUser from "../../components/Dropdown/VersionUser";
 
 class CreateVersion extends Component {
     state = {
-        appId: null,
         userId: null,
         appVersion: '',
         serverVersion: '',
@@ -44,25 +43,8 @@ class CreateVersion extends Component {
 
                     <article className="card-body mx-auto" style={{maxWidth: '350px', fontSize: '20px'}}>
                         <form onSubmit={this.onCreateVersion}>
-                            <h4 className='text-black-50'>App ID</h4>
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                <span className="input-group-text">
-                                    <i className="fab fa-android"/>
-                                </span>
-                                </div>
-                                <input className="form-control" placeholder="ID" type="number"
-                                       value={this.state.appId}
-                                       onChange={event => {
-                                           this.setState({
-                                               appId: event.target.value
-                                           })
-                                       }}
-                                       required={true}
-                                />
-                            </div>
 
-                            <AllUser onChange={this.onCreatePartner}/>
+                            <VersionUser onChange={this.onCreatePartner}/>
 
                             <h4 className='text-black-50'>App Version</h4>
                             <div className="form-group input-group">
