@@ -13,7 +13,7 @@ class DeleteTweakRealms extends Component {
         confirm('Delete the tweak realm?') ? this.onDeleteTweakRealm(this.props.delId) : null
     }
     onDeleteTweakRealm = (id) => {
-        RadiusApi.post('/Tweak-realms/delete.json', {'id': id}, {
+        RadiusApi.post('/tweak-realms/delete.json', {'id': id}, {
             params: {
                 token: localStorage.getItem('Token')
             }
