@@ -25,10 +25,10 @@ class CreateTweak extends Component {
             }
         })
             .then(response => {
-                if (response.data.status){
-                    alert('Tweak Created');
-                    this.props.history.push('/admin/root/Tweak')
-                }else {
+                if (response.data.success) {
+                    alert(response.data.message);
+                    this.props.history.push('/admin/root/tweak')
+                } else {
                     alert(response.data.message)
                 }
             })
@@ -106,7 +106,7 @@ class CreateTweak extends Component {
 
                         <h3>Country Tag</h3>
                         <Input type='text'
-                               placeholder='Country Tag'
+                               placeholder='BD,PAK'
                                value={this.state.countryTag}
                                onChange={event => {
                                    this.setState({
@@ -118,7 +118,7 @@ class CreateTweak extends Component {
 
                         <h3>Network Tag</h3>
                         <Input type='text'
-                               placeholder='Network Tag'
+                               placeholder='GP,BNG'
                                value={this.state.networkTag}
                                onChange={event => {
                                    this.setState({

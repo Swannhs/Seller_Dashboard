@@ -11,7 +11,7 @@ class CreateServer extends Component {
         ip: '',
         sslPort: '',
         proxyPort: '',
-        openPort: null,
+        openPort: '',
         countryTag: '',
         networkTag: '',
         apiServerPort: '',
@@ -167,7 +167,7 @@ class CreateServer extends Component {
                             <h3 className='mt-3 pl-3 text-black-50'>Country Tag</h3>
                             <div className="input-group pl-3 w-50">
                                 <input type="text" className="form-control" aria-label="VoIP"
-                                       placeholder='GP'
+                                       placeholder='BD, PAK'
                                        aria-describedby="basic-addon1"
                                        value={this.state.countryTag}
                                        onChange={event => this.setState({countryTag: event.target.value})}
@@ -178,7 +178,7 @@ class CreateServer extends Component {
                             <h3 className='mt-3 pl-3 text-black-50'>Network Tag</h3>
                             <div className="input-group pl-3 w-50">
                                 <input type="text" className="form-control" aria-label="VoIP"
-                                       placeholder='GP'
+                                       placeholder='GP, BNG'
                                        aria-describedby="basic-addon1"
                                        value={this.state.networkTag}
                                        onChange={event => this.setState({networkTag: event.target.value})}
