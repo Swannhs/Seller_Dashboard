@@ -112,37 +112,19 @@ class Tweak extends Component {
                                     <td>{item.protocols}</td>
                                     <td>{item.injection_type}</td>
                                     <td>{item.target_port}</td>
-                                    <td>
-                                        <div className="dropdown">
-                                            <div className="dropdown-toggle"
-                                                 id="dropdownMenuButton" data-toggle="dropdown"
-                                                 aria-haspopup="true" aria-expanded="false">
-                                                Country
-                                            </div>
-                                            <div className="dropdown-menu">
-                                                {
-                                                    item.country_tag.map((item) => {
-                                                        return <p className="dropdown-item">{item}</p>
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
+                                    <td>.
+                                        {
+                                            item.country_tag.map((item) => {
+                                                return <a className="ui violet label">{item}</a>
+                                            })
+                                        }
                                     </td>
-                                    <td>
-                                        <div className="dropdown">
-                                            <div className="dropdown-toggle"
-                                                 id="dropdownMenuButton" data-toggle="dropdown"
-                                                 aria-haspopup="true" aria-expanded="false">
-                                                Network
-                                            </div>
-                                            <div className="dropdown-menu">
-                                                {
-                                                    item.network_tag.map((item) => {
-                                                        return <p className="dropdown-item">{item}</p>
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
+                                    <td>.
+                                        {
+                                            item.network_tag.map((item) => {
+                                                return <a className="ui orange label">{item}</a>
+                                            })
+                                        }
                                     </td>
                                     <td>{item.payload}</td>
                                     <td>{item.note}</td>

@@ -118,52 +118,26 @@ class Server extends Component {
                                             <td>{item.ssl_port}</td>
                                             <td>{item.proxy_port}</td>
                                             <td>
-                                                <div className="dropdown">
-                                                    <div className="dropdown-toggle"
-                                                            id="dropdownMenuButton" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                        Ports
-                                                    </div>
-                                                    <div className="dropdown-menu">
-                                                        {
-                                                            item.open_port.map((item) => {
-                                                                return <p className="dropdown-item">{item}</p>
-                                                            })
-                                                        }
-                                                    </div>
-                                                </div>
+
+                                                {
+                                                    item.open_port.map((item) => {
+                                                        return <a className="ui orange label">{item}</a>
+                                                    })
+                                                }
                                             </td>
                                             <td>
-                                                <div className="dropdown">
-                                                    <div className="dropdown-toggle"
-                                                         id="dropdownMenuButton" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false">
-                                                        Country
-                                                    </div>
-                                                    <div className="dropdown-menu">
-                                                        {
-                                                            item.country_tag.map((item) => {
-                                                                return <p className="dropdown-item">{item}</p>
-                                                            })
-                                                        }
-                                                    </div>
-                                                </div>
+                                                {
+                                                    item.country_tag.map((item) => {
+                                                        return <a className="ui violet label">{item}</a>
+                                                    })
+                                                }
                                             </td>
                                             <td>
-                                                <div className="dropdown">
-                                                    <div className="dropdown-toggle"
-                                                         id="dropdownMenuButton" data-toggle="dropdown"
-                                                         aria-haspopup="true" aria-expanded="false">
-                                                        Network
-                                                    </div>
-                                                    <div className="dropdown-menu">
-                                                        {
-                                                            item.network_tag.map((item) => {
-                                                                return <p className="dropdown-item">{item}</p>
-                                                            })
-                                                        }
-                                                    </div>
-                                                </div>
+                                                {
+                                                    item.network_tag.map((item) => {
+                                                        return <a className="ui grey label">{item}</a>
+                                                    })
+                                                }
                                             </td>
                                             <td>{item.api_server_port}</td>
                                             <td>{item.note}</td>
