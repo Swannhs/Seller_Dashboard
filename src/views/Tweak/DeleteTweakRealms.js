@@ -20,13 +20,12 @@ class DeleteTweakRealms extends Component {
         })
             .then(response => {
                     if (response.data.success) {
-                        alert('Delete tweak_realm successful')
+                        alert('Deleted Tweak & Realm mapping successfully.')
                         this.setState({
                             redirect: true
                         })
-                        // props.history.push('/admin/Dashboard')
                     } else {
-                        alert('Error to delete user')
+                        alert('Failed to delete mapping!')
                     }
                 }
             )

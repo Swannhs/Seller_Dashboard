@@ -47,7 +47,7 @@ class Tweak extends Component {
     }
 
     async onPageChaneHandler(event, data) {
-        await this.setState({
+        this.setState({
             page: data.activePage,
             start: (data.activePage - 1) * this.state.limit
         })
@@ -93,10 +93,11 @@ class Tweak extends Component {
                         <th scope="col">Vendor</th>
                         <th scope="col">Protocols</th>
                         <th scope="col">Injection Type</th>
-                        <th scope="col">Target Port</th>
-                        <th scope="col">Country Tag</th>
-                        <th scope="col">Network Tag</th>
+                        <th scope="col">SNI</th>
                         <th scope="col">Payload</th>
+                        <th scope="col">Target Port</th>
+                        <th scope="col">Country Tags</th>
+                        <th scope="col">Network Tags</th>
                         <th scope="col">Note</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -111,22 +112,23 @@ class Tweak extends Component {
                                     <td>{item.vendor}</td>
                                     <td>{item.protocols}</td>
                                     <td>{item.injection_type}</td>
+                                    <td>{item.sni}</td>
+                                    <td>{item.payload}</td>
                                     <td>{item.target_port}</td>
-                                    <td>.
+                                    <td>
                                         {
-                                            item.country_tag.map((item) => {
+                                            item.country_tags.map((item) => {
                                                 return <a className="ui violet label">{item}</a>
                                             })
                                         }
                                     </td>
-                                    <td>.
+                                    <td>
                                         {
-                                            item.network_tag.map((item) => {
+                                            item.network_tags.map((item) => {
                                                 return <a className="ui orange label">{item}</a>
                                             })
                                         }
                                     </td>
-                                    <td>{item.payload}</td>
                                     <td>{item.note}</td>
                                     <td>
                                         <Link to={'/admin/root/tweak-view/' + item.id}>

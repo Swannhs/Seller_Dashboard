@@ -7,12 +7,13 @@ class CreateTweak extends Component {
     state = {
         name: '',
         vendor: '',
-        protocol: '',
-        injectionType: '',
+        protocols: '',
+        injection_type: '',
+        sni: '',
         payload: '',
-        targetPort: null,
-        countryTag: '',
-        networkTag: '',
+        target_port: '',
+        country_tags: '',
+        network_tags: '',
         note: ''
     }
 
@@ -46,7 +47,7 @@ class CreateTweak extends Component {
                     <form onSubmit={this.onCreateTweak}>
                         <h3>Name</h3>
                         <Input type='text'
-                               placeholder='Define a name'
+                               placeholder='ex: Mobily Free'
                                value={this.state.name}
                                onChange={event => {
                                    this.setState({
@@ -58,7 +59,7 @@ class CreateTweak extends Component {
 
                         <h3>Vendor</h3>
                         <Input type='text'
-                               placeholder='Enter vendor name'
+                               placeholder='ex: MOBILY'
                                value={this.state.vendor}
                                onChange={event => {
                                    this.setState({
@@ -68,13 +69,13 @@ class CreateTweak extends Component {
                                required={true}
                         />
 
-                        <h3>Protocol</h3>
+                        <h3>Protocols</h3>
                         <Input type='text'
-                               placeholder='Enter the protocol'
-                               value={this.state.protocol}
+                               placeholder='ex: TCP'
+                               value={this.state.protocols}
                                onChange={event => {
                                    this.setState({
-                                       protocol: event.target.value
+                                       protocols: event.target.value
                                    })
                                }}
                                required={true}
@@ -82,67 +83,80 @@ class CreateTweak extends Component {
 
                         <h3>Injection Type</h3>
                         <Input type='text'
-                               placeholder='Injection'
-                               value={this.state.injectionType}
+                               placeholder='ex: PROXY'
+                               value={this.state.injection_type}
                                onChange={event => {
                                    this.setState({
-                                       injectionType: event.target.value
+                                       injection_type: event.target.value
                                    })
                                }}
                                required={true}
+                        />
+
+                        <h3>SNI (SSL)</h3>
+                        <Input type='text'
+                               placeholder='ex: google.com'
+                               value={this.state.sni}
+                               onChange={event => {
+                                   this.setState({
+                                       sni: event.target.value
+                                   })
+                               }}
+                               required={true}
+                        />
+
+
+                        <h3>Payload (PROXY)</h3>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5"
+                                placeholder='ex: GET / HTTP/1.1[crlf]Host: facebook.com[crlf][crlf]'
+                                value={this.state.payload}
+                                onChange={event => {
+                                    this.setState({
+                                        payload: event.target.value
+                                    })
+                                }}
+                                required={true}
                         />
 
                         <h3>Target Port</h3>
                         <Input type='text'
-                               placeholder='Target Post'
-                               value={this.state.targetPort}
+                               placeholder='ex: 443 [0 to ignore]'
+                               value={this.state.target_port}
                                onChange={event => {
                                    this.setState({
-                                       targetPort: event.target.value
+                                       target_port: event.target.value
                                    })
                                }}
                                required={true}
                         />
 
-                        <h3>Country Tag</h3>
+                        <h3>Country Tags</h3>
                         <Input type='text'
-                               placeholder='BD,PAK'
-                               value={this.state.countryTag}
+                               placeholder='ex: BD,PAK'
+                               value={this.state.country_tags}
                                onChange={event => {
                                    this.setState({
-                                       countryTag: event.target.value
+                                       country_tags: event.target.value
                                    })
                                }}
                                required={true}
                         />
 
-                        <h3>Network Tag</h3>
+                        <h3>Network Tags</h3>
                         <Input type='text'
-                               placeholder='GP,BNG'
-                               value={this.state.networkTag}
+                               placeholder='ex: GP,BNG'
+                               value={this.state.network_tags}
                                onChange={event => {
                                    this.setState({
-                                       networkTag: event.target.value
+                                       network_tags: event.target.value
                                    })
                                }}
                                required={true}
-                        />
-
-                        <h3>Payload</h3>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="5"
-                                  placeholder='Payload'
-                                  value={this.state.payload}
-                                  onChange={event => {
-                                      this.setState({
-                                          payload: event.target.value
-                                      })
-                                  }}
-                                  required={true}
                         />
 
                         <h3>Note</h3>
                         <Input type='text'
-                               placeholder='Note'
+                               placeholder='ex: Send VB to 8888'
                                value={this.state.note}
                                onChange={event => {
                                    this.setState({
