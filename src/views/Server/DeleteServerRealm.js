@@ -9,21 +9,20 @@ class DeleteServerRealm extends Component {
         redirect: false
     }
     onConfirmDelete = () => {
-        confirm('Delete the server realm?') ? this.onDeleteRealmServer(this.props.delId) : null
+        confirm('Are you sure to delete the server & realm mapping?') ? this.onDeleteRealmServer(this.props.delId) : null
     }
     onDeleteRealmServer = (id) => {
-        RadiusApi.post('/Server-realms/delete.json', {'id': id}, {
+        RadiusApi.post('/server-realms/delete.json', {'id': id}, {
             params: {
                 token: localStorage.getItem('Token')
             }
         })
             .then(response => {
                     if (response.data.success) {
-                        alert('Delete server_realm successful')
+                        alert('Server & Realm mapping deleted successfully.')
                         this.setState({
                             redirect: true
                         })
-                        // props.history.push('/admin/Dashboard')
                     } else {
                         alert('Error to delete user')
                     }
@@ -33,7 +32,7 @@ class DeleteServerRealm extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/admin/root/server'/>
+            return <Redirect to='/admin/root/server-realms'/>
         }
         return (
             <Button className='btn-sm btn-danger' onClick={this.onConfirmDelete}>

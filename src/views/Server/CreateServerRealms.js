@@ -20,7 +20,7 @@ class CreateServerRealms extends Component {
         let data = this.state;
         delete data.open;
 
-        RadiusApi.post('/Server-realms/add.json', data,{
+        RadiusApi.post('/server-realms/add.json', data,{
             params:{
                 token: localStorage.getItem('Token')
             }

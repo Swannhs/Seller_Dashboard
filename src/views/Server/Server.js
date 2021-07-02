@@ -97,10 +97,10 @@ class Server extends Component {
                                 <th scope="col">IP</th>
                                 <th scope="col">SSL Port</th>
                                 <th scope="col">Proxy Port</th>
+                                <th scope="col">Api Service Port</th>
                                 <th scope="col">Open Port</th>
                                 <th scope="col">Country Tag</th>
                                 <th scope="col">Network Tag</th>
-                                <th scope="col">Api Server Port</th>
                                 <th scope="col">Note</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -117,29 +117,29 @@ class Server extends Component {
                                             <td>{item.ip}</td>
                                             <td>{item.ssl_port}</td>
                                             <td>{item.proxy_port}</td>
+                                            <td>{item.api_server_port}</td>
                                             <td>
 
                                                 {
-                                                    item.open_port.map((item) => {
+                                                    item.open_ports.map((item) => {
                                                         return <a className="ui orange label">{item}</a>
                                                     })
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    item.country_tag.map((item) => {
+                                                    item.country_tags.map((item) => {
                                                         return <a className="ui violet label">{item}</a>
                                                     })
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    item.network_tag.map((item) => {
+                                                    item.network_tags.map((item) => {
                                                         return <a className="ui grey label">{item}</a>
                                                     })
                                                 }
                                             </td>
-                                            <td>{item.api_server_port}</td>
                                             <td>{item.note}</td>
                                             <td>
                                                 <Link to={'/admin/root/server-edit/' + item.id}>
